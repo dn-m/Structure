@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import Structure
+import Stack
 
 class StackTests: XCTestCase {
 
