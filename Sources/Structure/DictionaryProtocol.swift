@@ -132,6 +132,7 @@ extension DictionaryProtocol where Value: DictionaryProtocol {
         }
     }
 
+    // FIXME: Implement with Swift 4 KeyPath
 //    /**
 //     Update the `value` for the given `keyPath`.
 //
@@ -186,6 +187,7 @@ extension DictionaryProtocol where
     Value.Value: ArrayProtocol
 {
 
+    // FIXME: Implement with Swift 4 KeyPath
 //    /// Ensure that there is an Array-type value for the given `keyPath`.
 //    public mutating func ensureValue(for keyPath: KeyPath) throws {
 //
@@ -247,6 +249,7 @@ extension DictionaryProtocol where
     Value.Value.Element: Equatable
 {
 
+    // FIXME: Implement with Swift 4 KeyPath
 //    /// Append given `value` to the array at the given `keyPath`, ensuring that there are no
 //    /// duplicates.
 //    ///
