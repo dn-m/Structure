@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import Structure
+import Matrix
 
 class MatrixTests: XCTestCase {
 
