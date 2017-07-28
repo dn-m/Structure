@@ -13,15 +13,15 @@ public protocol SortedCollectionWrapping: Collection {
 
 extension SortedCollectionWrapping {
 
-    public func min() -> Base.Iterator.Element? {
+    public func min() -> Base.Element? {
         return base.first
     }
 
-    public func max() -> Base.Iterator.Element? {
+    public func max() -> Base.Element? {
         return base.last
     }
 
-    public func sorted() -> [Iterator.Element] {
+    public func sorted() -> [Element] {
         return Array(self)
     }
 }

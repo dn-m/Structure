@@ -47,7 +47,7 @@ extension RandomAccessCollectionWrapping {
     ///
     /// - Complexity: O(1)
     ///
-    public var first: Base.Iterator.Element? {
+    public var first: Base.Element? {
         return base.first
     }
 
@@ -55,7 +55,7 @@ extension RandomAccessCollectionWrapping {
     ///
     /// - Complexity: O(1)
     ///
-    public var last: Base.Iterator.Element? {
+    public var last: Base.Element? {
         return base.last
     }
 
@@ -79,7 +79,7 @@ extension RandomAccessCollectionWrapping {
     ///
     /// - Complexity: O(1)
     ///
-    public subscript(position: Base.Index) -> Base.Iterator.Element {
+    public subscript(position: Base.Index) -> Base.Element {
         return base[position]
     }
 

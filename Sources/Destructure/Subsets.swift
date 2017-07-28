@@ -12,13 +12,13 @@ extension Collection where Index == Int, IndexDistance == Int {
 
     /// - returns: All combinations of with a given cardinality
     /// (how many elements chosen per combination).
-    public func subsets(cardinality k: Int) -> [[Iterator.Element]] {
+    public func subsets(cardinality k: Int) -> [[Element]] {
 
         func subsets(
             cardinality k: Int,
-            combinedWith prefix: [Iterator.Element],
+            combinedWith prefix: [Element],
             startingAt index: Int
-        ) -> [[Iterator.Element]]
+        ) -> [[Element]]
         {
 
             guard k > 0 else {

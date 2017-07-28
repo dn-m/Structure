@@ -35,7 +35,7 @@ public protocol SequenceWrapping: Sequence, ExpressibleByArrayLiteral {
     // MARK: - Initializers
 
     /// Create an `SequenceWrapping` with a `Sequence`.
-    init <S> (_ sequence: S) where S: Sequence, S.Iterator.Element == Element
+    init <S> (_ sequence: S) where S: Sequence, S.Element == Element
 }
 
 extension SequenceWrapping {

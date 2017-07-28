@@ -17,7 +17,7 @@ public struct CircularArray<Element> {
     // MARK: - Initializers
 
     /// Creates a `CircularArray` with an sequence.
-    public init <S: Sequence> (_ storage: S) where S.Iterator.Element == Element {
+    public init <S: Sequence> (_ storage: S) where S.Element == Element {
         self.storage = Array(storage)
     }
 
@@ -100,21 +100,13 @@ extension CircularArray: BidirectionalCollection {
 
     /// Index after given `i`.
     public func index(after i: Int) -> Int {
-
-        guard i < endIndex else {
-            fatalError("Index \(i) out of range.")
-        }
-
+        assert(i < endIndex)
         return i + 1
     }
 
     /// Index before given `i`.
     public func index(before i: Int) -> Int {
-
-        guard i > startIndex else {
-            fatalError("Index \(i) out of range.")
-        }
-
+        assert(i > startIndex)
         return i - 1
     }
 }

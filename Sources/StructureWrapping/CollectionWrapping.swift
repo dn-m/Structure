@@ -43,7 +43,7 @@ extension CollectionWrapping {
     }
 
     /// - returns: Element at the given `index`.
-    public subscript (index: Base.Index) -> Base.Iterator.Element {
+    public subscript (index: Base.Index) -> Base.Element {
         return base[index]
     }
 }
