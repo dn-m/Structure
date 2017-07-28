@@ -6,7 +6,7 @@
 //
 //
 
-import Structure
+import StructureWrapping
 
 extension ReferenceGraph {
 

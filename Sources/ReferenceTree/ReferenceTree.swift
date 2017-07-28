@@ -1,16 +1,18 @@
 //
-//  MutableTree.swift
+//  ReferenceTree.swift
 //  Collections
 //
 //  Created by James Bean on 1/16/17.
 //
 //
 
+import Structure
+
 /// Mutable Tree structure.
-public class MutableTree {
+public class ReferenceTree {
 
     /**
-     Error thrown when doing bad things to a `MutableTree` objects.
+     Error thrown when doing bad things to a `ReferenceTree` objects.
      */
     public enum Error: Swift.Error {
 
@@ -27,18 +29,18 @@ public class MutableTree {
     // MARK: - Instance Properties
 
     /// Parent `MutableTree`. The root of a tree has no parent.
-    public weak var parent: MutableTree?
+    public weak var parent: ReferenceTree?
 
     /// Children `MutableTree` objects.
-    public var children: [MutableTree]
+    public var children: [ReferenceTree]
 
     /// - returns: `true` if there are no children. Otherwise, `false`.
     public var isLeaf: Bool { return children.count == 0 }
 
     /// All leaves.
-    public var leaves: [MutableTree] {
+    public var leaves: [ReferenceTree] {
 
-        func descendToGetLeaves(of node: MutableTree, result: inout [MutableTree]) {
+        func descendToGetLeaves(of node: ReferenceTree, result: inout [ReferenceTree]) {
 
             if node.isLeaf {
                 result.append(node)
@@ -49,7 +51,7 @@ public class MutableTree {
             }
         }
 
-        var result: [MutableTree] = []
+        var result: [ReferenceTree] = []
         descendToGetLeaves(of: self, result: &result)
         return result
     }
@@ -65,9 +67,9 @@ public class MutableTree {
     }
 
     /// - returns: `true` if there is no parent. Otherwise, `false`.
-    public var root: MutableTree {
+    public var root: ReferenceTree {
 
-        func ascendToGetRoot(of node: MutableTree) -> MutableTree {
+        func ascendToGetRoot(of node: ReferenceTree) -> ReferenceTree {
             guard let parent = node.parent else { return node }
             return ascendToGetRoot(of: parent)
         }
@@ -76,9 +78,9 @@ public class MutableTree {
     }
 
     /// Array of all MutableTree objects between (and including) `self` up to `root`.
-    public var pathToRoot: [MutableTree] {
+    public var pathToRoot: [ReferenceTree] {
 
-        func ascendToGetPathToRoot(of node: MutableTree, result: [MutableTree]) -> [MutableTree] {
+        func ascendToGetPathToRoot(of node: ReferenceTree, result: [ReferenceTree]) -> [ReferenceTree] {
             guard let parent = node.parent else { return result + node }
             return ascendToGetPathToRoot(of: parent, result: result + node)
         }
@@ -89,7 +91,7 @@ public class MutableTree {
     /// Height of node.
     public var height: Int {
 
-        func descendToGetHeight(of node: MutableTree, result: Int) -> Int {
+        func descendToGetHeight(of node: ReferenceTree, result: Int) -> Int {
             if node.isLeaf { return result }
             return node.children
                 .map { descendToGetHeight(of: $0, result: result + 1) }
@@ -105,7 +107,7 @@ public class MutableTree {
     /// Depth of node.
     public var depth: Int {
 
-        func ascendToGetDepth(of node: MutableTree, depth: Int) -> Int {
+        func ascendToGetDepth(of node: ReferenceTree, depth: Int) -> Int {
             guard let parent = node.parent else { return depth }
             return ascendToGetDepth(of: parent, depth: depth + 1)
         }
@@ -116,9 +118,9 @@ public class MutableTree {
     // MARK: - Initializers
 
     /**
-     Create a `MutableTree`.
+     Create a `ReferenceTree`.
      */
-    public init(parent: MutableTree? = nil, children: [MutableTree] = []) {
+    public init(parent: ReferenceTree? = nil, children: [ReferenceTree] = []) {
         self.parent = parent
         self.children = children
     }
@@ -128,7 +130,7 @@ public class MutableTree {
     /**
      Add the given `node` to `children`.
      */
-    public func addChild(_ node: MutableTree) {
+    public func addChild(_ node: ReferenceTree) {
         children.append(node)
         node.parent = self
     }
@@ -136,7 +138,7 @@ public class MutableTree {
     /**
      Append the given `nodes` to `children`.
      */
-    public func addChildren(_ nodes: [MutableTree]) {
+    public func addChildren(_ nodes: [ReferenceTree]) {
         nodes.forEach(addChild)
     }
 
@@ -145,7 +147,7 @@ public class MutableTree {
 
      - throws: `Error.insertionError` if `index` is out of bounds.
      */
-    public func insertChild(_ node: MutableTree, at index: Int) throws {
+    public func insertChild(_ node: ReferenceTree, at index: Int) throws {
         if index > children.count { throw Error.insertionError }
         children.insert(node, at: index)
         node.parent = self
@@ -156,7 +158,7 @@ public class MutableTree {
 
      - throws: `Error.removalError` if the given `node` is not held in `children`.
      */
-    public func removeChild(_ node: MutableTree) throws {
+    public func removeChild(_ node: ReferenceTree) throws {
 
         guard let index = children.index(where: { $0 === node }) else {
             throw Error.nodeNotFound
@@ -182,14 +184,14 @@ public class MutableTree {
     /**
      - returns: `true` if the given node is contained herein. Otherwise, `false`.
      */
-    public func hasChild(_ child: MutableTree) -> Bool {
+    public func hasChild(_ child: ReferenceTree) -> Bool {
         return children.any { $0 === child }
     }
 
     /**
      - returns: Child node at the given `index`, if present. Otherwise, `nil`.
      */
-    public func child(at index: Int) -> MutableTree? {
+    public func child(at index: Int) -> ReferenceTree? {
         guard children.indices.contains(index) else { return nil }
         return children[index]
     }
@@ -197,7 +199,7 @@ public class MutableTree {
     /**
      - returns: Returns the leaf node at the given `index`, if present. Otherwise, `nil`.
      */
-    public func leaf(at index: Int) -> MutableTree? {
+    public func leaf(at index: Int) -> ReferenceTree? {
         guard index >= 0 && index < leaves.count else { return nil }
         return leaves[index]
     }
@@ -205,21 +207,21 @@ public class MutableTree {
     /**
      - returns: `true` if the given node is a leaf. Otherwise, `false`.
      */
-    public func hasLeaf(_ node: MutableTree) -> Bool {
+    public func hasLeaf(_ node: ReferenceTree) -> Bool {
         return leaves.contains { $0 === node }
     }
 
     /**
      - returns: `true` if the given node is an ancestor. Otherwise, `false`.
      */
-    public func hasAncestor(_ node: MutableTree) -> Bool {
+    public func hasAncestor(_ node: ReferenceTree) -> Bool {
         return self === node ? false : pathToRoot.any { $0 === node }
     }
 
     /**
      - returns: Ancestor at the given distance, if present. Otherwise, `nil`.
      */
-    public func ancestor(at distance: Int) -> MutableTree? {
+    public func ancestor(at distance: Int) -> ReferenceTree? {
         guard distance < pathToRoot.count else { return nil }
         return pathToRoot[distance]
     }
@@ -227,7 +229,7 @@ public class MutableTree {
     /**
      - returns: `true` if the given node is a descendent. Otherwise, `false`.
      */
-    public func hasDescendent(_ node: MutableTree) -> Bool {
+    public func hasDescendent(_ node: ReferenceTree) -> Bool {
         if isLeaf { return false }
         if hasChild(node) { return true }
         return children

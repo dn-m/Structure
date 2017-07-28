@@ -1,13 +1,15 @@
 //
-//  MutableTreeProtocol.swift
+//  ReferenceTreeProtocol.swift
 //  Collections
 //
 //  Created by James Bean on 1/16/17.
 //
 //
 
-/// Error for when you do bad things to a `MutableTreeProtocol`-conforming type.
-public enum MutableTreeError: Error {
+import Structure
+
+/// Error for when you do bad things to a `ReferenceTreeProtocol`-conforming type.
+public enum ReferenceTreeError: Error {
 
     /// Error thrown when trying to insert a Node at an invalid index
     case insertionError
@@ -25,7 +27,7 @@ public enum MutableTreeError: Error {
 /// Provides default implementations for many tree structure operations.
 ///
 /// > Useable only by `final class` types.
-public protocol MutableTreeProtocol: class {
+public protocol ReferenceTreeProtocol: class {
 
     // MARK: - Instance Properties
 
@@ -72,17 +74,17 @@ public protocol MutableTreeProtocol: class {
 
     /// Insert the given child node at the given `index`.
     ///
-    /// - throws: `MutableTreeError.Error.insertionError` if the given `index` is out of bounds.
+    /// - throws: `ReferenceTreeError.Error.insertionError` if the given `index` is out of bounds.
     func insertChild(_ node: Self, at index: Int) throws
 
     /// Remove the given child node.
     ///
-    /// - throws: `MutableTreeError.Error.removalError` if the given node is not contained herein.
+    /// - throws: `ReferenceTreeError.Error.removalError` if the given node is not contained herein.
     func removeChild(_ node: Self) throws
 
     /// Remove the child node at the given `index`.
     ///
-    /// - throws: `MutableTreeError.Error.removalError` if the given `index` is out of bounds.
+    /// - throws: `ReferenceTreeError.Error.removalError` if the given `index` is out of bounds.
     func removeChild(at index: Int) throws
 
     /// - returns: Child node at the given `index`, if present. Otherwise, `nil`.
@@ -107,7 +109,7 @@ public protocol MutableTreeProtocol: class {
     func hasDescendent(_ node: Self) -> Bool
 }
 
-public extension MutableTreeProtocol {
+public extension ReferenceTreeProtocol {
 
     /// Add the given `node` to `children`.
     func addChild(_ node: Self) {
@@ -122,11 +124,11 @@ public extension MutableTreeProtocol {
 
     /// Insert the given `node` at the given `index` of `children`.
     ///
-    /// - throws: `MutableTreeError.insertionError` if `index` is out of bounds.
+    /// - throws: `ReferenceTreeError.insertionError` if `index` is out of bounds.
     func insertChild(_ node: Self, at index: Int) throws {
 
         guard index <= children.endIndex else {
-            throw MutableTreeError.insertionError
+            throw ReferenceTreeError.insertionError
         }
 
         children.insert(node, at: index)
@@ -135,11 +137,11 @@ public extension MutableTreeProtocol {
 
     /// Remove the given `node` from `children`.
     ///
-    /// - throws: `MutableTreeError.removalError` if the given `node` is not held in `children`.
+    /// - throws: `ReferenceTreeError.removalError` if the given `node` is not held in `children`.
     func removeChild(_ node: Self) throws {
 
         guard let index = children.index(where: { $0 === node }) else {
-            throw MutableTreeError.nodeNotFound
+            throw ReferenceTreeError.nodeNotFound
         }
 
         try removeChild(at: index)
@@ -147,11 +149,11 @@ public extension MutableTreeProtocol {
 
     /// Remove the node at the given `index`.
     ///
-    /// - throws: `MutableTreeError.removalError` if `index` is out of bounds.
+    /// - throws: `ReferenceTreeError.removalError` if `index` is out of bounds.
     func removeChild(at index: Int) throws {
 
         guard children.indices.contains(index) else {
-            throw MutableTreeError.nodeNotFound
+            throw ReferenceTreeError.nodeNotFound
         }
 
         children.remove(at: index)

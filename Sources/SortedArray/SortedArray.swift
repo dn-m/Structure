@@ -9,7 +9,7 @@
 import Algebra
 
 // FIXME: Make more granular
-import Structure
+import StructureWrapping
 
 /// `Array` that keeps itself sorted.
 public struct SortedArray <Element: Comparable>:

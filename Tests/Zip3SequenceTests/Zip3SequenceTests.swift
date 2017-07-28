@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import Structure
+import Zip3Sequence
 
 class Zip3SequenceTests: XCTestCase {
 
