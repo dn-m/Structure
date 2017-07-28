@@ -28,11 +28,7 @@ let package = Package(
         .target(name: "OrderedDictionary", dependencies: ["DictionaryProtocol"]),
         .target(
             name: "SortedDictionary",
-            dependencies: [
-                "DictionaryProtocol",
-                "SortedArray",
-                "StructureWrapping"
-            ]
+            dependencies: ["DictionaryProtocol", "SortedArray", "StructureWrapping"]
         ),
 
         // Tests
