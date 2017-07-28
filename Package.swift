@@ -18,9 +18,10 @@ let package = Package(
         .target(name: "ReferenceGraph"),
         .target(name: "Tree", dependencies: ["Structure", "Destructure", "Stack"]),
         .target(name: "CircularArray", dependencies: ["Structure"]),
-        .target(name: "OrderedDictionary", dependencies: ["Structure"]),
         .target(name: "SortedArray", dependencies: ["Algebra", "StructureWrapping"]),
-        .target(name: "SortedDictionary", dependencies: ["SortedArray", "Structure"]),
+        .target(name: "DictionaryProtocol"),
+        .target(name: "OrderedDictionary", dependencies: ["DictionaryProtocol","Structure"]),
+        .target(name: "SortedDictionary", dependencies: ["DictionaryProtocol", "SortedArray", "Structure"]),
 
         // Tests
         .testTarget(name: "Zip3SequenceTests", dependencies: ["Zip3Sequence"]),
@@ -35,7 +36,7 @@ let package = Package(
         .testTarget(name: "OrderedDictionaryTests", dependencies: ["OrderedDictionary"]),
         .testTarget(name: "SortedArrayTests", dependencies: ["Algebra", "Structure"]),
         .testTarget(name: "SortedDictionaryTests", dependencies: ["SortedDictionary"]),
-
+        .testTarget(name: "DictionaryProtocolTests", dependencies: ["DictionaryProtocol"]),
         // FIXME: Ultimately get rid of this
         .target(name: "Structure", dependencies: ["Algebra"]),
         .testTarget(name: "StructureTests", dependencies: ["Structure"]),

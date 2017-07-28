@@ -1,5 +1,5 @@
 //
-//  DictionaryTypeTests.swift
+//  DictionaryProtocolsTests.swift
 //  Structure
 //
 //  Created by James Bean on 12/23/16.
@@ -7,9 +7,9 @@
 //
 
 import XCTest
-import Structure
+import DictionaryProtocol
 
-class DictionaryTypeTests: XCTestCase {
+class DictionaryProtocolsTests: XCTestCase {
 
     func testSafelyAppendToExisting() {
 

@@ -6,7 +6,7 @@
 //
 //
 
-import Structure
+import DictionaryProtocol
 
 /// Ordered Dictionary.
 public struct OrderedDictionary <Key: Hashable, Value>: DictionaryProtocol {

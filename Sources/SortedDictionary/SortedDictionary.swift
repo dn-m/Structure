@@ -7,9 +7,7 @@
 //
 
 import SortedArray
-
-// FIXME: Make more granular
-import Structure
+import DictionaryProtocol
 import StructureWrapping
 
 /// Ordered dictionary which has sorted `keys`.
