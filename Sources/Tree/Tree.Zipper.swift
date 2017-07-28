@@ -104,6 +104,28 @@ extension Tree {
             }
         }
 
+        /// Transform the leaf value of the wrapped `Tree` with the given `value`.
+        public func updateLeaf(_ transform: (Leaf) -> Leaf) -> Zipper {
+            guard case let .leaf(leaf) = tree else { fatalError() }
+            return Zipper(.leaf(transform(leaf)), breadcrumbs)
+        }
+
+        /// Update the leaf value of the wrapped `Tree` with the given `value`.
+        public func updateLeaf(_ value: Leaf) -> Zipper {
+            return updateLeaf { _ in value }
+        }
+
+        /// Transform the branch value of the wrapped `Tree` with the given `value`.
+        public func updateBranch(_ transform: (Branch) -> Branch) -> Zipper {
+            guard case let .branch(value, trees) = tree else { fatalError() }
+            return Zipper(.branch(transform(value), trees), breadcrumbs)
+        }
+
+        /// Replace the branch value of the wrapped `Tree` with the given `value`.
+        public func updateBranch(_ value: Branch) -> Zipper {
+            return updateBranch { _ in value }
+        }
+
         /// Replace the value of the wrapped `Tree` with the given `value`.
         public func update(value: Either<Branch,Leaf>) -> Zipper {
             let transform = Transform(

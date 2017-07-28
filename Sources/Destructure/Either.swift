@@ -10,6 +10,16 @@
 public enum Either <Left,Right> {
     case left(Left)
     case right(Right)
+
+    public var left: Left? {
+        guard case let .left(value) = self else { return nil }
+        return value
+    }
+
+    public var right: Right? {
+        guard case let .right(value) = self else { return nil }
+        return value
+    }
 }
 
 // TODO: Add retroactive Equatable conformance when/if Swift allows it
@@ -39,19 +49,9 @@ public func != <Left: Equatable, Right: Equatable> (
 public func == <Left: Equatable, Right: Equatable> (
     lhs: [Either<Left,Right>],
     rhs: [Either<Left,Right>]
-    ) -> Bool
+) -> Bool
 {
-
-    guard lhs.count == rhs.count else {
-        return false
-    }
-
-    for (a,b) in zip(lhs,rhs) {
-
-        if a != b {
-            return false
-        }
-    }
-    
+    guard lhs.count == rhs.count else { return false }
+    for (a,b) in zip(lhs,rhs) where a != b { return false }
     return true
 }
