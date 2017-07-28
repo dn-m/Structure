@@ -9,6 +9,7 @@ let package = Package(
         // Sources
         .target(name: "Algebra"),
         .target(name: "Destructure"),
+        .target(name: "LinkedList"),
         .target(name: "Stack", dependencies: ["Structure"]),
         .target(name: "Matrix", dependencies: ["Structure"]),
         .target(name: "Tree", dependencies: ["Structure", "Destructure"]),
@@ -18,6 +19,7 @@ let package = Package(
         .target(name: "SortedDictionary", dependencies: ["SortedArray", "Structure"]),
 
         // Tests
+        .testTarget(name: "LinkedListTests", dependencies: ["LinkedList"]),
         .testTarget(name: "StackTests", dependencies: ["Stack"]),
         .testTarget(name: "MatrixTests", dependencies: ["Matrix"]),
         .testTarget(name: "DestructureTests", dependencies: ["Structure", "Destructure"]),

@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import Structure
+import LinkedList
 
 class LinkedListTests: XCTestCase {
 
