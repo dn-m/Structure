@@ -1,12 +1,14 @@
 //
-//  MutableGraph+AdjacencyList.swift
+//  ReferenceGraph+AdjacencyList.swift
 //  Collections
 //
 //  Created by James Bean on 1/16/17.
 //
 //
 
-extension MutableGraph {
+import Structure
+
+extension ReferenceGraph {
 
     public class AdjacencyList: CollectionWrapping {
 

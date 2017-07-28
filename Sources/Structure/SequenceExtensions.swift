@@ -77,21 +77,13 @@ extension Sequence {
 
     /// - returns: `true` if all elements satisfy the given `predicate`. Otherwise, `false`.
     public func all(satisfy predicate: (Iterator.Element) -> Bool) -> Bool {
-        for element in self {
-            if !predicate(element) {
-                return false
-            }
-        }
+        for element in self where !predicate(element) { return false }
         return true
     }
 
     /// - returns: `true` if any elements satisfy the given `predicate`. Otherwise, `false`.
     public func any(satisfy predicate: (Iterator.Element) -> Bool) -> Bool {
-        for element in self {
-            if predicate(element) {
-                return true
-            }
-        }
+        for element in self where predicate(element) { return true }
         return false
     }
 
@@ -135,12 +127,11 @@ extension Sequence where Iterator.Element: Equatable {
 /// - returns: `true` if all elements in both `AnySequence` values are equivalent. Otherwise,
 /// `false`.
 public func == <T: Equatable> (lhs: AnySequence<T>, rhs: AnySequence<T>) -> Bool {
-    for (a,b) in zip(lhs,rhs) where a != b {
-        return false
-    }
+    for (a,b) in zip(lhs,rhs) where a != b { return false }
     return true
 }
 
+// FIXME: Move to PatternMatching
 /// - Returns: `true` if the given `array` contains the given `value`.
 public func ~= <S: Sequence> (array: S, value: S.Iterator.Element) -> Bool
     where S.Iterator.Element: Equatable

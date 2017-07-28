@@ -6,8 +6,9 @@
 //
 //
 
+// FIXME: Make Contains protocol
+
 public protocol ArrayProtocol: Collection {
-    //associatedtype Element
     init()
     mutating func append(_ element: Element)
     mutating func append<S> (contentsOf newElements: S) where S: Sequence, S.Element == Element
@@ -78,6 +79,7 @@ extension DictionaryProtocol where Iterator.Element == (key: Key, value: Value) 
     }
 }
 
+// FIXME: Consider making this `where Value: AdditiveMonoid`
 extension DictionaryProtocol where Value: ArrayProtocol {
 
     /// Ensure that an Array-type value exists for the given `key`.
@@ -107,11 +109,7 @@ extension DictionaryProtocol where Value: ArrayProtocol, Value.Element: Equatabl
 
      If this value already exists in desired array, the new value will not be added.
      */
-    public mutating func safelyAndUniquelyAppend(
-        _ value: Value.Element,
-        toArrayWith key: Key
-    )
-    {
+    public mutating func safelyAndUniquelyAppend(_ value: Value.Element, toArrayWith key: Key) {
 
         ensureValue(for: key)
 

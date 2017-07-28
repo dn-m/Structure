@@ -1,5 +1,5 @@
 //
-//  MutableGraph.swift
+//  ReferenceGraph.swift
 //  Collections
 //
 //  Created by James Bean on 1/16/17.
@@ -7,7 +7,7 @@
 //
 
 /// - TODO: Make Generic over some type.
-public class MutableGraph {
+public class ReferenceGraph {
 
     private var adjacencyList = AdjacencyList()
 

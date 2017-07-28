@@ -11,12 +11,8 @@ extension Array {
     /// - Returns: Left-hand-side value appending the right-hand-side value, if it exists.
     /// Otherwise, the left-hand-side value.
     public static func + (lhs: Array, rhs: Element?) -> Array {
-
-        if let element = rhs {
-            return lhs.appending(element)
-        }
-
-        return lhs
+        guard let element = rhs else { return lhs }
+        return lhs.appending(element)
     }
 
     /// - returns: New `Array` with the first element `head`, and the remaining elements of `tail`.
