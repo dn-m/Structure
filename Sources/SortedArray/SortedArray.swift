@@ -7,8 +7,6 @@
 //
 
 import Algebra
-
-// FIXME: Make more granular
 import StructureWrapping
 
 /// `Array` that keeps itself sorted.

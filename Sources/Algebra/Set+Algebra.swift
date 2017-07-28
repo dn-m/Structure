@@ -6,8 +6,6 @@
 //
 //
 
-import Algebra
-
 extension Set: Additive {
 
     public static var zero: Set {

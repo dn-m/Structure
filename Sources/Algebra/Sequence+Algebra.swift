@@ -6,7 +6,6 @@
 //
 //
 
-import Algebra
 import Destructure
 
 extension Sequence where Iterator.Element: Monoid {

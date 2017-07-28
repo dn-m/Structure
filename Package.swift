@@ -7,9 +7,9 @@ let package = Package(
     targets: [
 
         // Sources
-        .target(name: "Algebra"),
-        .target(name: "Destructure"),
         .target(name: "StructureWrapping"),
+        .target(name: "Destructure"),
+        .target(name: "Algebra", dependencies: ["Destructure"]),
         .target(name: "Zip3Sequence", dependencies: ["Structure"]),
         .target(name: "LinkedList"),
         .target(name: "Stack", dependencies: ["Structure"]),
@@ -19,7 +19,7 @@ let package = Package(
         .target(name: "Tree", dependencies: ["Structure", "Destructure", "Stack"]),
         .target(name: "CircularArray", dependencies: ["Structure"]),
         .target(name: "OrderedDictionary", dependencies: ["Structure"]),
-        .target(name: "SortedArray", dependencies: ["Structure"]),
+        .target(name: "SortedArray", dependencies: ["Algebra", "StructureWrapping"]),
         .target(name: "SortedDictionary", dependencies: ["SortedArray", "Structure"]),
 
         // Tests
@@ -34,7 +34,7 @@ let package = Package(
         .testTarget(name: "CircularArrayTests", dependencies: ["CircularArray"]),
         .testTarget(name: "OrderedDictionaryTests", dependencies: ["OrderedDictionary"]),
         .testTarget(name: "SortedArrayTests", dependencies: ["Algebra", "Structure"]),
-        .testTarget(name: "SortedDictionaryTests", dependencies: ["SortedArray"]),
+        .testTarget(name: "SortedDictionaryTests", dependencies: ["SortedDictionary"]),
 
 
         // FIXME: Ultimately get rid of this
