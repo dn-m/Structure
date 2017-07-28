@@ -7,6 +7,7 @@ let package = Package(
     targets: [
 
         // Sources
+        .target(name: "EnumExtensions"),
         .target(name: "StructureWrapping"),
         .target(name: "Destructure"),
         .target(name: "Algebra", dependencies: ["Destructure"]),
@@ -24,6 +25,7 @@ let package = Package(
         .target(name: "SortedDictionary", dependencies: ["DictionaryProtocol", "SortedArray", "Structure"]),
 
         // Tests
+        .testTarget(name: "EnumExtensionsTests", dependencies: ["EnumExtensions"]),
         .testTarget(name: "Zip3SequenceTests", dependencies: ["Zip3Sequence"]),
         .testTarget(name: "DestructureTests", dependencies: ["Structure", "Destructure"]),
         .testTarget(name: "LinkedListTests", dependencies: ["LinkedList"]),

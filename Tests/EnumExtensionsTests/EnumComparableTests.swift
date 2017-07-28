@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import Structure
+import EnumExtensions
 
 class EnumComparableTests: XCTestCase {
 

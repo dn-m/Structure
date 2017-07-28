@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import Structure
+import EnumExtensions
 
 class EnumIterationTests: XCTestCase {
 
