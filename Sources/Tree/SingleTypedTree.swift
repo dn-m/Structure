@@ -29,7 +29,7 @@ extension Tree where Branch == Leaf {
     ///
     ///     self = .branch(value, [.leaf(value)])
     ///
-    public init <S: Sequence> (_ value: Leaf, _ sequence: S) where S.Iterator.Element == Leaf {
+    public init <S: Sequence> (_ value: Leaf, _ sequence: S) where S.Element == Leaf {
 
         if let array = sequence as? Array<Leaf>, array.isEmpty {
             self = .branch(value, [.leaf(value)])

@@ -36,7 +36,6 @@ let package = Package(
         .testTarget(name: "SortedArrayTests", dependencies: ["Algebra", "Structure"]),
         .testTarget(name: "SortedDictionaryTests", dependencies: ["SortedDictionary"]),
 
-
         // FIXME: Ultimately get rid of this
         .target(name: "Structure", dependencies: ["Algebra"]),
         .testTarget(name: "StructureTests", dependencies: ["Structure"]),

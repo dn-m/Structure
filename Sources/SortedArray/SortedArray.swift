@@ -23,7 +23,7 @@ public struct SortedArray <Element: Comparable>:
     public init() { }
 
     /// Create a `SortedArray` with the given sequence of `elements`.
-    public init <S> (_ elements: S) where S: Sequence, S.Iterator.Element == Element {
+    public init <S> (_ elements: S) where S: Sequence, S.Element == Element {
         self.base = Array(elements).sorted()
     }
 
@@ -47,7 +47,7 @@ public struct SortedArray <Element: Comparable>:
 
     /// Insert the contents of another sequence of `T`.
     public mutating func insert <S: Sequence> (contentsOf elements: S)
-        where S.Iterator.Element == Element
+        where S.Element == Element
     {
         elements.forEach { insert($0) }
     }

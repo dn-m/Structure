@@ -61,7 +61,7 @@ extension DictionaryProtocol {
     }
 }
 
-extension DictionaryProtocol where Iterator.Element == (key: Key, value: Value) {
+extension DictionaryProtocol where Element == (key: Key, value: Value) {
 
     // MARK: - Instance Methods
 
@@ -154,8 +154,8 @@ extension DictionaryProtocol where Value: DictionaryProtocol {
 
 extension DictionaryProtocol where
     Value: DictionaryProtocol,
-    Iterator.Element == (Key, Value),
-    Value.Iterator.Element == (Value.Key, Value.Value)
+    Element == (Key, Value),
+    Value.Element == (Value.Key, Value.Value)
 {
     /// Merge the contents of the given `dictionary` destructively into this one.
     ///
@@ -181,8 +181,8 @@ extension DictionaryProtocol where
 
 extension DictionaryProtocol where
     Value: DictionaryProtocol,
-    Iterator.Element == (Key, Value),
-    Value.Iterator.Element == (Value.Key, Value.Value),
+    Element == (Key, Value),
+    Value.Element == (Value.Key, Value.Value),
     Value.Value: ArrayProtocol
 {
 
@@ -241,8 +241,8 @@ extension DictionaryProtocol where
 
 extension DictionaryProtocol where
     Value: DictionaryProtocol,
-    Iterator.Element == (Key, Value),
-    Value.Iterator.Element == (Value.Key, Value.Value),
+    Element == (Key, Value),
+    Value.Element == (Value.Key, Value.Value),
     Value.Value: ArrayProtocol,
     Value.Value.Element: Equatable
 {
@@ -272,7 +272,7 @@ extension DictionaryProtocol where
 
 /// - returns: `true` if all values in `[H: T]` types are equivalent. Otherwise, `false`.
 public func == <D: DictionaryProtocol> (lhs: D, rhs: D) -> Bool where
-    D.Iterator.Element == (D.Key, D.Value),
+    D.Element == (D.Key, D.Value),
     D.Value: Equatable
 {
     for (key, _) in lhs {
@@ -286,7 +286,7 @@ public func == <D: DictionaryProtocol> (lhs: D, rhs: D) -> Bool where
 
 /// - returns: `true` if any values in `[H: T]` types are not equivalent. Otherwise, `false`.
 public func != <D: DictionaryProtocol> (lhs: D, rhs: D) -> Bool where
-    D.Iterator.Element == (D.Key, D.Value),
+    D.Element == (D.Key, D.Value),
     D.Value: Equatable
 {
     return !(lhs == rhs)
@@ -294,9 +294,9 @@ public func != <D: DictionaryProtocol> (lhs: D, rhs: D) -> Bool where
 
 /// - returns: `true` if all values in `[H: [T]]` types are equivalent. Otherwise, `false`.
 public func == <D: DictionaryProtocol> (lhs: D, rhs: D) -> Bool where
-    D.Iterator.Element == (D.Key, D.Value),
+    D.Element == (D.Key, D.Value),
     D.Value: Collection,
-    D.Value.Iterator.Element: Equatable,
+    D.Value.Element: Equatable,
     D.Value.Index == Int // FIXME: Find a way to do without this constraint
 {
     for (key, lhsArray) in lhs {
@@ -311,9 +311,9 @@ public func == <D: DictionaryProtocol> (lhs: D, rhs: D) -> Bool where
 
 /// - returns: `true` if any values in `[H: [T]]` types are not equivalent. Otherwise, `false`.
 public func != <D: DictionaryProtocol> (lhs: D, rhs: D) -> Bool where
-    D.Iterator.Element == (D.Key, D.Value),
+    D.Element == (D.Key, D.Value),
     D.Value: Collection,
-    D.Value.Iterator.Element: Equatable,
+    D.Value.Element: Equatable,
     D.Value.Index == Int // FIXME: Find a way to do without this constraint
 {
     return !(lhs == rhs)
@@ -322,9 +322,9 @@ public func != <D: DictionaryProtocol> (lhs: D, rhs: D) -> Bool where
 
 /// - returns: `true` if all values in `[H: [HH: T]]` types are equivalent. Otherwise, `false`.
 public func == <D: DictionaryProtocol> (lhs: D, rhs: D) -> Bool where
-    D.Iterator.Element == (D.Key, D.Value),
+    D.Element == (D.Key, D.Value),
     D.Value: DictionaryProtocol,
-    D.Value.Iterator.Element == (D.Value.Key, D.Value.Value),
+    D.Value.Element == (D.Value.Key, D.Value.Value),
     D.Value.Value: Equatable
 {
     for (key, lhsDict) in lhs {
@@ -339,9 +339,9 @@ public func == <D: DictionaryProtocol> (lhs: D, rhs: D) -> Bool where
 /// - returns: `true` if any values in `[H: [HH: T]]` types are not equivalent. Otherwise,
 /// `false`.
 public func != <D: DictionaryProtocol> (lhs: D, rhs: D) -> Bool where
-    D.Iterator.Element == (D.Key, D.Value),
+    D.Element == (D.Key, D.Value),
     D.Value: DictionaryProtocol,
-    D.Value.Iterator.Element == (D.Value.Key, D.Value.Value),
+    D.Value.Element == (D.Value.Key, D.Value.Value),
     D.Value.Value: Equatable
 {
     return !(lhs == rhs)
@@ -350,11 +350,11 @@ public func != <D: DictionaryProtocol> (lhs: D, rhs: D) -> Bool where
 /// - returns: `true` if all values in `[H: [HH: [T]]]` types are equivalent. Otherwise,
 /// `false`.
 public func == <D: DictionaryProtocol> (lhs: D, rhs: D) -> Bool where
-    D.Iterator.Element == (D.Key, D.Value),
+    D.Element == (D.Key, D.Value),
     D.Value: DictionaryProtocol,
-    D.Value.Iterator.Element == (D.Value.Key, D.Value.Value),
+    D.Value.Element == (D.Value.Key, D.Value.Value),
     D.Value.Value: Collection,
-    D.Value.Value.Iterator.Element: Equatable,
+    D.Value.Value.Element: Equatable,
     D.Value.Value.Index == Int // FIXME: Find a way to do without this constraint
 {
     for (key, lhsDict) in lhs {
@@ -374,11 +374,11 @@ public func == <D: DictionaryProtocol> (lhs: D, rhs: D) -> Bool where
 /// - returns: `true` if any values in `[H: [HH: [T]]]` types are not equivalent.
 // Otherwise, `false`.
 public func != <D: DictionaryProtocol> (lhs: D, rhs: D) -> Bool where
-    D.Iterator.Element == (D.Key, D.Value),
+    D.Element == (D.Key, D.Value),
     D.Value: DictionaryProtocol,
-    D.Value.Iterator.Element == (D.Value.Key, D.Value.Value),
+    D.Value.Element == (D.Value.Key, D.Value.Value),
     D.Value.Value: Collection,
-    D.Value.Value.Iterator.Element: Equatable,
+    D.Value.Value.Element: Equatable,
     D.Value.Value.Index == Int // FIXME: Find a way to do without this constraint
 {
     return !(lhs == rhs)

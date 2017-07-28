@@ -38,7 +38,7 @@ public struct Stack <Element> {
     public init() { }
 
     /// Create a `Stack` with the given sequence of `elements`.
-    public init <S: Sequence> (_ elements: S) where S.Iterator.Element == Element {
+    public init <S: Sequence> (_ elements: S) where S.Element == Element {
         self.elements = Array(elements)
     }
 

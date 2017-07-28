@@ -350,7 +350,7 @@ public enum Tree <Branch,Leaf> {
     }
 
     public func zipLeaves <C: RangeReplaceableCollection> (_ collection: C)
-        -> Tree<Branch, C.Iterator.Element>
+        -> Tree<Branch, C.Element>
     {
         return zipLeaves(collection) { _, value in value }
     }
@@ -358,7 +358,7 @@ public enum Tree <Branch,Leaf> {
     // FIXME: Instead of copying `collection`, increment an `index`, pointing to `collection`.
     public func zipLeaves <C: RangeReplaceableCollection, T> (
         _ collection: C,
-        _ transform: @escaping (Leaf, C.Iterator.Element) -> T
+        _ transform: @escaping (Leaf, C.Element) -> T
     ) -> Tree<Branch,T>
     {
         var newValues = collection
