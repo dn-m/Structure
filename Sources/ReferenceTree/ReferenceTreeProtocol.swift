@@ -6,7 +6,7 @@
 //
 //
 
-import Structure
+import Restructure
 
 /// Error for when you do bad things to a `ReferenceTreeProtocol`-conforming type.
 public enum ReferenceTreeError: Error {
@@ -20,7 +20,6 @@ public enum ReferenceTreeError: Error {
     /// Error thrown when trying to insert a Node at an invalid index
     case nodeNotFound
 }
-
 
 /// Interface for nodes in tree structures.
 ///

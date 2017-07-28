@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import Structure
+import Restructure
 import Destructure
 
 class ListProcessingTests: XCTestCase {

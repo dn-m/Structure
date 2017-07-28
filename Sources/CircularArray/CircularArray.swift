@@ -6,7 +6,8 @@
 //
 //
 
-import Structure
+import Destructure
+import Restructure
 
 /// Array-like structure that allows retrieval of elements at indices outside of the bounds of
 /// the internal storage.

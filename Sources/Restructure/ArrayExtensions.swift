@@ -26,11 +26,4 @@ extension Array {
         copy.append(element)
         return copy
     }
-
-    /// - Returns: Array with the element at the given `index` removed.
-    public func removing(at index: Int) -> Array {
-        var copy = self
-        copy.remove(at: index)
-        return copy
-    }
 }

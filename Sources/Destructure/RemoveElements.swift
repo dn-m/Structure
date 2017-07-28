@@ -18,11 +18,7 @@ extension Array {
      >`[].removeFirst throws ArrayError.removalError`
      */
     public mutating func removeFirst() throws {
-
-        guard count > 0 else {
-            throw ArrayError.removalError
-        }
-
+        guard count > 0 else { throw ArrayError.removalError }
         remove(at: 0)
     }
 
@@ -36,14 +32,8 @@ extension Array {
      - parameter amount: Amount of elements to remove from beginning of Array
      */
     public mutating func removeFirst(amount: Int) throws {
-
-        guard count >= amount else {
-            throw ArrayError.removalError
-        }
-
-        for _ in 0..<amount {
-            remove(at: 0)
-        }
+        guard count >= amount else { throw ArrayError.removalError }
+        for _ in 0..<amount { remove(at: 0) }
     }
 
     /**
@@ -56,13 +46,14 @@ extension Array {
      - parameter amount: Amount of elements to remove from end of Array
      */
     public mutating func removeLast(amount: Int) throws {
+        guard count >= amount else { throw ArrayError.removalError }
+        for _ in 0..<amount { removeLast() }
+    }
 
-        guard count >= amount else {
-            throw ArrayError.removalError
-        }
-
-        for _ in 0..<amount {
-            removeLast()
-        }
+    /// - Returns: Array with the element at the given `index` removed.
+    public func removing(at index: Int) -> Array {
+        var copy = self
+        copy.remove(at: index)
+        return copy
     }
 }

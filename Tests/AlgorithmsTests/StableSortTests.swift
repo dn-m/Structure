@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import Structure
+import Algorithms
 
 class StableSortTests: XCTestCase {
 
