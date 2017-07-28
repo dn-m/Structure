@@ -8,6 +8,9 @@
 
 import Algebra
 
+// FIXME: Make more granular
+import Structure
+
 /// `Array` that keeps itself sorted.
 public struct SortedArray <Element: Comparable>:
     RandomAccessCollectionWrapping,

@@ -196,16 +196,17 @@ class DictionaryTypeTests: XCTestCase {
         _ = Dictionary(keysAndValues)
     }
 
-    func testSortedDictionaryInitWithArraysSorted() {
-
-        let xs = [0,3,4,1,2]
-        let ys = ["a","d","e","b","c"]
-
-        let dict = SortedDictionary(xs,ys)
-
-        XCTAssertEqual(dict[0], "a")
-        XCTAssertEqual(dict[4], "e")
-    }
+// FIXME: Move to SortedDictionary
+//    func testSortedDictionaryInitWithArraysSorted() {
+//
+//        let xs = [0,3,4,1,2]
+//        let ys = ["a","d","e","b","c"]
+//
+//        let dict = SortedDictionary(xs,ys)
+//
+//        XCTAssertEqual(dict[0], "a")
+//        XCTAssertEqual(dict[4], "e")
+//    }
 
     func testEqualitySimple() {
 

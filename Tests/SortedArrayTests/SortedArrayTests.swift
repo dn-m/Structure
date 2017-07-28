@@ -8,7 +8,7 @@
 
 import XCTest
 import Algebra
-import Structure
+import SortedArray
 
 class SortedArrayTests: XCTestCase {
 

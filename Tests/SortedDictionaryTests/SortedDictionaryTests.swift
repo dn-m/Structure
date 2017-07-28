@@ -7,7 +7,8 @@
 //
 
 import XCTest
-import Structure
+import SortedDictionary
+//import Structure
 
 class SortedDictionaryTests: XCTestCase {
 
