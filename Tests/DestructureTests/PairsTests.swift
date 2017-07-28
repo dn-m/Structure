@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import Structure
+import Destructure
 
 class PairsTests: XCTestCase {
 

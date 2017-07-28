@@ -7,9 +7,10 @@
 //
 
 import XCTest
-import Structure
+import Destructure
 
 class ReplaceElementsTests: XCTestCase {
+
     func testReplaceFirstThrows() {
         var array: [Int] = []
         do {

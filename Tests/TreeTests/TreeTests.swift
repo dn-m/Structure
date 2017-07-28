@@ -1,5 +1,5 @@
 //
-//  TreeNodeTests.swift
+//  TreeTests.swift
 //  Structure
 //
 //  Created by James Bean on 12/9/16.
@@ -8,8 +8,10 @@
 
 import XCTest
 import Structure
+import Destructure
+import Tree
 
-class TreeNodeTests: XCTestCase {
+class TreeTests: XCTestCase {
 
     private var tree: Tree<Int,Int> {
         return Tree.branch(0, [
