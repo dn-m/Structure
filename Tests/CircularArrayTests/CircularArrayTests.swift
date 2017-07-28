@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import Structure
+import CircularArray
 
 class CircularArrayTests: XCTestCase {
 
