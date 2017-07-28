@@ -16,7 +16,7 @@ let package = Package(
         .target(name: "Matrix", dependencies: ["Structure"]),
         .target(name: "ReferenceTree", dependencies: ["Structure"]),
         .target(name: "ReferenceGraph", dependencies: ["Structure"]),
-        .target(name: "Tree", dependencies: ["Structure", "Destructure"]),
+        .target(name: "Tree", dependencies: ["Structure", "Destructure", "Stack"]),
         .target(name: "CircularArray", dependencies: ["Structure"]),
         .target(name: "OrderedDictionary", dependencies: ["Structure"]),
         .target(name: "SortedArray", dependencies: ["Structure"]),
