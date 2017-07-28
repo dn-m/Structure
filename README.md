@@ -1,5 +1,7 @@
 # Structure
 
+[![Build Status](https://travis-ci.org/dn-m/Structure.svg?branch=master)](https://travis-ci.org/dn-m/Structure) 
+
 ## Stdlib Extensions
 - EnumExtensions
 - Predicates
