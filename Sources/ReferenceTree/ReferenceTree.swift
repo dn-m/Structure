@@ -7,6 +7,7 @@
 //
 
 import Structure
+import Predicates
 
 /// Mutable Tree structure.
 public class ReferenceTree {

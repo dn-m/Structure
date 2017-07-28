@@ -65,16 +65,3 @@ public func == <T: Equatable> (lhs: AnySequence<T>, rhs: AnySequence<T>) -> Bool
     for (a,b) in zip(lhs,rhs) where a != b { return false }
     return true
 }
-
-// FIXME: Move to PatternMatching
-/// - Returns: `true` if the given `array` contains the given `value`.
-public func ~= <S: Sequence> (array: S, value: S.Element) -> Bool
-    where S.Element: Equatable
-{
-    return array.contains(value)
-}
-
-/// - Returns: `true` if the given `set` contains the given `value`.
-public func ~= <S: SetAlgebra> (set: S, value: S.Element) -> Bool {
-    return set.contains(value)
-}
