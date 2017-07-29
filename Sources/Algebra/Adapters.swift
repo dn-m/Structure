@@ -1,9 +1,8 @@
 //
-//  Sequence+Monoid.swift
-//  Collections
+//  Adapters.swift
+//  Algebra
 //
-//  Created by James Bean on 7/19/17.
-//
+//  Created by James Bean on 7/29/17.
 //
 
 import Destructure
@@ -42,19 +41,20 @@ extension Sequence where Element: Additive {
     }
 }
 
-extension Collection where Element: AdditiveSemigroup {
+extension Set: Additive {
 
-    public var nonEmptySum: Element? {
-        guard let (head,tail) = destructured else { return nil }
-        return tail.reduce(head, +)
+    public static var zero: Set {
+        return Set()
+    }
+
+    public static func + (lhs: Set, rhs: Set) -> Set {
+        return lhs.union(rhs)
     }
 }
 
-extension Collection where Element: MultiplicativeSemigroup {
+extension Set: MultiplicativeSemigroup {
 
-    public var nonEmptyProduct: Element? {
-        guard let (head,tail) = destructured else { return nil }
-        return tail.reduce(head, *)
+    public static func * (lhs: Set, rhs: Set) -> Set {
+        return lhs.intersection(rhs)
     }
 }
-
