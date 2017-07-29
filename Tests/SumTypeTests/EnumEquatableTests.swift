@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import EnumExtensions
+import SumType
 
 class EnumEquatableTests: XCTestCase {
 
