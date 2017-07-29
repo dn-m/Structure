@@ -8,9 +8,10 @@ let package = Package(
 
         // Sources
         .target(name: "Algorithms"),
+        .target(name: "Bitwise"),
         .target(name: "PatternMatching"),
         .target(name: "Predicates"),
-        .target(name: "EnumExtensions"),
+        .target(name: "SumType", dependencies: ["Bitwise"]),
         .target(name: "StructureWrapping"),
         .target(name: "Destructure"),
         .target(name: "Algebra", dependencies: ["Destructure"]),
@@ -32,8 +33,9 @@ let package = Package(
 
         // Tests
         .testTarget(name: "AlgorithmsTests", dependencies: ["Algorithms"]),
+        .testTarget(name: "BitwiseTests", dependencies: ["Bitwise"]),
         .testTarget(name: "PredicatesTests", dependencies: ["Predicates"]),
-        .testTarget(name: "EnumExtensionsTests", dependencies: ["EnumExtensions"]),
+        .testTarget(name: "SumTypeTests", dependencies: ["SumType"]),
         .testTarget(name: "AlgebraTests", dependencies: ["Algebra"]),
         .testTarget(name: "Zip3SequenceTests", dependencies: ["Zip3Sequence"]),
         .testTarget(name: "DestructureTests", dependencies: ["Destructure"]),
