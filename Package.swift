@@ -11,7 +11,7 @@ let package = Package(
         .target(name: "Bitwise"),
         .target(name: "PatternMatching"),
         .target(name: "Predicates"),
-        .target(name: "SumType", ["Bitwise"]),
+        .target(name: "SumType", dependencies: ["Bitwise"]),
         .target(name: "StructureWrapping"),
         .target(name: "Destructure"),
         .target(name: "Algebra", dependencies: ["Destructure"]),
