@@ -8,7 +8,6 @@ let package = Package(
 
         // Sources
         .target(name: "Algorithms"),
-        .target(name: "Restructure"),
         .target(name: "PatternMatching"),
         .target(name: "Predicates"),
         .target(name: "EnumExtensions"),
@@ -19,10 +18,10 @@ let package = Package(
         .target(name: "LinkedList"),
         .target(name: "Matrix"),
         .target(name: "Stack", dependencies: ["Algebra"]),
-        .target(name: "ReferenceTree", dependencies: ["Restructure", "Predicates"]),
+        .target(name: "ReferenceTree", dependencies: ["Algebra", "Predicates"]),
         .target(name: "ReferenceGraph"),
-        .target(name: "Tree", dependencies: ["Restructure", "Destructure", "Stack"]),
-        .target(name: "CircularArray", dependencies: ["Restructure", "Destructure"]),
+        .target(name: "Tree", dependencies: ["Algebra", "Destructure", "Stack"]),
+        .target(name: "CircularArray", dependencies: ["Algebra", "Destructure"]),
         .target(name: "SortedArray", dependencies: ["Algebra", "StructureWrapping"]),
         .target(name: "DictionaryProtocol"),
         .target(name: "OrderedDictionary", dependencies: ["DictionaryProtocol"]),
@@ -33,7 +32,6 @@ let package = Package(
 
         // Tests
         .testTarget(name: "AlgorithmsTests", dependencies: ["Algorithms"]),
-        .testTarget(name: "RestructureTests", dependencies: ["Restructure"]),
         .testTarget(name: "PredicatesTests", dependencies: ["Predicates"]),
         .testTarget(name: "EnumExtensionsTests", dependencies: ["EnumExtensions"]),
         .testTarget(name: "AlgebraTests", dependencies: ["Algebra"]),

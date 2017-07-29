@@ -33,6 +33,23 @@ extension Sequence where Element: Multiplicative {
     }
 }
 
+
+extension Collection where Element: AdditiveSemigroup {
+
+    public var nonEmptySum: Iterator.Element? {
+        guard let (head,tail) = destructured else { return nil }
+        return tail.reduce(head, +)
+    }
+}
+
+extension Collection where Element: MultiplicativeSemigroup {
+
+    public var nonEmptyProduct: Iterator.Element? {
+        guard let (head,tail) = destructured else { return nil }
+        return tail.reduce(head, *)
+    }
+}
+
 extension Sequence where Element: Additive {
 
     /// - Returns: Sum of all values contained herein.
@@ -56,5 +73,46 @@ extension Set: MultiplicativeSemigroup {
 
     public static func * (lhs: Set, rhs: Set) -> Set {
         return lhs.intersection(rhs)
+    }
+}
+
+extension Set {
+
+    public func inserting(_ element: Element) -> Set {
+        var copy = self
+        copy.insert(element)
+        return self
+    }
+
+    public static func + (lhs: Set, rhs: Element?) -> Set {
+        guard let element = rhs else { return lhs }
+        return lhs.inserting(element)
+    }
+
+    public static func + (lhs: Element?, rhs: Set) -> Set {
+        guard let element = lhs else { return rhs }
+        return rhs.inserting(element)
+    }
+}
+
+extension Array {
+
+    /// - Returns: Array with the `element` appended.
+    public func appending(_ element: Element) -> Array {
+        var copy = self
+        copy.append(element)
+        return copy
+    }
+
+    /// - Returns: Left-hand-side value appending the right-hand-side value, if it exists.
+    /// Otherwise, the left-hand-side value.
+    public static func + (lhs: Array, rhs: Element?) -> Array {
+        guard let element = rhs else { return lhs }
+        return lhs.appending(element)
+    }
+
+    /// - returns: New `Array` with the first element `head`, and the remaining elements of `tail`.
+    public static func + (head: Element, tail: Array) -> Array {
+        return [head] + tail
     }
 }

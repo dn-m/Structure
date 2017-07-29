@@ -6,7 +6,7 @@
 //
 //
 
-import Restructure
+import Algebra
 import Predicates
 
 /// Mutable Tree structure.

@@ -6,7 +6,7 @@
 //
 //
 
-import Restructure
+import Algebra
 import Destructure
 import Stack
 
