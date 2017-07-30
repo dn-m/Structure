@@ -30,6 +30,7 @@ let package = Package(
             name: "SortedDictionary",
             dependencies: ["DictionaryProtocol", "SortedArray", "StructureWrapping"]
         ),
+        .target(name: "Number", dependencies: ["Algebra"]),
 
         // Tests
         .testTarget(name: "AlgorithmsTests", dependencies: ["Algorithms"]),
