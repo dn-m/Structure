@@ -7,6 +7,8 @@
 
 import Destructure
 
+// - MARK: collections
+
 extension Sequence where Element: Monoid {
 
     /// - Returns: The values contained herein, reduced from the `.identity` value of the `Monoid`,
@@ -116,3 +118,31 @@ extension Array {
         return [head] + tail
     }
 }
+
+// - MARK: numeric types
+
+extension Int: Additive {
+    public static let zero: Int = 0
+}
+
+extension Int: Multiplicative {
+    public static let one: Int = 1
+}
+
+extension Float: Additive {
+    public static let zero: Float = 0
+}
+
+extension Float: Multiplicative {
+    public static let one: Float = 1
+}
+
+extension Double: Additive {
+    public static let zero: Double = 0
+}
+
+extension Double: Multiplicative {
+    public static let one: Double = 1
+}
+
+// FIXME: Flesh out

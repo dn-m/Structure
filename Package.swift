@@ -15,7 +15,6 @@ let package = Package(
         .target(name: "DictionaryProtocol"),
         .target(name: "LinkedList"),
         .target(name: "Matrix"),
-        .target(name: "Number", dependencies: ["Algebra"]),
         .target(name: "OrderedDictionary", dependencies: ["DictionaryProtocol"]),
         .target(name: "PatternMatching"),
         .target(name: "Predicates"),
