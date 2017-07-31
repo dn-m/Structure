@@ -9,9 +9,6 @@
 import XCTest
 import Algebra
 
-extension Int: AdditiveSemigroup { }
-extension Int: MultiplicativeSemigroup { }
-
 class SequenceAlgebraTests: XCTestCase {
 
     func testSumOfAdditiveSemigroup() {
