@@ -7,6 +7,7 @@ let package = Package(
     targets: [
 
         // Sources
+        .target(name: "Structure"),
         .target(name: "Algebra", dependencies: ["Destructure"]),
         .target(name: "Algorithms"),
         .target(name: "Bitwise"),
