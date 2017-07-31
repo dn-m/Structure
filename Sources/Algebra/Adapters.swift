@@ -7,7 +7,7 @@
 
 import Destructure
 
-// - MARK: collections
+// - MARK: Collections
 
 extension Sequence where Element: Monoid {
 
@@ -119,7 +119,7 @@ extension Array {
     }
 }
 
-// - MARK: numeric types
+// - MARK: Numeric types
 
 extension Int: Additive {
     public static let zero: Int = 0
