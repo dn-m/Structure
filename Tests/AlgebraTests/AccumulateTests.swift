@@ -10,33 +10,32 @@ import Algebra
 
 class AccumulateTests: XCTestCase {
     
-    func testIntArrayCumulativeRight() {
+    func testIntArrayAccumulatingSum() {
         let array = [1,2,3]
-        XCTAssertEqual(array.accumulatingRight, [0,1,3])
+        XCTAssertEqual(array.accumulatingSum, [0,1,3])
     }
 
-    func testFloatArrayCumulativeRight() {
+    func testFloatArrayAccumulatingSum() {
 
         let array = [1.1, 2.2, 3.3]
         let expected = [0, 1.1, 3.3]
 
-        zip(array.accumulatingRight, expected).forEach { actual, expected in
+        zip(array.accumulatingSum, expected).forEach { actual, expected in
             XCTAssertEqual(actual, expected, accuracy: 0.000001)
         }
     }
 
-    func testIntArrayCumulativeLeft() {
-        let array = [1,2,3]
-        XCTAssertEqual(array.accumulatingLeft, [0,3,5])
+    func testArrayAccumulatingPerformance() {
+        let array = (0..<1_000_000).map { $0 }
+        measure {
+            let _ = array.accumulating(0, with: +)
+        }
     }
 
-    func testFloatArrayCumulativeLeft() {
-
-        let array = [1.1, 2.2, 3.3]
-        let expected = [0, 3.3, 5.5]
-
-        zip(array.accumulatingLeft, expected).forEach { actual, expected in
-            XCTAssertEqual(actual, expected, accuracy: 0.000001)
+    func testSequenceAccumulatingPerformance() {
+        let sequence = AnySequence((0..<1_000_000).map { $0 })
+        measure {
+            let _ = sequence.accumulating(0, with: +)
         }
     }
 }

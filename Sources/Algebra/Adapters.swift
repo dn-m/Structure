@@ -121,28 +121,40 @@ extension Array {
 
 // - MARK: Numeric types
 
-extension Int: Additive {
+extension Int: AdditiveSemigroup {
     public static let zero: Int = 0
 }
 
-extension Int: Multiplicative {
+extension Int: Additive { }
+
+extension Int: MultiplicativeSemigroup {
     public static let one: Int = 1
 }
 
-extension Float: Additive {
+extension Int: Multiplicative { }
+
+extension Float: AdditiveSemigroup {
     public static let zero: Float = 0
 }
 
-extension Float: Multiplicative {
+extension Float: Additive { }
+
+extension Float: MultiplicativeSemigroup {
     public static let one: Float = 1
 }
 
-extension Double: Additive {
+extension Float: Multiplicative { }
+
+extension Double: AdditiveSemigroup {
     public static let zero: Double = 0
 }
 
-extension Double: Multiplicative {
+extension Double: Additive { }
+
+extension Double: MultiplicativeSemigroup {
     public static let one: Double = 1
 }
+
+extension Double: Multiplicative { }
 
 // FIXME: Flesh out

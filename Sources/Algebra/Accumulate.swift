@@ -5,24 +5,65 @@
 //  Created by James Bean on 7/31/17.
 //
 
-// TODO: Extend to Multiplicative types
-extension Collection where Element: Additive {
+extension Sequence {
 
-    /// - returns: An array of the values contained herein accumulating the running sum to the
-    /// right, start with `.unit`.
-    public var accumulatingRight: [Element] {
-
-        func accumulate(_ array: [Element], result: [Element], sum: Element) -> [Element] {
-            guard let (head, tail) = array.destructured else { return result }
-            return accumulate(tail, result: result + [sum], sum: sum + head)
+    public func accumulating(
+        _ initial: Element,
+        with op: (Element,Element) -> Element
+    ) -> [Element]
+    {
+        var result: [Element] = []
+        var accum: Element = initial
+        for el in self {
+            result.append(accum)
+            accum = op(accum,el)
         }
-
-        return accumulate(Array(self), result: [], sum: .zero)
+        return result
     }
+}
 
-    /// - returns: An array of the values contained herein accumulating the running sum to the
-    /// left, start with `.unit`.
-    public var accumulatingLeft: [Iterator.Element] {
-        return reversed().accumulatingRight
+extension Sequence where Element: Additive {
+
+    public var accumulatingSum: [Element] {
+        return accumulating(.zero, with: +)
+    }
+}
+
+extension Sequence where Element: Multiplicative {
+
+    public var accumulatingProduct: [Element] {
+        return accumulating(.one, with: *)
+    }
+}
+
+extension Array {
+
+    public func accumulating(
+        _ initial: Element,
+        with op: (Element,Element) -> Element
+    ) -> [Element]
+    {
+        var result: [Element] = []
+        result.reserveCapacity(count)
+        var accum: Element = initial
+        for el in self {
+            result.append(accum)
+            accum = op(accum,el)
+        }
+        return result
+    }
+}
+
+extension Array where Element: Additive {
+
+    public var accumulatingSum: [Element] {
+        return accumulating(.zero, with: +)
+    }
+}
+
+extension Array where Element: Multiplicative {
+
+    public var accumulatingProduct: [Element] {
+        return accumulating(.one, with: *)
     }
 }
