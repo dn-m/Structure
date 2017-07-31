@@ -5,20 +5,15 @@
 //  Created by James Bean on 7/31/17.
 //
 
-extension Collection where Iterator.Element: Additive {
-
-    typealias M = Iterator.Element
+// TODO: Extend to Multiplicative types
+extension Collection where Element: Additive {
 
     /// - returns: An array of the values contained herein accumulating the running sum to the
     /// right, start with `.unit`.
-    public var accumulatingRight: [Iterator.Element] {
+    public var accumulatingRight: [Element] {
 
-        func accumulate(_ array: [M], result: [M], sum: M) -> [M] {
-
-            guard let (head, tail) = array.destructured else {
-                return result
-            }
-
+        func accumulate(_ array: [Element], result: [Element], sum: Element) -> [Element] {
+            guard let (head, tail) = array.destructured else { return result }
             return accumulate(tail, result: result + [sum], sum: sum + head)
         }
 
