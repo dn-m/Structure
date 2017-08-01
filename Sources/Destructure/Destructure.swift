@@ -16,13 +16,13 @@ extension Collection {
     }
 
     /// Remaining `Elements` of a list.
-    public var tail: Array<Element>? {
+    public var tail: SubSequence? {
         guard !isEmpty else { return nil }
-        return Array(dropFirst())
+        return dropFirst()
     }
 
     /// 2-tuple containing the `head` `Element` and `tail` `[Element]` of `Self`
-    public var destructured: (Element, Array<Element>)? {
+    public var destructured: (Element, SubSequence)? {
         guard let head = head, let tail = tail else { return nil }
         return (head, tail)
     }

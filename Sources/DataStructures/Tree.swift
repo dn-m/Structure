@@ -126,7 +126,7 @@ public enum Tree <Branch,Leaf> {
         /// - throws: `TreeError` if the given `path` is no good.
         public func move(through path: [Int]) throws -> Zipper {
             guard let (index, remaining) = path.destructured else { return self }
-            return try move(to: index).move(through: remaining)
+            return try move(to: index).move(through: Array(remaining))
         }
 
         /// Transform the value of the wrapped `Tree`.
@@ -286,7 +286,7 @@ public enum Tree <Branch,Leaf> {
                 // Otherwise, keep recursing down
                 return try tree.replacingTree(
                     at: index,
-                    with: try traverse(subTree, inserting: newTree, path: remainingPath)
+                    with: try traverse(subTree, inserting: newTree, path: Array(remainingPath))
                 )
             }
         }
@@ -329,7 +329,7 @@ public enum Tree <Branch,Leaf> {
 
                 let newBranch = try traverse(subTree,
                     inserting: newTree,
-                    through: tail,
+                    through: Array(tail),
                     at: index
                 )
 
