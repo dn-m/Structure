@@ -22,7 +22,7 @@ let package = Package(
         .target(name: "DictionaryProtocol"),
         .target(name: "Algebra", dependencies: ["Destructure"]),
         .target(name: "Structure", dependencies: ["Algebra"]),
-        .target(name: "DataStructures", dependencies: ["Algebra", "Structure", "DictionaryProtocol", "StructureWrapping"]),
+        .target(name: "DataStructures", dependencies: ["Algebra", "Destructure", "Destructure", "DictionaryProtocol", "StructureWrapping", "Structure"]),
 
         // Tests
         .testTarget(name: "StructureTests", dependencies: ["Structure"]),

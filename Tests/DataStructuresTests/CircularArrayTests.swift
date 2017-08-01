@@ -7,7 +7,8 @@
 //
 
 import XCTest
-import struct DataStructures.CircularArray
+import Restructure
+import DataStructures
 
 class CircularArrayTests: XCTestCase {
 

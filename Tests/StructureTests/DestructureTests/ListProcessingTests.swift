@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import Structure
+import Destructure
 import Restructure
 
 class ListProcessingTests: XCTestCase {
@@ -66,17 +66,5 @@ class ListProcessingTests: XCTestCase {
     func testArrayDestructuredNil() {
         let array: Array<Int> = []
         XCTAssertNil(array.destructured)
-    }
-
-    func testAddTail() {
-        let head: Int = 1
-        let tail: Array<Int> = [2,3]
-        XCTAssertEqual(head + tail, [1,2,3])
-    }
-
-    func testAddItem() {
-        let array: Array<Int> = [1,2]
-        let item = 3
-        XCTAssertEqual(array + item, [1,2,3])
     }
 }
