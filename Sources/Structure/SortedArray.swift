@@ -6,6 +6,8 @@
 //
 //
 
+import Algebra
+
 /// `Array` that keeps itself sorted.
 public struct SortedArray <Element: Comparable>:
     RandomAccessCollectionWrapping,

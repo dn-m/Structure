@@ -6,6 +6,8 @@
 //
 //
 
+import Algebra
+
 /// Mutable Tree structure.
 public class ReferenceTree {
 

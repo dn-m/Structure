@@ -6,6 +6,8 @@
 //
 //
 
+import Algebra
+
 /// Stack structure.
 public struct Stack <Element> {
 

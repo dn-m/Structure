@@ -6,6 +6,8 @@
 //
 //
 
+import Algebra
+
 /// Value-semantic, immutable Tree structure.
 public enum Tree <Branch,Leaf> {
 
