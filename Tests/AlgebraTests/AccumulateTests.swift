@@ -1,15 +1,16 @@
 //
 //  AccumulateTests.swift
-//  AlgebraTests
+//  Algebra
 //
-//  Created by James Bean on 7/31/17.
+//  Created by James Bean on 7/19/17.
+//
 //
 
 import XCTest
 import Algebra
 
 class AccumulateTests: XCTestCase {
-    
+
     func testIntArrayAccumulatingSum() {
         let array = [1,2,3]
         XCTAssertEqual(array.accumulatingSum, [0,1,3])

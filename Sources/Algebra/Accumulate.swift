@@ -2,7 +2,7 @@
 //  Accumulate.swift
 //  Algebra
 //
-//  Created by James Bean on 7/31/17.
+//  Created by James Bean on 8/1/17.
 //
 
 extension Sequence {
@@ -41,7 +41,7 @@ extension Array {
     public func accumulating(
         _ initial: Element,
         with op: (Element,Element) -> Element
-    ) -> [Element]
+        ) -> [Element]
     {
         var result: [Element] = []
         result.reserveCapacity(count)
