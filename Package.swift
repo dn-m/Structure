@@ -25,6 +25,7 @@ let package = Package(
         .target(name: "DataStructures", dependencies: ["Algebra", "Restructure", "Destructure", "DictionaryProtocol", "StructureWrapping", "Structure"]),
 
         // Tests
+        .testTarget(name: "AlgebraTests", dependencies: ["Algebra"]),
         .testTarget(name: "StructureTests", dependencies: ["Structure"]),
         .testTarget(name: "DataStructuresTests", dependencies: ["DataStructures"])
     ]
