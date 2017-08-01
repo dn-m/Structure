@@ -6,7 +6,6 @@
 //
 //
 
-import Structure
 import Restructure
 import Algebra
 
