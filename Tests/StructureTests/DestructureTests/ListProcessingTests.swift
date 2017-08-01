@@ -8,6 +8,7 @@
 
 import XCTest
 import Structure
+import Restructure
 
 class ListProcessingTests: XCTestCase {
 

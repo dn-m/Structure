@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import Structure
+import DataStructures
 
 class ReferenceTreeTests: XCTestCase {
 

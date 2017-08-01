@@ -6,6 +6,8 @@
 //
 //
 
+import Structure
+import Restructure
 import Algebra
 
 /// Value-semantic, immutable Tree structure.

@@ -7,6 +7,7 @@
 //
 
 import Algebra
+import StructureWrapping
 
 /// `Array` that keeps itself sorted.
 public struct SortedArray <Element: Comparable>:
@@ -45,8 +46,8 @@ public struct SortedArray <Element: Comparable>:
     }
 
     /// Insert the contents of another sequence of `T`.
-    public mutating func insert <S: Sequence> (contentsOf elements: S)
-        where S.Element == Element
+    public mutating func insert <S> (contentsOf elements: S)
+        where S: Sequence, S.Element == Element
     {
         elements.forEach { insert($0) }
     }

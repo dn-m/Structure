@@ -6,6 +6,8 @@
 //
 //
 
+import Structure
+import Restructure
 import Algebra
 
 /// Array-like structure that allows retrieval of elements at indices outside of the bounds of

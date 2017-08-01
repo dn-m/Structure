@@ -7,7 +7,9 @@
 //
 
 import XCTest
-import Structure
+import Restructure
+import Algebra
+import DataStructures
 
 class SortedArrayTests: XCTestCase {
 
@@ -56,7 +58,7 @@ class SortedArrayTests: XCTestCase {
     func testAdd() {
         let a: SortedArray = [1,2,5,6]
         let b: SortedArray = [3,4]
-        XCTAssertEqual(a + b, [1,2,3,4,5,6])
+        XCTAssertEqual(a + b, SortedArray([1,2,3,4,5,6]))
     }
 
     func testStartIndex() {

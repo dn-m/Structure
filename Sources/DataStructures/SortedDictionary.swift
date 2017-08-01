@@ -6,6 +6,8 @@
 //
 //
 
+import DictionaryProtocol
+
 /// Ordered dictionary which has sorted `keys`.
 public struct SortedDictionary<Key, Value>: DictionaryProtocol where Key: Hashable & Comparable {
 

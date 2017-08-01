@@ -6,6 +6,8 @@
 //
 //
 
+import StructureWrapping
+
 extension ReferenceGraph {
 
     public class AdjacencyList: CollectionWrapping {

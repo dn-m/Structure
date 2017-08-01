@@ -7,7 +7,8 @@
 //
 
 import XCTest
-import Structure
+import DataStructures
+import Structure // Either
 
 class TreeTests: XCTestCase {
 

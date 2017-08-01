@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import Structure
+import DataStructures
 
 final class Node: ReferenceTreeProtocol {
     weak var parent: Node?

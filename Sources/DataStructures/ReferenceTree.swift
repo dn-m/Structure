@@ -6,6 +6,7 @@
 //
 //
 
+import Restructure
 import Algebra
 
 /// Mutable Tree structure.

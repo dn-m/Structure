@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import Structure
+import Algebra
 
 class SequenceAlgebraTests: XCTestCase {
 
