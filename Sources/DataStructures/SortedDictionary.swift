@@ -65,7 +65,7 @@ public struct SortedDictionary<Key, Value>: DictionaryProtocol where Key: Hashab
     }
 
     /// Insert the contents of another `SortedDictionary` value.
-    public mutating func insertContents(of sortedDictionary: SortedDictionary<Key, Value>) {
+    public mutating func insert(contentsOf sortedDictionary: SortedDictionary<Key, Value>) {
         sortedDictionary.forEach { insert($0.1, key: $0.0) }
     }
 

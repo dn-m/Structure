@@ -66,7 +66,7 @@ class SortedDictionaryTests: XCTestCase {
         dict2.insert("two", key: 2)
         dict2.insert("four", key: 4)
 
-        dict1.insertContents(of: dict2)
+        dict1.insert(contentsOf: dict2)
 
         XCTAssertEqual(dict1.map { $0.0 }, [1,2,3,4])
         XCTAssertEqual(dict1.map { $0.1 }, ["one", "two", "three", "four"])
