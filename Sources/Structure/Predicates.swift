@@ -28,6 +28,19 @@ extension Sequence {
     }
 }
 
+extension Sequence {
+
+    public func extrema <T> (
+        property: (Element) -> T,
+        areInIncreasingOrder: (T,T) -> Bool
+    ) -> [Element] where T: Comparable
+    {
+        let sorted = self.sorted { areInIncreasingOrder(property($0), property($1)) }
+        guard let extremum = sorted.first.flatMap(property) else { return [] }
+        return sorted.filter { property($0) == extremum }
+    }
+}
+
 extension Sequence where Element: Equatable {
 
     /// - returns: `true` if there are one or fewer elements in `self`, or if all elements in
