@@ -18,13 +18,14 @@ public func combinations <T, U> (_ a: [T], _ b: [U]) -> [(T, U)] {
 extension Array {
 
     public var permutations: [[Element]] {
-        return Structure.permutations(self)
-    }
-}
 
-private func permutations <T> (_ values: [T]) -> [[T]] {
-    guard let (head, tail) = values.destructured else { return [[]] }
-    return permutations(Array(tail)).flatMap { injecting(head, into: $0) }
+        func permute(_ values: [Element]) -> [[Element]] {
+            guard let (head, tail) = values.destructured else { return [[]] }
+            return permute(Array(tail)).flatMap { injecting(head, into: $0) }
+        }
+
+        return permute(self)
+    }
 }
 
 internal func injecting <T> (_ value: T, into values: [T]) -> [[T]] {
