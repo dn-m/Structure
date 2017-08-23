@@ -16,15 +16,17 @@ extension Array {
     public mutating func rotate(by positions: Int) {
         guard positions != 0 else { return }
         let positions = (positions < 0 ? count + positions : positions) % count
-        reverse(start: 0, end: positions - 1)
-        reverse(start: positions, end: count - 1)
-        reverse(start: 0, end: count - 1)
+        reverse(in: 0 ..< positions - 1)
+        reverse(in: positions ..< count - 1)
+        reverse(in: 0 ..< count - 1)
     }
 
-    private mutating func reverse(start: Int, end: Int) {
-        guard start >= 0 && end < count && start < end else { return }
-        var start = start
-        var end = end
+    private mutating func reverse(in range: CountableRange<Int>) {
+        guard count > 1 else { return }
+        assert(range.lowerBound >= startIndex)
+        assert(range.upperBound < endIndex)
+        var start = range.lowerBound
+        var end = range.upperBound
         while start < end, start != end {
             swapAt(start, end)
             start += 1

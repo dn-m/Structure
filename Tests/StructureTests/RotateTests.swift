@@ -10,6 +10,11 @@ import Structure
 
 class RotateTests: XCTestCase {
 
+    func testRotateBy0() {
+        let array = [1,2,3,4]
+        XCTAssertEqual(array.rotated(by: 0), array)
+    }
+
     func testRotateBy1() {
         let array = [1,2,3,4]
         XCTAssertEqual(array.rotated(by: 1), [2,3,4,1])
