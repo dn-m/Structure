@@ -15,11 +15,6 @@ extension Collection {
         return first
     }
 
-//    public var tail: Array<Element>? {
-//        guard !isEmpty else { return nil }
-//        return Array(dropFirst())
-//    }
-
     /// Remaining `Elements` of a list.
     public var tail: SubSequence? {
         guard !isEmpty else { return nil }
