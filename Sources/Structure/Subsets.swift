@@ -14,20 +14,27 @@ extension Collection {
     /// (how many elements chosen per combination).
     public func subsets(cardinality k: Int) -> [[Element]] {
 
-        func subsets(cardinality k: Int, appendingTo prefix: [Element], at index: Int)
+        func subsets(cardinality k: Int, appendingTo prefix: [Element], at index: Index)
             -> [[Element]]
         {
             guard k > 0 else { return [prefix] }
-            if index < count {
-                let idx = index as! Index
+            if index < endIndex {
                 return (
-                    subsets(cardinality: k - 1, appendingTo: prefix + [self[idx]], at: index + 1) +
-                    subsets(cardinality: k, appendingTo: prefix, at: index + 1)
+                    subsets(
+                        cardinality: k - 1,
+                        appendingTo: prefix + [self[index]],
+                        at: indices.index(after: index)
+                    ) +
+                    subsets(
+                        cardinality: k,
+                        appendingTo: prefix,
+                        at: indices.index(after: index)
+                    )
                 )
             }
             return []
         }
 
-        return subsets(cardinality: k, appendingTo: [], at: 0)
+        return subsets(cardinality: k, appendingTo: [], at: startIndex)
     }
 }

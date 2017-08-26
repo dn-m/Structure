@@ -33,10 +33,7 @@ class SubsetsTests: XCTestCase {
 
     func testSubsetsQuadruple() {
         let array = [1,2,3,4]
-        XCTAssert(
-            [[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]] ==
-                array.subsets(cardinality: 2)
-        )
+        XCTAssert([[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]] == array.subsets(cardinality: 2))
     }
 }
 
