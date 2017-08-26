@@ -19,17 +19,10 @@ extension Collection {
         {
             guard k > 0 else { return [prefix] }
             if index < endIndex {
+                let next = indices.index(after: index)
                 return (
-                    subsets(
-                        cardinality: k - 1,
-                        appendingTo: prefix + [self[index]],
-                        at: indices.index(after: index)
-                    ) +
-                    subsets(
-                        cardinality: k,
-                        appendingTo: prefix,
-                        at: indices.index(after: index)
-                    )
+                    subsets(cardinality: k - 1, appendingTo: prefix + [self[index]], at: next) +
+                    subsets(cardinality: k, appendingTo: prefix, at: next)
                 )
             }
             return []
