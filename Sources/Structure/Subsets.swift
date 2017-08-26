@@ -10,7 +10,7 @@ extension Collection {
 
     // MARK: - Subsets
 
-    /// - returns: All combinations of with a given cardinality
+    /// - Returns: All combinations of with a given cardinality
     /// (how many elements chosen per combination).
     public func subsets(cardinality k: Int) -> [[Element]] {
 
