@@ -6,7 +6,7 @@
 //
 //
 
-extension Collection where Index == Int, IndexDistance == Int {
+extension Collection {
 
     // MARK: - Subsets
 
@@ -14,36 +14,20 @@ extension Collection where Index == Int, IndexDistance == Int {
     /// (how many elements chosen per combination).
     public func subsets(cardinality k: Int) -> [[Element]] {
 
-        func subsets(
-            cardinality k: Int,
-            combinedWith prefix: [Element],
-            startingAt index: Int
-        ) -> [[Element]]
+        func subsets(cardinality k: Int, appendingTo prefix: [Element], at index: Int)
+            -> [[Element]]
         {
-
-            guard k > 0 else {
-                return [prefix]
-            }
-
+            guard k > 0 else { return [prefix] }
             if index < count {
-                let first = self[index]
+                let idx = index as! Index
                 return (
-                    subsets(
-                        cardinality: k - 1,
-                        combinedWith: prefix + [first],
-                        startingAt: index + 1
-                    ) +
-                    subsets(
-                        cardinality: k,
-                        combinedWith: prefix,
-                        startingAt: index + 1
-                    )
+                    subsets(cardinality: k - 1, appendingTo: prefix + [self[idx]], at: index + 1) +
+                    subsets(cardinality: k, appendingTo: prefix, at: index + 1)
                 )
             }
-
             return []
         }
 
-        return subsets(cardinality: k, combinedWith: [], startingAt: 0)
+        return subsets(cardinality: k, appendingTo: [], at: 0)
     }
 }
