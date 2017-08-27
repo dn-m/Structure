@@ -13,6 +13,9 @@ let package = Package(
         .library(name: "Algebra", targets: ["Algebra"]),
         .library(name: "DataStructures", targets: ["DataStructures"])
     ],
+    dependencies: [
+        .package(url: "https://github.com/dn-m/PerformanceTesting.git", .branch("master"))
+    ],
     targets: [
 
         // Sources
@@ -27,6 +30,10 @@ let package = Package(
         // Tests
         .testTarget(name: "AlgebraTests", dependencies: ["Algebra"]),
         .testTarget(name: "StructureTests", dependencies: ["Structure"]),
-        .testTarget(name: "DataStructuresTests", dependencies: ["DataStructures"])
+        .testTarget(name: "DataStructuresTests", dependencies: ["DataStructures"]),
+
+        // Performance Tests
+        .testTarget(name: "StructurePerformanceTests",
+            dependencies: ["Structure", "PerformanceTesting"]),
     ]
 )
