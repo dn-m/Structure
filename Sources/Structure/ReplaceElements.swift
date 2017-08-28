@@ -6,20 +6,13 @@
 //
 //
 
-/// - TODO: Move up to `Collection`
 extension Array {
 
     // MARK: - Replace Elements
 
     /// Replace element at given `index` with the given `element`.
-    public mutating func replaceElement(at index: Int, with element: Element)
-        throws
-    {
-
-        guard index >= startIndex && index < endIndex else {
-            throw ArrayError.removalError
-        }
-
+    public mutating func replaceElement(at index: Int, with element: Element) throws {
+        guard index >= startIndex && index < endIndex else { throw ArrayError.removalError }
         remove(at: index)
         insert(element, at: index)
     }
@@ -33,11 +26,7 @@ extension Array {
 
     /// Replace the last element in `Array` with the given `element`.
     public mutating func replaceLast(with element: Element) throws {
-
-        guard self.count > 0 else {
-            throw ArrayError.removalError
-        }
-
+        guard self.count > 0 else { throw ArrayError.removalError }
         removeLast()
         append(element)
     }
@@ -47,7 +36,6 @@ extension Array {
     ///
     /// - throws: `ArrayError.removalError` if `self` is empty.
     public mutating func replaceFirst(with element: Element) throws {
-
         try removeFirst()
         insert(element, at: 0)
     }
@@ -57,11 +45,7 @@ extension Array {
     ///
     /// - throws: `ArrayError` if the given `index` is out of range.
     public func inserting(_ element: Element, at index: Index) throws -> Array {
-
-        guard index >= startIndex && index <= endIndex else {
-            throw ArrayError.insertionError
-        }
-
+        guard index >= startIndex && index <= endIndex else { throw ArrayError.insertionError }
         var copy = self
         copy.insert(element, at: index)
         return copy

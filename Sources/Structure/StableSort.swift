@@ -8,11 +8,9 @@
 
 extension RangeReplaceableCollection where Index == Int, IndexDistance == Int  {
 
-    public func stableSort(
-        _ isOrderedBefore: @escaping (Element, Element) -> Bool
-    ) -> [Element]
-    {
-        var result = self // make copy of self to return
+    public func stableSort(_ isOrderedBefore: @escaping (Element, Element) -> Bool) -> [Element] {
+
+        var result = self
         let count = result.count
 
         var aux: [Element] = []

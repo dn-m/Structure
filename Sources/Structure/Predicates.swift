@@ -47,6 +47,8 @@ extension Sequence where Element: Equatable {
     /// `self` are logically equivalent.
     public var isHomogeneous: Bool {
 
+        // FIXME: Use `destructured`
+
         var initialElement: Element?
 
         for element in self {
@@ -68,6 +70,7 @@ extension Sequence where Element: Equatable {
     /// - returns: `false` if there are one or fewer elements in `self`, or if any elements in
     /// `self` are not logically equivalent.
     public var isHeterogeneous: Bool {
+        // FIXME: Use own implementation for quick exit upon new value
         return !isHomogeneous
     }
 }
