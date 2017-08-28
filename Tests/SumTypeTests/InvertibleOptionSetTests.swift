@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import Structure
+import SumType
 
 class InvertibleOptionSetTests: XCTestCase {
 

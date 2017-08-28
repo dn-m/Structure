@@ -14,7 +14,8 @@ let package = Package(
         .library(name: "DataStructures", targets: ["DataStructures"]),
         .library(name: "Predicates", targets: ["Predicates"]),
         .library(name: "Bitwise", targets: ["Bitwise"]),
-        .library(name: "Combinatorics", targets: ["Combinatorics"])
+        .library(name: "Combinatorics", targets: ["Combinatorics"]),
+        .library(name: "SumType", targets: ["SumType"])
     ],
     dependencies: [
         .package(url: "https://github.com/dn-m/PerformanceTesting.git", .branch("master"))
@@ -32,6 +33,7 @@ let package = Package(
         .target(name: "DataStructures", dependencies: ["Algebra", "Restructure", "Destructure", "DictionaryProtocol", "StructureWrapping", "Structure", "Predicates"]),
         .target(name: "Predicates", dependencies: ["Destructure"]),
         .target(name: "Combinatorics"),
+        .target(name: "SumType"),
 
         // Tests
         .testTarget(name: "AlgebraTests", dependencies: ["Algebra"]),
@@ -40,6 +42,7 @@ let package = Package(
         .testTarget(name: "PredicatesTests", dependencies: ["Predicates"]),
         .testTarget(name: "BitwiseTests", dependencies: ["Bitwise"]),
         .testTarget(name: "CombinatoricsTests", dependencies: ["Combinatorics"]),
+        .testTarget(name: "SumTypeTests", dependencies: ["SumType"]),
 
         // Performance Tests
         .testTarget(name: "StructurePerformanceTests",
