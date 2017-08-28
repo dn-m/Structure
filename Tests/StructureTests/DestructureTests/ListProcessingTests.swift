@@ -12,22 +12,6 @@ import Restructure
 
 class ListProcessingTests: XCTestCase {
 
-    func testArraySliceHead() {
-        let arraySlice: ArraySlice = [1]
-        XCTAssertEqual(arraySlice.head, 1)
-    }
-
-    func testArraySliceTail() {
-        let arraySlice: ArraySlice<Int> = [1,2,3]
-        let tail = ArraySlice([2,3])
-        XCTAssertEqual(arraySlice.tail!, tail)
-    }
-
-    func testArraySliceTailNil() {
-        let arraySlice: ArraySlice<Int> = []
-        XCTAssertNil(arraySlice.tail)
-    }
-
     func testArraySliceDestructured() {
         let arraySlice: ArraySlice<Int> = [1,2,3]
         let (a,b) = arraySlice.destructured!
@@ -38,22 +22,6 @@ class ListProcessingTests: XCTestCase {
     func testArraySliceDestructuredNil() {
         let arraySlice: ArraySlice<Int> = []
         XCTAssertNil(arraySlice.destructured)
-    }
-
-    func testArrayHead() {
-        let array: Array = [1]
-        XCTAssertEqual(array.head, 1)
-    }
-
-    func testArrayTail() {
-        let array: Array<Int> = [1,2,3]
-        let tail: ArraySlice<Int> = [2,3]
-        XCTAssertEqual(array.tail!, tail)
-    }
-
-    func testArrayTailNil() {
-        let array: Array<Int> = []
-        XCTAssertNil(array.tail)
     }
 
     func testArrayDestructured() {

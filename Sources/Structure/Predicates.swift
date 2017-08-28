@@ -6,6 +6,8 @@
 //
 //
 
+import Destructure
+
 extension Sequence {
 
     // MARK: - Predicates
@@ -41,37 +43,22 @@ extension Sequence {
     }
 }
 
-extension Sequence where Element: Equatable {
+extension Collection where Element: Equatable {
 
-    /// - returns: `true` if there are one or fewer elements in `self`, or if all elements in
+    /// - Returns: `true` if there are one or fewer elements in `self`, or if all elements in
     /// `self` are logically equivalent.
     public var isHomogeneous: Bool {
-
-        // FIXME: Use `destructured`
-
-        var initialElement: Element?
-
-        for element in self {
-
-            guard let elementToCompare = initialElement else {
-                initialElement = element
-                continue
-            }
-
-            if element != elementToCompare {
-                return false
-            }
-        }
-
+        guard let (head,tail) = destructured else { return true }
+        for element in tail where element != head { return false }
         return true
     }
 
-
-    /// - returns: `false` if there are one or fewer elements in `self`, or if any elements in
+    /// - Returns: `false` if there are one or fewer elements in `self`, or if any elements in
     /// `self` are not logically equivalent.
     public var isHeterogeneous: Bool {
-        // FIXME: Use own implementation for quick exit upon new value
-        return !isHomogeneous
+        guard let (head,tail) = destructured else { return false }
+        for element in tail where element == head { return false }
+        return false
     }
 }
 
