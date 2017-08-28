@@ -1,21 +1,12 @@
 //
+//  Permutations.swift
 //  Combinatorics
-//  Collections
 //
-//  Created by James Bean on 12/23/16.
-//
+//  Created by James Bean on 8/28/17.
 //
 
 import Destructure
 
-/// - Returns: Cartesian product of two arrays.
-public func * <T,U> (_ a: T, _ b: U) -> [(T.Element, U.Element)] where T: Sequence, U: Sequence {
-    return a.flatMap { a in b.map { b in (a,b) } }
-}
-
-// TODO: Add combinations over Collection
-
-// FIXME: Abstract to Collection
 extension Array {
 
     public var permutations: [[Element]] {

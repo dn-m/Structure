@@ -1,9 +1,8 @@
 //
 //  Subsets.swift
-//  Collections
+//  Combinatorics
 //
-//  Created by James Bean on 12/23/16.
-//
+//  Created by James Bean on 8/28/17.
 //
 
 extension Collection {
