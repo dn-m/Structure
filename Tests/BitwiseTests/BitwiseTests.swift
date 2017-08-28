@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import Structure
+import Bitwise
 
 class BitwiseOperationsTests: XCTestCase {
 
