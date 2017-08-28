@@ -43,6 +43,7 @@ let package = Package(
         .testTarget(name: "BitwiseTests", dependencies: ["Bitwise"]),
         .testTarget(name: "CombinatoricsTests", dependencies: ["Combinatorics"]),
         .testTarget(name: "SumTypeTests", dependencies: ["SumType"]),
+        .testTarget(name: "DictionaryProtocolTests", dependencies: ["DictionaryProtocol"]),
 
         // Performance Tests
         .testTarget(name: "StructurePerformanceTests",
