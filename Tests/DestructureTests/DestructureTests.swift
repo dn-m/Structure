@@ -1,6 +1,6 @@
 //
-//  ListProcessingTests.swift
-//  Structure
+//  DestructureTests.swift
+//  DestructureTests
 //
 //  Created by James Bean on 12/23/16.
 //
@@ -10,7 +10,7 @@ import XCTest
 import Destructure
 import Restructure
 
-class ListProcessingTests: XCTestCase {
+class DestructureTests: XCTestCase {
 
     func testArraySliceDestructured() {
         let arraySlice: ArraySlice<Int> = [1,2,3]
