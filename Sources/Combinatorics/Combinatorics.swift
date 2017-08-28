@@ -13,7 +13,9 @@ public func * <T,U> (_ a: T, _ b: U) -> [(T.Element, U.Element)] where T: Sequen
     return a.flatMap { a in b.map { b in (a,b) } }
 }
 
-// FIXME: Abstract to Sequence
+// TODO: Add combinations over Collection
+
+// FIXME: Abstract to Collection
 extension Array {
 
     public var permutations: [[Element]] {
