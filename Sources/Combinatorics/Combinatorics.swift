@@ -8,13 +8,14 @@
 
 import Destructure
 
-/// - returns: All combinations of elements of two arrays.
-public func combinations <T,U> (_ a: [T], _ b: [U]) -> [(T, U)] {
-    return a.reduce([]) { accum, a in accum + b.map { b in (a,b) } }
+/// - Returns: Cartesian product of two arrays.
+public func * <T,U> (_ a: T, _ b: U) -> [(T.Element, U.Element)] where T: Sequence, U: Sequence {
+    return a.flatMap { a in b.map { b in (a,b) } }
 }
 
-// FIXME: Move to Combinatorics module
-// FIXME: Abstract to Sequence
+// TODO: Add combinations over Collection
+
+// FIXME: Abstract to Collection
 extension Array {
 
     public var permutations: [[Element]] {

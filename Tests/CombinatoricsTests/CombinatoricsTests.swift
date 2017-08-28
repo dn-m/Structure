@@ -7,14 +7,18 @@
 //
 
 import XCTest
-@testable import Structure
+@testable import Combinatorics
 
 class CombinatoricsTests: XCTestCase {
 
     func testCombinationsOfTwoArrays() {
-        let array1 = [1,2,3]
-        let array2 = [4,5]
-        XCTAssertEqual(combinations(array1, array2).count, 6)
+        let result = [1,2,3] * [4,5]
+        let expected = [(1,4),(1,5),(2,4),(2,5),(3,4),(3,5)]
+        XCTAssertEqual(result.count, 6)
+        zip(result,expected).forEach { a,b in
+            XCTAssertEqual(a.0,b.0)
+            XCTAssertEqual(a.1,b.1)
+        }
     }
 
     func testInjecting() {
