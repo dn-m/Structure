@@ -12,9 +12,7 @@ import XCTest
 class CombinatoricsTests: XCTestCase {
 
     func testCombinationsOfTwoArrays() {
-        let a = [1,2,3]
-        let b = [4,5]
-        let result = a * b
+        let result = [1,2,3] * [4,5]
         let expected = [(1,4),(1,5),(2,4),(2,5),(3,4),(3,5)]
         XCTAssertEqual(result.count, 6)
         zip(result,expected).forEach { a,b in
