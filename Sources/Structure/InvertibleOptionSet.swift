@@ -5,6 +5,8 @@
 //  Created by James Bean on 7/29/17.
 //
 
+import Bitwise
+
 /// Interface for types which have an inverse.
 public protocol Invertible {
 
