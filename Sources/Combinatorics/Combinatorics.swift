@@ -8,12 +8,11 @@
 
 import Destructure
 
-/// - returns: All combinations of elements of two arrays.
+/// - Returns: All combinations of elements of two arrays.
 public func combinations <T,U> (_ a: [T], _ b: [U]) -> [(T, U)] {
     return a.flatMap { a in b.map { b in (a,b) } }
 }
 
-// FIXME: Move to Combinatorics module
 // FIXME: Abstract to Sequence
 extension Array {
 
