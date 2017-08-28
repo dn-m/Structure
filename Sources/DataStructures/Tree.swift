@@ -251,7 +251,7 @@ public enum Tree <Branch,Leaf> {
         case .leaf:
             throw Error.branchOperationPerformedOnLeaf
         case .branch(let value, let trees):
-            return .branch(value, try trees.replacingElement(at: index, with: tree))
+            return .branch(value, trees.replacingElement(at: index, with: tree))
         }
     }
 
@@ -281,7 +281,7 @@ public enum Tree <Branch,Leaf> {
 
                 // We are done if only one `index` remaining in `indexPath`
                 guard path.count > 1 else {
-                    return .branch(value, try trees.replacingElement(at: index, with: newTree))
+                    return .branch(value, trees.replacingElement(at: index, with: newTree))
                 }
 
                 // Otherwise, keep recursing down
