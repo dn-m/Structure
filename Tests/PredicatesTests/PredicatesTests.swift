@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import Predicates
 
 class PredicatesTests: XCTestCase {
 

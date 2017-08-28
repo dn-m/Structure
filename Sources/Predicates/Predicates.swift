@@ -8,38 +8,26 @@
 
 import Destructure
 
+// FIXME: Move to Predicates module
 extension Sequence {
 
     // MARK: - Predicates
 
-    /// - returns: `true` if all elements satisfy the given `predicate`. Otherwise, `false`.
+    /// - Returns: `true` if all elements satisfy the given `predicate`. Otherwise, `false`.
     public func all(satisfy predicate: (Element) -> Bool) -> Bool {
         for element in self where !predicate(element) { return false }
         return true
     }
 
-    /// - returns: `true` if any elements satisfy the given `predicate`. Otherwise, `false`.
+    /// - Returns: `true` if any elements satisfy the given `predicate`. Otherwise, `false`.
     public func any(satisfy predicate: (Element) -> Bool) -> Bool {
         for element in self where predicate(element) { return true }
         return false
     }
 
-    /// - returns: `true` if no elements satisfy the given `predicate`. Otherwise, `false`.
+    /// - Returns: `true` if no elements satisfy the given `predicate`. Otherwise, `false`.
     public func none(satisfy predicate: (Element) -> Bool) -> Bool {
         return !any(satisfy: predicate)
-    }
-}
-
-extension Sequence {
-
-    public func extrema <T> (
-        property: (Element) -> T,
-        areInIncreasingOrder: (T,T) -> Bool
-    ) -> [Element] where T: Comparable
-    {
-        let sorted = self.sorted { areInIncreasingOrder(property($0), property($1)) }
-        guard let extremum = sorted.first.flatMap(property) else { return [] }
-        return sorted.filter { property($0) == extremum }
     }
 }
 
@@ -59,5 +47,17 @@ extension Collection where Element: Equatable {
         guard let (head,tail) = destructured else { return false }
         for element in tail where element == head { return false }
         return false
+    }
+}
+
+// FIXME: Move to different module than Predicates
+extension Sequence {
+
+    public func extrema <T> (property: (Element) -> T, areInIncreasingOrder: (T,T) -> Bool)
+        -> [Element] where T: Comparable
+    {
+        let sorted = self.sorted { areInIncreasingOrder(property($0), property($1)) }
+        guard let extremum = sorted.first.flatMap(property) else { return [] }
+        return sorted.filter { property($0) == extremum }
     }
 }
