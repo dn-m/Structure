@@ -50,7 +50,6 @@ extension Collection where Element: Equatable {
     }
 }
 
-
 // FIXME: Move to different module than Predicates
 extension Sequence {
 
