@@ -49,11 +49,7 @@ extension Collection where Element: Equatable {
     /// `self` are logically equivalent.
     public var isHomogeneous: Bool {
         guard let (head,tail) = destructured else { return true }
-        for element in tail {
-            if element != head {
-                return false
-            }
-        }
+        for element in tail where element != head { return false }
         return true
     }
 
@@ -61,11 +57,7 @@ extension Collection where Element: Equatable {
     /// `self` are not logically equivalent.
     public var isHeterogeneous: Bool {
         guard let (head,tail) = destructured else { return false }
-        for element in tail {
-            if element == head {
-                return false
-            }
-        }
+        for element in tail where element == head { return false }
         return false
     }
 }
