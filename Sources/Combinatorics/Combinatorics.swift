@@ -8,8 +8,8 @@
 
 import Destructure
 
-/// - Returns: All combinations of elements of two arrays.
-public func combinations <T,U> (_ a: [T], _ b: [U]) -> [(T, U)] {
+/// - Returns: Cartesian product of two arrays.
+public func * <T,U> (_ a: [T], _ b: [U]) -> [(T, U)] {
     return a.flatMap { a in b.map { b in (a,b) } }
 }
 
