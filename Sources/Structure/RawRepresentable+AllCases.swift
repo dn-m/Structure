@@ -35,5 +35,4 @@ private func iterateEnum<T: Hashable>(_: T.Type) -> AnyIterator<T> {
         i += 1
         return next
     }
-
 }
