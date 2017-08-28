@@ -8,7 +8,7 @@
 
 import XCTest
 import DataStructures
-import Structure // Either
+import SumType
 
 class TreeTests: XCTestCase {
 
