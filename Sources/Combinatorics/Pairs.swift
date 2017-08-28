@@ -7,7 +7,7 @@
 
 extension Sequence where SubSequence: Sequence {
 
-    /// - Returns: `Zip2Sequence` of 2-tuples comosed of adjacent values.
+    /// - Returns: `Zip2Sequence` of 2-tuples composed of adjacent values.
     public var pairs: Zip2Sequence<Self,SubSequence> {
         return zip(self,dropFirst())
     }
