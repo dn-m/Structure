@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import Structure
 import Combinatorics
 
 class PairsTests: XCTestCase {
