@@ -19,8 +19,7 @@ class DestructurePerformanceTests: PerformanceTestCase {
     func testDestructure() {
         assertPerformance(.constant) { testPoint in
             meanOutcome {
-                var array: [Int] = []
-                for _ in 0..<testPoint { array.append(randomInt(testPoint)) }
+                let array = Array(count: testPoint) { randomInt($0) }
                 return time {
                     let _ = array.destructured
                 }

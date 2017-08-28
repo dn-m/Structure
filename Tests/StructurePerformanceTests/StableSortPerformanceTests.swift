@@ -19,10 +19,7 @@ class StableSortPerformanceTests: PerformanceTestCase {
     func testStableSort() {
         assertPerformance(.linear, testPoints: Scale.small) { testPoint in
             meanOutcome {
-                // fill an array with random pairs of numbers
-                var array = Array<Int>()
-                array.reserveCapacity(testPoint)
-                for _ in 0..<testPoint { array.append(randomInt(testPoint)) }
+                let array = Array(count: testPoint) { randomInt($0) }
                 return time {
                     _ = array.stableSort { $0 < $1 }
                 }
