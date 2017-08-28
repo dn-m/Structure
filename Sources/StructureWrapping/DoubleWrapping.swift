@@ -6,14 +6,6 @@
 //  Copyright © 2017 James Bean. All rights reserved.
 //
 
-//
-//  DoubleWrapping.swift
-//  Math
-//
-//  Created by James Bean on 5/10/16.
-//  Copyright © 2016 James Bean. All rights reserved.
-//
-
 // TODO: Add doc comments.
 // - Wrap global functions as static methods in extensions, where possible.
 public protocol DoubleWrapping:
