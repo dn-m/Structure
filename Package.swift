@@ -33,7 +33,7 @@ let package = Package(
         .target(name: "DataStructures", dependencies: ["Algebra", "Restructure", "Destructure", "DictionaryProtocol", "StructureWrapping", "Structure", "Predicates", "SumType"]),
         .target(name: "Predicates", dependencies: ["Destructure"]),
         .target(name: "Combinatorics"),
-        .target(name: "SumType"),
+        .target(name: "SumType", dependencies: ["Bitwise"]),
 
         // Tests
         .testTarget(name: "AlgebraTests", dependencies: ["Algebra"]),
