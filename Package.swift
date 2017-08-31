@@ -45,6 +45,7 @@ let package = Package(
         .testTarget(name: "SumTypeTests", dependencies: ["SumType"]),
         .testTarget(name: "DictionaryProtocolTests", dependencies: ["DictionaryProtocol"]),
         .testTarget(name: "DestructureTests", dependencies: ["Destructure"]),
+        .testTarget(name: "RestructureTests", dependencies: ["Restructure"]),
 
         // Performance Tests
         .testTarget(name: "StructurePerformanceTests",
