@@ -35,10 +35,19 @@
 >TODO
 
 ## DictionaryProtocol
->TODO
+- TODO (move into `DataStructures`)
 
 ## StructureWrapping
->TODO
+- `IntegerWrapping`
+- `FloatWrapping`
+- `DoubleWrapping`
+- `SequenceWrapping`
+- `CollectionWrapping`
+- `SortedCollectionWrapping`
+- `RandomAccessCollectionWrapping`
 
 ## Predicates
->TODO
+- `~=` for `Sequence where Element: Equatable`
+- `any`, `all`, `none`
+- `isHomogeneous`, `isHeterogeneous`
+- `extrema`
