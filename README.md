@@ -2,26 +2,20 @@
 
 [![Build Status](https://travis-ci.org/dn-m/Structure.svg?branch=master)](https://travis-ci.org/dn-m/Structure) 
 
-## Stdlib Extensions
-- EnumExtensions
-- Predicates
-- PatternMatching
 
-## Protocols
-- StructureWrapping
-- DictionaryProtocol
+## Destructure
+>TODO
 
-## Algebraic Structures
-- Algebra
+## Restructure
+>TODO
 
-## Procedures
-- Destructure
-- Restructure
+## Algebra
+>TODO
 
-## Data Structures
+## DataStructures
 - Stack
 - Matrix
-- CircularArray 
+- CircularArray
 - SortedArray
 - OrderedDictionary
 - SortedDictionary
@@ -31,5 +25,20 @@
 - ReferenceGraph
 - Zip3Sequence
 
-## Algorithms
-- Algorithms
+## SumType
+>TODO
+
+## Combinatorics
+>TODO
+
+## Bitwise
+>TODO
+
+## DictionaryProtocol
+>TODO
+
+## StructureWrapping
+>TODO
+
+## Predicates
+>TODO
