@@ -10,7 +10,7 @@
 >TODO
 
 ## Algebra
->TODO
+Protocols for representing Algabraic structures (`Semigroup`, `Monoid`), and their operations.
 
 ## DataStructures
 - Stack
