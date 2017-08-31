@@ -48,6 +48,9 @@ Protocols for representing Algabraic structures (`Semigroup`, `Monoid`), and the
 - TODO (move into `DataStructures`)
 
 ## StructureWrapping
+
+Create domain specific wrappers of basic types, which expose the API of the wrapped type.
+
 - `IntegerWrapping`
 - `FloatWrapping`
 - `DoubleWrapping`
