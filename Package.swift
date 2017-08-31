@@ -32,7 +32,7 @@ let package = Package(
         .target(name: "Structure", dependencies: ["Algebra", "Bitwise"]),
         .target(name: "DataStructures", dependencies: ["Algebra", "Restructure", "Destructure", "DictionaryProtocol", "StructureWrapping", "Structure", "Predicates", "SumType"]),
         .target(name: "Predicates", dependencies: ["Destructure"]),
-        .target(name: "Combinatorics"),
+        .target(name: "Combinatorics", dependencies: ["Destructure"]),
         .target(name: "SumType", dependencies: ["Bitwise"]),
 
         // Tests
