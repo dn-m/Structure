@@ -29,10 +29,14 @@
 >TODO
 
 ## Combinatorics
->TODO
+- `pairs`
+- `permutations`
+- `*`: Cartesian product
+- `subsets(cardinality:)`
 
 ## Bitwise
->TODO
+- `countLeadingZeros`
+- `countTrailingZeros`
 
 ## DictionaryProtocol
 - TODO (move into `DataStructures`)
