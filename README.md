@@ -8,8 +8,8 @@ Break a `Collection` into a head and tail for functional-style recursive impleme
 
 ## Restructure
 - Provide new representations of the same data
-    - `stableSort`
-    - `swap(ped)`
+    - `stableSort(_:)`
+    - `swap<T,U>(_:_:)`
     - `split(at:)`
 - Modify data:
     - `replaceElement(at:with:)`
