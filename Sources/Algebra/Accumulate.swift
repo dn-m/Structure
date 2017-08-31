@@ -9,7 +9,7 @@ extension Sequence {
 
     public func accumulating(
         _ initial: Element,
-        with op: (Element,Element) -> Element
+        _ op: (Element,Element) -> Element
     ) -> [Element]
     {
         var result: [Element] = []
@@ -25,14 +25,14 @@ extension Sequence {
 extension Sequence where Element: Additive {
 
     public var accumulatingSum: [Element] {
-        return accumulating(.zero, with: +)
+        return accumulating(.zero, +)
     }
 }
 
 extension Sequence where Element: Multiplicative {
 
     public var accumulatingProduct: [Element] {
-        return accumulating(.one, with: *)
+        return accumulating(.one, *)
     }
 }
 
@@ -40,8 +40,8 @@ extension Array {
 
     public func accumulating(
         _ initial: Element,
-        with op: (Element,Element) -> Element
-        ) -> [Element]
+        _ op: (Element,Element) -> Element
+    ) -> [Element]
     {
         var result: [Element] = []
         result.reserveCapacity(count)
@@ -57,13 +57,13 @@ extension Array {
 extension Array where Element: Additive {
 
     public var accumulatingSum: [Element] {
-        return accumulating(.zero, with: +)
+        return accumulating(.zero,+)
     }
 }
 
 extension Array where Element: Multiplicative {
 
     public var accumulatingProduct: [Element] {
-        return accumulating(.one, with: *)
+        return accumulating(.one,*)
     }
 }

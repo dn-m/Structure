@@ -29,14 +29,14 @@ class AccumulateTests: XCTestCase {
     func testArrayAccumulatingPerformance() {
         let array = (0..<1_000_000).map { $0 }
         measure {
-            let _ = array.accumulating(0, with: +)
+            let _ = array.accumulating(0,+)
         }
     }
 
     func testSequenceAccumulatingPerformance() {
         let sequence = AnySequence((0..<1_000_000).map { $0 })
         measure {
-            let _ = sequence.accumulating(0, with: +)
+            let _ = sequence.accumulating(0,+)
         }
     }
 }
