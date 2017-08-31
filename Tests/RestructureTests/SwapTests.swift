@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import Structure
+import Restructure
 
 class SwapTests: XCTestCase {
 
