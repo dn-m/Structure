@@ -61,6 +61,6 @@ Create domain specific wrappers of basic types, which expose the API of the wrap
 
 ## Predicates
 - `~=` for `Sequence where Element: Equatable`
-- `any`, `all`, `none`
+- `any(satisfy:)`, `all(satisfy:)`, `none(satisfy:)`
 - `isHomogeneous`, `isHeterogeneous`
-- `extrema`
+- `extrema(property:areInIncreasingOrder:)`
