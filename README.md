@@ -4,7 +4,7 @@
 
 
 ## Destructure
->TODO
+Break a `Collection` into a head and tail for functional-style recursive implementations of algorithms.
 
 ## Restructure
 - Provide new representations of the same data
