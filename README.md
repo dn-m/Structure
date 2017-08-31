@@ -26,7 +26,8 @@
 - Zip3Sequence
 
 ## SumType
->TODO
+- `InvertibleOptionSet`
+- Enum extensions
 
 ## Combinatorics
 - `pairs`
