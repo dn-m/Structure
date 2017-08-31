@@ -7,7 +7,12 @@
 >TODO
 
 ## Restructure
->TODO
+- Provide new representations of the same data
+    - `stableSort`
+    - `swap(ped)`
+    - `split(at:)`
+- Modify data:
+    - `replaceElement(at:with:)`
 
 ## Algebra
 Protocols for representing Algabraic structures (`Semigroup`, `Monoid`), and their operations.
