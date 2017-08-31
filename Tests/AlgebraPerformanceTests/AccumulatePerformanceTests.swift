@@ -21,7 +21,7 @@ class AccumulatePerformanceTests: PerformanceTestCase {
             meanOutcome {
                 let array = Array(count: testPoint) { randomInt(max: $0) }
                 return time {
-                    let _ = array.accumulatingProduct
+                    _ = array.accumulatingProduct
                 }
             }
         }
