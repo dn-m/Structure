@@ -6,11 +6,14 @@
 //
 //
 
-/// - TODO: Generalize to `Sequence`
+/// - TODO: Generalize to `Collection`
 extension Array {
 
     /// - returns: A two-tuple containing two arrays of `Elements` split at the given `index`,
     /// if the given `index` is in the bounds of `self.` Otherwise, `nil`.
+    //
+    // FIXME: Generalize to `Collection`
+    // FIXME: Return (SubSequence,SubSequence)?
     public func split(at index: Index) -> ([Element], [Element])? {
         guard index >= startIndex && index <= endIndex else { return nil }
         let left = Array(self[startIndex ..< index])

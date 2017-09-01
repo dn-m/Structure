@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import Structure
+import Restructure
 
 class RotateTests: XCTestCase {
 

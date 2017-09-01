@@ -8,7 +8,6 @@
 
 import XCTest
 import DataStructures
-import Structure
 
 class Zip3SequenceTests: XCTestCase {
 
