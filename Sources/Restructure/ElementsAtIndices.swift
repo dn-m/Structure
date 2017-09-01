@@ -6,14 +6,22 @@
 //
 //
 
+extension Collection {
+
+    /// - Returns: `Element` at index if present. Otherwise `nil`.
+    public subscript (safe index: Index) -> Element? {
+        return indices.contains(index) ? self[index] : nil
+    }
+}
+
 extension Array {
 
     // MARK: - Elements At Indices
 
-    /// - returns: `Element` at index if present. Otherwise `nil`.
-    public subscript (safe index: Int) -> Element? {
-        return indices ~= index ? self[index] : nil
-    }
+//    /// - returns: `Element` at index if present. Otherwise `nil`.
+//    public subscript (safe index: Int) -> Element? {
+//        return indices ~= index ? self[index] : nil
+//    }
 
     /// Second `Element` in an `Array`
     public var second: Element? {
