@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import DictionaryProtocol
+import DataStructures
 
 class DictionaryProtocolsTests: XCTestCase {
 

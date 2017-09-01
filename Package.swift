@@ -5,7 +5,6 @@ import PackageDescription
 let package = Package(
     name: "Structure",
     products: [
-        .library(name: "DictionaryProtocol", targets: ["DictionaryProtocol"]),
         .library(name: "StructureWrapping", targets: ["StructureWrapping"]),
         .library(name: "Destructure", targets: ["Destructure"]),
         .library(name: "Restructure", targets: ["Restructure"]),
@@ -25,10 +24,9 @@ let package = Package(
         .target(name: "Restructure"),
         .target(name: "Destructure"),
         .target(name: "StructureWrapping"),
-        .target(name: "DictionaryProtocol"),
         .target(name: "Bitwise"),
         .target(name: "Algebra", dependencies: ["Destructure"]),
-        .target(name: "DataStructures", dependencies: ["Algebra", "Restructure", "Destructure", "DictionaryProtocol", "StructureWrapping", "Predicates", "SumType"]),
+        .target(name: "DataStructures", dependencies: ["Algebra", "Restructure", "Destructure", "StructureWrapping", "Predicates", "SumType"]),
         .target(name: "Predicates", dependencies: ["Destructure"]),
         .target(name: "Combinatorics", dependencies: ["Destructure"]),
         .target(name: "SumType", dependencies: ["Bitwise"]),
@@ -40,7 +38,6 @@ let package = Package(
         .testTarget(name: "BitwiseTests", dependencies: ["Bitwise"]),
         .testTarget(name: "CombinatoricsTests", dependencies: ["Combinatorics"]),
         .testTarget(name: "SumTypeTests", dependencies: ["SumType"]),
-        .testTarget(name: "DictionaryProtocolTests", dependencies: ["DictionaryProtocol"]),
         .testTarget(name: "DestructureTests", dependencies: ["Destructure"]),
         .testTarget(name: "RestructureTests", dependencies: ["Restructure"]),
 
