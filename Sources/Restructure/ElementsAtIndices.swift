@@ -20,15 +20,19 @@ extension Collection {
     }
 }
 
-extension Array {
-
-    // MARK: - Elements At Indices
+extension BidirectionalCollection {
 
     /// Second-to-last `Element` in `Array`
     public var penultimate: Element? {
         guard count > 1 else { return nil }
-        return self[self.count - 2]
+        let lastElementIndex = indices.index(before: endIndex)
+        return self[indices.index(before: lastElementIndex)]
     }
+}
+
+extension Array {
+
+    // MARK: - Elements At Indices
 
     /// An array with the given `amount` of elements from the end of `self`.
     public func last(amount: Int) -> [Element] {
