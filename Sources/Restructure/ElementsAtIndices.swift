@@ -18,11 +18,6 @@ extension Array {
 
     // MARK: - Elements At Indices
 
-//    /// - returns: `Element` at index if present. Otherwise `nil`.
-//    public subscript (safe index: Int) -> Element? {
-//        return indices ~= index ? self[index] : nil
-//    }
-
     /// Second `Element` in an `Array`
     public var second: Element? {
         guard count > 1 else { return nil }
