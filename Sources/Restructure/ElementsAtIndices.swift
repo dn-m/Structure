@@ -6,26 +6,33 @@
 //
 //
 
-extension Array {
+extension Collection {
 
-    // MARK: - Elements At Indices
-
-    /// - returns: `Element` at index if present. Otherwise `nil`.
-    public subscript (safe index: Int) -> Element? {
-        return indices ~= index ? self[index] : nil
+    /// - Returns: `Element` at index if present. Otherwise `nil`.
+    public subscript (safe index: Index) -> Element? {
+        return indices.contains(index) ? self[index] : nil
     }
 
     /// Second `Element` in an `Array`
     public var second: Element? {
         guard count > 1 else { return nil }
-        return self[1]
+        return self[indices.index(after: startIndex)]
     }
+}
+
+extension BidirectionalCollection {
 
     /// Second-to-last `Element` in `Array`
     public var penultimate: Element? {
         guard count > 1 else { return nil }
-        return self[self.count - 2]
+        let lastElementIndex = indices.index(before: endIndex)
+        return self[indices.index(before: lastElementIndex)]
     }
+}
+
+extension Array {
+
+    // MARK: - Elements At Indices
 
     /// An array with the given `amount` of elements from the end of `self`.
     public func last(amount: Int) -> [Element] {
