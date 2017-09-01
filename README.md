@@ -18,17 +18,17 @@ Break a `Collection` into a head and tail for functional-style recursive impleme
 Protocols for representing Algabraic structures (`Semigroup`, `Monoid`), and their operations.
 
 ## DataStructures
-- Stack
-- Matrix
-- CircularArray
-- SortedArray
-- OrderedDictionary
-- SortedDictionary
-- LinkedList
-- Tree
-- ReferenceTree
-- ReferenceGraph
-- Zip3Sequence
+- `Stack`
+- `Matrix`
+- `CircularArray`
+- `SortedArray`
+- `OrderedDictionary`
+- `SortedDictionary`
+- `LinkedList`
+- `Tree`
+- `ReferenceTree`
+- `ReferenceGraph`
+- `Zip3Sequence`
 
 ## SumType
 - `InvertibleOptionSet`
