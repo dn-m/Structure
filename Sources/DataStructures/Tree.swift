@@ -298,15 +298,10 @@ public enum Tree <Branch,Leaf> {
     /// the given `path`.
     ///
     /// - throws: `TreeError` in the case of ill-formed index paths and indexes out-of-range.
-    public func inserting(_ tree: Tree, through path: [Int] = [], at index: Int)
-        throws -> Tree
-    {
-        func traverse(
-            _ tree: Tree,
-            inserting newTree: Tree,
-            through path: [Int],
-            at index: Int
-        ) throws -> Tree
+    public func inserting(_ tree: Tree, through path: [Int] = [], at index: Int) throws -> Tree {
+
+        func traverse(_ tree: Tree, inserting newTree: Tree, through path: [Int], at index: Int)
+            throws -> Tree
         {
 
             switch tree {

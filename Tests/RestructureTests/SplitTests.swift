@@ -11,6 +11,13 @@ import Restructure
 
 class SplitTests: XCTestCase {
 
+    func testSplitAtIndexEmptySubsequence() {
+        let array = [1,2,3,4]
+        let result = array.split(at: 4)!
+        XCTAssertEqual(result.0, [1,2,3,4])
+        XCTAssertEqual(result.1, [])
+    }
+
     func testSplitAndExtractEmpty() {
         let array: [Int] = []
         XCTAssertNil(array.splitAndExtractElement(at: 0))
