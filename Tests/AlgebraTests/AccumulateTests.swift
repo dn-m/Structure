@@ -25,18 +25,4 @@ class AccumulateTests: XCTestCase {
             XCTAssertEqual(actual, expected, accuracy: 0.000001)
         }
     }
-
-    func testArrayAccumulatingPerformance() {
-        let array = (0..<1_000_000).map { $0 }
-        measure {
-            let _ = array.accumulating(0,+)
-        }
-    }
-
-    func testSequenceAccumulatingPerformance() {
-        let sequence = AnySequence((0..<1_000_000).map { $0 })
-        measure {
-            let _ = sequence.accumulating(0,+)
-        }
-    }
 }

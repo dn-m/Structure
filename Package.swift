@@ -46,6 +46,7 @@ let package = Package(
 
         // Performance Tests
         .testTarget(name: "DestructurePerformanceTests", dependencies: ["Destructure", "PerformanceTesting"]),
-        .testTarget(name: "RestructurePerformanceTests", dependencies: ["Restructure", "PerformanceTesting"])
+        .testTarget(name: "RestructurePerformanceTests", dependencies: ["Restructure", "PerformanceTesting"]),
+        .testTarget(name: "AlgebraPerformanceTests", dependencies: ["Algebra", "PerformanceTesting"])
     ]
 )
