@@ -12,17 +12,17 @@ extension Collection {
     public subscript (safe index: Index) -> Element? {
         return indices.contains(index) ? self[index] : nil
     }
+
+    /// Second `Element` in an `Array`
+    public var second: Element? {
+        guard count > 1 else { return nil }
+        return self[indices.index(after: startIndex)]
+    }
 }
 
 extension Array {
 
     // MARK: - Elements At Indices
-
-    /// Second `Element` in an `Array`
-    public var second: Element? {
-        guard count > 1 else { return nil }
-        return self[1]
-    }
 
     /// Second-to-last `Element` in `Array`
     public var penultimate: Element? {
