@@ -9,6 +9,8 @@
 import XCTest
 import DataStructures
 import SumType
+import Combinatorics
+import Destructure
 
 class TreeTests: XCTestCase {
 
