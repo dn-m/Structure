@@ -8,17 +8,17 @@
 import Combinatorics
 import Destructure
 
-public struct Interval {
+public struct Interval <Metric: SignedNumeric & Comparable> {
 
     enum Bound {
         case start
         case end
     }
 
-    let start: Int
-    let end: Int
+    let start: Metric
+    let end: Metric
 
-    public init(_ start: Int, _ end: Int) {
+    public init(_ start: Metric, _ end: Metric) {
         precondition(end >= start)
         self.start = start
         self.end = end
@@ -31,9 +31,9 @@ extension Interval: Equatable {
     }
 }
 
-enum SegmentTree {
+enum SegmentTree <Metric: SignedNumeric & Comparable> {
 
-    public var interval: Interval {
+    public var interval: Interval<Metric> {
         switch self {
         case .leaf(let interval):
             return interval
@@ -42,19 +42,19 @@ enum SegmentTree {
         }
     }
 
-    case leaf(Interval)
-    indirect case branch(SegmentTree, Interval, SegmentTree)
+    case leaf(Interval<Metric>)
+    indirect case branch(SegmentTree, Interval<Metric>, SegmentTree)
 
     init(_ a: SegmentTree, _ b: SegmentTree) {
         precondition(a.interval.end == b.interval.start)
         self = .branch(a, Interval(a.interval.start, b.interval.end), b)
     }
 
-    init(_ interval: Interval) {
+    init(_ interval: Interval<Metric>) {
         self = .leaf(interval)
     }
 
-    init(offsets: [Int]) {
+    init(offsets: [Metric]) {
 
         func clump(_ trees: [SegmentTree]) -> ([(SegmentTree, SegmentTree)], SegmentTree?) {
             precondition(!trees.isEmpty)
@@ -84,10 +84,18 @@ enum SegmentTree {
         }
     }
 
-    func interval(containing offset: Int, including bound: Interval.Bound) -> Interval? {
+    subscript(interval: Interval<Metric>) -> SegmentTree {
+        // first
+        // last?
+        // innnards?
+        // first + innards? + last?
+        fatalError()
+    }
 
-        let startCompare: (Int,Int) -> Bool = bound == .start ? (>=) : (>)
-        let endCompare: (Int,Int) -> Bool = bound == .end ? (<=) : (<)
+    func interval(containing offset: Metric, including bound: Interval<Metric>.Bound) -> Interval<Metric>? {
+
+        let startCompare: (Metric,Metric) -> Bool = bound == .start ? (>=) : (>)
+        let endCompare: (Metric,Metric) -> Bool = bound == .end ? (<=) : (<)
 
         guard startCompare(offset, interval.start) && endCompare(offset, interval.end) else {
             return nil
