@@ -26,7 +26,7 @@ let package = Package(
         .target(name: "StructureWrapping"),
         .target(name: "Bitwise"),
         .target(name: "Algebra", dependencies: ["Destructure"]),
-        .target(name: "DataStructures", dependencies: ["Algebra", "Restructure", "Destructure", "StructureWrapping", "Predicates", "SumType"]),
+        .target(name: "DataStructures", dependencies: ["Algebra", "Restructure", "Destructure", "StructureWrapping", "Predicates", "SumType", "Combinatorics"]),
         .target(name: "Predicates", dependencies: ["Destructure"]),
         .target(name: "Combinatorics", dependencies: ["Destructure"]),
         .target(name: "SumType", dependencies: ["Bitwise"]),
