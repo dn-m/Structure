@@ -26,8 +26,8 @@ class MatrixTests: XCTestCase {
 
     func testSubscript() {
         var matrix = Matrix(height: 2, width: 3, initial: 0)
-        matrix[1, 2] = 1
-        XCTAssertEqual(matrix[1, 2], 1)
+        matrix[1,2] = 1
+        XCTAssertEqual(matrix[1,2], 1)
     }
 
     func testSequence() {
@@ -36,19 +36,19 @@ class MatrixTests: XCTestCase {
     }
 
     func testEquivalenceTrue() {
-        var matrix1 = Matrix(height: 2, width: 3, initial: 0)
-        var matrix2 = Matrix(height: 2, width: 3, initial: 0)
-        matrix1[1, 2] = 1
-        matrix2[1, 2] = 1
-        XCTAssert(matrix1 == matrix2)
+        var a = Matrix(height: 2, width: 3, initial: 0)
+        var b = Matrix(height: 2, width: 3, initial: 0)
+        a[1,2] = 1
+        b[1,2] = 1
+        XCTAssertEqual(a,b)
     }
 
     func testEquivalenceFalse() {
-        var matrix1 = Matrix(height: 2, width: 3, initial: 0)
-        var matrix2 = Matrix(height: 2, width: 3, initial: 0)
-        matrix1[1, 2] = 1
-        matrix2[1, 2] = 0
-        XCTAssertFalse(matrix1 == matrix2)
+        var a = Matrix(height: 2, width: 3, initial: 0)
+        var b = Matrix(height: 2, width: 3, initial: 0)
+        a[1,2] = 1
+        b[1,2] = 0
+        XCTAssertNotEqual(a,b)
     }
 
     func testRowsAndColumns() {
