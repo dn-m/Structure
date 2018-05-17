@@ -6,32 +6,32 @@
 //
 //
 
-/// 2-dimensional matrix with user-definable dimensions, parameterized over any type `T`.
-public struct Matrix <T> {
+/// 2-dimensional matrix with user-definable dimensions, parameterized over any type `Element`.
+public struct Matrix <Element> {
 
     /// Amount of rows.
-    fileprivate let rowCount: Int
+    private let rowCount: Int
 
     /// Amount of columns.
-    fileprivate let columnCount: Int
+    private let columnCount: Int
 
-    /// Items of type `T` stored as `[row, row, row, ...]`
-    fileprivate var grid: [T] = []
+    /// Items of type `Element` stored as `[row, row, row, ...]`
+    private var grid: [Element] = []
 
     // MARK: - Initializers
 
     /// - returns: Array of rows.
-    public var rows: [[T]] {
+    public var rows: [[Element]] {
         return (0 ..< rowCount).map { self[row: $0] }
     }
 
     /// - returns: Array of columns.
-    public var columns: [[T]] {
+    public var columns: [[Element]] {
         return (0 ..< columnCount).map { self[column: $0] }
     }
 
     /// Create a `Matrix` with the given dimensions and given `defaultValue`.
-    public init(height rowCount: Int, width columnCount: Int, initial: T) {
+    public init(height rowCount: Int, width columnCount: Int, initial: Element) {
         self.rowCount = rowCount
         self.columnCount = columnCount
         self.grid = Array(repeating: initial, count: Int(rowCount * columnCount))
@@ -41,7 +41,7 @@ public struct Matrix <T> {
 
     /// Get and set the value for the given `row` and `column`, if these are valid indices.
     /// Otherwise, `nil` is returned or nothing is set.
-    public subscript (row: Int, column: Int) -> T {
+    public subscript (row: Int, column: Int) -> Element {
 
         get {
 
@@ -63,7 +63,7 @@ public struct Matrix <T> {
     }
 
     /// Get and set an row of values.
-    public subscript (row row: Int) -> [T] {
+    public subscript (row row: Int) -> [Element] {
 
         get {
             let startIndex = row * columnCount
@@ -79,7 +79,7 @@ public struct Matrix <T> {
     }
 
     /// Get and set a column of values.
-    public subscript (column column: Int) -> [T] {
+    public subscript (column column: Int) -> [Element] {
 
         get {
             return (0 ..< rowCount).map { index in grid[index * columnCount + column] }
@@ -129,12 +129,12 @@ extension Matrix: Collection {
     }
 
     /// - returns: Element at the given `index`.
-    public subscript (index: Int) -> T {
+    public subscript (index: Int) -> Element {
         return grid[index]
     }
 }
 
-extension Matrix where T: Equatable {
+extension Matrix: Equatable where Element: Equatable {
 
     /// - returns: `true` if all values of both matrices are equivalent. Otherwise, `false`.
     public static func == (lhs: Matrix, rhs: Matrix) -> Bool {
@@ -160,7 +160,7 @@ extension Matrix: CustomStringConvertible {
         }
 
         /// - warning: Don't use `\t`, though. Doesn't register correctly.
-        func format <T> (_ row: [T]) -> String {
+        func format <Element> (_ row: [Element]) -> String {
 
             let separator = "  "
 
