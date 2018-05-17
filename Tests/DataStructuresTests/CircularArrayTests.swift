@@ -12,6 +12,12 @@ import DataStructures
 
 class CircularArrayTests: XCTestCase {
 
+    func testEquatable() {
+        let a: CircularArray = [1,2,3,4,5]
+        let b: CircularArray = [1,2,3,4,5]
+        XCTAssertEqual(a,b)
+    }
+
     func testElementAtZero() {
         let array = CircularArray([0,1,2,3,4,5])
         XCTAssertEqual(array[circular: 0], 0)

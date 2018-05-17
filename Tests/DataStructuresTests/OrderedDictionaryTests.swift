@@ -104,4 +104,10 @@ class OrderedDictionaryTests: XCTestCase {
         XCTAssertEqual(dict.map { $0.0 }, [1, 2, 3, 4, 5])
         XCTAssertEqual(dict.map { $0.1 }, ["one", "two", "three", "four", "five"])
     }
+
+    func testEquatable() {
+        let a: OrderedDictionary = [1: "one", 2: "two", 3: "three"]
+        let b: OrderedDictionary = [1: "one", 2: "two", 3: "three"]
+        XCTAssertEqual(a,b)
+    }
 }
