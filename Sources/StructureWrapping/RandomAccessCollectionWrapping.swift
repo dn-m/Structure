@@ -63,7 +63,7 @@ extension RandomAccessCollectionWrapping {
     ///
     /// - Complexity: O(1)
     ///
-    public var count: Base.IndexDistance {
+    public var count: Int {
         return base.count
     }
 

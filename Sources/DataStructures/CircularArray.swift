@@ -160,7 +160,7 @@ extension CircularArray: RangeReplaceableCollection {
     }
 }
 
-extension CircularArray where Element: Equatable {
+extension CircularArray: Equatable where Element: Equatable {
 
     /// - Returns: `true` if the elements contained both `CircularArray` values are equivalent.
     /// Otherwise, `false`.

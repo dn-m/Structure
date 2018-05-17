@@ -2,10 +2,10 @@
 
 [![Build Status](https://travis-ci.org/dn-m/Structure.svg?branch=master)](https://travis-ci.org/dn-m/Structure) 
 
-Algabraic and data structures in Swift 4.0.
+Algebraic and data structures in Swift 4.1.
 
 ## Algebra
-Protocols for representing Algabraic structures (`Semigroup`, `Monoid`), and their operations.
+Protocols for representing Algebraic structures (`Semigroup`, `Monoid`), and their operations.
 
 ## Destructure
 Break a `Collection` into a head and tail for functional-style recursive implementations of algorithms.

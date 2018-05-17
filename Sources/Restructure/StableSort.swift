@@ -6,7 +6,7 @@
 //
 //
 
-extension RangeReplaceableCollection where Index == Int, IndexDistance == Int  {
+extension RangeReplaceableCollection where Index == Int  {
 
     public func stableSort(_ isOrderedBefore: @escaping (Element, Element) -> Bool) -> [Element] {
 
