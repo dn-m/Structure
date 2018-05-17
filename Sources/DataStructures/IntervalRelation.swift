@@ -123,6 +123,7 @@ public enum IntervalRelation: InvertibleEnum {
 
 extension RangeProtocol {
 
+    /// - Returns: The `IntervalRelation` between this `RangeProtocol`-conforming type and another.
     public func relation(with range: Self) -> IntervalRelation {
 
         if upperBound < range.lowerBound {
