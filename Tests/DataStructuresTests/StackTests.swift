@@ -14,7 +14,7 @@ class StackTests: XCTestCase {
     func testEquatable() {
         let a: Stack = [1,2,3,4]
         let b: Stack = [1,2,3,4]
-        XCTAssertEqual(a, b)
+        XCTAssertEqual(a,b)
     }
 
     func testTop() {
