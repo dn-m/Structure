@@ -134,7 +134,7 @@ extension Matrix: Collection {
     }
 }
 
-extension Matrix where Element: Equatable {
+extension Matrix: Equatable where Element: Equatable {
 
     /// - returns: `true` if all values of both matrices are equivalent. Otherwise, `false`.
     public static func == (lhs: Matrix, rhs: Matrix) -> Bool {
