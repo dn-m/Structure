@@ -156,7 +156,7 @@ extension Matrix: CustomStringConvertible {
         /// - warning: Assumes primitive type with no fancier `CustomStringConvertible`
         /// implementation.
         func width(_ value: Any) -> Int {
-            return "\(value)".characters.count
+            return "\(value)".count
         }
 
         /// - warning: Don't use `\t`, though. Doesn't register correctly.
