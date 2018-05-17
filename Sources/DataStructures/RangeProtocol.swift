@@ -11,3 +11,6 @@ public protocol RangeProtocol {
     var upperBound: Bound { get }
     init(uncheckedBounds: (lower: Bound, upper: Bound))
 }
+
+extension Range: RangeProtocol { }
+extension ClosedRange: RangeProtocol { }
