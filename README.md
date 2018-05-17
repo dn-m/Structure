@@ -5,7 +5,7 @@
 Algabraic and data structures in Swift 4.1.
 
 ## Algebra
-Protocols for representing Algabraic structures (`Semigroup`, `Monoid`), and their operations.
+Protocols for representing Algebraic structures (`Semigroup`, `Monoid`), and their operations.
 
 ## Destructure
 Break a `Collection` into a head and tail for functional-style recursive implementations of algorithms.
