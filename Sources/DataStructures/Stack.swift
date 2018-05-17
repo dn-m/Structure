@@ -122,8 +122,8 @@ extension Stack: BidirectionalCollection {
 
 extension Stack: Equatable where Element: Equatable {
 
-    /// - returns: `true` if all items in both `Stack` structs are equivalent. Otherwise `false`.
-    public static func == <T: Equatable> (lhs: Stack<T>, rhs: Stack<T>) -> Bool {
+    /// - returns: `true` if two `Stack` values are equivalent. Otherwise `false`.
+    public static func == (lhs: Stack, rhs: Stack) -> Bool {
         return lhs.elements == rhs.elements
     }
 }
