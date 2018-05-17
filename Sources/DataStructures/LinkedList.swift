@@ -8,19 +8,19 @@
 //
 
 /// The `LinkedList`.
-public enum LinkedList <T> {
+public enum LinkedList <Element> {
 
     /// Last node in list.
     case end
 
     /// Node with pointer to next node.
-    indirect case node(T, next: LinkedList<T>)
+    indirect case node(Element, next: LinkedList<Element>)
 }
 
 extension LinkedList {
 
     /// Construct a new list with the given `value` held by a node at the front.
-    func cons(value: T) -> LinkedList {
+    func cons(value: Element) -> LinkedList {
         return .node(value, next: self)
     }
 }
@@ -28,13 +28,13 @@ extension LinkedList {
 extension LinkedList {
 
     /// Push a node holding the given `value` onto the front of the list.
-    public mutating func push(x: T) {
+    public mutating func push(x: Element) {
         self = self.cons(value: x)
     }
 
     /// - returns: The element contained by the node at the front of the list, if the
     /// list is not empty. Otherwise, `nil`.
-    public mutating func pop() -> T? {
+    public mutating func pop() -> Element? {
 
         switch self {
         case .end:
@@ -72,7 +72,7 @@ extension LinkedList: Collection {
     }
 
     /// - returns: Element at the given `index`.
-    public subscript(position: Int) -> T {
+    public subscript(position: Int) -> Element {
 
         switch (self, position) {
         case (.end, _):
@@ -90,7 +90,7 @@ extension LinkedList: ExpressibleByArrayLiteral {
     // - MARK: `ExpressibleByArrayLiteral`
 
     /// Create a `LinkedList` with an array literal.
-    public init(arrayLiteral elements: T...) {
+    public init(arrayLiteral elements: Element...) {
         self = elements
             .lazy
             .reversed()
