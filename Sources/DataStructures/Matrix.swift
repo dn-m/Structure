@@ -10,13 +10,13 @@
 public struct Matrix <T> {
 
     /// Amount of rows.
-    fileprivate let rowCount: Int
+    private let rowCount: Int
 
     /// Amount of columns.
-    fileprivate let columnCount: Int
+    private let columnCount: Int
 
     /// Items of type `T` stored as `[row, row, row, ...]`
-    fileprivate var grid: [T] = []
+    private var grid: [T] = []
 
     // MARK: - Initializers
 
