@@ -120,6 +120,14 @@ extension Stack: BidirectionalCollection {
     }
 }
 
+extension Stack: Equatable where Element: Equatable {
+    
+    /// - returns: `true` if all items in both `Stack` structs are equivalent. Otherwise `false`.
+    public static func == <T: Equatable> (lhs: Stack<T>, rhs: Stack<T>) -> Bool {
+        return lhs.elements == rhs.elements
+    }
+}
+
 extension Stack: ExpressibleByArrayLiteral {
 
     // MARK: - `ExpressibleByArrayLiteral`.
@@ -158,9 +166,4 @@ extension Stack: Monoid {
     public static func <> (lhs: Stack<Element>, rhs: Stack<Element>) -> Stack<Element> {
         return lhs + rhs
     }
-}
-
-/// - returns: `true` if all items in both `Stack` structs are equivalent. Otherwise `false`.
-public func == <T: Equatable> (lhs: Stack<T>, rhs: Stack<T>) -> Bool {
-    return lhs.elements == rhs.elements
 }
