@@ -9,14 +9,14 @@ extension MutableCollection where Self: BidirectionalCollection {
 
     /// - Returns: A mutable and bidirectional collection with its elements rotated by the given
     /// `amount`.
-    public func rotated(by amount: IndexDistance) -> Self {
+    public func rotated(by amount: Int) -> Self {
         var copy = self
         copy.rotate(by: amount)
         return copy
     }
 
     /// Rotates the elements contained herein by the given `amount`.
-    public mutating func rotate(by amount: IndexDistance) {
+    public mutating func rotate(by amount: Int) {
         guard amount != 0 else { return }
         let amount = (amount < 0 ? count + amount : amount) % count
         let amountIndex = index(startIndex, offsetBy: amount)
