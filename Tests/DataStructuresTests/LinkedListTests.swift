@@ -41,4 +41,10 @@ class LinkedListTests: XCTestCase {
         let list: LinkedList<Int> = [3,2,1]
         XCTAssertEqual((list.map { $0 * $0 }), [9, 4, 1])
     }
+
+    func testEquatable() {
+        let a: LinkedList = [1,2,3]
+        let b: LinkedList = [1,2,3]
+        XCTAssertEqual(a, b)
+    }
 }
