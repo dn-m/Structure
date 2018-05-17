@@ -121,42 +121,43 @@ public enum IntervalRelation: InvertibleEnum {
     case precededBy
 }
 
-//extension RangeProtocol {
-//
-//    public func relation(with range: Self) -> IntervalRelation {
-//
-//        if upperBound < range.lowerBound {
-//            return .precedes
-//        } else if upperBound == range.lowerBound {
-//            return .meets
-//        } else if lowerBound < range.lowerBound && range.openContains(upperBound) {
-//            return .overlaps
-//        } else if upperBound == range.upperBound && openContains(range.lowerBound) {
-//            return .finishedBy
-//        } else if openContains(range.lowerBound) && openContains(range.upperBound) {
-//            return .contains
-//        } else if lowerBound == range.lowerBound && range.openContains(upperBound) {
-//            return .starts
-//        } else if lowerBound == range.lowerBound && openContains(range.upperBound) {
-//            return .startedBy
-//        } else if range.openContains(lowerBound) && range.openContains(upperBound) {
-//            return .containedBy
-//        } else if upperBound == range.upperBound && range.openContains(lowerBound) {
-//            return .finishes
-//        } else if upperBound > range.upperBound && range.openContains(lowerBound) {
-//            return .overlappedBy
-//        } else if lowerBound == range.upperBound {
-//            return .metBy
-//        } else if lowerBound > range.upperBound {
-//            return .precededBy
-//        }
-//
-//        return .equals
-//    }
-//
-//    /// - returns: `true` if the given `value` is greater than the `lowerBound` and
-//    /// `upperBound`. Otherwise, `false`.
-//    private func openContains(_ value: Bound) -> Bool {
-//        return value > lowerBound && value < upperBound
-//    }
-//}
+extension RangeProtocol {
+
+    /// - Returns: The `IntervalRelation` between this `RangeProtocol`-conforming type and another.
+    public func relation(with range: Self) -> IntervalRelation {
+
+        if upperBound < range.lowerBound {
+            return .precedes
+        } else if upperBound == range.lowerBound {
+            return .meets
+        } else if lowerBound < range.lowerBound && range.openContains(upperBound) {
+            return .overlaps
+        } else if upperBound == range.upperBound && openContains(range.lowerBound) {
+            return .finishedBy
+        } else if openContains(range.lowerBound) && openContains(range.upperBound) {
+            return .contains
+        } else if lowerBound == range.lowerBound && range.openContains(upperBound) {
+            return .starts
+        } else if lowerBound == range.lowerBound && openContains(range.upperBound) {
+            return .startedBy
+        } else if range.openContains(lowerBound) && range.openContains(upperBound) {
+            return .containedBy
+        } else if upperBound == range.upperBound && range.openContains(lowerBound) {
+            return .finishes
+        } else if upperBound > range.upperBound && range.openContains(lowerBound) {
+            return .overlappedBy
+        } else if lowerBound == range.upperBound {
+            return .metBy
+        } else if lowerBound > range.upperBound {
+            return .precededBy
+        }
+
+        return .equals
+    }
+
+    /// - returns: `true` if the given `value` is greater than the `lowerBound` and
+    /// `upperBound`. Otherwise, `false`.
+    private func openContains(_ value: Bound) -> Bool {
+        return value > lowerBound && value < upperBound
+    }
+}

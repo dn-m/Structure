@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import SumType
+import DataStructures
 
 class EitherTests: XCTestCase {
     

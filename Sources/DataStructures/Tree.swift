@@ -8,7 +8,6 @@
 
 import Restructure
 import Algebra
-import SumType
 
 /// Value-semantic, immutable Tree structure.
 public enum Tree <Branch,Leaf> {
