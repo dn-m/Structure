@@ -165,7 +165,7 @@ extension Matrix: CustomStringConvertible {
             let separator = "  "
 
             let columnWidth = columns
-                .flatMap { $0.flatMap(width) }
+                .flatMap { $0.compactMap(width) }
                 .max() ?? 0
 
             return row
