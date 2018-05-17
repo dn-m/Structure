@@ -15,6 +15,7 @@ public struct SortedArray <Element: Comparable>:
     SortedCollectionWrapping
 {
 
+    /// Underlying storage of elements contained herein.
     public var base: [Element] = []
 
     // MARK: - Initializers
@@ -75,6 +76,14 @@ public struct SortedArray <Element: Comparable>:
             }
         }
         return start
+    }
+}
+
+extension SortedArray {
+
+    /// - Returns: The slice of the `SortedArray` for the given `bounds`.
+    public subscript(bounds: Range<Base.Index>) -> Slice<Base> {
+        return Slice(base: base, bounds: bounds)
     }
 }
 
