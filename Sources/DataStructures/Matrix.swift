@@ -9,6 +9,8 @@
 /// 2-dimensional matrix with user-definable dimensions, parameterized over any type `Element`.
 public struct Matrix <Element> {
 
+    // MARK: - Instance Properties
+
     /// Amount of rows.
     private let rowCount: Int
 
@@ -17,8 +19,6 @@ public struct Matrix <Element> {
 
     /// Items of type `Element` stored as `[row, row, row, ...]`
     private var grid: [Element] = []
-
-    // MARK: - Initializers
 
     /// - returns: Array of rows.
     public var rows: [[Element]] {
@@ -29,6 +29,8 @@ public struct Matrix <Element> {
     public var columns: [[Element]] {
         return (0 ..< columnCount).map { self[column: $0] }
     }
+
+    // MARK: - Initializers
 
     /// Create a `Matrix` with the given dimensions and given `defaultValue`.
     public init(height rowCount: Int, width columnCount: Int, initial: Element) {
