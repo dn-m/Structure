@@ -44,35 +44,23 @@ public struct Matrix <Element> {
     /// Get and set the value for the given `row` and `column`, if these are valid indices.
     /// Otherwise, `nil` is returned or nothing is set.
     public subscript (row: Int, column: Int) -> Element {
-
         get {
-
-            guard let index = index(row, column) else {
-                fatalError("Index out of bounds")
-            }
-
+            guard let index = index(row, column) else { fatalError("Index out of bounds") }
             return grid[index]
         }
-
         set {
-
-            guard let index = index(row, column) else {
-                fatalError("Index out of bounds")
-            }
-
+            guard let index = index(row, column) else { fatalError("Index out of bounds") }
             grid[index] = newValue
         }
     }
 
     /// Get and set an row of values.
     public subscript (row row: Int) -> [Element] {
-
         get {
             let startIndex = row * columnCount
             let endIndex = row * columnCount + columnCount
             return Array(grid[startIndex ..< endIndex])
         }
-
         set {
             let startIndex = row * columnCount
             let endIndex = row * columnCount + columnCount
@@ -82,13 +70,10 @@ public struct Matrix <Element> {
 
     /// Get and set a column of values.
     public subscript (column column: Int) -> [Element] {
-
         get {
             return (0 ..< rowCount).map { index in grid[index * columnCount + column] }
         }
-
         set {
-
             for i in 0 ..< rowCount {
                 let index = i * columnCount + column
                 grid[index] = newValue[i]
@@ -97,11 +82,7 @@ public struct Matrix <Element> {
     }
 
     private func index(_ row: Int, _ column: Int) -> Int? {
-
-        guard row < rowCount && column < columnCount else {
-            return nil
-        }
-
+        guard row < rowCount && column < columnCount else { return nil }
         return row * columnCount + column
     }
 }
