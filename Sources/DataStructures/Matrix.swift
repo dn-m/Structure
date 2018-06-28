@@ -58,12 +58,12 @@ public struct Matrix <Element> {
     public subscript (row row: Int) -> [Element] {
         get {
             let startIndex = row * columnCount
-            let endIndex = row * columnCount + columnCount
+            let endIndex = startIndex + columnCount
             return Array(grid[startIndex ..< endIndex])
         }
         set {
             let startIndex = row * columnCount
-            let endIndex = row * columnCount + columnCount
+            let endIndex = startIndex + columnCount
             grid.replaceSubrange(startIndex ..< endIndex, with: newValue)
         }
     }
