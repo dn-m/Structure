@@ -102,6 +102,7 @@ extension Matrix: Equatable where Element: Equatable { }
 
 extension Matrix: CustomStringConvertible {
 
+    /// Printed description of `Matrix`.
     public var description: String {
 
         /// - returns: Whitespace with the given width.
