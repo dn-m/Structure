@@ -6,6 +6,8 @@
 //
 //
 
+import StructureWrapping
+
 /// 2-dimensional matrix with user-definable dimensions, parameterized over any type `Element`.
 public struct Matrix <Element> {
 
@@ -87,33 +89,12 @@ public struct Matrix <Element> {
     }
 }
 
-extension Matrix: Collection {
+extension Matrix: CollectionWrapping {
 
-    // MARK: - `Collection`
+    // MARK: - CollectionWrapping
 
-    /// Index after given index `i`.
-    public func index(after i: Int) -> Int {
-
-        guard i != endIndex else {
-            fatalError("Cannot increment endIndex")
-        }
-
-        return i + 1
-    }
-
-    /// Start index.
-    public var startIndex: Int {
-        return 0
-    }
-
-    /// End index.
-    public var endIndex: Int {
-        return grid.count
-    }
-
-    /// - returns: Element at the given `index`.
-    public subscript (index: Int) -> Element {
-        return grid[index]
+    public var base: [Element] {
+        return grid
     }
 }
 
