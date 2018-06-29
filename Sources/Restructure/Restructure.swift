@@ -10,7 +10,7 @@ extension Set {
     public func inserting(_ element: Element) -> Set {
         var copy = self
         copy.insert(element)
-        return self
+        return copy
     }
 
     public static func + (lhs: Set, rhs: Element?) -> Set {
