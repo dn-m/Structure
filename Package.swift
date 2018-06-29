@@ -30,7 +30,6 @@ let package = Package(
         // Tests
         .testTarget(name: "AlgebraTests", dependencies: ["Algebra"]),
         .testTarget(name: "DataStructuresTests", dependencies: ["DataStructures"]),
-        .testTarget(name: "PredicatesTests", dependencies: ["Predicates"]),
         .testTarget(name: "CombinatoricsTests", dependencies: ["Combinatorics"]),
         .testTarget(name: "DestructureTests", dependencies: ["Destructure"]),
         .testTarget(name: "RestructureTests", dependencies: ["Restructure"]),
