@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Combinatorics
+@testable import DataStructures
 
 class CombinatoricsTests: XCTestCase {
 

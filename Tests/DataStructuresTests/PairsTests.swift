@@ -1,13 +1,13 @@
 //
 //  PairsTests.swift
-//  Structure
+//  DataStructuresTests
 //
 //  Created by James Bean on 12/23/16.
 //
 //
 
 import XCTest
-import Combinatorics
+import DataStructures
 
 class PairsTests: XCTestCase {
 
