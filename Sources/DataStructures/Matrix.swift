@@ -6,8 +6,6 @@
 //
 //
 
-import StructureWrapping
-
 /// 2-dimensional matrix with user-definable dimensions, parameterized over any type `Element`.
 public struct Matrix <Element> {
 
