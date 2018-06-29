@@ -6,7 +6,6 @@ let package = Package(
     name: "Structure",
     products: [
         .library(name: "Destructure", targets: ["Destructure"]),
-        .library(name: "Restructure", targets: ["Restructure"]),
         .library(name: "Algebra", targets: ["Algebra"]),
         .library(name: "DataStructures", targets: ["DataStructures"]),
         .library(name: "Combinatorics", targets: ["Combinatorics"])
@@ -17,10 +16,9 @@ let package = Package(
     targets: [
 
         // Sources
-        .target(name: "Restructure"),
         .target(name: "Destructure"),
         .target(name: "Algebra", dependencies: ["Destructure"]),
-        .target(name: "DataStructures", dependencies: ["Algebra", "Restructure", "Destructure"]),
+        .target(name: "DataStructures", dependencies: ["Algebra", "Destructure"]),
         .target(name: "Combinatorics", dependencies: ["Destructure"]),
 
         // Tests
@@ -28,11 +26,15 @@ let package = Package(
         .testTarget(name: "DataStructuresTests", dependencies: ["DataStructures"]),
         .testTarget(name: "CombinatoricsTests", dependencies: ["Combinatorics"]),
         .testTarget(name: "DestructureTests", dependencies: ["Destructure"]),
-        .testTarget(name: "RestructureTests", dependencies: ["Restructure"]),
 
         // Performance Tests
-        .testTarget(name: "DestructurePerformanceTests", dependencies: ["Destructure", "PerformanceTesting"]),
-        .testTarget(name: "RestructurePerformanceTests", dependencies: ["Restructure", "PerformanceTesting"]),
-        .testTarget(name: "AlgebraPerformanceTests", dependencies: ["Algebra", "PerformanceTesting"])
+        .testTarget(
+            name: "DataStructuresPerformanceTests",
+            dependencies: ["DataStructures", "PerformanceTesting"]
+        ),
+        .testTarget(
+            name: "AlgebraPerformanceTests",
+            dependencies: ["Algebra", "PerformanceTesting"]
+        )
     ]
 )
