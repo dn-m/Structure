@@ -10,7 +10,6 @@ let package = Package(
         .library(name: "Restructure", targets: ["Restructure"]),
         .library(name: "Algebra", targets: ["Algebra"]),
         .library(name: "DataStructures", targets: ["DataStructures"]),
-        .library(name: "Predicates", targets: ["Predicates"]),
         .library(name: "Combinatorics", targets: ["Combinatorics"])
     ],
     dependencies: [
@@ -23,8 +22,7 @@ let package = Package(
         .target(name: "Destructure"),
         .target(name: "StructureWrapping"),
         .target(name: "Algebra", dependencies: ["Destructure"]),
-        .target(name: "DataStructures", dependencies: ["Algebra", "Restructure", "Destructure", "StructureWrapping", "Predicates"]),
-        .target(name: "Predicates", dependencies: ["Destructure"]),
+        .target(name: "DataStructures", dependencies: ["Algebra", "Restructure", "Destructure", "StructureWrapping"]),
         .target(name: "Combinatorics", dependencies: ["Destructure"]),
 
         // Tests
