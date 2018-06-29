@@ -19,6 +19,14 @@ extension Sequence {
     }
 }
 
+extension Sequence where SubSequence: Sequence {
+
+    /// - Returns: `Zip2Sequence` of 2-tuples composed of adjacent values.
+    public var pairs: Zip2Sequence<Self,SubSequence> {
+        return zip(self,dropFirst())
+    }
+}
+
 /// - Returns: `true` if the given `array` contains the given `value`.
 public func ~= <S: Sequence> (array: S, value: S.Element) -> Bool where S.Element: Equatable {
     return array.contains(value)

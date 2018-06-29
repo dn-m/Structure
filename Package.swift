@@ -8,10 +8,9 @@ let package = Package(
         .library(name: "Destructure", targets: ["Destructure"]),
         .library(name: "Algebra", targets: ["Algebra"]),
         .library(name: "DataStructures", targets: ["DataStructures"]),
-        .library(name: "Combinatorics", targets: ["Combinatorics"])
     ],
     dependencies: [
-        .package(url: "https://github.com/dn-m/PerformanceTesting.git", .branch("master"))
+        .package(url: "https://github.com/dn-m/PerformanceTesting", .branch("master"))
     ],
     targets: [
 
@@ -19,12 +18,10 @@ let package = Package(
         .target(name: "Destructure"),
         .target(name: "Algebra", dependencies: ["Destructure"]),
         .target(name: "DataStructures", dependencies: ["Algebra", "Destructure"]),
-        .target(name: "Combinatorics", dependencies: ["Destructure"]),
 
         // Tests
         .testTarget(name: "AlgebraTests", dependencies: ["Algebra"]),
         .testTarget(name: "DataStructuresTests", dependencies: ["DataStructures"]),
-        .testTarget(name: "CombinatoricsTests", dependencies: ["Combinatorics"]),
         .testTarget(name: "DestructureTests", dependencies: ["Destructure"]),
 
         // Performance Tests

@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import Combinatorics
+import DataStructures
 
 class SubsetsTests: XCTestCase {
 
