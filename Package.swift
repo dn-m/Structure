@@ -5,7 +5,6 @@ import PackageDescription
 let package = Package(
     name: "Structure",
     products: [
-        .library(name: "StructureWrapping", targets: ["StructureWrapping"]),
         .library(name: "Destructure", targets: ["Destructure"]),
         .library(name: "Restructure", targets: ["Restructure"]),
         .library(name: "Algebra", targets: ["Algebra"]),
@@ -20,9 +19,8 @@ let package = Package(
         // Sources
         .target(name: "Restructure"),
         .target(name: "Destructure"),
-        .target(name: "StructureWrapping"),
         .target(name: "Algebra", dependencies: ["Destructure"]),
-        .target(name: "DataStructures", dependencies: ["Algebra", "Restructure", "Destructure", "StructureWrapping"]),
+        .target(name: "DataStructures", dependencies: ["Algebra", "Restructure", "Destructure"]),
         .target(name: "Combinatorics", dependencies: ["Destructure"]),
 
         // Tests
