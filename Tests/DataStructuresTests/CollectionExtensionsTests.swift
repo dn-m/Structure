@@ -1,16 +1,15 @@
 //
-//  PredicatesTests.swift
-//  Structure
+//  CollectionExtensionsTests.swift
+//  DataStructuresTests
 //
-//  Created by James Bean on 12/23/16.
-//
+//  Created by James Bean on 6/29/18.
 //
 
 import XCTest
-import Predicates
+import DataStructures
 
-class PredicatesTests: XCTestCase {
-
+class CollectionExtensionsTests: XCTestCase {
+    
     func testIsHomogenousEmptyTrue() {
         XCTAssert(Array<Int>().isHomogeneous)
     }
