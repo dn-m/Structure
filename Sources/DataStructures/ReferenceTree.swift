@@ -187,7 +187,7 @@ public class ReferenceTree {
      - returns: `true` if the given node is contained herein. Otherwise, `false`.
      */
     public func hasChild(_ child: ReferenceTree) -> Bool {
-        return children.any { $0 === child }
+        return children.contains { $0 === child }
     }
 
     /**
@@ -217,7 +217,7 @@ public class ReferenceTree {
      - returns: `true` if the given node is an ancestor. Otherwise, `false`.
      */
     public func hasAncestor(_ node: ReferenceTree) -> Bool {
-        return self === node ? false : pathToRoot.any { $0 === node }
+        return self === node ? false : pathToRoot.contains { $0 === node }
     }
 
     /**
