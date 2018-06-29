@@ -7,7 +7,6 @@
 //
 
 import Algebra
-import StructureWrapping
 
 /// `Array` that keeps itself sorted.
 public struct SortedArray <Element: Comparable>:
