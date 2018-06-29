@@ -455,38 +455,4 @@ public func zip <T,U,V> (_ a: Tree<T,T>, _ b: Tree<U,U>, _ f: (T, U) -> V) -> Tr
     }
 }
 
-/// - TODO: Make extension, retroactively conforming to `Equatable` when Swift allows it
-
-/// - returns: `true` if two `Tree` values are equivalent. Otherwise, `false`.
-public func == <T: Equatable, U: Equatable> (lhs: Tree<T,U>, rhs: Tree<T,U>) -> Bool {
-
-    switch (lhs, rhs) {
-    case (.leaf(let a), .leaf(let b)):
-        return a == b
-    case (.branch(let valueA, let treesA), .branch(let valueB, let treesB)):
-        return valueA == valueB && treesA == treesB
-    default:
-        return false
-    }
-}
-
-/// - returns: `true` if two `Tree` values are not equivalent. Otherwise, `false`.
-public func != <T: Equatable, U: Equatable> (lhs: Tree<T,U>, rhs: Tree<T,U>) -> Bool {
-    return !(lhs == rhs)
-}
-
-/// - returns: `true` if two arrays of `Tree` values are equivalent. Otherwise, `false.`
-public func == <T: Equatable, U: Equatable> (lhs: [Tree<T,U>], rhs: [Tree<T,U>]) -> Bool {
-
-    guard lhs.count == rhs.count else {
-        return false
-    }
-
-    for (lhs, rhs) in zip(lhs, rhs) {
-        if lhs != rhs {
-            return false
-        }
-    }
-
-    return true
-}
+extension Tree: Equatable where Leaf: Equatable, Branch: Equatable { }
