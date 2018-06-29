@@ -9,7 +9,7 @@ Module which includes a single extension of `Collection`, which breaks it into a
 
 ```Swift
 extension Collection {
-	/// 2-tuple containing the `head` `Element` and `tail` `[Element]` of `Self`
+    /// 2-tuple containing the `head` `Element` and `tail` `[Element]` of `Self`
     public var destructured: (Element, SubSequence)? {
         guard let first = first else { return nil }
         return (first, dropFirst())
