@@ -7,7 +7,9 @@
 
 extension Sequence {
 
-    /// All of 
+    /// All of the values which are the least or greatest given the `areInIncreasingOrder` closure.
+    ///
+    /// - NOTE: Consider returning (Element, count: Int)? instead of `Array`.
     public func extrema <T> (property: (Element) -> T, areInIncreasingOrder: (T,T) -> Bool)
         -> [Element] where T: Comparable
     {
