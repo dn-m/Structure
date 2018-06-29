@@ -6,7 +6,6 @@
 //
 //
 
-import Restructure
 import Algebra
 
 /// Error for when you do bad things to a `ReferenceTreeProtocol`-conforming type.

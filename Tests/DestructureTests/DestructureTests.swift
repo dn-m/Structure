@@ -8,7 +8,6 @@
 
 import XCTest
 import Destructure
-import Restructure
 
 class DestructureTests: XCTestCase {
 
