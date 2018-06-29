@@ -1,13 +1,13 @@
 //
 //  TupleMapTests.swift
-//  Structure
+//  DataStructuresTests
 //
 //  Created by James Bean on 2/2/17.
 //
 //
 
 import XCTest
-import Restructure
+import DataStructures
 
 class TupleMapTests: XCTestCase {
 
