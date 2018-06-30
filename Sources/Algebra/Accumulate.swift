@@ -36,7 +36,7 @@ extension Sequence where Element: Multiplicative {
     }
 }
 
-extension Array {
+extension Collection {
 
     public func accumulating(
         _ initial: Element,
@@ -54,14 +54,14 @@ extension Array {
     }
 }
 
-extension Array where Element: Additive {
+extension Collection where Element: Additive {
 
     public var accumulatingSum: [Element] {
         return accumulating(.zero,+)
     }
 }
 
-extension Array where Element: Multiplicative {
+extension Collection where Element: Multiplicative {
 
     public var accumulatingProduct: [Element] {
         return accumulating(.one,*)
