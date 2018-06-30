@@ -103,16 +103,13 @@ extension Matrix: CustomStringConvertible {
     /// Printed description of `Matrix`.
     public var description: String {
 
-        /// - returns: Whitespace with the given width.
+        /// - Returns: Whitespace with the given width.
         func space(_ amount: Int) -> String {
             return String(repeating: " ", count: amount)
         }
 
-        /// Returns the width of a string-interpolated representation of any value.
-        ///
-        /// - warning: Assumes primitive type with no fancier `CustomStringConvertible`
-        /// implementation.
-        func width(_ value: Any) -> Int {
+        /// - Returns the width of a string-interpolated representation of any value.
+        func width <T> (_ value: T) -> Int {
             return "\(value)".count
         }
 
