@@ -108,12 +108,12 @@ extension Matrix: CustomStringConvertible {
             return String(repeating: " ", count: amount)
         }
 
-        /// - Returns the width of a string-interpolated representation of any value.
+        /// - Returns: Width of a string-interpolated representation of any value.
         func width <T> (_ value: T) -> Int {
             return "\(value)".count
         }
 
-        /// - warning: Don't use `\t`, though. Doesn't register correctly.
+        /// - Warning: Don't use `\t`, though. Doesn't register correctly.
         func format <Element> (_ row: [Element]) -> String {
 
             let separator = "  "
