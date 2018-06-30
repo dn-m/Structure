@@ -141,9 +141,10 @@ extension Collection {
     }
 }
 
-// FIXME: Use `ArraySlice` to avoid conversion to `Array`.
-internal func injecting <T> (_ value: T, into values: [T]) -> [[T]] {
+/// - Returns: Two-dimensional array of `C.Element` values (helper for `Collection.permutations`).
+func injecting <C> (_ value: C.Element, into values: C) -> [[C.Element]]
+    where C: Collection
+{
     guard let (head, tail) = values.destructured else { return [[value]] }
-    return  [[value] + values] + injecting(value, into: Array(tail)).map { [head] + $0 }
+    return [[value] + values] + injecting(value, into: tail).map { [head] + $0 }
 }
-
