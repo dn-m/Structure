@@ -7,25 +7,6 @@
 
 import Destructure
 
-extension Collection where Element: Equatable {
-
-    /// - Returns: `true` if there are one or fewer elements in `self`, or if all elements in
-    /// `self` are logically equivalent.
-    public var isHomogeneous: Bool {
-        guard let (head,tail) = destructured else { return true }
-        for element in tail where element != head { return false }
-        return true
-    }
-
-    /// - Returns: `false` if there are one or fewer elements in `self`, or if any elements in
-    /// `self` are not logically equivalent.
-    public var isHeterogeneous: Bool {
-        guard let (head,tail) = destructured else { return false }
-        for element in tail where element == head { return false }
-        return false
-    }
-}
-
 extension Collection {
 
     /// - Returns: All combinations of with a given cardinality
@@ -48,7 +29,39 @@ extension Collection {
 
         return subsets(cardinality: k, appendingTo: [], at: startIndex)
     }
+
+    /// - Returns: The permutations of the values contained herein.
+    public var permutations: [[Element]] {
+        func permute <C> (_ values: C) -> [[Element]] where C: Collection, C.Element == Element {
+            guard let (head, tail) = values.destructured else { return [[]] }
+            return permute(tail).flatMap { injecting(head, into: $0) }
+        }
+        return permute(self)
+    }
 }
+
+extension Collection where Element: Equatable {
+
+    /// - Returns: `true` if there are one or fewer elements in `self`, or if all elements in
+    /// `self` are logically equivalent.
+    public var isHomogeneous: Bool {
+        guard let (head,tail) = destructured else { return true }
+        for element in tail where element != head { return false }
+        return true
+    }
+
+    /// - Returns: `false` if there are one or fewer elements in `self`, or if any elements in
+    /// `self` are not logically equivalent.
+    public var isHeterogeneous: Bool {
+        guard let (head,tail) = destructured else { return false }
+        for element in tail where element == head { return false }
+        return false
+    }
+}
+
+
+
+
 
 extension MutableCollection where Self: BidirectionalCollection {
 
@@ -132,4 +145,12 @@ extension Int {
     func limited(notToExceed maximum: Int) -> Int {
         return self >= maximum ? maximum : self
     }
+}
+
+/// - Returns: Two-dimensional array of `C.Element` values (helper for `Collection.permutations`).
+func injecting <C> (_ value: C.Element, into values: C) -> [[C.Element]]
+    where C: Collection
+{
+    guard let (head, tail) = values.destructured else { return [[value]] }
+    return [[value] + values] + injecting(value, into: tail).map { [head] + $0 }
 }
