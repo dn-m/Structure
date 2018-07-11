@@ -1,12 +1,10 @@
 //
 //  TupleMap.swift
-//  Collections
+//  Algorithms
 //
 //  Created by James Bean on 2/2/17.
 //
 //
-
-#warning("Move to Algorithms module")
 
 /// Applies the given transform `f` to the given values `a` and `b`.
 public func map <T,U> (_ a: T, _ b: T, _ f: (T) -> U) -> (U,U) {
