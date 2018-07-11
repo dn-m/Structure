@@ -25,6 +25,7 @@ let package = Package(
         .testTarget(name: "AlgebraTests", dependencies: ["Algebra"]),
         .testTarget(name: "DataStructuresTests", dependencies: ["DataStructures"]),
         .testTarget(name: "DestructureTests", dependencies: ["Destructure"]),
+        .testTarget(name: "AlgorithmsTests", dependencies: ["Algorithms"]),
 
         // Performance Tests
         .testTarget(
