@@ -16,8 +16,6 @@ public func cartesianProduct <T,U> (_ a: T, _ b: U) -> [(T.Element, U.Element)]
 
 extension Collection {
 
-    #warning("Attempt to generalize to RangeReplaceableCollection")
-
     /// All of the permutations of each of the elements in each of the given sequences.
     public var permutations: [[Element]] {
         func permute <C> (_ values: C) -> [[Element]] where C: Collection, C.Element == Element {
