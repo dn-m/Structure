@@ -30,7 +30,6 @@ extension Collection {
     }
 }
 
-// FIXME: Use `ArraySlice` to avoid conversion to `Array`.
 /// Inject the given `value` into each possible index of the given `values`.
 internal func injecting <C> (_ value: C.Element, into values: C) -> [[C.Element]]
     where C: Collection
