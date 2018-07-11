@@ -43,19 +43,19 @@ class ArrayExtensionsTests: XCTestCase {
     func testLastAmountEmpty() {
         let array: [Int] = []
         let last5 = array.last(amount: 5)
-        XCTAssert(last5.isEmpty)
+        XCTAssertNil(last5)
     }
 
     func testLastAmountTooMany() {
         let array = [1,2,3,4]
         let last5 = array.last(amount: 5)
-        XCTAssert(last5.isEmpty)
+        XCTAssertNil(last5)
     }
 
     func testLastAmountEquiv() {
         let array = [1,2,3,4,5]
         let last5 = array.last(amount: 5)
-        XCTAssertEqual(last5, array)
+        XCTAssertEqual(last5, [1,2,3,4,5])
     }
 
     func testLastAmountValid() {
