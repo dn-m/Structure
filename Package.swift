@@ -29,12 +29,16 @@ let package = Package(
 
         // Performance Tests
         .testTarget(
+            name: "AlgebraPerformanceTests",
+            dependencies: ["Algebra", "PerformanceTesting"]
+        ),
+        .testTarget(
             name: "DataStructuresPerformanceTests",
             dependencies: ["DataStructures", "PerformanceTesting"]
         ),
         .testTarget(
-            name: "AlgebraPerformanceTests",
-            dependencies: ["Algebra", "PerformanceTesting"]
+            name: "AlgorithmsPerformanceTests",
+            dependencies: ["Algorithms", "PerformanceTesting"]
         )
     ]
 )
