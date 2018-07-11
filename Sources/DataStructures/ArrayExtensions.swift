@@ -7,29 +7,6 @@
 
 extension Array {
 
-    /// - Returns: `Element` at index if present. Otherwise `nil`.
-    public subscript (safe index: Int) -> Element? {
-        return indices ~= index ? self[index] : nil
-    }
-
-    /// - Returns: The second `Element` in an `Array`, if not empty. Otherwise, `nil`.
-    public var second: Element? {
-        guard count > 1 else { return nil }
-        return self[1]
-    }
-
-    /// - Returns: The second-to-last `Element` in `Array`, if not empty. Otherwise, `nil`.
-    public var penultimate: Element? {
-        guard count > 1 else { return nil }
-        return self[self.count - 2]
-    }
-
-    /// - Returns: An array with the given `amount` of elements from the end of `self`.
-    public func last(amount: Int) -> [Element] {
-        guard count >= amount else { return [] }
-        return Array(self[(self.count - amount)..<self.count])
-    }
-
     /// - Returns: Array with the `element` appended.
     public func appending(_ element: Element) -> Array {
         var copy = self
@@ -47,6 +24,35 @@ extension Array {
     /// - returns: New `Array` with the first element `head`, and the remaining elements of `tail`.
     public static func + (head: Element, tail: Array) -> Array {
         return [head] + tail
+    }
+}
+
+extension Collection {
+
+    /// - Returns: `Element` at index if present. Otherwise `nil`.
+    public subscript (safe index: Index) -> Element? {
+        return indices ~= index ? self[index] : nil
+    }
+
+    /// - Returns: The second `Element` in an `Array`, if not empty. Otherwise, `nil`.
+    public var second: Element? {
+        guard count > 1 else { return nil }
+        return self[index(after: startIndex)]
+    }
+}
+
+extension BidirectionalCollection {
+
+    /// - Returns: The second-to-last `Element` in `Array`, if not empty. Otherwise, `nil`.
+    public var penultimate: Element? {
+        guard count > 1 else { return nil }
+        return self[index(endIndex, offsetBy: -2)]
+    }
+
+    /// - Returns: An array with the given `amount` of elements from the end of `self`.
+    public func last(amount: Int) -> SubSequence? {
+        guard count >= amount else { return nil }
+        return self[index(endIndex, offsetBy: -amount) ..< endIndex]
     }
 }
 
