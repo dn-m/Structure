@@ -5,6 +5,8 @@
 //  Created by James Bean on 6/29/18.
 //
 
+#warning("Move to Algorithms module")
+
 extension Array {
 
     /// - Returns: `Element` at index if present. Otherwise `nil`.
