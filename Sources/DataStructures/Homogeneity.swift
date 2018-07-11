@@ -1,5 +1,5 @@
 //
-//  CollectionExtensions.swift
+//  Homogeneity
 //  DataStructures
 //
 //  Created by James Bean on 6/29/18.
