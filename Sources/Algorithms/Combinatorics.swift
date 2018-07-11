@@ -14,15 +14,14 @@ public func cartesianProduct <T,U> (_ a: T, _ b: U) -> [(T.Element, U.Element)]
     return a.flatMap { a in b.map { b in (a,b) } }
 }
 
-extension Array {
+extension Collection {
 
     #warning("Attempt to generalize to RangeReplaceableCollection")
 
     /// All of the permutations of each of the elements in each of the given sequences.
     public var permutations: [[Element]] {
 
-        // FIXME: Use `ArraySlice` to avoid conversion to `Array`.
-        func permute(_ values: [Element]) -> [[Element]] {
+        func permute <C> (_ values: C) -> [[Element]] where C: Collection, C.Element == Element {
             guard let (head, tail) = values.destructured else { return [[]] }
             return permute(Array(tail)).flatMap { injecting(head, into: $0) }
         }
