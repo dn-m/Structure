@@ -18,6 +18,7 @@ extension Array {
 
     #warning("Attempt to generalize to RangeReplaceableCollection")
 
+    /// All of the permutations of each of the elements in each of the given sequences.
     public var permutations: [[Element]] {
 
         // FIXME: Use `ArraySlice` to avoid conversion to `Array`.
@@ -31,7 +32,8 @@ extension Array {
 }
 
 // FIXME: Use `ArraySlice` to avoid conversion to `Array`.
-internal func injecting <T> (_ value: T, into values: [T]) -> [[T]] {
+/// Inject the given `value` into each possible index of the given `values`.
+internal func injecting <C> (_ value: C.Element, into values: C) -> [[C.Element]] where C: Collection {
     guard let (head, tail) = values.destructured else { return [[value]] }
     return  [[value] + values] + injecting(value, into: Array(tail)).map { [head] + $0 }
 }
