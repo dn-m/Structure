@@ -59,10 +59,7 @@ public struct CircularArray<Element> {
     }
 
     /// - Returns: A sorted copy of `CircularArray`.
-    public func sorted(
-        by areInIncreasingOrder: (Iterator.Element, Iterator.Element) -> Bool
-    ) -> CircularArray
-    {
+    public func sorted(by areInIncreasingOrder: (Element, Element) -> Bool) -> CircularArray {
         return CircularArray(storage.sorted(by: areInIncreasingOrder))
     }
 
