@@ -21,7 +21,7 @@ extension Array {
         return lhs.appending(element)
     }
 
-    /// - returns: New `Array` with the first element `head`, and the remaining elements of `tail`.
+    /// - Returns: New `Array` with the first element `head`, and the remaining elements of `tail`.
     public static func + (head: Element, tail: Array) -> Array {
         return [head] + tail
     }
@@ -95,7 +95,7 @@ extension Array {
         return replaced
     }
 
-    /// - returns: A new `Array` with the given `element` inserted at the given `index`, if
+    /// - Returns: A new `Array` with the given `element` inserted at the given `index`, if
     /// possible.
     ///
     /// - throws: `ArrayError` if the given `index` is out of range.
