@@ -10,14 +10,9 @@ extension Collection {
 
     /// - Returns: A two-tuple containing two arrays of `Elements` split at the given `index`,
     /// if the given `index` is in the bounds of `self.` Otherwise, `nil`.
-    //
-    // FIXME: Generalize to `Collection`
-    // FIXME: Return (SubSequence,SubSequence)?
-    public func split(at index: Index) -> ([Element], [Element])? {
+    public func split(at index: Index) -> (SubSequence, SubSequence)? {
         guard index >= startIndex && index <= endIndex else { return nil }
-        let left = Array(self[startIndex ..< index])
-        let right = index == endIndex ? [] : Array(self[index ..< endIndex])
-        return (left, right)
+        return (self[startIndex ..< index], self[index ..< endIndex])
     }
 
     /// - returns: A three-tuple containing:
