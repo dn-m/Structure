@@ -1,13 +1,13 @@
 //
 //  StableSortTests.swift
-//  DataStructuresTests
+//  AlgorithmsTests
 //
 //  Created by James Bean on 12/23/16.
 //
 //
 
 import XCTest
-import DataStructures
+import Algorithms
 
 class StableSortTests: XCTestCase {
 
