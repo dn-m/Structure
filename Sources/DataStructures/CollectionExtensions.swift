@@ -5,8 +5,6 @@
 //  Created by James Bean on 6/29/18.
 //
 
-#warning("Move to Algorithms module")
-
 import Destructure
 
 extension Collection where Element: Equatable {
@@ -30,6 +28,7 @@ extension Collection where Element: Equatable {
 
 extension Collection {
 
+    #warning("Move to Algorithms module")
     /// - Returns: All combinations of with a given cardinality
     /// (how many elements chosen per combination).
     public func subsets(cardinality k: Int) -> [[Element]] {
@@ -54,6 +53,7 @@ extension Collection {
 
 extension MutableCollection where Self: BidirectionalCollection {
 
+    #warning("Move to Algorithms module")
     /// - Returns: A mutable and bidirectional collection with its elements rotated by the given
     /// `amount`.
     public func rotated(by amount: Int) -> Self {
@@ -88,6 +88,7 @@ extension MutableCollection where Self: BidirectionalCollection {
 
 extension RangeReplaceableCollection where Index == Int  {
 
+    #warning("Move to Algorithms module")
     public func stableSort(_ isOrderedBefore: @escaping (Element, Element) -> Bool) -> [Element] {
 
         var result = self
@@ -130,6 +131,7 @@ extension RangeReplaceableCollection where Index == Int  {
     }
 }
 
+#warning("Move to Algorithms module")
 extension Int {
     func limited(notToExceed maximum: Int) -> Int {
         return self >= maximum ? maximum : self
