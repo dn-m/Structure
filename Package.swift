@@ -19,7 +19,7 @@ let package = Package(
         .target(name: "Destructure"),
         .target(name: "Algebra", dependencies: ["Destructure"]),
         .target(name: "DataStructures", dependencies: ["Algebra", "Destructure"]),
-        .target(name: "Algorithms", dependencies: []),
+        .target(name: "Algorithms", dependencies: ["Destructure"]),
 
         // Tests
         .testTarget(name: "AlgebraTests", dependencies: ["Algebra"]),

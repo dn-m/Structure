@@ -1,18 +1,18 @@
 //
 //  CombinatoricsTests.swift
-//  Structure
+//  AlgorithmsTests
 //
 //  Created by James Bean on 12/23/16.
 //
 //
 
 import XCTest
-@testable import DataStructures
+@testable import Algorithms
 
 class CombinatoricsTests: XCTestCase {
 
     func testCombinationsOfTwoArrays() {
-        let result = [1,2,3] * [4,5]
+        let result = cartesianProduct([1,2,3],[4,5])
         let expected = [(1,4),(1,5),(2,4),(2,5),(3,4),(3,5)]
         XCTAssertEqual(result.count, 6)
         zip(result,expected).forEach { a,b in
