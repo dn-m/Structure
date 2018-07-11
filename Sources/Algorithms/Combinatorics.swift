@@ -20,12 +20,10 @@ extension Collection {
 
     /// All of the permutations of each of the elements in each of the given sequences.
     public var permutations: [[Element]] {
-
         func permute <C> (_ values: C) -> [[Element]] where C: Collection, C.Element == Element {
             guard let (head, tail) = values.destructured else { return [[]] }
             return permute(tail).flatMap { injecting(head, into: $0) }
         }
-
         return permute(self)
     }
 }
