@@ -5,6 +5,8 @@
 //  Created by James Bean on 6/29/18.
 //
 
+#warning("Move to Algorithms module")
+
 import Destructure
 
 extension Collection where Element: Equatable {

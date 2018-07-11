@@ -6,6 +6,8 @@
 //
 //
 
+#warning("Move to Algorithms module")
+
 // Immutable swap.
 public func swapped <T, U> (_ a: T, _ b: U) -> (U, T) {
     return (b,a)
