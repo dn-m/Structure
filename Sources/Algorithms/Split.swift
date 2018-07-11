@@ -21,12 +21,12 @@ extension Collection {
     /// - The elements to the right of the element at the given `index`
     ///
     /// if the given `index` is in the bounds of `self.` Otherwise, `nil`.
-    public func splitAndExtractElement(at index: Index) -> ([Element], Element, [Element])? {
+    public func splitAndExtractElement(at index: Index) -> (SubSequence, Element, SubSequence)? {
         guard count > 0 else { return nil }
         guard index >= startIndex && index < endIndex else { return nil }
         let element = self[index]
-        let left = Array(self[startIndex ..< index])
-        let right = index == endIndex ? [] : Array(self[self.index(after: index) ..< endIndex])
+        let left = self[startIndex ..< index]
+        let right = self[self.index(after: index) ..< endIndex]
         return (left, element, right)
     }
 }

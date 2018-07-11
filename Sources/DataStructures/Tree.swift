@@ -115,7 +115,7 @@ public enum Tree <Branch,Leaf> {
                     throw Tree.Error.illFormedIndexPath
                 }
 
-                let crumb = Crumb(value: .left(value), trees: (left, right))
+                let crumb = Crumb(value: .left(value), trees: (Array(left), Array(right)))
                 return Zipper(subTree, breadcrumbs.pushing(crumb))
             }
         }
