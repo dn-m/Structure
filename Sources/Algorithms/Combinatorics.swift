@@ -23,7 +23,7 @@ extension Collection {
 
         func permute <C> (_ values: C) -> [[Element]] where C: Collection, C.Element == Element {
             guard let (head, tail) = values.destructured else { return [[]] }
-            return permute(Array(tail)).flatMap { injecting(head, into: $0) }
+            return permute(tail).flatMap { injecting(head, into: $0) }
         }
 
         return permute(self)
