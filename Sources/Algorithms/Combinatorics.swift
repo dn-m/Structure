@@ -33,7 +33,9 @@ extension Array {
 
 // FIXME: Use `ArraySlice` to avoid conversion to `Array`.
 /// Inject the given `value` into each possible index of the given `values`.
-internal func injecting <C> (_ value: C.Element, into values: C) -> [[C.Element]] where C: Collection {
+internal func injecting <C> (_ value: C.Element, into values: C) -> [[C.Element]]
+    where C: Collection
+{
     guard let (head, tail) = values.destructured else { return [[value]] }
     return [[value] + values] + injecting(value, into: tail).map { [head] + $0 }
 }
