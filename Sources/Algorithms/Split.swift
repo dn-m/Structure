@@ -5,7 +5,6 @@
 //  Created by James Bean on 7/11/18.
 //
 
-#warning("Get rid of constraint of Index == Int")
 extension Collection {
 
     /// - Returns: A two-tuple containing two arrays of `Elements` split at the given `index`,
