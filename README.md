@@ -19,8 +19,11 @@ extension Collection {
 ``` 
 
 ## Algebra
-Protocols for representing Algebraic structures (`Semigroup`, `Monoid`), and their operations.
+Protocols for representing Algebraic structures (`Semigroup`, `Monoid`, etc.), and their operations.
 
 
 ## DataStructures
-Various data structures and algorithms.
+Various data structures which are not included in the Standard Library.
+
+## Algorithms
+Various algorithms over the Standard Library built-in data structures.
