@@ -25,4 +25,10 @@ class AccumulateTests: XCTestCase {
             XCTAssertEqual(actual, expected, accuracy: 0.000001)
         }
     }
+
+    func testAccumulatingProduct() {
+        let numbers = [2,1,2]
+        let accumulated = numbers.accumulatingProduct
+        XCTAssertEqual(accumulated, [1,2,2])
+    }
 }

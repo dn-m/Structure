@@ -35,7 +35,6 @@ extension Sequence where Element: Multiplicative {
     }
 }
 
-
 extension Collection where Element: AdditiveSemigroup {
 
     public var nonEmptySum: Iterator.Element? {
