@@ -47,6 +47,14 @@ extension Collection {
     }
 }
 
+extension Sequence where SubSequence: Sequence {
+
+    /// - Returns: `Zip2Sequence` of 2-tuples composed of adjacent values.
+    public var pairs: Zip2Sequence<Self,SubSequence> {
+        return zip(self,dropFirst())
+    }
+}
+
 /// Inject the given `value` into each possible index of the given `values`.
 internal func injecting <C> (_ value: C.Element, into values: C) -> [[C.Element]]
     where C: Collection
