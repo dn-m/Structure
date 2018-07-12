@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/dn-m/Structure.svg?branch=master)](https://travis-ci.org/dn-m/Structure) 
 
-Algebraic and data structures in Swift 4.2. The `Structure` package consists of three modules.
+Algebraic and data structures in Swift 4.2. The `Structure` package consists of four modules:
 
 ## Destructure
 Module which includes a single extension of `Collection`, which breaks it into a `head` and `tail` for functional-style recursive implementations of algorithms.
