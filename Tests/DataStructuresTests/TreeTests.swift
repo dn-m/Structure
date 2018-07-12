@@ -8,7 +8,6 @@
 
 import XCTest
 import DataStructures
-import SumType
 
 class TreeTests: XCTestCase {
 
@@ -258,7 +257,7 @@ class TreeTests: XCTestCase {
             .leaf(12)
         ])
 
-        XCTAssert(tree.map { $0 * 2 } == expected)
+        XCTAssertEqual(tree.map { $0 * 2 }, expected)
     }
 
     func testHeightLeafZero() {
@@ -309,14 +308,12 @@ class TreeTests: XCTestCase {
             [.left(1), .right(5)]
         ]
 
-        zip(tree.paths, expected).forEach { path, expected in
-            XCTAssert(path == expected)
-        }
+        XCTAssertEqual(tree.paths, expected)
     }
 
     func testPathLeaf() {
         XCTAssertEqual(Tree<Int,Int>.leaf(1).paths.count, 1)
-        XCTAssert(Tree<Int,Int>.leaf(1).paths[0][0] == .right(1))
+        XCTAssertEqual(Tree<Int,Int>.leaf(1).paths[0][0], .right(1))
     }
 
     func testTreeZip() {
@@ -349,13 +346,13 @@ class TreeTests: XCTestCase {
         ])
 
         let result = zip(a,b,*)
-        XCTAssert(result == expected)
+        XCTAssertEqual(result, expected)
     }
 
     func testInitWithValueAndEmptyArray() {
         let tree = Tree(1, [])
         let expected = Tree.branch(1, [.leaf(1)])
-        XCTAssert(tree == expected)
+        XCTAssertEqual(tree, expected)
     }
 
     func testZipLeaves() {
@@ -380,7 +377,7 @@ class TreeTests: XCTestCase {
             .leaf("d")
         ])
 
-        XCTAssert(zipped == expected)
+        XCTAssertEqual(zipped, expected)
     }
 
     func testZipLeavesWithTransform() {
@@ -405,6 +402,6 @@ class TreeTests: XCTestCase {
             .leaf(16)
         ])
 
-        XCTAssert(zipped == expected)
+        XCTAssertEqual(zipped, expected)
     }
 }

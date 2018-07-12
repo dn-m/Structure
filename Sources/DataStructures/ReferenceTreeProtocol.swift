@@ -6,7 +6,6 @@
 //
 //
 
-import Restructure
 import Algebra
 
 /// Error for when you do bad things to a `ReferenceTreeProtocol`-conforming type.
@@ -161,7 +160,7 @@ public extension ReferenceTreeProtocol {
 
     /// - returns: `true` if the given node is contained herein. Otherwise, `false`.
     func hasChild(_ child: Self) -> Bool {
-        return children.any { $0 === child }
+        return children.contains { $0 === child }
     }
 
     /// - returns: Child node at the given `index`, if present. Otherwise, `nil`.
@@ -245,7 +244,7 @@ public extension ReferenceTreeProtocol {
 
     /// - returns: `true` if the given node is an ancestor. Otherwise, `false`.
     func hasAncestor(_ node: Self) -> Bool {
-        return self === node ? false : pathToRoot.any { $0 === node }
+        return self === node ? false : pathToRoot.contains { $0 === node }
     }
 
     /// - returns: Ancestor at the given distance, if present. Otherwise, `nil`.
