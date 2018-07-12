@@ -1,5 +1,5 @@
 //
-//  ArrayExtensions.swift
+//  CollectionExtensions.swift
 //  DataStructures
 //
 //  Created by James Bean on 6/29/18.
