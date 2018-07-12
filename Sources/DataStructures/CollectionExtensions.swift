@@ -5,131 +5,101 @@
 //  Created by James Bean on 6/29/18.
 //
 
-import Destructure
+extension Array {
 
-extension Collection where Element: Equatable {
-
-    /// - Returns: `true` if there are one or fewer elements in `self`, or if all elements in
-    /// `self` are logically equivalent.
-    public var isHomogeneous: Bool {
-        guard let (head,tail) = destructured else { return true }
-        for element in tail where element != head { return false }
-        return true
+    /// - Returns: Array with the `element` appended.
+    public func appending(_ element: Element) -> Array {
+        var copy = self
+        copy.append(element)
+        return copy
     }
 
-    /// - Returns: `false` if there are one or fewer elements in `self`, or if any elements in
-    /// `self` are not logically equivalent.
-    public var isHeterogeneous: Bool {
-        guard let (head,tail) = destructured else { return false }
-        for element in tail where element == head { return false }
-        return false
+    /// - Returns: Left-hand-side value appending the right-hand-side value, if it exists.
+    /// Otherwise, the left-hand-side value.
+    public static func + (lhs: Array, rhs: Element?) -> Array {
+        guard let element = rhs else { return lhs }
+        return lhs.appending(element)
+    }
+
+    /// - Returns: New `Array` with the first element `head`, and the remaining elements of `tail`.
+    public static func + (head: Element, tail: Array) -> Array {
+        return [head] + tail
     }
 }
 
 extension Collection {
 
-    /// - Returns: All combinations of with a given cardinality
-    /// (how many elements chosen per combination).
-    public func subsets(cardinality k: Int) -> [[Element]] {
+    /// - Returns: `Element` at index if present. Otherwise `nil`.
+    public subscript (safe index: Index) -> Element? {
+        return indices ~= index ? self[index] : nil
+    }
 
-        func subsets(cardinality k: Int, appendingTo prefix: [Element], at index: Index)
-            -> [[Element]]
-        {
-            guard k > 0 else { return [prefix] }
-            if index < endIndex {
-                let next = indices.index(after: index)
-                return (
-                    subsets(cardinality: k - 1, appendingTo: prefix + [self[index]], at: next) +
-                        subsets(cardinality: k, appendingTo: prefix, at: next)
-                )
-            }
-            return []
-        }
-
-        return subsets(cardinality: k, appendingTo: [], at: startIndex)
+    /// - Returns: The second `Element` in an `Array`, if not empty. Otherwise, `nil`.
+    public var second: Element? {
+        guard count > 1 else { return nil }
+        return self[index(after: startIndex)]
     }
 }
 
-extension MutableCollection where Self: BidirectionalCollection {
+extension BidirectionalCollection {
 
-    /// - Returns: A mutable and bidirectional collection with its elements rotated by the given
-    /// `amount`.
-    public func rotated(by amount: Int) -> Self {
+    /// - Returns: The second-to-last `Element` in `Array`, if not empty. Otherwise, `nil`.
+    public var penultimate: Element? {
+        guard count > 1 else { return nil }
+        return self[index(endIndex, offsetBy: -2)]
+    }
+
+    /// - Returns: An array with the given `amount` of elements from the end of `self`.
+    public func last(amount: Int) -> SubSequence? {
+        guard count >= amount else { return nil }
+        return self[index(endIndex, offsetBy: -amount) ..< endIndex]
+    }
+}
+
+extension RangeReplaceableCollection {
+
+    /// Replace element at given `index` with the given `element`.
+    @discardableResult
+    public mutating func replaceElement(at index: Index, with element: Element) -> Element {
+        assert(indices.contains(index))
+        let replaced = remove(at: index)
+        insert(element, at: index)
+        return replaced
+    }
+
+    /// Immutable version of `replaceElement(at:with:)`
+    public func replacingElement(at index: Index, with element: Element) -> Self {
         var copy = self
-        copy.rotate(by: amount)
+        _ = copy.replaceElement(at: index, with: element)
         return copy
     }
 
-    /// Rotates the elements contained herein by the given `amount`.
-    public mutating func rotate(by amount: Int) {
-        guard amount != 0 else { return }
-        let amount = (amount < 0 ? count + amount : amount) % count
-        let amountIndex = index(startIndex, offsetBy: amount)
-        reverse(in: startIndex ..< index(before: amountIndex))
-        reverse(in: amountIndex ..< index(before: endIndex))
-        reverse(in: startIndex ..< index(before: endIndex))
+    /// Replace first element in Array with a new element.
+    @discardableResult
+    public mutating func replaceFirst(with element: Element) -> Element {
+        assert(!isEmpty)
+        let replaced = removeFirst()
+        insert(element, at: startIndex)
+        return replaced
     }
 
-    private mutating func reverse(in range: Range<Index>) {
-        guard count > 1 else { return }
-        assert(range.lowerBound >= startIndex)
-        assert(range.upperBound < endIndex)
-        var start = range.lowerBound
-        var end = range.upperBound
-        while start < end, start != end {
-            swapAt(start, end)
-            start = index(after: start)
-            end = index(before: end)
-        }
+    /// - Returns: A new `Array` with the given `element` inserted at the given `index`, if
+    /// possible.
+    public func inserting(_ element: Element, at index: Index) -> Self {
+        var copy = self
+        copy.insert(element, at: index)
+        return copy
     }
 }
 
-extension RangeReplaceableCollection where Index == Int  {
+extension RangeReplaceableCollection where Self: BidirectionalCollection {
 
-    public func stableSort(_ isOrderedBefore: @escaping (Element, Element) -> Bool) -> [Element] {
-
-        var result = self
-        let count = result.count
-
-        var aux: [Element] = []
-        aux.reserveCapacity(numericCast(count))
-
-        func merge(_ lo: Index, _ mid: Index, _ hi: Index) {
-
-            aux.removeAll(keepingCapacity: true)
-
-            var i = lo
-            var j = mid
-
-            while i < mid && j < hi {
-                if isOrderedBefore(result[j], result[i]) {
-                    aux.append(result[j])
-                    j += 1
-                }
-                else {
-                    aux.append(result[i])
-                    i += 1
-                }
-            }
-
-            aux.append(contentsOf: result[i ..< mid])
-            aux.append(contentsOf: result[j ..< hi])
-            result.replaceSubrange(lo ..< hi, with: aux)
-        }
-
-        var sz: Int = 1
-        while sz < count {
-            for lo in stride(from: result.startIndex, to: result.endIndex - sz, by: sz * 2) {
-                merge(lo, lo + sz, (lo + (sz * 2)).limited(notToExceed: count))
-            }
-            sz *= 2
-        }
-        return Array(result)
-    }
-}
-
-extension Int {
-    func limited(notToExceed maximum: Int) -> Int {
-        return self >= maximum ? maximum : self
+    /// Replace the last element in `Self` with the given `element`.
+    @discardableResult
+    public mutating func replaceLast(with element: Element) -> Element {
+        assert(!isEmpty)
+        let replaced = removeLast()
+        append(element)
+        return replaced
     }
 }

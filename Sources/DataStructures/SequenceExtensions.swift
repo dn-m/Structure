@@ -5,6 +5,8 @@
 //  Created by James Bean on 6/29/18.
 //
 
+#warning("Move to Algorithms module")
+
 extension Sequence {
 
     /// All of the values which are the least or greatest given the `areInIncreasingOrder` closure.
@@ -16,14 +18,6 @@ extension Sequence {
         let sorted = self.sorted { areInIncreasingOrder(property($0), property($1)) }
         guard let extremum = sorted.first.flatMap(property) else { return [] }
         return sorted.filter { property($0) == extremum }
-    }
-}
-
-extension Sequence where SubSequence: Sequence {
-
-    /// - Returns: `Zip2Sequence` of 2-tuples composed of adjacent values.
-    public var pairs: Zip2Sequence<Self,SubSequence> {
-        return zip(self,dropFirst())
     }
 }
 

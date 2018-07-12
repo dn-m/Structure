@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import DataStructures
+import Algorithms
 import PerformanceTesting
 
 class StableSortPerformanceTests: PerformanceTestCase {

@@ -59,10 +59,7 @@ public struct CircularArray<Element> {
     }
 
     /// - Returns: A sorted copy of `CircularArray`.
-    public func sorted(
-        by areInIncreasingOrder: (Iterator.Element, Iterator.Element) -> Bool
-    ) -> CircularArray
-    {
+    public func sorted(by areInIncreasingOrder: (Element, Element) -> Bool) -> CircularArray {
         return CircularArray(storage.sorted(by: areInIncreasingOrder))
     }
 
@@ -176,7 +173,7 @@ extension CircularArray: ExpressibleByArrayLiteral {
     }
 }
 
-/// - returns: "True" modulo (not "remainder", which is implemented by Swift's `%`).
+/// - Returns: "True" modulo (not "remainder", which is implemented by Swift's `%`).
 private func mod <T: BinaryInteger> (_ dividend: T, _ modulus: T) -> T {
     let result = dividend % modulus
     return result < 0 ? result + modulus : result

@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import DataStructures
+import Algorithms
 
 class TupleMapTests: XCTestCase {
 
