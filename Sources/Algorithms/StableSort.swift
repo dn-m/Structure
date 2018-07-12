@@ -7,7 +7,7 @@
 
 extension RangeReplaceableCollection where Index == Int  {
 
-    #warning("Move to Algorithms module")
+    /// The elements of `Self` sorted stably.
     public func stableSort(_ isOrderedBefore: @escaping (Element, Element) -> Bool) -> [Element] {
 
         var result = self
