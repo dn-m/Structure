@@ -22,7 +22,7 @@ extension Collection {
 Protocols for representing Algebraic structures (`Semigroup`, `Monoid`, etc.), and their operations.
 
 ## DataStructures
-Various data structures which are not included in the Standard Library.
+Data structures which are not included in the Standard Library.
 
 ## Algorithms
-Various algorithms over the Standard Library built-in data structures.
+Algorithms over the Standard Library built-in data structures.
