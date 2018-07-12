@@ -5,8 +5,6 @@
 //  Created by James Bean on 6/29/18.
 //
 
-#warning("Move to Algorithms module")
-
 extension Sequence {
 
     /// All of the values which are the least or greatest given the `areInIncreasingOrder` closure.
