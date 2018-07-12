@@ -3,11 +3,11 @@
     "pins": [
       {
         "package": "PerformanceTesting",
-        "repositoryURL": "https://github.com/dn-m/PerformanceTesting.git",
+        "repositoryURL": "https://github.com/dn-m/PerformanceTesting",
         "state": {
-          "branch": "master",
+          "branch": null,
           "revision": "fc96795471fce16de0277ec0dbd0f69f5dd013d6",
-          "version": null
+          "version": "0.1.0"
         }
       }
     ]
