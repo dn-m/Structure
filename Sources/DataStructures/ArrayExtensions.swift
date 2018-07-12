@@ -56,12 +56,11 @@ extension BidirectionalCollection {
     }
 }
 
-extension Array {
-
+extension RangeReplaceableCollection {
 
     /// Replace element at given `index` with the given `element`.
     @discardableResult
-    public mutating func replaceElement(at index: Int, with element: Element) -> Element {
+    public mutating func replaceElement(at index: Index, with element: Element) -> Element {
         assert(indices.contains(index))
         let replaced = remove(at: index)
         insert(element, at: index)
@@ -69,39 +68,38 @@ extension Array {
     }
 
     /// Immutable version of `replaceElement(at:with:)`
-    public func replacingElement(at index: Int, with element: Element) -> Array {
+    public func replacingElement(at index: Index, with element: Element) -> Self {
         var copy = self
         _ = copy.replaceElement(at: index, with: element)
         return copy
     }
 
-    /// Replace the last element in `Array` with the given `element`.
+    /// Replace first element in Array with a new element.
+    @discardableResult
+    public mutating func replaceFirst(with element: Element) -> Element {
+        assert(!isEmpty)
+        let replaced = removeFirst()
+        insert(element, at: startIndex)
+        return replaced
+    }
+
+    /// - Returns: A new `Array` with the given `element` inserted at the given `index`, if
+    /// possible.
+    public func inserting(_ element: Element, at index: Index) -> Self {
+        var copy = self
+        copy.insert(element, at: index)
+        return copy
+    }
+}
+
+extension RangeReplaceableCollection where Self: BidirectionalCollection {
+
+    /// Replace the last element in `Self` with the given `element`.
     @discardableResult
     public mutating func replaceLast(with element: Element) -> Element {
         assert(!isEmpty)
         let replaced = removeLast()
         append(element)
         return replaced
-    }
-
-    /// Replace first element in Array with a new element.
-    ///
-    /// - throws: `ArrayError.removalError` if `self` is empty.
-    @discardableResult
-    public mutating func replaceFirst(with element: Element) -> Element {
-        assert(!isEmpty)
-        let replaced = removeFirst()
-        insert(element, at: 0)
-        return replaced
-    }
-
-    /// - Returns: A new `Array` with the given `element` inserted at the given `index`, if
-    /// possible.
-    ///
-    /// - throws: `ArrayError` if the given `index` is out of range.
-    public func inserting(_ element: Element, at index: Index) -> Array {
-        var copy = self
-        copy.insert(element, at: index)
-        return copy
     }
 }
