@@ -1,6 +1,6 @@
 //
 //  Swap.swift
-//  Collections
+//  Algorithms
 //
 //  Created by James Bean on 12/10/16.
 //
@@ -21,11 +21,9 @@ public func swapped <T> (_ a: T, _ b: T, if predicate: () -> Bool) -> (T, T, Boo
 /// fasion, and `true` is returned. Otherwise, no `swap` takes place, and `false` is returned.
 @discardableResult
 public func swap <T> (_ a: inout T, _ b: inout T, if predicate: () -> Bool) -> Bool {
-
     if predicate() {
         swap(&a,&b)
         return true
     }
-
     return false
 }
