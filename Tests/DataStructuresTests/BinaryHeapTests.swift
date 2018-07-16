@@ -28,7 +28,11 @@ class BinaryHeapTests: XCTestCase {
         heap.insert(1, 3.5)
         heap.insert(2, 0.5)
         let first = heap.pop()!
+        let second = heap.pop()!
         XCTAssertEqual(first.0, 2)
         XCTAssertEqual(first.1, 0.5)
+        XCTAssertEqual(second.0, 1)
+        XCTAssertEqual(second.1, 3.5)
+        XCTAssertNil(heap.pop())
     }
 }
