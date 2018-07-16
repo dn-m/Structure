@@ -14,7 +14,7 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
     
     // MARK: - Instance Methods
     
-    private func compareAt(_ i: Int, _ j: Int) -> Bool {
+    private func lessAt(_ i: Int, than j: Int) -> Bool {
         return lookup[storage[i]]! < lookup[storage[j]]!
     }
     
@@ -23,7 +23,7 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
         lookup[element] = value
         var i = storage.count - 1
         while (i != 0) {
-            if compareAt(i,(i-1)/2) {
+            if lessAt(i, than: (i-1)/2) {
                 storage.swapAt(i, (i-1)/2)
                 i /= 2
             }
@@ -55,7 +55,7 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
         var i = 0
         while (2 * i + 1 <= storage.count - 1) {
             let j = hasOneChild(i) ? 2 * i + 1 : argmin(2 * i + 1, 2 * i + 2)
-            if compareAt(j,i) {
+            if lessAt(j,than: i) {
                 storage.swapAt(i,j)
                 i = j
             }
