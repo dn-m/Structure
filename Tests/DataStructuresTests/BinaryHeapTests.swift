@@ -39,17 +39,18 @@ class BinaryHeapTests: XCTestCase {
     func testBalance() {
         var heap = BinaryHeap<Int, Double>()
         var toInsert: [(Int, Double)] = []
-        for i in 0..<10 {
+        for i in 0..<100 {
             toInsert.append( (i, Double.random(in: 0...1)) )
         }
         for (element, value) in toInsert {
             heap.insert(element, value)
         }
         var toCompare: [Double] = []
-        for _ in 0..<10 {
+        for _ in 0..<100 {
             toCompare.append(heap.pop()!.1)
         }
         toInsert.sort(by: { $0.1 < $1.1 })
         XCTAssertEqual(toInsert.compactMap { $0.1 }, toCompare)
+        XCTAssertNil(heap.pop())
     }
 }
