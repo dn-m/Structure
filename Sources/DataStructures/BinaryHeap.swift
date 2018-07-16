@@ -49,8 +49,8 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
         #warning("TODO: implement balancing")
     }
     
-    private func updateIndex (of element: Element, to i: Int) {
-        #warning("TODO: implement")
+    private mutating func updateIndex (of element: Element, to i: Int) {
+        indices[element] = i
     }
     
     private mutating func bubbleUp (_ i: Int) {
