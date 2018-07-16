@@ -27,8 +27,8 @@ class BinaryHeapTests: XCTestCase {
         var heap = BinaryHeap<Int, Double>()
         heap.insert(1, 3.5)
         heap.insert(2, 0.5)
-        let (minimum, value) = heap.pop()!
-        XCTAssertEqual(minimum, 2)
-        XCTAssertEqual(value, 0.5)
+        let first = heap.pop()!
+        XCTAssertEqual(first.0, 2)
+        XCTAssertEqual(first.1, 0.5)
     }
 }
