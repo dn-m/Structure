@@ -14,6 +14,10 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
     
     // MARK: - Instance Methods
     
+    private func compareAt(_ i: Int, _ j: Int) -> Bool {
+        return lookup[storage[i]]! < lookup[storage[j]]!
+    }
+    
     mutating func insert (_ element: Element, _ value: Value) {
         storage.append(element)
         lookup[element] = value
