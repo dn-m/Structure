@@ -38,6 +38,23 @@ struct BinaryHeap<Element, Value: Comparable> {
             return storage[i].1 == min(storage[i].1, storage[j].1) ? i : j
         }
         
+        var i = 0
+        while (2 * i + 1 <= storage.count - 1) {
+            if (2 * i + 2 > storage.count - 1) {
+                let j = 2 * i + 1
+                if (storage[j].1 < storage[i].1) {
+                    storage.swapAt(i, j)
+                    i = j
+                    continue
+                }
+            }
+            let j = argmin(2 * i + 1, 2 * i + 2)
+            if (storage[j].1 < storage[i].1) {
+                storage.swapAt(i, j)
+                i = j
+                continue
+            }
+        }
     }
     
     // MARK: - Initializers
