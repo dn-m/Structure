@@ -38,6 +38,10 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
         return minimum
     }
     
+    mutating func update(_ element: Element, _ value: Value) {
+        lookup[element] = value
+    }
+    
     private mutating func balance () {
         
         func argmin(_ i: Int, _ j: Int) -> Int {
