@@ -48,6 +48,10 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
             return lookup[storage[i]]! == min(lookup[storage[i]]!, lookup[storage[j]]!) ? i : j
         }
         
+        func hasOneChild(_ i: Int) -> Bool {
+            return 2 * i + 2 == storage.count
+        }
+        
         var i = 0
         while (2 * i + 1 <= storage.count - 1) {
             let j = (2 * i + 2 == storage.count) ? 2 * i + 1 : argmin(2 * i + 1, 2 * i + 2)
