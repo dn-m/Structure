@@ -53,6 +53,10 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
         indices[element] = i
     }
     
+    private mutating func swapAt (_ i: Int, _ j: Int) {
+        #warning("TODO: implement")
+    }
+    
     private mutating func bubbleUp (_ i: Int) {
         #warning("TODO: implement")
     }
