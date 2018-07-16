@@ -16,7 +16,7 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
     // MARK: - Instance Methods
     
     private func lessAt(_ i: Int, than j: Int) -> Bool {
-        return lookup[storage[i]]! < lookup[storage[j]]!
+        return value(at: i) < value(at: j)
     }
     
     mutating func insert (_ element: Element, _ value: Value) {
