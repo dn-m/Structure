@@ -48,6 +48,10 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
         #warning("TODO: implement balancing")
     }
     
+    private mutating func bubbleUp (_ i: Int) {
+        #warning("TODO: implement")
+    }
+    
     private mutating func balance () {
         
         func argmin(_ i: Int, _ j: Int) -> Int {
