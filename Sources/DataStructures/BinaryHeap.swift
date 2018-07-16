@@ -22,15 +22,7 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
     mutating func insert (_ element: Element, _ value: Value) {
         storage.append(element)
         lookup[element] = value
-        var i = storage.count - 1
-        while (i != 0) {
-            let j = (i-1)/2
-            if lessAt(i, than: j) {
-                swapAt(i, j)
-                i = j
-            }
-            else { break }
-        }
+        bubbleUp(from: storage.count - 1)
     }
     
     mutating func pop () -> (Element, Value)? {
