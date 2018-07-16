@@ -38,6 +38,7 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
             let least = storage.first!
             if storage.count > 1 { storage[0] = storage.last! }
             storage.removeLast()
+            balance()
             return (least, lookup[least]!)
         }
     }
