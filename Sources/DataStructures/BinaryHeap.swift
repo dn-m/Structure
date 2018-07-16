@@ -11,6 +11,12 @@ struct BinaryHeap<Element, Value: Comparable> {
     
     private let storage: [(Element, Value)]
     
+    // MARK: - Instance Methods
+    
+    mutating func insert(_ element: Element, _ value: Value) {
+        storage.append((element, value))
+    }
+    
     // MARK: - Initializers
     
     init () {
