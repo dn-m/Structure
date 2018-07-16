@@ -16,6 +16,7 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
     
     mutating func insert (_ element: Element, _ value: Value) {
         storage.append((element, value))
+        lookup[element] = value
         var i = storage.count - 1
         while (i != 0) {
             if (storage[i].1 < storage[(i-1)/2].1) {
