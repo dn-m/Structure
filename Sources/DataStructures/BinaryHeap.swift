@@ -43,7 +43,7 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
         }
     }
     
-    mutating func decreaseValue(of element: Element, to value: Value) {
+    private mutating func decreaseValue(of element: Element, to value: Value) {
         updateValue(of: element, to: value)
         bubbleUp(from: index(of: element))
     }
