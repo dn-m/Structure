@@ -45,7 +45,7 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
     
     mutating func decreaseValue(of element: Element, to value: Value) {
         updateValue(of: element, to: value)
-        #warning("TODO: implement balancing")
+        bubbleUp(from: index(of: element))
     }
     
     private mutating func updateIndex (of element: Element, to i: Int?) {
