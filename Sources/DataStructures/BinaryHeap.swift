@@ -37,7 +37,7 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
         if storage.isEmpty { return nil }
         else {
             if storage.count > 1 { swapAt(0, storage.count - 1) }
-            let least = storage.removeLast()
+            let least = removeLast()
             balance()
             return (least, lookup[least]!)
         }
