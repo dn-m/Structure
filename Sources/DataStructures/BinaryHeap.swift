@@ -49,7 +49,7 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
         #warning("TODO: implement balancing")
     }
     
-    private mutating func updateIndex (of element: Element, to i: Int) {
+    private mutating func updateIndex (of element: Element, to i: Int?) {
         indices[element] = i
     }
     
