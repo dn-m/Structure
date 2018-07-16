@@ -52,6 +52,10 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
         indices[element] = i
     }
     
+    private func index(of element: Element) -> Int {
+        return indices[element]!
+    }
+    
     private mutating func removeLast () -> Element {
         let element = storage.removeLast()
         updateIndex (of: element, to: nil)
