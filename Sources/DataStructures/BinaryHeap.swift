@@ -33,13 +33,10 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
     
     mutating func pop () -> (Element, Value)? {
         if storage.isEmpty { return nil }
-        else if storage.count == 1 {
-            let least = storage.removeFirst()
-            return (least, lookup[least]!)
-        }
         else {
             let least = storage.first!
-            storage[0] = storage.removeLast()
+            if storage.count > 1 { storage[0] = storage.last! }
+            storage.removeLast()
             return (least, lookup[least]!)
         }
     }
