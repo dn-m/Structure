@@ -28,7 +28,7 @@ struct BinaryHeap<Element, Value: Comparable> {
     mutating func pop () -> (Element, Value)? {
         guard let minimum = storage.first else { return nil }
         storage[0] = storage.removeLast()
-        #warning("TODO: balance heap")
+        balance()
         return minimum
     }
     
