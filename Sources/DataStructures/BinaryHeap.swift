@@ -31,11 +31,11 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
         }
     }
     
-    mutating func pop () -> Element? {
+    mutating func pop () -> (Element, Value)? {
         guard let minimum = storage.first else { return nil }
         storage[0] = storage.removeLast()
         balance()
-        return minimum
+        return (minimum, lookup[minimum]!)
     }
     
     mutating func updateValue(at element: Element, with value: Value) {
