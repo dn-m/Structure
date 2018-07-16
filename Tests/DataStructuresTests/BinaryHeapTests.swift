@@ -45,11 +45,11 @@ class BinaryHeapTests: XCTestCase {
         for (element, value) in toInsert {
             heap.insert(element, value)
         }
-        var toCompare: [(Int, Double)] = []
-        for i in 0..<10 {
-            toCompare.append(heap.pop()!)
+        var toCompare: [Double] = []
+        for _ in 0..<10 {
+            toCompare.append(heap.pop()!.1)
         }
         toInsert.sort(by: { $0.1 < $1.1 })
-        XCTAssertEqual(toInsert.compactMap { $0.1 }, toCompare.compactMap { $0.1 })
+        XCTAssertEqual(toInsert.compactMap { $0.1 }, toCompare)
     }
 }
