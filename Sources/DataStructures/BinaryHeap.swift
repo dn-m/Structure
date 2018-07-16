@@ -27,7 +27,7 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
         }
     }
     
-    mutating func pop () -> (Element, Value)? {
+    mutating func pop () -> Element? {
         guard let minimum = storage.first else { return nil }
         storage[0] = storage.removeLast()
         balance()
