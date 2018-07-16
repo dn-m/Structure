@@ -35,9 +35,9 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
         }
     }
     
-    mutating func suggestDecrease(of element: Element, to value: Value) {
-        if value < lookup[element]! {
-            decreaseValue(of: element, to: value)
+    mutating func suggestDecrease(of element: Element, to suggestion: Value) {
+        if suggestion < value(of: element) {
+            decreaseValue(of: element, to: suggestion)
         }
     }
     
