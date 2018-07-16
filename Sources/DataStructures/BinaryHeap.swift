@@ -68,7 +68,7 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
         updateIndex(of: storage[j], to: i)
     }
     
-    private mutating func bubbleUp (_ i: Int) {
+    private mutating func bubbleUp (from i: Int) {
         #warning("TODO: implement")
     }
     
