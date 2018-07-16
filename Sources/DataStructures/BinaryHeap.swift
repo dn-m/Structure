@@ -15,11 +15,11 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
     // MARK: - Instance Methods
     
     mutating func insert (_ element: Element, _ value: Value) {
-        storage.append((element, value))
+        storage.append(element)
         lookup[element] = value
         var i = storage.count - 1
         while (i != 0) {
-            if (storage[i].1 < storage[(i-1)/2].1) {
+            if (lookup[storage[i]]! < lookup[storage[(i-1)/2]]!) {
                 storage.swapAt(i, (i-1)/2)
                 i /= 2
             }
