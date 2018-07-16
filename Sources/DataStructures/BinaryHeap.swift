@@ -49,7 +49,7 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
         #warning("TODO: implement balancing")
     }
     
-    private func updateIndex (of i: Int, to j: Int) {
+    private func updateIndex (of element: Element, to i: Int) {
         #warning("TODO: implement")
     }
     
