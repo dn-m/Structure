@@ -5,11 +5,12 @@
 //  Created by Benjamin Wetherfield on 7/15/18.
 //
 
-struct BinaryHeap<Element, Value: Comparable> {
+struct BinaryHeap<Element: Hashable, Value: Comparable> {
 
     // MARK: - Instance Properties
     
     private var storage: [(Element, Value)]
+    private var lookup: [Element: Value]
     
     // MARK: - Instance Methods
     
