@@ -79,7 +79,15 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
     }
     
     private mutating func bubbleUp (from i: Int) {
-        #warning("TODO: implement")
+        var i = i
+        while (i != 0) {
+            let j = (i-1)/2
+            if lessAt(i, than: j) {
+                swapAt(i, j)
+                i = j
+            }
+            else { return }
+        }
     }
     
     private mutating func balance () {
