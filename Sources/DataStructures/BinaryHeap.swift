@@ -52,6 +52,10 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
         indices[element] = i
     }
     
+    private mutating func updateValue (of element: Element, to value: Value) {
+        lookup[element] = value
+    }
+    
     private func index(of element: Element) -> Int {
         return indices[element]!
     }
