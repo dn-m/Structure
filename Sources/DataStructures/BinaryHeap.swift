@@ -9,7 +9,7 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
 
     // MARK: - Instance Properties
     
-    private var storage: [(Element, Value)]
+    private var storage: [Element]
     private var lookup: [Element: Value]
     
     // MARK: - Instance Methods
