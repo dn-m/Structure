@@ -41,11 +41,11 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
         }
     }
     
-    private mutating func value(of element: Element) -> Value {
+    private func value(of element: Element) -> Value {
         return lookup[element]!
     }
     
-    private mutating func value(at i: Int) -> Value {
+    private func value(at i: Int) -> Value {
         return value(of: storage[i])
     }
     
