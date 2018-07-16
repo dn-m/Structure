@@ -37,7 +37,7 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
     mutating func balance () {
         
         func argmin(_ i: Int, _ j: Int) -> Int {
-            return storage[i].1 == min(storage[i].1, storage[j].1) ? i : j
+            return lookup[storage[i]]! == min(lookup[storage[i]]!, lookup[storage[j]]!) ? i : j
         }
         
         var i = 0
