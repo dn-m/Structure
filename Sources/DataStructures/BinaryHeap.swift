@@ -9,7 +9,7 @@ struct BinaryHeap<Element, Value: Comparable> {
 
     // MARK: - Instance Properties
     
-    private let storage: [(Element, Value)]
+    private var storage: [(Element, Value)]
     
     // MARK: - Instance Methods
     
