@@ -10,4 +10,10 @@ struct BinaryHeap<Element, Value: Comparable> {
     // MARK: - Instance Properties
     
     private let storage: [(Element, Value)]
+    
+    // MARK: - Initializers
+    
+    init () {
+        storage = []
+    }
 }
