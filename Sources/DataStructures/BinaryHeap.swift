@@ -11,6 +11,7 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
     
     private var storage: [Element]
     private var lookup: [Element: Value]
+    private var indices: [Element: Int]
     
     // MARK: - Instance Methods
     
@@ -78,5 +79,6 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
     init () {
         storage = []
         lookup = [:]
+        indices = [:]
     }
 }
