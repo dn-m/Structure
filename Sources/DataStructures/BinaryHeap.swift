@@ -26,7 +26,7 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
         while (i != 0) {
             let j = (i-1)/2
             if lessAt(i, than: j) {
-                storage.swapAt(i, j)
+                swapAt(i, j)
                 i = j
             }
             else { break }
@@ -76,7 +76,7 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
         while (2 * i + 1 <= storage.count - 1) {
             let j = hasOneChild(i) ? 2 * i + 1 : argmin(2 * i + 1, 2 * i + 2)
             if lessAt(j,than: i) {
-                storage.swapAt(i,j)
+                swapAt(i,j)
                 i = j
             }
             else { break }
