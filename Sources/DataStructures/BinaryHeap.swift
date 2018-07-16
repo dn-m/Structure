@@ -32,6 +32,14 @@ struct BinaryHeap<Element, Value: Comparable> {
         return minimum
     }
     
+    mutating func balance () {
+        
+        func argmin(_ i: Int, _ j: Int) -> Int {
+            return storage[i].1 == min(storage[i].1, storage[j].1) ? i : j
+        }
+        
+    }
+    
     // MARK: - Initializers
     
     init () {
