@@ -62,5 +62,6 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
     
     init () {
         storage = []
+        lookup = [:]
     }
 }
