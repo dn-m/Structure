@@ -10,4 +10,11 @@ import XCTest
 
 class BinaryHeapTests: XCTestCase {
     
+    func testBasicInsertPop() {
+        var heap = BinaryHeap<Int, Double>()
+        heap.insert(4, 3.5)
+        let (minimum, value) = heap.pop()!
+        XCTAssertEqual(minimum, 4)
+        XCTAssertEqual(value, 3.5)
+    }
 }
