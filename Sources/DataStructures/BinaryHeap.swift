@@ -23,7 +23,7 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
         lookup[element] = value
         var i = storage.count - 1
         while (i != 0) {
-            if (lookup[storage[i]]! < lookup[storage[(i-1)/2]]!) {
+            if compareAt(i,(i-1)/2) {
                 storage.swapAt(i, (i-1)/2)
                 i /= 2
             }
