@@ -38,7 +38,7 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
         return minimum
     }
     
-    mutating func update(_ element: Element, _ value: Value) {
+    mutating func updateValue(at element: Element, with value: Value) {
         lookup[element] = value
     }
     
