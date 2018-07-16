@@ -6,5 +6,8 @@
 //
 
 struct BinaryHeap<Element, Value: Comparable> {
-    #warning("TODO")
+
+    // MARK: - Instance Properties
+    
+    private let storage: [(Element, Value)]
 }
