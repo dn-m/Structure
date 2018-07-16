@@ -54,7 +54,7 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
         
         var i = 0
         while (2 * i + 1 <= storage.count - 1) {
-            let j = (2 * i + 2 == storage.count) ? 2 * i + 1 : argmin(2 * i + 1, 2 * i + 2)
+            let j = hasOneChild(i) ? 2 * i + 1 : argmin(2 * i + 1, 2 * i + 2)
             if compareAt(j,i) {
                 storage.swapAt(i,j)
                 i = j
