@@ -10,6 +10,11 @@ import XCTest
 
 class BinaryHeapTests: XCTestCase {
     
+    func testPopNil() {
+        var heap = BinaryHeap<Int, Double>()
+        XCTAssertNil(heap.pop())
+    }
+    
     func testBasicInsertPop() {
         var heap = BinaryHeap<Int, Double>()
         heap.insert(4, 3.5)
