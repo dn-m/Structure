@@ -15,6 +15,7 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
     
     // MARK: - Instance Methods
     
+    /// Insert element into `BinaryHeap` instance with associated value `value`
     mutating func insert (_ element: Element, _ value: Value) {
         storage.append(element)
         updateValue(of: element, to: value)
