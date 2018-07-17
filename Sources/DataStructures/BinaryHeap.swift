@@ -116,6 +116,7 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
     
     // MARK: - Initializers
     
+    /// Create empty `BinaryHeap`
     init () {
         storage = []
         lookup = [:]
