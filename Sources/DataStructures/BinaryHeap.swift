@@ -74,9 +74,9 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
     }
     
     private mutating func swapAt (_ i: Int, _ j: Int) {
-        storage.swapAt(i, j)
         updateIndex(of: storage[i], to: j)
         updateIndex(of: storage[j], to: i)
+        storage.swapAt(i, j)
     }
     
     private mutating func bubbleUp (from i: Int) {
