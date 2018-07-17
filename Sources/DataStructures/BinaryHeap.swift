@@ -86,8 +86,7 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
             if lessAt(i, than: j) {
                 swapAt(i, j)
                 i = j
-            }
-            else { return }
+            } else { return }
         }
     }
     
@@ -107,8 +106,7 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
             if lessAt(j,than: i) {
                 swapAt(i,j)
                 i = j
-            }
-            else { break }
+            } else { break }
         }
     }
     
