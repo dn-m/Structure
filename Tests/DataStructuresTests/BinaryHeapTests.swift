@@ -75,7 +75,7 @@ class BinaryHeapTests: XCTestCase {
         for _ in 0..<10 {
             output.append(heap.pop()!.1)
         }
-        input.sort(by: { $0.1 < $1.1 })
+        throughput.sort(by: { $0.1 < $1.1 })
         XCTAssertEqual(throughput.compactMap { $0.1 }, output)
         XCTAssertNil(heap.pop())
     }
