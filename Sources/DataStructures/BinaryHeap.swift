@@ -15,10 +15,6 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
     
     // MARK: - Instance Methods
     
-    private func lessAt (_ i: Int, than j: Int) -> Bool {
-        return value(at: i) < value(at: j)
-    }
-    
     mutating func insert (_ element: Element, _ value: Value) {
         storage.append(element)
         updateValue(of: element, to: value)
@@ -40,6 +36,10 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
         if suggestion < value(of: element) {
             decreaseValue(of: element, to: suggestion)
         }
+    }
+    
+    private func lessAt (_ i: Int, than j: Int) -> Bool {
+        return value(at: i) < value(at: j)
     }
     
     private func value (of element: Element) -> Value {
