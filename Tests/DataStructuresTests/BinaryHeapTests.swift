@@ -53,9 +53,7 @@ class BinaryHeapTests: XCTestCase {
         let input = (0..<100).map { _ in Double.random(in: 0...1) }
         let throughput = (0..<100).map { _ in Double.random(in: 0...1) }
         let testAgainst = (0..<100).map { i in min(input[i], throughput[i]) }.sorted()
-        for (element, value) in input.enumerated() {
-            heap.insert(element, value)
-        }
+        input.enumerated().forEach { pair in heap.insert(pair.0, pair.1) }
         for (element, value) in throughput.enumerated() {
             heap.suggestDecrease(of: element, to: value)
         }
