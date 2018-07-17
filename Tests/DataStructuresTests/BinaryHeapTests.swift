@@ -53,4 +53,30 @@ class BinaryHeapTests: XCTestCase {
         XCTAssertEqual(input.compactMap { $0.1 }, output)
         XCTAssertNil(heap.pop())
     }
+    
+    func testUpdate() {
+        var heap = BinaryHeap<Int, Double>()
+        var input: [(Int, Double)] = []
+        var throughput: [(Int, Double)] = []
+        for i in 0..<10 {
+            input.append( (i, Double.random(in: 0...1)) )
+            throughput.append( (i, Double.random(in: 0...1)) )
+        }
+        for (element, value) in input {
+            heap.insert(element, value)
+        }
+        for (element, value) in throughput {
+            heap.suggestDecrease(of: element, to: value)
+        }
+        for i in 0..<10 {
+            if input[i].1 < throughput[i].1 { throughput[i] = input[i] }
+        }
+        var output: [Double] = []
+        for _ in 0..<10 {
+            output.append(heap.pop()!.1)
+        }
+        input.sort(by: { $0.1 < $1.1 })
+        XCTAssertEqual(throughput.compactMap { $0.1 }, output)
+        XCTAssertNil(heap.pop())
+    }
 }
