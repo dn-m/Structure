@@ -90,6 +90,26 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
         }
     }
     
+    private mutating func bubbleDown (from i: Int) {
+        
+        func argmin (_ i: Int, _ j: Int) -> Int {
+            return value(at: i) == min(value(at: i), value(at: j)) ? i : j
+        }
+        
+        func hasOneChild (_ i: Int) -> Bool {
+            return 2 * i + 2 == storage.count
+        }
+        
+        var i = i
+        while (2 * i + 1 <= storage.count - 1) {
+            let j = hasOneChild(i) ? 2 * i + 1 : argmin(2 * i + 1, 2 * i + 2)
+            if lessAt(j,than: i) {
+                swapAt(i,j)
+                i = j
+            } else { return }
+        }
+    }
+    
     private mutating func balance () {
         
         func argmin (_ i: Int, _ j: Int) -> Int {
