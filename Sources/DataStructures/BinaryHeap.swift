@@ -22,6 +22,7 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
         bubbleUp(from: storage.count - 1)
     }
     
+    /// - Returns: Minimum value element of `BinaryHeap` instance or `nil` if empty
     mutating func pop () -> (Element, Value)? {
         if storage.isEmpty { return nil }
         else {
