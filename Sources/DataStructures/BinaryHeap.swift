@@ -15,7 +15,7 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
     
     // MARK: - Instance Methods
     
-    private func lessAt(_ i: Int, than j: Int) -> Bool {
+    private func lessAt (_ i: Int, than j: Int) -> Bool {
         return value(at: i) < value(at: j)
     }
     
@@ -36,21 +36,21 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
         }
     }
     
-    mutating func suggestDecrease(of element: Element, to suggestion: Value) {
+    mutating func suggestDecrease (of element: Element, to suggestion: Value) {
         if suggestion < value(of: element) {
             decreaseValue(of: element, to: suggestion)
         }
     }
     
-    private func value(of element: Element) -> Value {
+    private func value (of element: Element) -> Value {
         return lookup[element]!
     }
     
-    private func value(at i: Int) -> Value {
+    private func value (at i: Int) -> Value {
         return value(of: storage[i])
     }
     
-    private mutating func decreaseValue(of element: Element, to value: Value) {
+    private mutating func decreaseValue (of element: Element, to value: Value) {
         updateValue(of: element, to: value)
         bubbleUp(from: index(of: element))
     }
@@ -63,7 +63,7 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
         lookup[element] = value
     }
     
-    private func index(of element: Element) -> Int {
+    private func index (of element: Element) -> Int {
         return indices[element]!
     }
     
@@ -93,11 +93,11 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
     
     private mutating func balance () {
         
-        func argmin(_ i: Int, _ j: Int) -> Int {
+        func argmin (_ i: Int, _ j: Int) -> Int {
             return value(at: i) == min(value(at: i), value(at: j)) ? i : j
         }
         
-        func hasOneChild(_ i: Int) -> Bool {
+        func hasOneChild (_ i: Int) -> Bool {
             return 2 * i + 2 == storage.count
         }
         
