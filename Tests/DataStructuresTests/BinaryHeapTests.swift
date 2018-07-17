@@ -58,7 +58,7 @@ class BinaryHeapTests: XCTestCase {
         var heap = BinaryHeap<Int, Double>()
         var input: [(Int, Double)] = []
         var throughput: [(Int, Double)] = []
-        for i in 0..<10 {
+        for i in 0..<100 {
             input.append( (i, Double.random(in: 0...1)) )
             throughput.append( (i, Double.random(in: 0...1)) )
         }
@@ -68,11 +68,11 @@ class BinaryHeapTests: XCTestCase {
         for (element, value) in throughput {
             heap.suggestDecrease(of: element, to: value)
         }
-        for i in 0..<10 {
+        for i in 0..<100 {
             if input[i].1 < throughput[i].1 { throughput[i] = input[i] }
         }
         var output: [Double] = []
-        for _ in 0..<10 {
+        for _ in 0..<100 {
             output.append(heap.pop()!.1)
         }
         throughput.sort(by: { $0.1 < $1.1 })
