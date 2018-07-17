@@ -21,7 +21,7 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
     
     mutating func insert (_ element: Element, _ value: Value) {
         storage.append(element)
-        lookup[element] = value
+        updateValue(of: element, to: value)
         updateIndex(of: element, to: storage.count - 1)
         bubbleUp(from: storage.count - 1)
     }
