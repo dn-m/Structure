@@ -54,9 +54,7 @@ class BinaryHeapTests: XCTestCase {
         let throughput = (0..<100).map { _ in Double.random(in: 0...1) }
         let testAgainst = (0..<100).map { i in min(input[i], throughput[i]) }.sorted()
         input.enumerated().forEach { pair in heap.insert(pair.0, pair.1) }
-        for (element, value) in throughput.enumerated() {
-            heap.suggestDecrease(of: element, to: value)
-        }
+        throughput.enumerated().forEach { pair in heap.suggestDecrease(of: pair.0, to: pair.1) }
         let output = (0..<100).map { _ in heap.pop()!.1 }
         XCTAssertEqual(testAgainst, output)
         XCTAssertNil(heap.pop())
