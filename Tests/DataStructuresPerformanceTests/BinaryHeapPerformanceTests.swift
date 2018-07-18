@@ -18,10 +18,9 @@ class BinaryHeapPerformanceTests: PerformanceTestCase {
 
     /// Guarantee that insertion into `BinaryHeap` is O(1).
     func testInsert_O_1() {
-        assertPerformance(.constant) { testPoint in
+        assertPerformance(.constant) { size in
             meanOutcome {
-                let count = Int.random(in: 1...10_000)
-                var heap = BinaryHeap<Int,String>((0...count).map { _ in random })
+                var heap = BinaryHeap<Int,String>((0...size).map { _ in random })
                 return time {
                     let (element,value) = random
                     _ = heap.insert(element,value)
@@ -32,10 +31,9 @@ class BinaryHeapPerformanceTests: PerformanceTestCase {
 
     /// Guarantee that popping the minimum value from `BinaryHeap` is O(1).
     func testPop_O_1() {
-        assertPerformance(.constant) { testPoint in
+        assertPerformance(.constant) { size in
             meanOutcome {
-                let count = Int.random(in: 1...10_000)
-                var heap = BinaryHeap<Int,String>((0...count).map { _ in random })
+                var heap = BinaryHeap<Int,String>((0...size).map { _ in random })
                 return time {
                     let _ = heap.pop()
                 }
