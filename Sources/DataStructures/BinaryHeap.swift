@@ -16,7 +16,7 @@ public struct BinaryHeap <Element: Hashable, Value: Comparable> {
 
     // MARK: - Initializers
 
-    /// Create empty `BinaryHeap`
+    /// Create an empty `BinaryHeap`.
     public init () {
         storage = []
         lookup = [:]
