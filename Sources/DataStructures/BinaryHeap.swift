@@ -25,7 +25,7 @@ public struct BinaryHeap<Element: Hashable, Value: Comparable> {
     
     // MARK: - Instance Methods
     
-    /// Insert element into `BinaryHeap` instance with associated value `value`
+    /// Insert element into `BinaryHeap` instance with associated value `value`.
     public mutating func insert (_ element: Element, _ value: Value) {
         storage.append(element)
         updateValue(of: element, to: value)
@@ -33,7 +33,7 @@ public struct BinaryHeap<Element: Hashable, Value: Comparable> {
         bubbleUp(from: storage.count - 1)
     }
     
-    /// - Returns: Minimum value element of `BinaryHeap` instance or `nil` if empty
+    /// - Returns: Minimum value element of `BinaryHeap` instance or `nil` if empty.
     public mutating func pop () -> (Element, Value)? {
         if storage.isEmpty { return nil }
         else {
@@ -44,7 +44,8 @@ public struct BinaryHeap<Element: Hashable, Value: Comparable> {
         }
     }
     
-    /// Propose update of `element` to value `suggestion` (accept if `value(of: element)` decreases)
+    /// Propose update of `element` to value `suggestion` (accept if `value(of: element)`
+    /// decreases).
     internal mutating func suggestDecrease (of element: Element, to suggestion: Value) {
         if suggestion < value(of: element) {
             decreaseValue(of: element, to: suggestion)
