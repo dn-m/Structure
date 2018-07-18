@@ -16,7 +16,7 @@ class BinaryHeapPerformanceTests: PerformanceTestCase {
         return (value, "\(value)")
     }
 
-    /// Guarantee that insertion into `BinaryHeap` is O(1)
+    /// Guarantee that insertion into `BinaryHeap` is O(1).
     func testInsert_O_1() {
         assertPerformance(.constant) { testPoint in
             meanOutcome {
@@ -30,6 +30,7 @@ class BinaryHeapPerformanceTests: PerformanceTestCase {
         }
     }
 
+    /// Guarantee that popping the minimum value from `BinaryHeap` is O(1).
     func testPop_O_1() {
         assertPerformance(.constant) { testPoint in
             meanOutcome {
