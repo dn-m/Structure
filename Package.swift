@@ -33,6 +33,10 @@ let package = Package(
             dependencies: ["Algebra", "PerformanceTesting"]
         ),
         .testTarget(
+            name: "DataStructuresPerformanceTests",
+            dependencies: ["DataStructures", "PerformanceTesting"]
+        ),
+        .testTarget(
             name: "AlgorithmsPerformanceTests",
             dependencies: ["Algorithms", "PerformanceTesting"]
         )
