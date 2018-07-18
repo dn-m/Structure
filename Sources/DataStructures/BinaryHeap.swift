@@ -22,6 +22,12 @@ public struct BinaryHeap <Element: Hashable, Value: Comparable> {
         lookup = [:]
         indices = [:]
     }
+
+    /// Create a `BinaryHeap` with the given `sequence`.
+    public init <S> (_ sequence: S) where S: Sequence, S.Element == (Element,Value) {
+        self.init()
+        sequence.forEach { (element,value) in insert(element,value) }
+    }
     
     // MARK: - Instance Methods
     
