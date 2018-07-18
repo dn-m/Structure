@@ -5,8 +5,8 @@
 //  Created by Benjamin Wetherfield on 7/15/18.
 //
 
-/// Implements a priority queue where minimum values have highest priority
-public struct BinaryHeap<Element: Hashable, Value: Comparable> {
+/// Implements a priority queue where minimum values have highest priority.
+public struct BinaryHeap <Element: Hashable, Value: Comparable> {
 
     // MARK: - Instance Properties
     
