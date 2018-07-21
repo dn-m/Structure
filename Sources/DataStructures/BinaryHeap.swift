@@ -5,27 +5,42 @@
 //  Created by Benjamin Wetherfield on 7/15/18.
 //
 
-/// Implements a priority queue where minimum values have highest priority
-struct BinaryHeap<Element: Hashable, Value: Comparable> {
+/// Implements a priority queue where minimum values have highest priority.
+public struct BinaryHeap <Element: Hashable, Value: Comparable> {
 
     // MARK: - Instance Properties
     
     private var storage: [Element]
     private var lookup: [Element: Value]
     private var indices: [Element: Int]
+
+    // MARK: - Initializers
+
+    /// Create an empty `BinaryHeap`.
+    public init () {
+        storage = []
+        lookup = [:]
+        indices = [:]
+    }
+
+    /// Create a `BinaryHeap` with the given `sequence`.
+    public init <S> (_ sequence: S) where S: Sequence, S.Element == (Element,Value) {
+        self.init()
+        sequence.forEach { (element,value) in insert(element,value) }
+    }
     
     // MARK: - Instance Methods
     
-    /// Insert element into `BinaryHeap` instance with associated value `value`
-    mutating func insert (_ element: Element, _ value: Value) {
+    /// Insert element into `BinaryHeap` instance with associated value `value`.
+    public mutating func insert (_ element: Element, _ value: Value) {
         storage.append(element)
         updateValue(of: element, to: value)
         updateIndex(of: element, to: storage.count - 1)
         bubbleUp(from: storage.count - 1)
     }
     
-    /// - Returns: Minimum value element of `BinaryHeap` instance or `nil` if empty
-    mutating func pop () -> (Element, Value)? {
+    /// - Returns: Minimum value element of `BinaryHeap` instance or `nil` if empty.
+    public mutating func pop () -> (Element, Value)? {
         if storage.isEmpty { return nil }
         else {
             if storage.count > 1 { swapAt(0, storage.count - 1) }
@@ -35,8 +50,9 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
         }
     }
     
-    /// Propose update of `element` to value `suggestion` (accept if `value(of: element)` decreases)
-    mutating func suggestDecrease (of element: Element, to suggestion: Value) {
+    /// Propose update of `element` to value `suggestion` (accept if `value(of: element)`
+    /// decreases).
+    internal mutating func suggestDecrease (of element: Element, to suggestion: Value) {
         if suggestion < value(of: element) {
             decreaseValue(of: element, to: suggestion)
         }
@@ -116,14 +132,5 @@ struct BinaryHeap<Element: Hashable, Value: Comparable> {
     
     private mutating func balance () {
         bubbleDown(from: 0)
-    }
-    
-    // MARK: - Initializers
-    
-    /// Create empty `BinaryHeap`
-    init () {
-        storage = []
-        lookup = [:]
-        indices = [:]
     }
 }
