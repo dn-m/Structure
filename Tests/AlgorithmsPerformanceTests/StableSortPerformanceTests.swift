@@ -10,16 +10,14 @@ import XCTest
 import Algorithms
 import PerformanceTesting
 
-class StableSortPerformanceTests: PerformanceTestCase {
+class StableSortPerformanceTests: XCTestCase {
 
     func testStableSort() {
-        assertPerformance(.linear, testPoints: Scale.small) { testPoint in
-            meanOutcome {
-                let array = Array(count: testPoint) { Int.random(in: 0...$0) }
-                return time {
-                    _ = array.stableSort { $0 < $1 }
-                }
-            }
-        }
+        let benchmark = Benchmark.mutating(
+            testPoints: Scale.small,
+            setup: { Array((0..<$0).map { Int.random(in: 0...$0) }) },
+            measuring: { _ = $0.stableSort(<) }
+        )
+        XCTAssert(benchmark.performance(is: .linear))
     }
 }
