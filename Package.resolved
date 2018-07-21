@@ -5,9 +5,9 @@
         "package": "PerformanceTesting",
         "repositoryURL": "https://github.com/dn-m/PerformanceTesting",
         "state": {
-          "branch": "benchmark",
-          "revision": "6ea0db729d6b64e20803990deb516d3c2347762b",
-          "version": null
+          "branch": null,
+          "revision": "b76715a574872e29fe24f70b45f14c7e1bccf170",
+          "version": "0.2.0"
         }
       }
     ]
