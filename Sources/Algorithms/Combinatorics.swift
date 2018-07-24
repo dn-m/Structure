@@ -59,6 +59,8 @@ extension Sequence where SubSequence: Sequence {
 internal func injecting <S> (_ value: S.Element, into values: S) -> [[S.Element]]
     where S: Sequence
 {
+    print("injecting: \(value) into: \(values.map { $0 })")
     guard let (head, tail) = values.destructured else { return [[value]] }
+    print("tail: \(tail.map { $0 })")
     return [[value] + values] + injecting(value, into: tail).map { [head] + $0 }
 }

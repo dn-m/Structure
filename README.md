@@ -5,7 +5,7 @@
 Algebraic and data structures in Swift 4.2. The `Structure` package consists of four modules:
 
 ## Destructure
-Module which includes a single extension of `Collection`, which breaks it into a `head` and `tail` for functional-style recursive implementations of algorithms.
+Module which includes a single extension of `Sequence`, which breaks it into a `head` and `tail` for functional-style recursive implementations of algorithms.
 
 ```Swift
 extension Sequence {
