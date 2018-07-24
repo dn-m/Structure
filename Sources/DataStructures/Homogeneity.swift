@@ -7,7 +7,7 @@
 
 import Destructure
 
-extension Collection where Element: Equatable {
+extension Sequence where Element: Equatable {
 
     /// - Returns: `true` if there are one or fewer elements in `self`, or if all elements in
     /// `self` are logically equivalent.
