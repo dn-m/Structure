@@ -36,7 +36,7 @@ extension Collection {
 
     /// - Returns: The permutations of the values contained herein.
     public var permutations: [[Element]] {
-        func permute <C> (_ values: C) -> [[Element]] where C: Collection, C.Element == Element {
+        func permute <S> (_ values: S) -> [[Element]] where S: Sequence, S.Element == Element {
             guard let (head, tail) = values.destructured else { return [[]] }
             return permute(tail).flatMap { injecting(head, into: $0) }
         }
@@ -117,9 +117,7 @@ extension RangeReplaceableCollection where Self: BidirectionalCollection {
 }
 
 /// - Returns: Two-dimensional array of `C.Element` values (helper for `Collection.permutations`).
-func injecting <C> (_ value: C.Element, into values: C) -> [[C.Element]]
-    where C: Collection
-{
+func injecting <S> (_ value: S.Element, into values: S) -> [[S.Element]] where S: Sequence {
     guard let (head, tail) = values.destructured else { return [[value]] }
     return [[value] + values] + injecting(value, into: tail).map { [head] + $0 }
 }
