@@ -12,10 +12,10 @@ import Destructure
 class DestructureTests: XCTestCase {
 
     func testArraySliceDestructured() {
-        let arraySlice: ArraySlice<Int> = [1,2,3]
-        let (a,b) = arraySlice.destructured!
+        let values = [1,2,3]
+        let (a,b) = values.destructured!
         XCTAssertEqual(1, a)
-        XCTAssertEqual([2,3], b)
+        XCTAssertEqual([2,3], b.map { $0 })
     }
 
     func testArraySliceDestructuredNil() {
@@ -24,10 +24,10 @@ class DestructureTests: XCTestCase {
     }
 
     func testArrayDestructured() {
-        let array: Array<Int> = [1,2,3]
-        let (a,b) = array.destructured!
+        let values = [1,2,3]
+        let (a,b) = values.destructured!
         XCTAssertEqual(1, a)
-        XCTAssertEqual([2,3], b)
+        XCTAssertEqual([2,3], b.map { $0 })
     }
 
     func testArrayDestructuredNil() {
