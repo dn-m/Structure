@@ -71,7 +71,7 @@ public func zipToLongest <Sequence1,Sequence2,Sequence3> (
 }
 
 /// Lazy sequence zipping two `Sequence` values together to the longest of the two sequences,
-/// filling in the others with the given `firstFill`, and `secondFill` values.
+/// filling in the others with the given `fill1`, and `fill2` values.
 public struct ZipToLongest2Sequence <Sequence1: Sequence, Sequence2: Sequence>
     : IteratorProtocol, Sequence
 {
@@ -102,7 +102,7 @@ public struct ZipToLongest2Sequence <Sequence1: Sequence, Sequence2: Sequence>
 }
 
 /// Lazy sequence zipping three `Sequence` values together to the longest of the three sequences,
-/// filling in the others with the given `firstFill`, `secondFill`, and `thirdFill` values.
+/// filling in the others with the given `fill1`, `fill2`, and `fill3` values.
 public struct ZipToLongest3Sequence <Sequence1: Sequence, Sequence2: Sequence, Sequence3: Sequence>
     : IteratorProtocol, Sequence
 {
