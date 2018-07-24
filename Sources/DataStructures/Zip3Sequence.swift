@@ -193,64 +193,42 @@
 ///
 /// Modified by James Bean.
 ///
-public func zip <A,B,C> (_ a: A, _ b: B, _ c: C) -> Zip3Sequence<A,B,C> {
-    return Zip3Sequence(a,b,c)
+public func zip <Sequence1,Sequence2,Sequence3> (
+    _ sequence1: Sequence1,
+    _ sequence2: Sequence2,
+    _ sequence3: Sequence3
+) -> Zip3Sequence<Sequence1,Sequence2,Sequence3>
+{
+    return Zip3Sequence(sequence1,sequence2,sequence3)
 }
 
-public struct Zip3Sequence <A: Sequence, B: Sequence, C: Sequence>: Sequence {
+public struct Zip3Sequence <
+    Sequence1: Sequence,
+    Sequence2: Sequence,
+    Sequence3: Sequence
+>: IteratorProtocol, Sequence
+{
 
-    /// A type whose instances can produce the elements of this sequence, in order.
-    public typealias Iterator = Zip3Iterator<A.Iterator, B.Iterator, C.Iterator>
-
-    private let a: A
-    private let b: B
-    private let c: C
+    private var iterator1: Sequence1.Iterator
+    private var iterator2: Sequence2.Iterator
+    private var iterator3: Sequence3.Iterator
 
     /// Creates an instance that makes pairs of elements from `sequence1` and
     /// `sequence2`.
-    public init(_ a: A, _ b: B, _ c: C) {
-        (self.a, self.b, self.c) = (a, b, c)
-    }
-
-    /// Returns an iterator over the elements of this sequence.
-    public func makeIterator() -> Iterator {
-        return Iterator(
-            a.makeIterator(),
-            b.makeIterator(),
-            c.makeIterator())
-    }
-}
-
-public struct Zip3Iterator <A: IteratorProtocol, B: IteratorProtocol, C: IteratorProtocol>
-    : IteratorProtocol
-{
-
-    /// The type of element returned by `next()`.
-    public typealias Element = (A.Element, B.Element, C.Element)
-
-    private var a: A
-    private var b: B
-    private var c: C
-
-    /// Creates an instance around a pair of underlying iterators.
-    internal init(_ a: A, _ b: B, _ c: C) {
-        (self.a, self.b, self.c) = (a, b, c)
+    public init(_ sequence1: Sequence1, _ sequence2: Sequence2, _ sequence3: Sequence3) {
+        self.iterator1 = sequence1.makeIterator()
+        self.iterator2 = sequence2.makeIterator()
+        self.iterator3 = sequence3.makeIterator()
     }
 
     /// Advances to the next element and returns it, or `nil` if no next element
     /// exists.
     ///
     /// Once `nil` has been returned, all subsequent calls return `nil`.
-    public mutating func next() -> Element? {
-
-        guard
-            let a = a.next(),
-            let b = b.next(),
-            let c = c.next()
-        else {
+    public mutating func next() -> (Sequence1.Element, Sequence2.Element, Sequence3.Element)? {
+        guard let a = iterator1.next(), let b = iterator2.next(), let c = iterator3.next() else {
             return nil
         }
-
         return (a, b, c)
     }
 }
