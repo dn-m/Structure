@@ -12,20 +12,21 @@ import XCTest
 class CombinatoricsTests: XCTestCase {
 
     func testCartesianProductOfTwoArrays() {
-        let result = cartesianProduct([1,2,3],[4,5])
+        let a = [1,2,3]
+        let b = [4,5]
+        let result = cartesianProduct(a,b)
         let expected = [(1,4),(1,5),(2,4),(2,5),(3,4),(3,5)]
-        XCTAssertEqual(result.count, 6)
+        XCTAssertEqual(result.count, expected.count)
         zip(result,expected).forEach { a,b in
             XCTAssertEqual(a.0,b.0)
             XCTAssertEqual(a.1,b.1)
         }
     }
 
-    func testInjecting() {
-        let values = [1,2,3]
-        let result = injecting(0, into: values)
-        let expected = [[0, 1, 2, 3], [1, 0, 2, 3], [1, 2, 0, 3], [1, 2, 3, 0]]
-        XCTAssertEqual(result, expected)
+    func testPermutationsEmpty() {
+        let values: [Int] = []
+        let permutations = values.permutations
+        XCTAssert(values.permutations.isEmpty)
     }
 
     func testPermutations() {

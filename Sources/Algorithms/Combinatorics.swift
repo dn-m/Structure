@@ -39,11 +39,18 @@ extension Collection {
 
     /// All of the permutations of each of the elements in each of the given sequences.
     public var permutations: [[Element]] {
+
+        func injecting <S> (_ value: S.Element, into values: S) -> [[S.Element]] where S: Sequence {
+            guard let (head, tail) = values.destructured else { return [[value]] }
+            return [[value] + values] + injecting(value, into: tail).map { [head] + $0 }
+        }
+
         func permute <S> (_ values: S) -> [[Element]] where S: Sequence, S.Element == Element {
             guard let (head, tail) = values.destructured else { return [[]] }
             return permute(tail).flatMap { injecting(head, into: $0) }
         }
-        return permute(self)
+
+        return self.isEmpty ? [] : permute(self)
     }
 }
 
@@ -53,14 +60,4 @@ extension Sequence where SubSequence: Sequence {
     public var pairs: Zip2Sequence<Self,SubSequence> {
         return zip(self,dropFirst())
     }
-}
-
-/// Inject the given `value` into each possible index of the given `values`.
-internal func injecting <S> (_ value: S.Element, into values: S) -> [[S.Element]]
-    where S: Sequence
-{
-    print("injecting: \(value) into: \(values.map { $0 })")
-    guard let (head, tail) = values.destructured else { return [[value]] }
-    print("tail: \(tail.map { $0 })")
-    return [[value] + values] + injecting(value, into: tail).map { [head] + $0 }
 }
