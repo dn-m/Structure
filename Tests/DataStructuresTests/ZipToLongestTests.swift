@@ -11,7 +11,7 @@ import DataStructures
 class ZipToLongestTests: XCTestCase {
 
     func testEqualLengths() {
-        let zipped = zipToLongest([1,4,7], [2,5,8], [3,6,9], fill: 0).map { $0 }
+        let zipped = zip([1,4,7], [2,5,8], [3,6,9], fill: 0).map { $0 }
         let expected = [(1,2,3),(4,5,6),(7,8,9)]
         zip(zipped,expected).forEach {
             XCTAssertEqual($0.0, $1.0)
@@ -21,7 +21,7 @@ class ZipToLongestTests: XCTestCase {
     }
 
     func testFirstLonger() {
-        let zipped = zipToLongest([1,4,7], [2,5], [3,6], fill: 0).map { $0 }
+        let zipped = zip([1,4,7], [2,5], [3,6], fill: 0).map { $0 }
         let expected = [(1,2,3),(4,5,6),(7,0,0)]
         zip(zipped,expected).forEach {
             XCTAssertEqual($0.0, $1.0)
@@ -31,7 +31,7 @@ class ZipToLongestTests: XCTestCase {
     }
 
     func testSecondLonger() {
-        let zipped = zipToLongest([1,4], [2,5,8], [3,6], fill: 0).map { $0 }
+        let zipped = zip([1,4], [2,5,8], [3,6], fill: 0).map { $0 }
         let expected = [(1,2,3),(4,5,6),(0,8,0)]
         zip(zipped,expected).forEach {
             XCTAssertEqual($0.0, $1.0)
@@ -41,7 +41,7 @@ class ZipToLongestTests: XCTestCase {
     }
 
     func testThirdLonger() {
-        let zipped = zipToLongest([1,4], [2,5], [3,6,9], fill: 0).map { $0 }
+        let zipped = zip([1,4], [2,5], [3,6,9], fill: 0).map { $0 }
         let expected = [(1,2,3),(4,5,6),(0,0,9)]
         zip(zipped,expected).forEach {
             XCTAssertEqual($0.0, $1.0)

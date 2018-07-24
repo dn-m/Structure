@@ -7,7 +7,7 @@
 
 /// - Returns: A `ZipToLongest2Sequence` for the two given sequences, using `fill1` and
 /// `fill2` as default values if the other sequence is longer.
-public func zipToLongest <Sequence1,Sequence2> (
+public func zip <Sequence1,Sequence2> (
     _ sequence1: Sequence1,
     _ sequence2: Sequence2,
     fill1: Sequence1.Element,
@@ -19,19 +19,19 @@ public func zipToLongest <Sequence1,Sequence2> (
 
 /// - Returns: A `ZipToLongest2Sequence` for the two given sequences, using `fill` and
 /// `fill` as default values if the other sequence is longer.
-public func zipToLongest <Sequence1,Sequence2> (
+public func zip <Sequence1,Sequence2> (
     _ sequence1: Sequence1,
     _ sequence2: Sequence2,
     fill: Sequence1.Element
 ) -> ZipToLongest2Sequence<Sequence1,Sequence2>
     where Sequence1.Element == Sequence2.Element
 {
-    return ZipToLongest2Sequence(sequence1, sequence2, fill1: fill, fill2: fill)
+    return zip(sequence1, sequence2, fill1: fill, fill2: fill)
 }
 
 /// - Returns: A `ZipToLongest3Sequence` for the three given sequences, using `firstFill`,
 /// `secondFill`, and `thirdFill` as default values if the other sequences are longer.
-public func zipToLongest <Sequence1,Sequence2,Sequence3> (
+public func zip <Sequence1,Sequence2,Sequence3> (
     _ sequence1: Sequence1,
     _ sequence2: Sequence2,
     _ sequence3: Sequence3,
@@ -52,7 +52,7 @@ public func zipToLongest <Sequence1,Sequence2,Sequence3> (
 
 /// - Returns: A `ZipToLongest3Sequence` for the three given sequences, using `fill` as a default
 /// value if the other sequences are longer.
-public func zipToLongest <Sequence1,Sequence2,Sequence3> (
+public func zip <Sequence1,Sequence2,Sequence3> (
     _ sequence1: Sequence1,
     _ sequence2: Sequence2,
     _ sequence3: Sequence3,
