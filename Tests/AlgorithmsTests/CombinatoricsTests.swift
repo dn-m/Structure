@@ -26,7 +26,10 @@ class CombinatoricsTests: XCTestCase {
         let result = injecting(0, into: values)
         let expected = [[0, 1, 2, 3], [1, 0, 2, 3], [1, 2, 0, 3], [1, 2, 3, 0]]
         XCTAssertEqual(result.count, expected.count)
-        zip(result,expected).forEach { (a,b) in XCTAssertEqual(a,b) }
+        zip(result,expected).forEach { (a,b) in
+            print("a: \(a) ==? b: \(b)")
+            XCTAssertEqual(a,b)
+        }
     }
 
     func testPermutations() {

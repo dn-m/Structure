@@ -33,15 +33,6 @@ extension Collection {
     public subscript (safe index: Index) -> Element? {
         return indices ~= index ? self[index] : nil
     }
-
-    /// - Returns: The permutations of the values contained herein.
-    public var permutations: [[Element]] {
-        func permute <S> (_ values: S) -> [[Element]] where S: Sequence, S.Element == Element {
-            guard let (head, tail) = values.destructured else { return [[]] }
-            return permute(tail).flatMap { injecting(head, into: $0) }
-        }
-        return permute(self)
-    }
 }
 
 extension MutableCollection where Self: BidirectionalCollection {
@@ -114,10 +105,4 @@ extension RangeReplaceableCollection where Self: BidirectionalCollection {
         append(element)
         return replaced
     }
-}
-
-/// - Returns: Two-dimensional array of `C.Element` values (helper for `Collection.permutations`).
-func injecting <S> (_ value: S.Element, into values: S) -> [[S.Element]] where S: Sequence {
-    guard let (head, tail) = values.destructured else { return [[value]] }
-    return [[value] + values] + injecting(value, into: tail).map { [head] + $0 }
 }
