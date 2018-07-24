@@ -62,5 +62,3 @@ internal func injecting <S> (_ value: S.Element, into values: S) -> [[S.Element]
     guard let (head, tail) = values.destructured else { return [[value]] }
     return [[value] + values] + injecting(value, into: tail).map { [head] + $0 }
 }
-
-
