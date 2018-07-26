@@ -25,7 +25,6 @@ class CombinatoricsTests: XCTestCase {
 
     func testPermutationsEmpty() {
         let values: [Int] = []
-        let permutations = values.permutations
         XCTAssert(values.permutations.isEmpty)
     }
 
