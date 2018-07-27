@@ -93,20 +93,12 @@ extension DictionaryProtocol where Value: RangeReplaceableCollection {
 
 extension DictionaryProtocol where Value: RangeReplaceableCollection, Value.Element: Equatable {
 
-    /**
-     Safely append value to the array value for a given key.
-
-     If this value already exists in desired array, the new value will not be added.
-     */
+    /// Safely append value to the array value for a given key.
+    ///
+    /// If this value already exists in desired array, the new value will not be added.
     public mutating func safelyAndUniquelyAppend(_ value: Value.Element, toArrayWith key: Key) {
-
         ensureValue(for: key)
-
-        // FIXME: Find a way to not cast to Array!
-        if (self[key] as! Array).contains(value) {
-            return
-        }
-
+        if self[key]!.contains(value) { return }
         self[key]!.append(value)
     }
 }
