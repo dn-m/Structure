@@ -12,7 +12,6 @@ public protocol InvertibleEnum: CaseIterable, Equatable {
 }
 
 extension InvertibleEnum where AllCases.Index == Int {
-
     /// - Returns: Inverse of `self`.
     public var inverse: Self {
         let index = Self.allCases.index(of: self)!
