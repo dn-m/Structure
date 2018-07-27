@@ -157,36 +157,6 @@ extension DictionaryProtocol where
     }
 }
 
-extension DictionaryProtocol where
-    Value: DictionaryProtocol,
-    Element == (Key, Value),
-    Value.Element == (Value.Key, Value.Value),
-    Value.Value: ArrayProtocol,
-    Value.Value.Element: Equatable
-{
-
-    // FIXME: Implement with Swift 4 KeyPath
-//    /// Append given `value` to the array at the given `keyPath`, ensuring that there are no
-//    /// duplicates.
-//    ///
-//    /// > If no such subdictionary or array exists, these structures will be created.
-//    public mutating func safelyAndUniquelyAppend(
-//        _ value: Value.Value.Element,
-//        toArrayWith keyPath: KeyPath
-//    ) throws
-//    {
-//        guard
-//            let key = keyPath[0] as? Key,
-//            let subKey = keyPath[1] as? Value.Key
-//        else {
-//            throw DictionaryProtocolError.illFormedKeyPath
-//        }
-//
-//        try ensureValue(for: keyPath)
-//        self[key]!.safelyAndUniquelyAppend(value, toArrayWith: subKey)
-//    }
-}
-
 // MARK: - Evaluating the equality of `DictionaryProtocol` values
 
 /// - returns: `true` if all values in `[H: T]` types are equivalent. Otherwise, `false`.
