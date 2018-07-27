@@ -77,4 +77,11 @@ class CircularArrayTests: XCTestCase {
         XCTAssertEqual(array.first!, 0)
         XCTAssertEqual(array.last!, 5)
     }
+
+    func testReversed() {
+        let array = CircularArray([0,1,2,3,4,5])
+        let reversed = array.reversed()
+        let expected = CircularArray([5,4,3,2,1,0])
+        XCTAssertEqual(reversed.map { $0 }, expected.map { $0 })
+    }
 }

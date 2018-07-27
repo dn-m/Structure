@@ -102,14 +102,6 @@ extension CircularArray: BidirectionalCollection {
     }
 }
 
-extension CircularArray: RandomAccessCollection {
-
-    /// - Returns: A reversed copy of `CircularArray`.
-    public func reversed() -> CircularArray {
-        return CircularArray(storage.reversed())
-    }
-}
-
 extension CircularArray: RangeReplaceableCollection {
 
     /// Replaces the specified subrange of elements with the given collection.
