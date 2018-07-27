@@ -6,8 +6,6 @@
 //
 //
 
-import Algebra
-
 /// Array-like structure that allows retrieval of elements at indices outside of the bounds of
 /// the internal storage.
 public struct CircularArray<Element> {
