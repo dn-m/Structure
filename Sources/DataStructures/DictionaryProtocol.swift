@@ -73,9 +73,7 @@ extension DictionaryProtocol where Value: RangeReplaceableCollection {
 
     /// Ensure that an Array-type value exists for the given `key`.
     public mutating func ensureValue(for key: Key) {
-        if self[key] == nil {
-            self[key] = Value()
-        }
+        if self[key] == nil { self[key] = Value() }
     }
 
     /// Safely append the given `value` to the Array-type `value` for the given `key`.
