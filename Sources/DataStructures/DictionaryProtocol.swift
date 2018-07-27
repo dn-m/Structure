@@ -6,8 +6,6 @@
 //
 //
 
-// FIXME: Make Contains protocol
-
 public protocol ArrayProtocol: Collection {
     init()
     mutating func append(_ element: Element)
