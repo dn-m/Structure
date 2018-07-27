@@ -28,7 +28,7 @@ public protocol DictionaryProtocol: Collection {
 
     // MARK: - Subscripts
 
-    /// - returns: `Value` for the given `key`, if present. Otherwise, `nil`.
+    /// - Returns: `Value` for the given `key`, if present. Otherwise, `nil`.
     subscript (key: Key) -> Value? { get set }
 }
 
@@ -36,7 +36,7 @@ extension DictionaryProtocol {
 
     /// Create a `DictionaryProtocol` with two parallel arrays.
     ///
-    /// - Note: Usefule for creating a dataset from x- and y-value arrays.
+    /// - Note: Useful for creating a dataset from x- and y-value arrays.
     public init(_ xs: [Key], _ ys: [Value]) {
         self.init()
         zip(xs,ys).forEach { key, value in self[key] = value }
