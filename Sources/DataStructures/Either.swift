@@ -28,16 +28,5 @@ public enum Either <Left, Right> {
 }
 
 extension Either: Equatable where Left: Equatable, Right: Equatable {
-
-    /// - Returns: `true` if two `Either` values are equivalent. Otherwise, `false`.
-    public static func == (lhs: Either, rhs: Either) -> Bool {
-        switch (lhs,rhs) {
-        case let (.left(a), .left(b)):
-            return a == b
-        case let (.right(a), .right(b)):
-            return a == b
-        default:
-            return false
-        }
-    }
+    // MARK: - Equatable
 }
