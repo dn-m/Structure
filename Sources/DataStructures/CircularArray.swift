@@ -68,6 +68,12 @@ public struct CircularArray<Element> {
     }
 }
 
+extension CircularArray: RandomAccessCollectionWrapping {
+    public var base: [Element] {
+        return storage
+    }
+}
+
 extension CircularArray: BidirectionalCollection {
 
     /// Start index.
@@ -157,12 +163,7 @@ extension CircularArray: RangeReplaceableCollection {
 }
 
 extension CircularArray: Equatable where Element: Equatable {
-
-    /// - Returns: `true` if the elements contained both `CircularArray` values are equivalent.
-    /// Otherwise, `false`.
-    public static func == (lhs: CircularArray, rhs: CircularArray) -> Bool {
-        return lhs.storage == rhs.storage
-    }
+    // MARK: - Equatable
 }
 
 extension CircularArray: ExpressibleByArrayLiteral {
