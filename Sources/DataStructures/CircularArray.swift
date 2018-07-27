@@ -10,7 +10,7 @@
 /// the internal storage.
 public struct CircularArray<Element> {
 
-    internal var storage: Array<Element>
+    private var storage: Array<Element>
 
     // MARK: - Initializers
 
