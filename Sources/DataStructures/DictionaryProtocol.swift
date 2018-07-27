@@ -126,31 +126,8 @@ extension DictionaryProtocol where Value: DictionaryProtocol {
 
     /// Ensure there is a value for a given `key`.
     public mutating func ensureValue(for key: Key) {
-
-        if self[key] == nil {
-            self[key] = Value()
-        }
+        if self[key] == nil { self[key] = Value() }
     }
-
-    // FIXME: Implement with Swift 4 KeyPath
-//    /**
-//     Update the `value` for the given `keyPath`.
-//
-//     - TODO: Use subscript (keyPath: KeyPath) { get set }
-//     */
-//    public mutating func update(_ value: Value.Value, keyPath: KeyPath) throws {
-//
-//        guard
-//            keyPath.count >= 2,
-//            let key = keyPath[0] as? Key,
-//            let subKey = keyPath[1] as? Value.Key
-//        else {
-//            throw DictionaryProtocolError.illFormedKeyPath
-//        }
-//
-//        ensureValue(for: key)
-//        self[key]![subKey] = value
-//    }
 }
 
 extension DictionaryProtocol where
