@@ -161,67 +161,6 @@ extension DictionaryProtocol where
     Value: DictionaryProtocol,
     Element == (Key, Value),
     Value.Element == (Value.Key, Value.Value),
-    Value.Value: ArrayProtocol
-{
-
-    // FIXME: Implement with Swift 4 KeyPath
-//    /// Ensure that there is an Array-type value for the given `keyPath`.
-//    public mutating func ensureValue(for keyPath: KeyPath) throws {
-//
-//        guard
-//            let key = keyPath[0] as? Key,
-//            let subKey = keyPath[1] as? Value.Key
-//        else {
-//            throw DictionaryProtocolError.illFormedKeyPath
-//        }
-//
-//        ensureValue(for: key)
-//        self[key]!.ensureValue(for: subKey)
-//    }
-
-//    /// Append the given `value` to the array at the given `keyPath`.
-//    ///
-//    /// > If no such subdictionary or array exists, these structures will be created.
-//    public mutating func safelyAppend(
-//        _ value: Value.Value.Element,
-//        toArrayWith keyPath: KeyPath
-//    ) throws
-//    {
-//        guard
-//            let key = keyPath[0] as? Key,
-//            let subKey = keyPath[1] as? Value.Key
-//        else {
-//            throw DictionaryProtocolError.illFormedKeyPath
-//        }
-//
-//        try ensureValue(for: keyPath)
-//        self[key]!.safelyAppend(value, toArrayWith: subKey)
-//    }
-
-//    /// Append the given `values` to the array at the given `keyPath`.
-//    ///
-//    /// > If no such subdictionary or array exists, these structures will be created.
-//    public mutating func safelyAppendContents(
-//        of values: Value.Value,
-//        toArrayWith keyPath: KeyPath
-//    ) throws
-//    {
-//        guard
-//            let key = keyPath[0] as? Key,
-//            let subKey = keyPath[1] as? Value.Key
-//        else {
-//            throw DictionaryProtocolError.illFormedKeyPath
-//        }
-//
-//        try ensureValue(for: keyPath)
-//        self[key]!.safelyAppendContents(of: values, toArrayWith: subKey)
-//    }
-}
-
-extension DictionaryProtocol where
-    Value: DictionaryProtocol,
-    Element == (Key, Value),
-    Value.Element == (Value.Key, Value.Value),
     Value.Value: ArrayProtocol,
     Value.Value.Element: Equatable
 {
