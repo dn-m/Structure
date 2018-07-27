@@ -8,8 +8,6 @@
 extension Tree {
 
     /// Navigate an immutable n-ary `Tree` structure.
-    //
-    // FIXME: Move to own file when SR-631 is resolved.
     public struct Zipper {
 
         // MARK: - Associated Types
