@@ -6,14 +6,6 @@
 //
 //
 
-public protocol ArrayProtocol: Collection {
-    init()
-    mutating func append(_ element: Element)
-    mutating func append<S> (contentsOf newElements: S) where S: Sequence, S.Element == Element
-}
-
-extension Array: ArrayProtocol { }
-
 public enum DictionaryProtocolError: Error {
     case illFormedKeyPath
 }
@@ -77,8 +69,7 @@ extension DictionaryProtocol where Element == (key: Key, value: Value) {
     }
 }
 
-// FIXME: Consider making this `where Value: AdditiveMonoid`
-extension DictionaryProtocol where Value: ArrayProtocol {
+extension DictionaryProtocol where Value: RangeReplaceableCollection {
 
     /// Ensure that an Array-type value exists for the given `key`.
     public mutating func ensureValue(for key: Key) {
@@ -100,7 +91,7 @@ extension DictionaryProtocol where Value: ArrayProtocol {
     }
 }
 
-extension DictionaryProtocol where Value: ArrayProtocol, Value.Element: Equatable {
+extension DictionaryProtocol where Value: RangeReplaceableCollection, Value.Element: Equatable {
 
     /**
      Safely append value to the array value for a given key.
