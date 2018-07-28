@@ -6,13 +6,11 @@
 //
 //
 
-import Algebra
-
 /// Array-like structure that allows retrieval of elements at indices outside of the bounds of
 /// the internal storage.
 public struct CircularArray<Element> {
 
-    internal var storage: Array<Element>
+    private var storage: Array<Element>
 
     // MARK: - Initializers
 
@@ -68,6 +66,12 @@ public struct CircularArray<Element> {
     }
 }
 
+extension CircularArray: RandomAccessCollectionWrapping {
+    public var base: [Element] {
+        return storage
+    }
+}
+
 extension CircularArray: BidirectionalCollection {
 
     /// Start index.
@@ -95,14 +99,6 @@ extension CircularArray: BidirectionalCollection {
     public func index(before i: Int) -> Int {
         assert(i > startIndex)
         return i - 1
-    }
-}
-
-extension CircularArray: RandomAccessCollection {
-
-    /// - Returns: A reversed copy of `CircularArray`.
-    public func reversed() -> CircularArray {
-        return CircularArray(storage.reversed())
     }
 }
 
@@ -157,12 +153,7 @@ extension CircularArray: RangeReplaceableCollection {
 }
 
 extension CircularArray: Equatable where Element: Equatable {
-
-    /// - Returns: `true` if the elements contained both `CircularArray` values are equivalent.
-    /// Otherwise, `false`.
-    public static func == (lhs: CircularArray, rhs: CircularArray) -> Bool {
-        return lhs.storage == rhs.storage
-    }
+    // MARK: - Equatable
 }
 
 extension CircularArray: ExpressibleByArrayLiteral {
