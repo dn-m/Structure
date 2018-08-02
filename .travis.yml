@@ -12,6 +12,7 @@ script:
   - swift build
   - swift test
 after_success: 
+  - sudo gem install jazzy
   - git clone https://github.com/dn-m/Documentarian && cd Documentarian
   - swift build -c release -Xswiftc -static-stdlib
   - cd ../
