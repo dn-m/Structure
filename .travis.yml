@@ -12,6 +12,8 @@ script:
   - swift build
   - swift test
 after_success: 
+  - xcode-select -p
+  - xcodebuild -showBuildSettings | grep SWIFT_VERSION
   - swift package generate-xcodeproj
   - sudo gem install jazzy
   - git clone https://github.com/dn-m/Documentarian && cd Documentarian
