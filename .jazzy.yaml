@@ -1,0 +1,57 @@
+module: DataStructures
+clean: true
+xcodebuild_arguments:
+  - '-scheme'
+  - 'Structure-Package'
+swift_version: 4.2
+theme: fullwidth
+custom_categories:
+
+  - name: Abstract
+    children:
+    - Either
+    - IntervalRelation
+
+  - name: Linear
+    children:
+      - Matrix
+      - LinkedList
+      - Stack  
+      - SortedArray
+      - CircularArray
+
+  - name: Trees
+    children:
+      - Tree
+      - BinaryHeap
+
+  - name: Graphs
+    children:
+      - ReferenceGraph
+
+  - name: Dictionaries
+    children:
+      - DictionaryProtocol
+      - OrderedDictionary
+      - SortedDictionary
+
+  - name: Zip
+    children:
+      - Zip3Sequence
+      - ZipToLongest2Sequence
+      - ZipToLongest3Sequence
+      - zip(_:_:_:)
+      - zip(_:_:fill1:fill2:)
+      - zip(_:_:fill:)
+      - zip(_:_:_:fill1:fill2:fill3:)
+      - zip(_:_:_:fill:)
+
+  - name: Wrapping Protocols
+    children:
+      - IntegerWrapping
+      - FloatWrapping
+      - DoubleWrapping
+      - SequenceWrapping
+      - CollectionWrapping
+      - SortedCollectionWrapping
+      - RandomAccessCollectionWrapping

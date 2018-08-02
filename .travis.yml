@@ -11,3 +11,5 @@ install:
 script:
   - swift build
   - swift test
+after_success: echo "Create documentation, then push it upstream from here!"
+

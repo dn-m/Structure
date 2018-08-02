@@ -6,7 +6,29 @@
 //
 //
 
-/// 2-dimensional matrix with user-definable dimensions, parameterized over any type `Element`.
+/// Two-dimensional matrix with user-definable dimensions, parameterized over the generic `Element`.
+///
+/// **Example Usage**
+///
+/// It is quite pleasant to fill a new `Matrix` value.
+///
+///     let matrix = Matrix(height: 3, width: 3, initial: 0)
+///     // => 0,0,0
+///     //    0,0,0
+///     //    0,0,0
+///
+/// You can ask what the value is at a given row and column.
+/// > **Warning**: Your program will crash if the row or column is invalid — so, be careful!
+///
+///     matrix[row: 1, column: 2] // => 0
+///
+/// You can also set the value at the given row and column.
+///
+///     matrix[row: 0, column: 1] = 1
+///     // => 0,1,0
+///     //    0,0,0
+///     //    0,0,0
+///
 public struct Matrix <Element> {
 
     // MARK: - Instance Properties
@@ -32,7 +54,7 @@ public struct Matrix <Element> {
 
     // MARK: - Initializers
 
-    /// Create a `Matrix` with the given dimensions and given `defaultValue`.
+    /// Create a `Matrix` with the given dimensions and the given `initial` value.
     public init(height rowCount: Int, width columnCount: Int, initial: Element) {
         self.rowCount = rowCount
         self.columnCount = columnCount
@@ -99,6 +121,8 @@ extension Matrix: CollectionWrapping {
 extension Matrix: Equatable where Element: Equatable { }
 
 extension Matrix: CustomStringConvertible {
+
+    // MARK: - CustomStringConvertible
 
     /// Printed description of `Matrix`.
     public var description: String {

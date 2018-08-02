@@ -8,6 +8,8 @@
 
 extension Tree where Branch == Leaf {
 
+    // MARK: - Single-Typed Tree
+
     /// The payload of a given `Tree`.
     public var value: Leaf {
         switch self {
@@ -39,7 +41,7 @@ extension Tree where Branch == Leaf {
         self = .branch(value, sequence.map(Tree.leaf))
     }
 
-    /// - returns: A new `Tree` with the given `value` as payload.
+    /// - Returns: A new `Tree` with the given `value` as payload.
     public func updating(value: Leaf) -> Tree {
         switch self {
         case .leaf:

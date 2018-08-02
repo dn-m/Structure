@@ -10,6 +10,8 @@
 /// The `LinkedList`.
 public enum LinkedList <Element> {
 
+    // MARK: - Cases
+
     /// Last node in list.
     case end
 
@@ -19,13 +21,7 @@ public enum LinkedList <Element> {
 
 extension LinkedList {
 
-    /// Construct a new list with the given `value` held by a node at the front.
-    func cons(value: Element) -> LinkedList {
-        return .node(value, next: self)
-    }
-}
-
-extension LinkedList {
+    // MARK: - Instance Methods
 
     /// Push a node holding the given `value` onto the front of the list.
     public mutating func push(x: Element) {
@@ -35,7 +31,6 @@ extension LinkedList {
     /// - returns: The element contained by the node at the front of the list, if the
     /// list is not empty. Otherwise, `nil`.
     public mutating func pop() -> Element? {
-
         switch self {
         case .end:
             return nil
@@ -46,23 +41,30 @@ extension LinkedList {
     }
 }
 
+extension LinkedList {
+
+    /// - Returns: A new `LinkedList` with the given `value` held by a node at the front.
+    func cons(value: Element) -> LinkedList {
+        return .node(value, next: self)
+    }
+}
+
 extension LinkedList: Collection {
 
-    // MARK: - `Collection`
+    // MARK: - Collection
 
-    /// Index after given index `i`.
+    /// - Returns: Index after given index `i`.
     public func index(after i: Int) -> Int {
         return i + 1
     }
 
-    /// Start index.
+    /// - Returns: Start index.
     public var startIndex: Int {
         return 0
     }
 
-    /// End index.
+    /// Returns: End index.
     public var endIndex: Int {
-
         switch self {
         case .end:
             return 0
@@ -71,9 +73,8 @@ extension LinkedList: Collection {
         }
     }
 
-    /// - returns: Element at the given `index`.
+    /// - Returns: Element at the given `index`.
     public subscript(position: Int) -> Element {
-
         switch (self, position) {
         case (.end, _):
             fatalError("Index out of bounds")
@@ -85,25 +86,11 @@ extension LinkedList: Collection {
     }
 }
 
-extension LinkedList: Equatable where Element: Equatable {
-
-    /// - returns: `true` if two `LinkedList` values are equivalent. Otherwise `false`.
-    public static func == (lhs: LinkedList, rhs: LinkedList) -> Bool {
-        switch (lhs, rhs) {
-        case (.end, .end):
-            return true
-        case let (.node(elementA, nextA), .node(elementB, nextB)):
-            return elementA == elementB && nextA == nextB
-        default:
-            return false
-        }
-    }
-
-}
+extension LinkedList: Equatable where Element: Equatable { }
 
 extension LinkedList: ExpressibleByArrayLiteral {
 
-    // - MARK: `ExpressibleByArrayLiteral`
+    // - MARK: ExpressibleByArrayLiteral
 
     /// Create a `LinkedList` with an array literal.
     public init(arrayLiteral elements: Element...) {

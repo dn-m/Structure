@@ -7,12 +7,11 @@ Algebraic and data structures in Swift 4.2. The `Structure` package consists of 
 ## Destructure
 Module which includes a single extension of `Sequence`, which breaks it into a `head` and `tail` for functional-style recursive implementations of algorithms.
 
-```Swift
+```
 extension Sequence {
     /// 2-tuple containing the `head` and `tail` of a given `Sequence`.
     public var destructured: (Element, AnySequence<Element>)?
-}
-	    
+}  
 ``` 
 
 ## Algebra

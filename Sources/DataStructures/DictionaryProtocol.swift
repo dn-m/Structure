@@ -6,10 +6,6 @@
 //
 //
 
-public enum DictionaryProtocolError: Error {
-    case illFormedKeyPath
-}
-
 /// Interface for Dictionary-like structures.
 public protocol DictionaryProtocol: Collection {
 
