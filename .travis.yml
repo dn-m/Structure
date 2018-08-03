@@ -12,12 +12,14 @@ script:
   - swift build
   - swift test
 after_success: 
-  - swift package generate-xcodeproj
-  - xcode-select -p
-  - xcodebuild -showBuildSettings | grep SWIFT_VERSION
-  - export TOOLCHAINS=swift
   - sudo gem install jazzy
   - git clone https://github.com/dn-m/Documentarian && cd Documentarian
   - swift build -c release -Xswiftc -static-stdlib
   - cd ../
-  - Documentarian/.build/Release/Documentarian DataStructures
+  - git clone https//github.com/jpsim/SourceKitten
+  - cd SourceKitten
+  - swift build
+  - cd ../
+  - SourceKitten/.build/debug/sourcekitten doc --spm-module DataStructures > datastructures.json
+  - jazzy -s datastructures.json
+  # - Documentarian/.build/Release/Documentarian DataStructures
