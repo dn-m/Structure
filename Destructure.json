@@ -1,0 +1,136 @@
+[{
+  "\/Users\/BEAN\/dn-m\/Frameworks\/Structure\/Sources\/Destructure\/Destructure.swift" : {
+    "key.diagnostic_stage" : "source.diagnostic.stage.swift.parse",
+    "key.length" : 432,
+    "key.offset" : 0,
+    "key.substructure" : [
+      {
+        "key.annotated_decl" : "<Declaration>protocol Sequence<\/Declaration>",
+        "key.bodylength" : 317,
+        "key.bodyoffset" : 113,
+        "key.doc.declaration" : "protocol Sequence",
+        "key.doc.discussion" : [
+          {
+            "Para" : "A sequence is a list of values that you can step through one at a time. The most common way to iterate over the elements of a sequence is to use a `for`-`in` loop:"
+          },
+          {
+            "CodeListing" : ""
+          },
+          {
+            "Para" : "While seemingly simple, this capability gives you access to a large number of operations that you can perform on any sequence. As an example, to check whether a sequence includes a particular value, you can test each value sequentially until you’ve found a match or reached the end of the sequence. This example checks to see whether a particular insect is in an array."
+          },
+          {
+            "CodeListing" : ""
+          },
+          {
+            "Para" : "The `Sequence` protocol provides default implementations for many common operations that depend on sequential access to a sequence’s values. For clearer, more concise code, the example above could use the array’s `contains(_:)` method, which every sequence inherits from `Sequence`, instead of iterating manually:"
+          },
+          {
+            "CodeListing" : ""
+          },
+          {
+            "Para" : "The `Sequence` protocol makes no requirement on conforming types regarding whether they will be destructively consumed by iteration. As a consequence, don’t assume that multiple `for`-`in` loops on a sequence will either resume iteration or restart from the beginning:"
+          },
+          {
+            "CodeListing" : ""
+          },
+          {
+            "Para" : "In this case, you cannot assume either that a sequence will be consumable and will resume iteration, or that a sequence is a collection and will restart iteration from the first element. A conforming sequence that is not a collection is allowed to produce an arbitrary sequence of elements in the second `for`-`in` loop."
+          },
+          {
+            "Para" : "To establish that a type you’ve created supports nondestructive iteration, add conformance to the `Collection` protocol."
+          },
+          {
+            "Para" : "Making your own custom types conform to `Sequence` enables many useful operations, like `for`-`in` looping and the `contains` method, without much effort. To add `Sequence` conformance to your own custom type, add a `makeIterator()` method that returns an iterator."
+          },
+          {
+            "Para" : "Alternatively, if your type can act as its own iterator, implementing the requirements of the `IteratorProtocol` protocol and declaring conformance to both `Sequence` and `IteratorProtocol` are sufficient."
+          },
+          {
+            "Para" : "Here’s a definition of a `Countdown` sequence that serves as its own iterator. The `makeIterator()` method is provided as a default implementation."
+          },
+          {
+            "CodeListing" : ""
+          },
+          {
+            "Para" : "A sequence should provide its iterator in O(1). The `Sequence` protocol makes no other requirements about element access, so routines that traverse a sequence should be considered O() unless documented otherwise."
+          }
+        ],
+        "key.doc.full_as_xml" : "<Class><Name>Sequence<\/Name><USR>s:ST<\/USR><Declaration>protocol Sequence<\/Declaration><CommentParts><Abstract><Para>A type that provides sequential, iterated access to its elements.<\/Para><\/Abstract><Discussion><Para>A sequence is a list of values that you can step through one at a time. The most common way to iterate over the elements of a sequence is to use a <codeVoice>for<\/codeVoice>-<codeVoice>in<\/codeVoice> loop:<\/Para><CodeListing language=\"swift\"><zCodeLineNumbered><![CDATA[let oneTwoThree = 1...3]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[for number in oneTwoThree {]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[    print(number)]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[}]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[\/\/ Prints \"1\"]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[\/\/ Prints \"2\"]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[\/\/ Prints \"3\"]]><\/zCodeLineNumbered><zCodeLineNumbered><\/zCodeLineNumbered><\/CodeListing><Para>While seemingly simple, this capability gives you access to a large number of operations that you can perform on any sequence. As an example, to check whether a sequence includes a particular value, you can test each value sequentially until you’ve found a match or reached the end of the sequence. This example checks to see whether a particular insect is in an array.<\/Para><CodeListing language=\"swift\"><zCodeLineNumbered><![CDATA[let bugs = [\"Aphid\", \"Bumblebee\", \"Cicada\", \"Damselfly\", \"Earwig\"]]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[var hasMosquito = false]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[for bug in bugs {]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[    if bug == \"Mosquito\" {]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[        hasMosquito = true]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[        break]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[    }]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[}]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[print(\"'bugs' has a mosquito: \\(hasMosquito)\")]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[\/\/ Prints \"'bugs' has a mosquito: false\"]]><\/zCodeLineNumbered><zCodeLineNumbered><\/zCodeLineNumbered><\/CodeListing><Para>The <codeVoice>Sequence<\/codeVoice> protocol provides default implementations for many common operations that depend on sequential access to a sequence’s values. For clearer, more concise code, the example above could use the array’s <codeVoice>contains(_:)<\/codeVoice> method, which every sequence inherits from <codeVoice>Sequence<\/codeVoice>, instead of iterating manually:<\/Para><CodeListing language=\"swift\"><zCodeLineNumbered><![CDATA[if bugs.contains(\"Mosquito\") {]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[    print(\"Break out the bug spray.\")]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[} else {]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[    print(\"Whew, no mosquitos!\")]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[}]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[\/\/ Prints \"Whew, no mosquitos!\"]]><\/zCodeLineNumbered><zCodeLineNumbered><\/zCodeLineNumbered><\/CodeListing><rawHTML><![CDATA[<h1>]]><\/rawHTML>Repeated Access<rawHTML><![CDATA[<\/h1>]]><\/rawHTML><Para>The <codeVoice>Sequence<\/codeVoice> protocol makes no requirement on conforming types regarding whether they will be destructively consumed by iteration. As a consequence, don’t assume that multiple <codeVoice>for<\/codeVoice>-<codeVoice>in<\/codeVoice> loops on a sequence will either resume iteration or restart from the beginning:<\/Para><CodeListing language=\"swift\"><zCodeLineNumbered><![CDATA[for element in sequence {]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[    if ... some condition { break }]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[}]]><\/zCodeLineNumbered><zCodeLineNumbered><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[for element in sequence {]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[    \/\/ No defined behavior]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[}]]><\/zCodeLineNumbered><zCodeLineNumbered><\/zCodeLineNumbered><\/CodeListing><Para>In this case, you cannot assume either that a sequence will be consumable and will resume iteration, or that a sequence is a collection and will restart iteration from the first element. A conforming sequence that is not a collection is allowed to produce an arbitrary sequence of elements in the second <codeVoice>for<\/codeVoice>-<codeVoice>in<\/codeVoice> loop.<\/Para><Para>To establish that a type you’ve created supports nondestructive iteration, add conformance to the <codeVoice>Collection<\/codeVoice> protocol.<\/Para><rawHTML><![CDATA[<h1>]]><\/rawHTML>Conforming to the Sequence Protocol<rawHTML><![CDATA[<\/h1>]]><\/rawHTML><Para>Making your own custom types conform to <codeVoice>Sequence<\/codeVoice> enables many useful operations, like <codeVoice>for<\/codeVoice>-<codeVoice>in<\/codeVoice> looping and the <codeVoice>contains<\/codeVoice> method, without much effort. To add <codeVoice>Sequence<\/codeVoice> conformance to your own custom type, add a <codeVoice>makeIterator()<\/codeVoice> method that returns an iterator.<\/Para><Para>Alternatively, if your type can act as its own iterator, implementing the requirements of the <codeVoice>IteratorProtocol<\/codeVoice> protocol and declaring conformance to both <codeVoice>Sequence<\/codeVoice> and <codeVoice>IteratorProtocol<\/codeVoice> are sufficient.<\/Para><Para>Here’s a definition of a <codeVoice>Countdown<\/codeVoice> sequence that serves as its own iterator. The <codeVoice>makeIterator()<\/codeVoice> method is provided as a default implementation.<\/Para><CodeListing language=\"swift\"><zCodeLineNumbered><![CDATA[struct Countdown: Sequence, IteratorProtocol {]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[    var count: Int]]><\/zCodeLineNumbered><zCodeLineNumbered><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[    mutating func next() -> Int? {]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[        if count == 0 {]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[            return nil]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[        } else {]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[            defer { count -= 1 }]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[            return count]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[        }]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[    }]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[}]]><\/zCodeLineNumbered><zCodeLineNumbered><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[let threeToGo = Countdown(count: 3)]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[for i in threeToGo {]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[    print(i)]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[}]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[\/\/ Prints \"3\"]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[\/\/ Prints \"2\"]]><\/zCodeLineNumbered><zCodeLineNumbered><![CDATA[\/\/ Prints \"1\"]]><\/zCodeLineNumbered><zCodeLineNumbered><\/zCodeLineNumbered><\/CodeListing><rawHTML><![CDATA[<h1>]]><\/rawHTML>Expected Performance<rawHTML><![CDATA[<\/h1>]]><\/rawHTML><Para>A sequence should provide its iterator in O(1). The <codeVoice>Sequence<\/codeVoice> protocol makes no other requirements about element access, so routines that traverse a sequence should be considered O(<emphasis>n<\/emphasis>) unless documented otherwise.<\/Para><\/Discussion><\/CommentParts><\/Class>",
+        "key.doc.name" : "Sequence",
+        "key.doc.type" : "Class",
+        "key.fully_annotated_decl" : "<decl.protocol><syntaxtype.keyword>protocol<\/syntaxtype.keyword> <decl.name>Sequence<\/decl.name><\/decl.protocol>",
+        "key.groupname" : "Collection",
+        "key.is_system" : true,
+        "key.kind" : "source.lang.swift.decl.extension",
+        "key.length" : 338,
+        "key.modulename" : "Swift",
+        "key.name" : "Sequence",
+        "key.namelength" : 8,
+        "key.nameoffset" : 103,
+        "key.offset" : 93,
+        "key.substructure" : [
+          {
+            "key.accessibility" : "source.lang.swift.accessibility.public",
+            "key.annotated_decl" : "<Declaration>public var destructured: (<Type usr=\"s:ST7ElementQa\">Element<\/Type>, <Type usr=\"s:s11AnySequenceV\">AnySequence<\/Type>&lt;<Type usr=\"s:ST7ElementQa\">Element<\/Type>&gt;)? { get }<\/Declaration>",
+            "key.attributes" : [
+              {
+                "key.attribute" : "source.decl.attribute.public",
+                "key.length" : 6,
+                "key.offset" : 200
+              }
+            ],
+            "key.bodylength" : 169,
+            "key.bodyoffset" : 259,
+            "key.doc.column" : 16,
+            "key.doc.comment" : "2-tuple containing the `head` `Element` and `tail` `[Element]` of `Self`",
+            "key.doc.declaration" : "public var destructured: (Element, AnySequence<Element>)? { get }",
+            "key.doc.file" : "\/Users\/BEAN\/dn-m\/Frameworks\/Structure\/Sources\/Destructure\/Destructure.swift",
+            "key.doc.full_as_xml" : "<Other file=\"\/Users\/BEAN\/dn-m\/Frameworks\/Structure\/Sources\/Destructure\/Destructure.swift\" line=\"12\" column=\"16\"><Name>destructured<\/Name><USR>s:ST11DestructureE12destructured7ElementQz_s11AnySequenceVyADGtSgvp<\/USR><Declaration>public var destructured: (Element, AnySequence&lt;Element&gt;)? { get }<\/Declaration><CommentParts><Abstract><Para>2-tuple containing the <codeVoice>head<\/codeVoice> <codeVoice>Element<\/codeVoice> and <codeVoice>tail<\/codeVoice> <codeVoice>[Element]<\/codeVoice> of <codeVoice>Self<\/codeVoice><\/Para><\/Abstract><\/CommentParts><\/Other>",
+            "key.doc.line" : 12,
+            "key.doc.name" : "destructured",
+            "key.doc.type" : "Other",
+            "key.doclength" : 77,
+            "key.docoffset" : 119,
+            "key.filepath" : "\/Users\/BEAN\/dn-m\/Frameworks\/Structure\/Sources\/Destructure\/Destructure.swift",
+            "key.fully_annotated_decl" : "<decl.var.instance><syntaxtype.keyword>public<\/syntaxtype.keyword> <syntaxtype.keyword>var<\/syntaxtype.keyword> <decl.name>destructured<\/decl.name>: <decl.var.type><tuple>(<tuple.element><tuple.element.type><ref.associatedtype usr=\"s:ST7ElementQa\">Element<\/ref.associatedtype><\/tuple.element.type><\/tuple.element>, <tuple.element><tuple.element.type><ref.struct usr=\"s:s11AnySequenceV\">AnySequence<\/ref.struct>&lt;<ref.associatedtype usr=\"s:ST7ElementQa\">Element<\/ref.associatedtype>&gt;<\/tuple.element.type><\/tuple.element>)<\/tuple>?<\/decl.var.type> { <syntaxtype.keyword>get<\/syntaxtype.keyword> }<\/decl.var.instance>",
+            "key.groupname" : "Collection",
+            "key.kind" : "source.lang.swift.decl.var.instance",
+            "key.length" : 222,
+            "key.name" : "destructured",
+            "key.namelength" : 12,
+            "key.nameoffset" : 211,
+            "key.offset" : 207,
+            "key.parsed_declaration" : "public var destructured: (Element, AnySequence<Element>)?",
+            "key.parsed_scope.end" : 16,
+            "key.parsed_scope.start" : 12,
+            "key.typename" : "(Self.Element, AnySequence<Self.Element>)?",
+            "key.typeusr" : "$S7ElementSTQz_s11AnySequenceVyABGtSgD",
+            "key.usr" : "s:ST11DestructureE12destructured7ElementQz_s11AnySequenceVyADGtSgvp"
+          },
+          {
+            "key.annotated_decl" : "<Declaration>var iterator: <Type usr=\"s:ST4Selfxmfp\">Self<\/Type>.Iterator<\/Declaration>",
+            "key.filepath" : "\/Users\/BEAN\/dn-m\/Frameworks\/Structure\/Sources\/Destructure\/Destructure.swift",
+            "key.fully_annotated_decl" : "<decl.var.local><syntaxtype.keyword>var<\/syntaxtype.keyword> <decl.name>iterator<\/decl.name>: <decl.var.type><ref.generic_type_param usr=\"s:ST4Selfxmfp\">Self<\/ref.generic_type_param>.Iterator<\/decl.var.type><\/decl.var.local>",
+            "key.groupname" : "Collection",
+            "key.kind" : "source.lang.swift.decl.var.local",
+            "key.length" : 29,
+            "key.name" : "iterator",
+            "key.namelength" : 8,
+            "key.nameoffset" : 272,
+            "key.offset" : 268,
+            "key.parsed_declaration" : "var iterator = makeIterator()",
+            "key.parsed_scope.end" : 13,
+            "key.parsed_scope.start" : 13,
+            "key.typename" : "Self.Iterator",
+            "key.typeusr" : "$S8IteratorSTQzD",
+            "key.usr" : "s:ST11DestructureE12destructured7ElementQz_s11AnySequenceVyADGtSgvg8iteratorL_8IteratorQzvp"
+          }
+        ],
+        "key.typename" : "Sequence.Protocol",
+        "key.typeusr" : "$SST_pmD",
+        "key.usr" : "s:ST"
+      }
+    ]
+  }
+}]

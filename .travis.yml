@@ -15,11 +15,12 @@ after_success:
   - sudo gem install jazzy
   - git clone https://github.com/dn-m/Documentarian && cd Documentarian
   - swift build -c release -Xswiftc -static-stdlib
-  - cd ../
-  - git clone https://github.com/jpsim/SourceKitten
-  - cd SourceKitten
-  - swift build
-  - cd ../
-  - SourceKitten/.build/debug/sourcekitten doc --spm-module DataStructures > datastructures.json
-  - jazzy -s datastructures.json
-  # - Documentarian/.build/Release/Documentarian DataStructures
+  - Documentarian/.build/Release/Documentarian DataStructures
+  # - cd ../
+  # - git clone https://github.com/jpsim/SourceKitten
+  # - cd SourceKitten
+  # - swift build
+  # - cd ../
+  # - SourceKitten/.build/debug/sourcekitten doc --spm-module DataStructures > datastructures.json
+  # - jazzy -s datastructures.json
+  
