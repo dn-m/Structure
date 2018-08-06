@@ -6,7 +6,7 @@
 //
 //
 
-/// Multiplicative monoidal view of a `Additive`-conforming type.
+/// Additive monoidal view of a `Additive`-conforming type.
 public struct Sum <T: Additive>: MonoidView {
 
     // MARK: - Type Properties

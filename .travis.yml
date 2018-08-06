@@ -17,5 +17,3 @@ after_success:
   - swift build -c release -Xswiftc -static-stdlib
   - cd ../
   - Documentarian/.build/Release/Documentarian
-
-  

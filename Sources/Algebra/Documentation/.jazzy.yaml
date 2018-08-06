@@ -1,1 +1,23 @@
 theme: apple
+custom_categories:
+  - name: "Unital Magmas"
+    children:
+      - "Zero"
+      - "One"
+  - name: "Semigroup"
+    children:
+      - "Semigroup"
+      - "AdditiveSemigroup"
+      - "MultiplicativeSemigroup"
+  - name: "Monoid"
+    children:
+      - "Monoid"
+      - "Additive"
+      - "Multiplicative"
+      - "MonoidView"
+      - "Sum"
+      - "Product"
+  - name: "Group"
+    children:
+      - "Group"
+      - "Invertible"
