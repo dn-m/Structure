@@ -111,33 +111,7 @@ extension OrderedDictionary: Collection {
     }
 }
 
-extension OrderedDictionary: Equatable where Value: Equatable {
-
-    /// - returns: `true` if all values contained in both `OrderedDictionary` values are
-    /// equivalent. Otherwise, `false`.
-    public static func == (lhs: OrderedDictionary, rhs: OrderedDictionary) -> Bool {
-
-        guard lhs.keys == rhs.keys else {
-            return false
-        }
-
-        for key in lhs.keys {
-
-            if rhs.values[key] == nil || rhs.values[key]! != lhs.values[key]! {
-                return false
-            }
-        }
-
-        for key in rhs.keys {
-
-            if lhs.values[key] == nil || lhs.values[key]! != rhs.values[key]! {
-                return false
-            }
-        }
-
-        return true
-    }
-}
+extension OrderedDictionary: Equatable where Value: Equatable { }
 
 extension OrderedDictionary: ExpressibleByDictionaryLiteral {
 
