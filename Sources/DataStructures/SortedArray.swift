@@ -78,21 +78,13 @@ public struct SortedArray <Element: Comparable>:
     }
 }
 
+extension SortedArray: Equatable { }
+
 extension SortedArray {
 
     /// - Returns: The slice of the `SortedArray` for the given `bounds`.
     public subscript(bounds: Range<Base.Index>) -> Slice<Base> {
         return Slice(base: base, bounds: bounds)
-    }
-}
-
-extension SortedArray: Equatable {
-
-    // MARK: - Equatable
-
-    /// - returns: `true` if all elements in both arrays are equivalent. Otherwise, `false`.
-    public static func == <T> (lhs: SortedArray<T>, rhs: SortedArray<T>) -> Bool {
-        return lhs.base == rhs.base
     }
 }
 
