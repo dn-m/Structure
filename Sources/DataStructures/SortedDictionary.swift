@@ -78,7 +78,7 @@ extension SortedDictionary: Equatable where Value: Equatable { }
 
 extension SortedDictionary: Collection {
 
-    // MARK: - `Collection`
+    // MARK: - Collection
 
     /// Index after the given `index`.
     public func index(after index: Int) -> Int {
@@ -140,7 +140,7 @@ extension SortedDictionary {
 
 extension SortedDictionary: ExpressibleByDictionaryLiteral {
 
-    // MARK: - `ExpressibleByDictionaryLiteral`
+    // MARK: - ExpressibleByDictionaryLiteral
 
     /// Create a `SortedDictionary` with a `DictionaryLiteral`.
     public init(dictionaryLiteral elements: (Key, Value)...) {

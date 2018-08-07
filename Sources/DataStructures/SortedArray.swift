@@ -14,6 +14,8 @@ public struct SortedArray <Element: Comparable>:
     SortedCollectionWrapping
 {
 
+    // MARK: - Instance Properties
+
     /// Underlying storage of elements contained herein.
     public var base: [Element] = []
 
