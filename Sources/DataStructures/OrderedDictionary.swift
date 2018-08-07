@@ -153,11 +153,3 @@ extension OrderedDictionary: ExpressibleByDictionaryLiteral {
         }
     }
 }
-
-
-//public func == <K, V: Equatable> (lhs: OrderedDictionary<K,V>, rhs: OrderedDictionary<K,V>)
-//    -> Bool
-//{
-//
-//
-//}
