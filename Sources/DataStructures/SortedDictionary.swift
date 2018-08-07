@@ -74,6 +74,8 @@ public struct SortedDictionary<Key, Value>: DictionaryProtocol where Key: Hashab
     }
 }
 
+extension SortedDictionary: Equatable where Value: Equatable { }
+
 extension SortedDictionary: Collection {
 
     // MARK: - `Collection`
@@ -149,33 +151,6 @@ extension SortedDictionary: ExpressibleByDictionaryLiteral {
             insert(v, key: k)
         }
     }
-}
-
-/// - returns: `true` if all values contained in both `SortedDictionary` values are
-/// equivalent. Otherwise, `false`.
-public func == <K, V: Equatable> (lhs: SortedDictionary<K,V>, rhs: SortedDictionary<K,V>)
-    -> Bool
-{
-
-    guard lhs.keys == rhs.keys else {
-        return false
-    }
-
-    for key in lhs.keys {
-
-        if rhs.unsorted[key] == nil || rhs.unsorted[key]! != lhs.unsorted[key]! {
-            return false
-        }
-    }
-
-    for key in rhs.keys {
-
-        if lhs.unsorted[key] == nil || lhs.unsorted[key]! != rhs.unsorted[key]! {
-            return false
-        }
-    }
-
-    return true
 }
 
 /// - returns: `SortedOrderedDictionary` with values of two `SortedOrderedDictionary` values.
