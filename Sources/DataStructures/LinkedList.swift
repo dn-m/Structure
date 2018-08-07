@@ -85,21 +85,7 @@ extension LinkedList: Collection {
     }
 }
 
-extension LinkedList: Equatable where Element: Equatable {
-
-    /// - returns: `true` if two `LinkedList` values are equivalent. Otherwise `false`.
-    public static func == (lhs: LinkedList, rhs: LinkedList) -> Bool {
-        switch (lhs, rhs) {
-        case (.end, .end):
-            return true
-        case let (.node(elementA, nextA), .node(elementB, nextB)):
-            return elementA == elementB && nextA == nextB
-        default:
-            return false
-        }
-    }
-
-}
+extension LinkedList: Equatable where Element: Equatable { }
 
 extension LinkedList: ExpressibleByArrayLiteral {
 
