@@ -152,9 +152,7 @@ extension CircularArray: RangeReplaceableCollection {
     }
 }
 
-extension CircularArray: Equatable where Element: Equatable {
-    // MARK: - Equatable
-}
+extension CircularArray: Equatable where Element: Equatable { }
 
 extension CircularArray: ExpressibleByArrayLiteral {
 

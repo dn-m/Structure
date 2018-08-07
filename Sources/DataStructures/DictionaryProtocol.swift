@@ -136,7 +136,4 @@ extension DictionaryProtocol where
     }
 }
 
-extension Dictionary: DictionaryProtocol {
-
-    // MARK: - `DictionaryProtocol`
-}
+extension Dictionary: DictionaryProtocol { }
