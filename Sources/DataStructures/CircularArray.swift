@@ -8,6 +8,13 @@
 
 /// Array-like structure that allows retrieval of elements at indices outside of the bounds of
 /// the internal storage.
+///
+/// **Example Usage**
+///
+///     let loop: CircularArray = [0,1,2,3,4,5]
+///     loop[circular: 6] // => 0
+///     loop[from: 2, through: 7] // => [2,3,4,5,0,1]
+///
 public struct CircularArray<Element> {
 
     private var storage: Array<Element>
@@ -67,12 +74,18 @@ public struct CircularArray<Element> {
 }
 
 extension CircularArray: RandomAccessCollectionWrapping {
+
+    // MARK: RandomAccessCollectionWrapping
+
+    /// - Returns: The underlying, non-circular contiguous storage of elements.
     public var base: [Element] {
         return storage
     }
 }
 
 extension CircularArray: BidirectionalCollection {
+
+    // MARK: - BidirectionalCollection
 
     /// Start index.
     public var startIndex: Int {
@@ -103,6 +116,8 @@ extension CircularArray: BidirectionalCollection {
 }
 
 extension CircularArray: RangeReplaceableCollection {
+
+    // MARK: - RangeReplaceableCollection
 
     /// Replaces the specified subrange of elements with the given collection.
     ///
@@ -155,6 +170,8 @@ extension CircularArray: RangeReplaceableCollection {
 extension CircularArray: Equatable where Element: Equatable { }
 
 extension CircularArray: ExpressibleByArrayLiteral {
+
+    // MARK: - ExpressibleByArrayLiteral
 
     /// Creates a `CircularArray` with an array literal.
     public init(arrayLiteral elements: Element...) {

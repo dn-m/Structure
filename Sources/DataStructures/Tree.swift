@@ -9,43 +9,61 @@
 import Algebra
 import Algorithms
 
-/// Value-semantic, immutable Tree structure.
+/// A value-semantic, immutable Tree structure with two generic types for the branches and leaves.
+///
+/// **Example Usage**
+///
+/// A `Tree` can be used in pretty simple cases:
+///
+///     let justALeaf: Tree<(),Double> = .leaf(3.14159265359)
+///
+/// Or more nested cases:
+///
+///     let happyTree = Tree.branch("alpha", [
+///         .leaf(1),
+///         .branch("beta", [
+///             .leaf(2),
+///             .leaf(3),
+///             .leaf(4)
+///         ]),
+///         .leaf(5),
+///         .branch("gamma", [
+///             .leaf(6),
+///             .branch("delta", [
+///                 .leaf(7),
+///                 .leaf(8)
+///             ])
+///         ])
+///     ])
+///
 public enum Tree <Branch,Leaf> {
-
-    /// Things that can go wrong when doing things to a `Tree`.
-    public enum Error: Swift.Error {
-        case indexOutOfBounds
-        case branchOperationPerformedOnLeaf
-        case illFormedIndexPath
-    }
-
-    /// Transforms for `branch` and `leaf` cases.
-    public struct Transform <B,L> {
-
-        let branch: (Branch) -> B
-        let leaf: (Leaf) -> L
-
-        public init(branch: @escaping (Branch) -> B, leaf: @escaping (Leaf) -> L) {
-            self.branch = branch
-            self.leaf = leaf
-        }
-    }
 
     // MARK: - Cases
 
-    /// Leaf.
+    /// The leaf case.
     case leaf(Leaf)
 
-    /// Branch.
+    /// The branch case, containing the value for this node, as well as all of its children nodes.
     indirect case branch(Branch, [Tree])
+}
+
+extension Tree {
 
     // MARK: - Instance Properties
 
-    /// Leaves of this `Tree`.
+    /// - Returns: The values contained by the leaves of this `Tree`.
+    ///
+    ///     let tree = Tree.branch("root", [
+    ///         .leaf(0),
+    ///         .branch("internal", [
+    ///             .leaf(1)
+    ///         ]),
+    ///         .leaf(2)
+    ///     ])
+    ///     tree.leaves // => [0,1,2]
+    ///
     public var leaves: [Leaf] {
-
         func flattened(accum: [Leaf], tree: Tree) -> [Leaf] {
-
             switch tree {
             case .branch(_, let trees):
                 return trees.reduce(accum, flattened)
@@ -53,35 +71,22 @@ public enum Tree <Branch,Leaf> {
                 return accum + [value]
             }
         }
-
         return flattened(accum: [], tree: self)
     }
 
-    /// All of the values along the paths from this node to each leaf
-    public var paths: [[Either<Branch,Leaf>]] {
-
-        func traverse(_ tree: Tree, accum: [[Either<Branch,Leaf>]])
-            -> [[Either<Branch,Leaf>]]
-        {
-
-            var accum = accum
-            let path = accum.popLast() ?? []
-
-            switch tree {
-            case .leaf(let value):
-                return accum + (path + .right(value))
-
-            case .branch(let value, let trees):
-                return trees.flatMap { traverse($0, accum: accum + (path + .left(value))) }
-            }
-        }
-
-        return traverse(self, accum: [])
-    }
-
-    /// Height of a `Tree`.
+    /// - Returns: The number of edges on the longest path between the root and a leaf.
+    ///
+    ///     let tree = Tree.branch(0, [
+    ///         .leaf(1),
+    ///         .branch(2, [
+    ///             .leaf(1),
+    ///             .leaf(2)
+    ///         ]),
+    ///         .leaf(3)
+    ///     ])
+    ///     tree.height // => 2
+    ///
     public var height: Int {
-
         func traverse(_ tree: Tree, height: Int) -> Int {
             switch tree {
             case .leaf:
@@ -90,11 +95,28 @@ public enum Tree <Branch,Leaf> {
                 return trees.map { traverse($0, height: height + 1) }.max()!
             }
         }
-
         return traverse(self, height: 0)
     }
 
-    // MARK: - Initializers
+    /// - Returns: All of the values along the paths from this node to each leaf.
+    public var paths: [[Either<Branch,Leaf>]] {
+        func traverse(_ tree: Tree, accum: [[Either<Branch,Leaf>]]) -> [[Either<Branch,Leaf>]] {
+            var accum = accum
+            let path = accum.popLast() ?? []
+            switch tree {
+            case .leaf(let value):
+                return accum + (path + .right(value))
+            case .branch(let value, let trees):
+                return trees.flatMap { traverse($0, accum: accum + (path + .left(value))) }
+            }
+        }
+        return traverse(self, accum: [])
+    }
+}
+
+extension Tree {
+
+    // MARK: - Instance Methods
 
     /// Replace the subtree at the given `index` for the given `tree`.
     ///
@@ -128,8 +150,8 @@ public enum Tree <Branch,Leaf> {
                 guard
                     let (index, remainingPath) = path.destructured,
                     let subTree = trees[safe: index]
-                else {
-                    throw Error.illFormedIndexPath
+                    else {
+                        throw Error.illFormedIndexPath
                 }
 
                 // We are done if only one `index` remaining in `indexPath`
@@ -152,15 +174,9 @@ public enum Tree <Branch,Leaf> {
     /// the given `path`.
     ///
     /// - throws: `TreeError` in the case of ill-formed index paths and indexes out-of-range.
-    public func inserting(_ tree: Tree, through path: [Int] = [], at index: Int)
-        throws -> Tree
-    {
-        func traverse(
-            _ tree: Tree,
-            inserting newTree: Tree,
-            through path: [Int],
-            at index: Int
-        ) throws -> Tree
+    public func inserting(_ tree: Tree, through path: [Int] = [], at index: Int) throws -> Tree {
+
+        func traverse(_ tree: Tree, inserting newTree: Tree, through path: [Int], at index: Int) throws -> Tree
         {
 
             switch tree {
@@ -182,9 +198,9 @@ public enum Tree <Branch,Leaf> {
                 }
 
                 let newBranch = try traverse(subTree,
-                    inserting: newTree,
-                    through: Array(tail),
-                    at: index
+                     inserting: newTree,
+                     through: Array(tail),
+                     at: index
                 )
 
                 return try tree.replacingTree(at: index, with: newBranch)
@@ -194,6 +210,7 @@ public enum Tree <Branch,Leaf> {
         return try traverse(self, inserting: tree, through: path, at: index)
     }
 
+    /// - Returns: A `Tree` with leaves updated by the given `transform`.
     public func mapLeaves <T> (_ transform: @escaping (Leaf) -> T) -> Tree<Branch,T> {
         switch self {
         case .leaf(let value):
@@ -203,6 +220,7 @@ public enum Tree <Branch,Leaf> {
         }
     }
 
+    /// - Returns: A `Tree` with its leaves replaced by the elements in the given `collection`.
     public func zipLeaves <C: RangeReplaceableCollection> (_ collection: C)
         -> Tree<Branch, C.Element>
     {
@@ -249,6 +267,7 @@ public enum Tree <Branch,Leaf> {
         return traverse(self)
     }
 
+    /// - Returns: A `Tree` with its branches and leaves modified by the given `transform`.
     public func map <B,L> (_ transform: Transform<B,L>) -> Tree<B,L> {
         switch self {
         case .leaf(let value):
@@ -259,16 +278,40 @@ public enum Tree <Branch,Leaf> {
     }
 
     private func insert <A> (_ element: A, into elements: [A], at index: Int) throws -> [A] {
-
-        guard let (left, right) = elements.split(at: index) else {
-            throw Error.illFormedIndexPath
-        }
-
+        guard let (left, right) = elements.split(at: index) else { throw Error.illFormedIndexPath }
         return left + [element] + right
     }
 }
 
+extension Tree {
+
+    // MARK: - Errors
+
+    /// Things that can go wrong when doing things to a `Tree`.
+    public enum Error: Swift.Error {
+        case indexOutOfBounds
+        case branchOperationPerformedOnLeaf
+        case illFormedIndexPath
+    }
+
+    // MARK: - Assosciated Types
+
+    /// Transforms for `branch` and `leaf` cases.
+    public struct Transform <B,L> {
+
+        let branch: (Branch) -> B
+        let leaf: (Leaf) -> L
+
+        public init(branch: @escaping (Branch) -> B, leaf: @escaping (Leaf) -> L) {
+            self.branch = branch
+            self.leaf = leaf
+        }
+    }
+}
+
 extension Tree: CustomStringConvertible {
+
+    // MARK: - CustomStringConvertible
 
     /// Printed description.
     public var description: String {
@@ -295,10 +338,10 @@ extension Tree: CustomStringConvertible {
     }
 }
 
-/// - returns: A new `Tree` resulting from applying the given function `f` to each
+/// - Returns: A new `Tree` resulting from applying the given function `f` to each
 /// corresponding node in the given trees `a` and `b`.
 ///
-/// - invariant: `a` and `b` are the same shape.
+/// - Invariant: `a` and `b` are the same shape.
 public func zip <T,U,V> (_ a: Tree<T,T>, _ b: Tree<U,U>, _ f: (T, U) -> V) -> Tree<V,V> {
     switch (a,b) {
     case (.leaf(let a), .leaf(let b)):

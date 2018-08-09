@@ -6,9 +6,9 @@
 //
 
 /// Implementation of
-/// [Allen's Interval Structure](https://en.wikipedia.org/wiki/Allen%27s_interval_algebra).
+/// [Allen's Interval Algebra](https://en.wikipedia.org/wiki/Allen%27s_interval_algebra).
 ///
-/// ## Background
+/// **Background**
 ///
 /// From [Thomas A. Alspaugh](http://www.ics.uci.edu/~alspaugh/cls/shr/allen.html#Allen1983-mkti):
 /// > In 1983 James F. Allen published a paper in which he proposed thirteen basic relations

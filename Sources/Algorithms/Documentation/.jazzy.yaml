@@ -1,0 +1,8 @@
+theme: apple
+
+custom_categories:
+  - name: Swapping
+    children:
+      - swap(_:_:if:)
+      - swapped(_:_:)
+      - swapped(_:_:if:)
