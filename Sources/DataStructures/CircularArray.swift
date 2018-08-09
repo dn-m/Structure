@@ -141,7 +141,7 @@ extension CircularArray: RangeReplaceableCollection {
     ///   contents of `newElements` to the collection, the complexity is O(*n*),
     ///   where *n* is the length of `newElements`.
     public mutating func replaceSubrange<C>(_ subrange: Range<Int>, with newElements: C)
-        where C : Collection, C.Iterator.Element == Element
+        where C : Collection, C.Element == Element
     {
         self.storage.replaceSubrange(subrange, with: newElements)
     }
