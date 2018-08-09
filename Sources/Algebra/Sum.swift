@@ -6,14 +6,14 @@
 //
 //
 
-/// Multiplicative monoidal view of a `Additive`-conforming type.
-public struct Sum <T: Additive>: MonoidView {
+/// Additive monoidal view of a `Additive`-conforming type.
+public struct Sum <Value: Additive>: MonoidView {
 
     // MARK: - Type Properties
 
     /// - Returns: The additive identity wrapped in a `AdditiveMonoid`.
     public static var identity: Sum {
-        return Sum(T.zero)
+        return Sum(Value.zero)
     }
 
     // MARK: - Type Methods
@@ -26,13 +26,28 @@ public struct Sum <T: Additive>: MonoidView {
     // MARK: - Instance Properties
 
     /// Value wrapped by `AdditiveMonoid`.
-    public let value: T
+    public let value: Value
 
     // MARK: - Initializers
 
     /// Creates a `AdditiveMonoid` with the given `value.`
-    public init(_ value: T) {
+    public init(_ value: Value) {
         self.value = value
+    }
+}
+
+extension Sum: Additive {
+
+    // MARK: - Additive
+
+    /// - Returns: The wrapped-up `zero` type property of the wrapped type.
+    public static var zero: Sum<Value> {
+        return Sum(Value.zero)
+    }
+
+    /// - Returns: The wrapped-up sum of the two given values.
+    public static func + (lhs: Sum<Value>, rhs: Sum<Value>) -> Sum<Value> {
+        return Sum(lhs.value + rhs.value)
     }
 }
 

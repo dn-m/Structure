@@ -7,13 +7,13 @@
 //
 
 /// Multiplicative monoidal view of a `Multiplicative`-conforming type.
-public struct Product <T: Multiplicative>: MonoidView {
+public struct Product <Value: Multiplicative>: MonoidView {
 
     // MARK: - Type Properties
 
     /// - Returns: The multiplicative identity wrapped in a `MultiplicativeMonoid`.
     public static var identity: Product {
-        return Product(T.one)
+        return Product(Value.one)
     }
 
     // MARK: - Type Methods
@@ -26,13 +26,28 @@ public struct Product <T: Multiplicative>: MonoidView {
     // MARK: - Instance Properties
 
     /// Value wrapped by `MultiplativeMonoid`.
-    public let value: T
+    public let value: Value
 
     // MARK: - Initializers
 
     /// Creates a `MultiplicativeMonoid` with the given `value.`
-    public init(_ value: T) {
+    public init(_ value: Value) {
         self.value = value
+    }
+}
+
+extension Product: Multiplicative {
+
+    // MARK: - Multiplicative
+
+    /// - Returns: The wrapped-up `one` type property of the wrapped type.
+    public static var one: Product<Value> {
+        return Product(Value.one)
+    }
+
+    /// - Returns: The wrapped-up product of the two given values.
+    public static func * (lhs: Product<Value>, rhs: Product<Value>) -> Product<Value> {
+        return Product(lhs.value * rhs.value)
     }
 }
 
