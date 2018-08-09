@@ -5,8 +5,6 @@
 //  Created by James Bean on 7/29/17.
 //
 
-// - MARK: Collections
-
 import Destructure
 
 extension Sequence where Element: Monoid {
@@ -37,7 +35,8 @@ extension Sequence where Element: Multiplicative {
 
 extension Collection where Element: AdditiveSemigroup {
 
-    public var nonEmptySum: Iterator.Element? {
+    /// - Returns: The sum of the elements contained herein, if `!self.isEmpty`. Otherwise, `nil`.
+    public var nonEmptySum: Element? {
         guard let (head,tail) = destructured else { return nil }
         return tail.reduce(head, +)
     }
@@ -45,7 +44,9 @@ extension Collection where Element: AdditiveSemigroup {
 
 extension Collection where Element: MultiplicativeSemigroup {
 
-    public var nonEmptyProduct: Iterator.Element? {
+    /// - Returns: The product of the elements contained herein, if `!self.isEmpty`. Otherwise,
+    /// `nil`.
+    public var nonEmptyProduct: Element? {
         guard let (head,tail) = destructured else { return nil }
         return tail.reduce(head, *)
     }
@@ -61,10 +62,14 @@ extension Sequence where Element: Additive {
 
 extension Set: Additive {
 
+    // MARK: - Additive
+
+    /// - Returns: The empty set.
     public static var zero: Set {
         return Set()
     }
 
+    /// - Returns: The union of the two given sets.
     public static func + (lhs: Set, rhs: Set) -> Set {
         return lhs.union(rhs)
     }
@@ -72,44 +77,71 @@ extension Set: Additive {
 
 extension Set: MultiplicativeSemigroup {
 
+    // MARK: - MultiplicativeSemigroup
+
+    /// - Returns: The intersection of the two given sets.
     public static func * (lhs: Set, rhs: Set) -> Set {
         return lhs.intersection(rhs)
     }
 }
 
-// - MARK: numeric types
+// - MARK: Numeric types
 
 extension Int: AdditiveSemigroup {
+
+    // MARK: - AdditiveSemigroup
+
+    /// `0`.
     public static let zero: Int = 0
 }
 
 extension Int: Additive { }
 
 extension Int: MultiplicativeSemigroup {
+
+    // MARK: - MultiplicativeSemigroup
+
+    /// `1`.
     public static let one: Int = 1
 }
 
 extension Int: Multiplicative { }
 
 extension Float: AdditiveSemigroup {
+
+    // MARK: - AdditiveSemigroup
+
+    /// `0`.
     public static let zero: Float = 0
 }
 
 extension Float: Additive { }
 
 extension Float: MultiplicativeSemigroup {
+
+    // MARK: - MultiplicativeSemigroup
+
+    /// `1`.
     public static let one: Float = 1
 }
 
 extension Float: Multiplicative { }
 
 extension Double: AdditiveSemigroup {
+
+    // MARK: - AdditiveSemigroup
+
+    /// `0`.
     public static let zero: Double = 0
 }
 
 extension Double: Additive { }
 
 extension Double: MultiplicativeSemigroup {
+
+    // MARK: - MultiplicativeSemigroup
+
+    /// `1`.
     public static let one: Double = 1
 }
 
