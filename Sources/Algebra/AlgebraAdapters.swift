@@ -5,8 +5,6 @@
 //  Created by James Bean on 7/29/17.
 //
 
-// - MARK: Collections
-
 import Destructure
 
 extension Sequence where Element: Monoid {
