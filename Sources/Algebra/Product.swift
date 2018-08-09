@@ -25,7 +25,7 @@ public struct Product <Value: Multiplicative>: MonoidView {
 
     // MARK: - Instance Properties
 
-    /// Value wrapped by `MultiplativeMonoid`.
+    /// Value wrapped by `MultiplicativeMonoid`.
     public let value: Value
 
     // MARK: - Initializers
