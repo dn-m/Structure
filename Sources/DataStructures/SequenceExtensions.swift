@@ -17,6 +17,16 @@ extension Sequence {
         guard let extremum = sorted.first.flatMap(property) else { return [] }
         return sorted.filter { property($0) == extremum }
     }
+
+    /// - Returns: All of the values which are equivalent to the minimum value contained herein.
+    public func min <T> (property: (Element) -> T) -> [Element] where T: Comparable {
+        return extrema(property: property, areInIncreasingOrder: <)
+    }
+
+    /// - Returns: All of the values which are equivalent to the maximum value contained herein.
+    public func max <T> (property: (Element) -> T) -> [Element] where T: Comparable {
+        return extrema(property: property, areInIncreasingOrder: >)
+    }
 }
 
 /// - Returns: `true` if the given `array` contains the given `value`.
