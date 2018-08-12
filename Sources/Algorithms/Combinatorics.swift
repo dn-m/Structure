@@ -54,7 +54,7 @@ extension Collection {
     }
 }
 
-extension Sequence where SubSequence: Sequence {
+extension Sequence {
 
     /// - Returns: `Zip2Sequence` of 2-tuples composed of adjacent values.
     public var pairs: Zip2Sequence<Self,SubSequence> {
