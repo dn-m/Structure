@@ -6,8 +6,6 @@
 //  Copyright © 2016 James Bean. All rights reserved.
 //
 
-import Foundation
-
 // TODO: Add doc comments.
 // - Wrap global functions as static methods in extensions, where possible.
 public protocol FloatWrapping:
