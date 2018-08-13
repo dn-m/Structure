@@ -10,6 +10,7 @@ install:
 env:
   - SWIFT_VERSION=DEVELOPMENT-SNAPSHOT-2018-05-30-a
 script:
+  - swift package update
   - swift test
 after_success: 
   - git clone https://github.com/dn-m/Documentarian && cd Documentarian
