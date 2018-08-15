@@ -24,6 +24,12 @@ public struct SortedArray <Element: Comparable>:
     /// Create an empty `SortedArray`.
     public init() { }
 
+    /// Creates an empty `SortedArray` type with preallocated space for at least the specified
+    /// number of elements.
+    public init(minimumCapacity: Int) {
+        self.base.reserveCapacity(minimumCapacity)
+    }
+
     /// Create a `SortedArray` with the given sequence of `elements`.
     public init <S> (_ elements: S) where S: Sequence, S.Element == Element {
         self.init(presorted: Array(elements).sorted())

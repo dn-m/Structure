@@ -22,6 +22,14 @@ public struct OrderedDictionary <Key: Hashable, Value>: DictionaryProtocol {
     /// Create an empty `OrderedDictionary`
     public init() { }
 
+    /// Creates an empty `OrderedDictionary` type with preallocated space for at least the specified
+    /// number of elements.
+    public init(minimumCapacity: Int) {
+        self.keys = []
+        self.keys.reserveCapacity(minimumCapacity)
+        self.values = .init(minimumCapacity: minimumCapacity)
+    }
+
     // MARK: - Subscripts
 
     /// - returns: Value for the given `key`, if available. Otherwise, `nil`.
