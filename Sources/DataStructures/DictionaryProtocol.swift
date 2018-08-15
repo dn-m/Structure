@@ -38,10 +38,11 @@ extension DictionaryProtocol {
         zip(xs,ys).forEach { key, value in self[key] = value }
     }
 
-    /// Create a `DictionaryProtocol` with an array of tuples.
-    public init(_ keysAndValues: [(Key, Value)]) {
+    /// Create a `DictionaryProtocol`-conforming type with a collection with dictionary-like
+    /// elements.
+    public init <C: Collection> (_ collection: C) where C.Element == (key: Key, value: Value) {
         self.init()
-        for (key, value) in keysAndValues {
+        for (key, value) in collection {
             self[key] = value
         }
     }
