@@ -26,7 +26,15 @@ public struct SortedArray <Element: Comparable>:
 
     /// Create a `SortedArray` with the given sequence of `elements`.
     public init <S> (_ elements: S) where S: Sequence, S.Element == Element {
-        self.base = Array(elements).sorted()
+        self.init(presorted: Array(elements).sorted())
+    }
+
+    /// Create a `SortedArray` with the given array of presorted elements.
+    ///
+    /// - Warning: You must be certain that `presorted` is sorted, otherwise undefined behavior is
+    /// certain.
+    public init <C> (presorted: C) where C: Collection, C.Element == Element {
+        self.base = Array(presorted)
     }
 
     // MARK: - Instance Methods

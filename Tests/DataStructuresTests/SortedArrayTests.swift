@@ -17,6 +17,12 @@ class SortedArrayTests: XCTestCase {
         XCTAssertEqual(sortedArray, [])
     }
 
+    func testInitWithPresorted() {
+        let array = (0...4).map { $0 }
+        let sortedArray = SortedArray(presorted: array)
+        XCTAssertEqual(sortedArray, [0,1,2,3,4])
+    }
+
     func testInitWithArraySorted() {
         let array = [1,5,4,3,2]
         let sortedArray = SortedArray(array)

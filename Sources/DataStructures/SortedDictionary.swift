@@ -9,11 +9,6 @@
 /// Ordered dictionary which has sorted `keys`.
 public struct SortedDictionary<Key, Value>: DictionaryProtocol where Key: Hashable & Comparable {
 
-    /// Backing dictionary.
-    ///
-    // FIXME: Make `private` in Swift 4
-    internal var unsorted: [Key: Value] = [:]
-
     // MARK: - Instance Properties
 
     /// Values contained herein, in order sorted by their associated keys.
@@ -24,10 +19,24 @@ public struct SortedDictionary<Key, Value>: DictionaryProtocol where Key: Hashab
     /// Sorted keys.
     public var keys: SortedArray<Key> = []
 
+    /// Backing dictionary.
+    ///
+    // FIXME: Make `private` in Swift 4
+    internal var unsorted: [Key: Value] = [:]
+
     // MARK: - Initializers
 
     /// Create an empty `SortedOrderedDictionary`.
     public init() { }
+
+    /// Create a `SortedDictionary` with the elements of a presorted `OrderedDictionary`.
+    ///
+    /// - Warning: You must be certain that `presorted` is sorted, otherwise undefined behavior is
+    /// certain.
+    public init(presorted: OrderedDictionary<Key,Value>) {
+        self.keys = SortedArray(presorted: presorted.keys)
+        self.unsorted = Dictionary(presorted.map { $0 })
+    }
 
     // MARK: - Subscripts
 

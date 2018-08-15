@@ -11,6 +11,12 @@ import DataStructures
 
 class SortedDictionaryTests: XCTestCase {
 
+    func testInitPresorted() {
+        let presorted: OrderedDictionary = [0: "zero", 1: "one", 2: "two", 3: "three"]
+        let sorted = SortedDictionary(presorted: presorted)
+        XCTAssertEqual(sorted, [0: "zero", 1: "one", 2: "two", 3: "three"])
+    }
+
     func testInsert() {
 
         var dict = SortedDictionary<Int, String>()
