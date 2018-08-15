@@ -32,7 +32,7 @@ public struct SortedArray <Element: Comparable>:
     /// Create a `SortedArray` with the given array of presorted elements.
     ///
     /// - Warning: You must be certain that `presorted` is sorted, otherwise undefined lays ahead.
-    public init <S> (presorted: S) where S: Sequence, S.Element == Element {
+    public init <C> (presorted: C) where C: Collection, C.Element == Element {
         self.base = Array(presorted)
     }
 
