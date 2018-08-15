@@ -29,6 +29,13 @@ public struct SortedDictionary<Key, Value>: DictionaryProtocol where Key: Hashab
     /// Create an empty `SortedOrderedDictionary`.
     public init() { }
 
+    /// Creates an empty `SortedDictionary` type with preallocated space for at least the specified
+    /// number of elements.
+    public init(minimumCapacity: Int) {
+        self.keys = []
+        self.keys = .init(minimumCapacity: minimumCapacity)
+    }
+
     /// Create a `SortedDictionary` with the elements of a presorted `OrderedDictionary`.
     ///
     /// - Warning: You must be certain that `presorted` is sorted, otherwise undefined behavior is

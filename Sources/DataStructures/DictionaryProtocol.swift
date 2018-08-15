@@ -22,6 +22,10 @@ public protocol DictionaryProtocol: Collection {
     /// Create an empty `DictionaryProtocol` value.
     init()
 
+    /// Creates an empty `DictionaryProtocol`-conforming type with preallocated space for at least
+    /// the specified number of elements.
+    init(minimumCapacity: Int)
+
     // MARK: - Subscripts
 
     /// - Returns: `Value` for the given `key`, if present. Otherwise, `nil`.
@@ -34,14 +38,14 @@ extension DictionaryProtocol {
     ///
     /// - Note: Useful for creating a dataset from x- and y-value arrays.
     public init(_ xs: [Key], _ ys: [Value]) {
-        self.init()
+        self.init(minimumCapacity: xs.count)
         zip(xs,ys).forEach { key, value in self[key] = value }
     }
 
     /// Create a `DictionaryProtocol`-conforming type with a collection with dictionary-like
     /// elements.
     public init <C: Collection> (_ collection: C) where C.Element == (key: Key, value: Value) {
-        self.init()
+        self.init(minimumCapacity: collection.count)
         for (key, value) in collection {
             self[key] = value
         }
