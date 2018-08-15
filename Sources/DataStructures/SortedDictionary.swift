@@ -12,8 +12,8 @@ public struct SortedDictionary<Key, Value>: DictionaryProtocol where Key: Hashab
     // MARK: - Instance Properties
 
     /// Values contained herein, in order sorted by their associated keys.
-    public var values: AnyCollection<Value> {
-        return AnyCollection(keys.lazy.map { self.unsorted[$0]! })
+    public var values: AnyRandomAccessCollection<Value> {
+        return AnyRandomAccessCollection(keys.lazy.map { self.unsorted[$0]! })
     }
 
     /// Sorted keys.
