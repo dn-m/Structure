@@ -17,6 +17,18 @@ extension NewType {
     }
 }
 
+extension NewType where Value: Equatable {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        return lhs.value == rhs.value
+    }
+}
+
+extension NewType where Value: Hashable {
+    public var hashValue: Int {
+        return value.hashValue
+    }
+}
+
 extension NewType where Value: Comparable {
     public static func < (lhs: Self, rhs: Self) -> Bool {
         return lhs.value < rhs.value
