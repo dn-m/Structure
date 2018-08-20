@@ -15,7 +15,7 @@
 ///     loop[circular: 6] // => 0
 ///     loop[from: 2, through: 7] // => [2,3,4,5,0,1]
 ///
-public struct CircularArray<Element> {
+public struct CircularArray <Element> {
 
     private var storage: Array<Element>
 
