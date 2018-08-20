@@ -16,3 +16,39 @@ extension NewType where Value: ExpressibleByIntegerLiteral {
         self.init(value: Value(integerLiteral: value))
     }
 }
+
+extension NewType where Value: Numeric {
+
+    public var magnitude: Value.Magnitude {
+        return value.magnitude
+    }
+
+    public static func + (lhs: Self, rhs: Self) -> Self {
+        return Self(value: lhs.value + rhs.value)
+    }
+
+    public static func += (lhs: inout Self, rhs: Self) {
+        lhs = lhs + rhs
+    }
+
+    public static func - (lhs: Self, rhs: Self) -> Self {
+        return Self(value: lhs.value - rhs.value)
+    }
+
+    public static func -= (lhs: inout Self, rhs: Self) {
+        lhs = lhs - rhs
+    }
+
+    public static func * (lhs: Self, rhs: Self) -> Self {
+        return Self(value: lhs.value * rhs.value)
+    }
+
+    public static func *= (lhs: inout Self, rhs: Self) {
+        lhs = lhs * rhs
+    }
+
+    public init?<T>(exactly source: T) where T: BinaryInteger {
+        guard let value = Value(exactly: source) else { return nil }
+        self.init(value: value)
+    }
+}
