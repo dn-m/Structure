@@ -12,8 +12,14 @@ public protocol NewType {
 }
 
 extension NewType where Value: ExpressibleByIntegerLiteral {
-    init(integerLiteral value: Value.IntegerLiteralType) {
+    public init(integerLiteral value: Value.IntegerLiteralType) {
         self.init(value: Value(integerLiteral: value))
+    }
+}
+
+extension NewType where Value: ExpressibleByFloatLiteral {
+    public init(floatLiteral value: Value.FloatLiteralType) {
+        self.init(value: Value(floatLiteral: value))
     }
 }
 
@@ -52,3 +58,6 @@ extension NewType where Value: Numeric {
         self.init(value: value)
     }
 }
+
+extension NewType where Value: SignedNumeric { }
+
