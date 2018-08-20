@@ -11,6 +11,12 @@ public protocol NewType {
     init(value: Value)
 }
 
+extension NewType {
+    public init(_ value: Value) {
+        self.init(value: value)
+    }
+}
+
 extension NewType where Value: ExpressibleByIntegerLiteral {
     public init(integerLiteral value: Value.IntegerLiteralType) {
         self.init(value: Value(integerLiteral: value))
@@ -61,3 +67,8 @@ extension NewType where Value: Numeric {
 
 extension NewType where Value: SignedNumeric { }
 
+extension NewType where Value: Sequence {
+    public func makeIterator() -> Value.Iterator {
+        return value.makeIterator()
+    }
+}
