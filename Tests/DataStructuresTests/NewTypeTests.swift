@@ -10,6 +10,14 @@ import DataStructures
 
 class NewTypeTests: XCTestCase {
 
+    func testComparable() {
+        struct C: NewType, Comparable { let value: Int }
+        let a = C(1)
+        let c = C(2)
+        XCTAssert(a < c)
+        XCTAssert(c > a)
+    }
+
     func testExpressibleByIntegerLiteral() {
         struct I: NewType, ExpressibleByIntegerLiteral { let value: Int }
         let _: I = 42
