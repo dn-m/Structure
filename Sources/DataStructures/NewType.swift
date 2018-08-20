@@ -10,3 +10,9 @@ public protocol NewType {
     var value: Value { get }
     init(value: Value)
 }
+
+extension NewType where Value: ExpressibleByIntegerLiteral {
+    init(integerLiteral value: Value.IntegerLiteralType) {
+        self.init(value: Value(integerLiteral: value))
+    }
+}
