@@ -15,7 +15,7 @@ class NewTypeTests: XCTestCase {
         let a = C(1)
         let c = C(2)
         XCTAssert(a < c)
-        XCTAssert(a > c)
+        XCTAssert(c > a)
     }
 
     func testExpressibleByIntegerLiteral() {
