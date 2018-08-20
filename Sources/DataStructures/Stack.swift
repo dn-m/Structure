@@ -22,11 +22,7 @@ public struct Stack <Element> {
 
     /// - returns: The `top` and the remaining items, if possible. Otherwise, `nil`.
     public var destructured: (Element, Stack<Element>)? {
-
-        guard self.count > 0 else {
-            return nil
-        }
-
+        guard self.count > 0 else { return nil }
         var copy = self
         let top = copy.pop()!
         return (top, copy)
@@ -101,6 +97,14 @@ extension Stack: Collection {
     public subscript (index: Int) -> Element {
         return elements[index]
     }
+
+    /// Count of elements contained herein.
+    ///
+    /// - Complexity: O(_1_)
+    ///
+    public var count: Int {
+        return elements.count
+    }
 }
 
 extension Stack: BidirectionalCollection {
@@ -109,14 +113,6 @@ extension Stack: BidirectionalCollection {
     public func index(before index: Int) -> Int {
         assert(index > 0, "Cannot decrement index to \(index - 1)")
         return index - 1
-    }
-
-    /// Count of elements contained herein.
-    ///
-    /// - Complexity: O(_1_)
-    ///
-    public var count: Int {
-        return elements.count
     }
 }
 
