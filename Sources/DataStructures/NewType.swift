@@ -17,6 +17,12 @@ extension NewType {
     }
 }
 
+extension NewType where Value: Comparable {
+    public static func < (lhs: Self, rhs: Self) -> Bool {
+        return lhs.value < rhs.value
+    }
+}
+
 extension NewType where Value: ExpressibleByIntegerLiteral {
     public init(integerLiteral value: Value.IntegerLiteralType) {
         self.init(value: Value(integerLiteral: value))
