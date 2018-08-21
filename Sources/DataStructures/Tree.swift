@@ -354,3 +354,4 @@ public func zip <T,U,V> (_ a: Tree<T,T>, _ b: Tree<U,U>, _ f: (T, U) -> V) -> Tr
 }
 
 extension Tree: Equatable where Leaf: Equatable, Branch: Equatable { }
+extension Tree: Hashable where Leaf: Hashable, Branch: Hashable { }
