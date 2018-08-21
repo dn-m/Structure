@@ -40,7 +40,7 @@ public protocol SequenceWrapping: Sequence, ExpressibleByArrayLiteral {
 
 extension SequenceWrapping {
 
-    // MARK: - `Sequence`
+    // MARK: - Sequence
 
     /// - returns a generator over the elements of this sequence.
     public func makeIterator() -> AnyIterator<Element> {

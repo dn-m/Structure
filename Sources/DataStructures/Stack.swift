@@ -75,7 +75,7 @@ public struct Stack <Element> {
 
 extension Stack: Collection {
 
-    // MARK: - `Collection`
+    // MARK: - Collection
 
     /// - Returns: Index after the given `index`.
     public func index(after index: Int) -> Int {
@@ -126,7 +126,7 @@ extension Stack: Equatable where Element: Equatable {
 
 extension Stack: ExpressibleByArrayLiteral {
 
-    // MARK: - `ExpressibleByArrayLiteral`.
+    // MARK: - ExpressibleByArrayLiteral
 
     /// - returns: Create a `SortedArray` with an array literal.
     public init(arrayLiteral elements: Element...) {

@@ -25,7 +25,7 @@ public protocol CollectionWrapping: Collection {
 
 extension CollectionWrapping {
 
-    // MARK: - `Collection`
+    // MARK: - Collection
 
     /// Start index.
     public var startIndex: Base.Index {
