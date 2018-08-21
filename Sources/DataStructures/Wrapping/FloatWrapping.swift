@@ -30,7 +30,7 @@ extension FloatWrapping {
 
 extension FloatWrapping {
 
-    // MARK: - `Hashable`
+    // MARK: - Hashable
 
     public var hashValue: Int { return value.hashValue }
 }

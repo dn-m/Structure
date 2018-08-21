@@ -29,7 +29,7 @@ extension DoubleWrapping {
 
 extension DoubleWrapping {
 
-    // MARK: - `Hashable`
+    // MARK: - Hashable
 
     public var hashValue: Int { return value.hashValue }
 }

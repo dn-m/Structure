@@ -89,7 +89,7 @@ public struct OrderedDictionary <Key: Hashable, Value>: DictionaryProtocol {
 
 extension OrderedDictionary: Collection {
 
-    // MARK: - `Collection`
+    // MARK: - Collection
 
     /// - Index after given index `i`.
     public func index(after i: Int) -> Int {
@@ -123,7 +123,7 @@ extension OrderedDictionary: Equatable where Value: Equatable { }
 
 extension OrderedDictionary: ExpressibleByDictionaryLiteral {
 
-    // MARK: - `ExpressibleByDictionaryLiteral`
+    // MARK: - ExpressibleByDictionaryLiteral
 
     /// Create an `OrderedDictionary` with a `DictionaryLiteral`.
     public init(dictionaryLiteral elements: (Key, Value)...) {
