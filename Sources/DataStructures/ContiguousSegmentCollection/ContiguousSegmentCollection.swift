@@ -171,6 +171,15 @@ extension ContiguousSegmentCollection: Fragmentable where
         return fragment.to(offset - elementOffset)
     }
 
+    /// - Returns: A tuple of the start index and end index of segments containing the bounds of
+    /// the given `interval`.
+    func indices(containingBoundsOf interval: Range<Metric>) -> (Int?,Int?) {
+        return (
+            indexOfElement(containing: interval.lowerBound, for: .lower),
+            indexOfElement(containing: interval.upperBound, for: .upper)
+        )
+    }
+
     /// - Returns: The index of the element containing the given `target` offset.
     func indexOfElement(containing target: Metric, for bound: Bound) -> Int? {
         var start = 0
@@ -194,11 +203,7 @@ extension ContiguousSegmentCollection: Fragmentable where
 
 extension ContiguousSegmentCollection where Segment.Metric == Metric, Metric: Additive {
 
-//    func indicesOfSegments(containingBoundsOf interval: Range<Metric>)
-//        -> (startIndex: Metric, endIndex: Metric)
-//    {
-//        func indexOfBound
-//    }
+
 
 
 }
