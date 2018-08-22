@@ -69,6 +69,11 @@ extension ContiguousSegmentCollection where Segment.Metric == Metric, Metric: Ad
         guard let initial = first?.0 else { return .empty }
         return .init(SortedDictionary(map { (offset,value) in (offset - initial, value) }))
     }
+
+    /// - Returns: A `ContiguousSegmentCollection` with the `offsets` offset by the given `amount`.
+    public func offsetBy(_ amount: Metric) -> ContiguousSegmentCollection {
+        return .init(SortedDictionary(map { (offset,value) in (offset + amount, value)} ))
+    }
 }
 
 extension ContiguousSegmentCollection: Intervallic where Segment.Metric == Metric, Metric: Additive {
