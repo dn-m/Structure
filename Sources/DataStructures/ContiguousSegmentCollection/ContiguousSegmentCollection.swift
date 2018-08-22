@@ -194,12 +194,6 @@ extension ContiguousSegmentCollection: Fragmentable where
 
 extension ContiguousSegmentCollection where Segment.Metric == Metric, Metric: Additive {
 
-//    enum Bound {
-//        case lower, upper
-//        var lowerCompare: (Metric,Metric) -> Bool { return self == .lower ? (>) : (>=) }
-//        var upperCompare: (Metric,Metric) -> Bool { return self == .lower ? (<) : (<=) }
-//    }
-//
 //    func indicesOfSegments(containingBoundsOf interval: Range<Metric>)
 //        -> (startIndex: Metric, endIndex: Metric)
 //    {
