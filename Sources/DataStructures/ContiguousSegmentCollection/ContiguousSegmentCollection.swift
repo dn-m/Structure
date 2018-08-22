@@ -139,10 +139,10 @@ extension ContiguousSegmentCollection: Fragmentable where
         assert(range.lowerBound >= .zero)
         guard range.lowerBound < length else { return .empty }
         let range = range.upperBound > length ? range.lowerBound ..< length : range
-        guard let startIndex = indexOfElement(containing: range.lowerBound, for: .lower) else {
+        guard let startIndex = index(containing: range.lowerBound, for: .lower) else {
             return .empty
         }
-        let endIndex = indexOfElement(containing: range.upperBound, for: .upper)
+        let endIndex = index(containing: range.upperBound, for: .upper)
             ?? segments.count - 1
         if endIndex == startIndex {
             let (offset, element) = storage[startIndex]
@@ -175,13 +175,13 @@ extension ContiguousSegmentCollection: Fragmentable where
     /// the given `interval`.
     func indices(containingBoundsOf interval: Range<Metric>) -> (Int?,Int?) {
         return (
-            indexOfElement(containing: interval.lowerBound, for: .lower),
-            indexOfElement(containing: interval.upperBound, for: .upper)
+            index(containing: interval.lowerBound, for: .lower),
+            index(containing: interval.upperBound, for: .upper)
         )
     }
 
     /// - Returns: The index of the element containing the given `target` offset.
-    func indexOfElement(containing target: Metric, for bound: Bound) -> Int? {
+    func index(containing target: Metric, for bound: Bound) -> Int? {
         var start = 0
         var end = segments.count
         while start < end {
