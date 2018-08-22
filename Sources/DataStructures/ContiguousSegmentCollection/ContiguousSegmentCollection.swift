@@ -127,23 +127,14 @@ extension ContiguousSegmentCollection: Fragmentable where
 
     public typealias Fragment = ContiguousSegmentCollection<Metric, Segment.Fragment>
 
-    enum Bound {
-        case lower, upper
-        var lowerCompare: (Metric,Metric) -> Bool { return self == .lower ? (>=) : (>) }
-        var upperCompare: (Metric,Metric) -> Bool { return self == .lower ? (<) : (<=) }
-    }
-
     /// - Returns: New `ContiguousSegmentCollection` in the given `range` of metrics.
     public func fragment (in range: Range<Metric>) -> Fragment {
-        // FIXME: normalize range
-        assert(range.lowerBound >= .zero)
-        guard range.lowerBound < length else { return .empty }
-        let range = range.upperBound > length ? range.lowerBound ..< length : range
-        guard let startIndex = index(containing: range.lowerBound, for: .lower) else {
+        guard
+            let range = normalizedRange(range),
+            let (startIndex,endIndex) = indices(containingBoundsOf: range)
+        else {
             return .empty
         }
-        let endIndex = index(containing: range.upperBound, for: .upper)
-            ?? segments.count - 1
         if endIndex == startIndex {
             let (offset, element) = storage[startIndex]
             let only = element.fragment(in: range.lowerBound - offset ..< range.upperBound - offset)
@@ -171,13 +162,29 @@ extension ContiguousSegmentCollection: Fragmentable where
         return fragment.to(offset - elementOffset)
     }
 
+    /// - Returns: A `Range<Metric>` which clamps the given `range` to the bounds of this
+    /// `ContiguousSegmentCollection`.
+    private func normalizedRange(_ range: Range<Metric>) -> Range<Metric>? {
+        guard let first = first?.0 else { return nil }
+        return range.clamped(to: first ..< length)
+    }
+
     /// - Returns: A tuple of the start index and end index of segments containing the bounds of
     /// the given `interval`.
-    func indices(containingBoundsOf interval: Range<Metric>) -> (Int?,Int?) {
-        return (
-            index(containing: interval.lowerBound, for: .lower),
-            index(containing: interval.upperBound, for: .upper)
-        )
+    func indices(containingBoundsOf interval: Range<Metric>) -> (Int,Int)? {
+        guard
+            let startIndex = index(containing: interval.lowerBound, for: .lower),
+            let endIndex = index(containing: interval.upperBound, for: .upper)
+        else {
+            return nil
+        }
+        return (startIndex,endIndex)
+    }
+
+    enum Bound {
+        case lower, upper
+        var lowerCompare: (Metric,Metric) -> Bool { return self == .lower ? (>=) : (>) }
+        var upperCompare: (Metric,Metric) -> Bool { return self == .lower ? (<) : (<=) }
     }
 
     /// - Returns: The index of the element containing the given `target` offset.
