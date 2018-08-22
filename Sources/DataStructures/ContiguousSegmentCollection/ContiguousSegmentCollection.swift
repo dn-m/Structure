@@ -138,13 +138,15 @@ extension ContiguousSegmentCollection: Fragmentable where
         if endIndex == startIndex {
             let (offset, element) = storage[startIndex]
             let only = element.fragment(in: range.lowerBound - offset ..< range.upperBound - offset)
-            return Fragment.init([only])
+            return .init([range.lowerBound: only])
         }
         let start = segment(from: range.lowerBound, at: startIndex)
         let end = segment(to: range.upperBound, at: endIndex)
-        if endIndex == startIndex + 1 { return .init([start,end]) }
+        if endIndex == startIndex + 1 {
+            return Fragment([start,end]).offsetBy(range.lowerBound)
+        }
         let innards = base.values[startIndex + 1 ... endIndex - 1].map(Segment.Fragment.init)
-        return .init([start] + innards + [end])
+        return Fragment([start] + innards + [end]).offsetBy(range.lowerBound)
     }
 
     /// - Returns: Segment at the given `index`, spanning from the given (global) `offset` to its
