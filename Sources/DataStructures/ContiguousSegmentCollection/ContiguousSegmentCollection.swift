@@ -61,6 +61,16 @@ extension ContiguousSegmentCollection where Segment.Metric == Metric, Metric: Ad
     }
 }
 
+extension ContiguousSegmentCollection where Segment.Metric == Metric, Metric: Additive & SignedNumeric {
+
+    /// - Returns: A `ContiguousSegmentCollection` with all `offsets` reduced such that the first
+    /// offset is `0`.
+    public var normalized: ContiguousSegmentCollection {
+        guard let initial = first?.0 else { return .empty }
+        return .init(SortedDictionary(map { (offset,value) in (offset - initial, value) }))
+    }
+}
+
 extension ContiguousSegmentCollection: Intervallic where Segment.Metric == Metric, Metric: Additive {
 
     // MARK: - Intervallic
