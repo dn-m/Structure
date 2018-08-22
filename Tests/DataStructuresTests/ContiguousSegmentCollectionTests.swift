@@ -26,9 +26,6 @@ extension Int: Fragmentable {
 
 extension Int.Fragment: FragmentProtocol, Fragmentable {
     public typealias WholeMetric = Int
-    public typealias Whole = Int
-    public typealias Metric = Int
-    public typealias Fragment = Int.Fragment
     public init(whole: Int) {
         self.init(whole, in: 0..<whole.length)
     }
