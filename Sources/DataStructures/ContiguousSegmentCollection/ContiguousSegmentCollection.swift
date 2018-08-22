@@ -75,11 +75,12 @@ extension ContiguousSegmentCollection: Intervallic where Segment.Metric == Metri
 
     // MARK: - Intervallic
 
-    /// Length of `ContiguousSegmentCollection`.
+    /// - Returns: The length of `ContiguousSegmentCollection`.
     public var length: Metric {
         return storage.values.map { $0.length }.sum
     }
 
+    /// - Returns: `true` if the `target` is within the bounds of this `ContiguousSegmentCollection`.
     public func contains(_ target: Metric) -> Bool {
         return (.zero ..< length).contains(target)
     }
