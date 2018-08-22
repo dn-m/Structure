@@ -207,11 +207,4 @@ extension ContiguousSegmentCollection: Fragmentable where
     }
 }
 
-extension ContiguousSegmentCollection where Segment.Metric == Metric, Metric: Additive {
-
-
-
-
-}
-
 extension ContiguousSegmentCollection: Equatable where Segment: Equatable { }
