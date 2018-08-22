@@ -22,7 +22,7 @@ public struct SortedDictionary<Key, Value>: DictionaryProtocol where Key: Hashab
     /// Backing dictionary.
     ///
     // FIXME: Make `private` in Swift 4
-    internal var unsorted: [Key: Value] = [:]
+    private var unsorted: [Key: Value] = [:]
 
     // MARK: - Initializers
 
