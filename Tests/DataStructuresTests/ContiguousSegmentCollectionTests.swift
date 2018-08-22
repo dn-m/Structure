@@ -76,42 +76,98 @@ class ContiguousSegmentCollectionTests: XCTestCase {
         XCTAssertEqual(fourthSegment.1, 5)
     }
 
+    var collection = ContiguousSegmentCollection([4,4,4,4])
+
+    ///          xx
+    /// |---|---|---|---|
     func testFragmentA() {
-        let collection = ContiguousSegmentCollection([4,4,4,4])
         let fragment = collection.fragment(in: 9..<11)
-        let expected = ContiguousSegmentCollection<Int,Int.Fragment>([Int.Fragment(4, in: 1..<3)])
-        XCTAssertEqual(fragment.base, expected.base)
+        let expected = ContiguousSegmentCollection([Int.Fragment(4, in: 1..<3)])
+        XCTAssertEqual(fragment, expected)
     }
 
-//    func testFragmentB() {
-//        let collection = IntSegmentCollection([4,4,4,4])
-//    }
-//
-//    func testFragmentC() {
-//        let collection = IntSegmentCollection([4,4,4,4])
-//    }
-//
-//    func testFragmentD() {
-//        let collection = IntSegmentCollection([4,4,4,4])
-//    }
-//
-//    func testFragmentE() {
-//        let collection = IntSegmentCollection([4,4,4,4])
-//    }
-//
-//    func testFragmentF() {
-//        let collection = IntSegmentCollection([4,4,4,4])
-//    }
-//
-//    func testFragmentG() {
-//        let collection = IntSegmentCollection([4,4,4,4])
-//    }
-//
-//    func testFragmentH() {
-//        let collection = IntSegmentCollection([4,4,4,4])
-//    }
-//
-//    func testFragmentI() {
-//        let collection = IntSegmentCollection([4,4,4,4])
-//    }
+    ///         x x
+    /// |---|---|---|---|
+    func testFragmentB() {
+        let fragment = collection.fragment(in: 8..<10)
+        let expected = ContiguousSegmentCollection([Int.Fragment(4, in: 0..<2)])
+        XCTAssertEqual(fragment, expected)
+    }
+
+    ///           x x
+    /// |---|---|---|---|
+    func testFragmentC() {
+        let fragment = collection.fragment(in: 10..<12)
+        let expected = ContiguousSegmentCollection([Int.Fragment(4, in: 2..<4)])
+        XCTAssertEqual(fragment, expected)
+    }
+
+    ///         x   x
+    /// |---|---|---|---|
+    func testFragmentD() {
+        let fragment = collection.fragment(in: 8..<12)
+        let expected = ContiguousSegmentCollection([Int.Fragment(4, in: 0..<4)])
+        XCTAssertEqual(fragment, expected)
+    }
+
+    ///     x     x
+    /// |---|---|---|---|
+    func testFragmentE() {
+        let fragment = collection.fragment(in: 4..<10)
+        let expected = ContiguousSegmentCollection([
+            Int.Fragment(4, in: 0..<4),
+            Int.Fragment(4, in: 0..<2)
+        ])
+        XCTAssertEqual(fragment, expected)
+    }
+
+    ///       x     x
+    /// |---|---|---|---|
+    func testFragmentF() {
+        let fragment = collection.fragment(in: 6..<12)
+        let expected = ContiguousSegmentCollection([
+            Int.Fragment(4, in: 2..<4),
+            Int.Fragment(4, in: 0..<4)
+        ])
+        XCTAssertEqual(fragment, expected)
+    }
+
+    ///   x             x
+    /// |---|---|---|---|
+    func testFragmentG() {
+        let fragment = collection.fragment(in: 2..<16)
+        let expected = ContiguousSegmentCollection([
+            Int.Fragment(4, in: 2..<4),
+            Int.Fragment(4, in: 0..<4),
+            Int.Fragment(4, in: 0..<4),
+            Int.Fragment(4, in: 0..<4)
+        ])
+        XCTAssertEqual(fragment, expected)
+    }
+
+    /// x             x
+    /// |---|---|---|---|
+    func testFragmentH() {
+        let fragment = collection.fragment(in: 0..<14)
+        let expected = ContiguousSegmentCollection([
+            Int.Fragment(4, in: 0..<4),
+            Int.Fragment(4, in: 0..<4),
+            Int.Fragment(4, in: 0..<4),
+            Int.Fragment(4, in: 0..<2)
+        ])
+        XCTAssertEqual(fragment, expected)
+    }
+
+    /// x               x
+    /// |---|---|---|---|
+    func testFragmentI() {
+        let fragment = collection.fragment(in: 0..<16)
+        let expected = ContiguousSegmentCollection([
+            Int.Fragment(4, in: 0..<4),
+            Int.Fragment(4, in: 0..<4),
+            Int.Fragment(4, in: 0..<4),
+            Int.Fragment(4, in: 0..<4)
+        ])
+        XCTAssertEqual(fragment, expected)
+    }
 }
