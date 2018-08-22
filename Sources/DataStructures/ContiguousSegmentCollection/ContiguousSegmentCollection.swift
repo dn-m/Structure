@@ -127,14 +127,22 @@ extension ContiguousSegmentCollection: Fragmentable where
 
     public typealias Fragment = ContiguousSegmentCollection<Metric, Segment.Fragment>
 
+    enum Bound {
+        case lower, upper
+        var lowerCompare: (Metric,Metric) -> Bool { return self == .lower ? (>=) : (>) }
+        var upperCompare: (Metric,Metric) -> Bool { return self == .lower ? (<) : (<=) }
+    }
+
     /// - Returns: New `ContiguousSegmentCollection` in the given `range` of metrics.
     public func fragment (in range: Range<Metric>) -> Fragment {
         // FIXME: normalize range
         assert(range.lowerBound >= .zero)
         guard range.lowerBound < length else { return .empty }
         let range = range.upperBound > length ? range.lowerBound ..< length : range
-        guard let startIndex = indexOfElement(containing: range.lowerBound) else { return .empty }
-        let endIndex = indexOfElement(containing: range.upperBound, includingUpperBound: true)
+        guard let startIndex = indexOfElement(containing: range.lowerBound, for: .lower) else {
+            return .empty
+        }
+        let endIndex = indexOfElement(containing: range.upperBound, for: .upper)
             ?? segments.count - 1
         if endIndex == startIndex {
             let (offset, element) = storage[startIndex]
@@ -162,50 +170,43 @@ extension ContiguousSegmentCollection: Fragmentable where
         let (elementOffset, fragment) = storage[index]
         return fragment.to(offset - elementOffset)
     }
-}
 
-extension ContiguousSegmentCollection where Segment.Metric == Metric, Metric: Additive {
-
-    /// - Parameters:
-    ///   - includingUpperBound: Whether or not to include the `upperBound` of the `element.range`
-    ///     in the search, and to dismiss the `lowerBound`.
-    ///
     /// - Returns: The index of the element containing the given `target` offset.
-    ///
-    // FIXME: It feels gross to have to duplicate this code.
-    public func indexOfElement(containing target: Metric, includingUpperBound: Bool = false)
-        -> Int?
-    {
-
+    func indexOfElement(containing target: Metric, for bound: Bound) -> Int? {
         var start = 0
         var end = segments.count
-
         while start < end {
-
             let mid = start + (end - start) / 2
             let (offset, element) = storage[mid]
             let lowerBound = offset
             let upperBound = offset + element.length
-            if includingUpperBound {
-                if target > lowerBound && target <= upperBound {
-                    return mid
-                } else if target > upperBound {
-                    start = mid + 1
-                } else {
-                    end = mid
-                }
+            if bound.lowerCompare(target,lowerBound) && bound.upperCompare(target,upperBound) {
+                return mid
+            } else if bound.lowerCompare(target,upperBound) {
+                start = mid + 1
             } else {
-                if target >= lowerBound && target < upperBound {
-                    return mid
-                } else if target >= offset + element.length {
-                    start = mid + 1
-                } else {
-                    end = mid
-                }
+                end = mid
             }
         }
         return nil
     }
+}
+
+extension ContiguousSegmentCollection where Segment.Metric == Metric, Metric: Additive {
+
+//    enum Bound {
+//        case lower, upper
+//        var lowerCompare: (Metric,Metric) -> Bool { return self == .lower ? (>) : (>=) }
+//        var upperCompare: (Metric,Metric) -> Bool { return self == .lower ? (<) : (<=) }
+//    }
+//
+//    func indicesOfSegments(containingBoundsOf interval: Range<Metric>)
+//        -> (startIndex: Metric, endIndex: Metric)
+//    {
+//        func indexOfBound
+//    }
+
+
 }
 
 extension ContiguousSegmentCollection: Equatable where Segment: Equatable { }
