@@ -134,9 +134,9 @@ extension ContiguousSegmentCollection: FragmentProtocol where Metric: SignedNume
     }
 }
 
-extension ContiguousSegmentCollection: Fragmentable where
+extension ContiguousSegmentCollection: Measured & Fragmentable where
     Metric: Additive,
-    Segment: Fragmentable,
+    Segment: MeasuredFragmentable,
     Segment.Fragment: Intervallic,
     Segment.Fragment.Whole == Segment,
     Segment.Metric == Segment.Fragment.Metric

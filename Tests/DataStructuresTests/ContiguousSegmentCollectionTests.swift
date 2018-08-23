@@ -8,10 +8,7 @@
 import XCTest
 @testable import DataStructures
 
-extension Int: Fragmentable {
-    public func fragment(in range: Range<Int>) -> Int.Fragment {
-        return Fragment(self, in: range)
-    }
+extension Int: MeasuredFragmentable {
 
     public struct Fragment: Intervallic {
         public var length: Int { return range.length }
@@ -22,9 +19,14 @@ extension Int: Fragmentable {
             self.range = range
         }
     }
+
+    public func fragment(in range: Range<Int>) -> Int.Fragment {
+        return Fragment(self, in: range)
+    }
 }
 
-extension Int.Fragment: FragmentProtocol, Fragmentable {
+extension Int.Fragment: FragmentProtocol, MeasuredFragmentable {
+    public typealias Fragment = Int.Fragment
     public typealias WholeMetric = Int
     public init(whole: Int) {
         self.init(whole, in: 0..<whole.length)

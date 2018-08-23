@@ -6,18 +6,27 @@
 //
 
 /// Interface for types which can be fragmented into smaller pieces.
-public protocol Fragmentable where Fragment.WholeMetric == Metric {
+public protocol Fragmentable {
 
     // MARK: - Associated Types
 
-    /// Type of metric by which the domain of the fragment may be calculated.
-    associatedtype Metric
+//    /// Type of metric by which the domain of the fragment may be calculated.
+//    associatedtype Metric
 
     /// Type of fragment that is created.
     associatedtype Fragment: FragmentProtocol
 
     // MARK: - Subscripts
 
+//    /// - Returns: `Fragment` within the given `range`.
+//    func fragment(in range: Range<Metric>) -> Fragment
+}
+
+public protocol Measured {
+    associatedtype Metric
+}
+
+public protocol MeasuredFragmentable: Measured & Fragmentable where Fragment.WholeMetric == Metric  {
     /// - Returns: `Fragment` within the given `range`.
     func fragment(in range: Range<Metric>) -> Fragment
 }
