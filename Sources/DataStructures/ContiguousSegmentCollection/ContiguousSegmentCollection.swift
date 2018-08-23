@@ -13,7 +13,16 @@ import Algebra
 /// **Example Usage**
 ///
 ///     let collection = ContiguousSegmentCollection([1,2,1,3])
-///     // Creates a structure like this: |-|--|-|---|
+///
+/// This creates a `ContiguousSegmentCollection<Int,Int>`, where the `Metric` and `Interallic` types
+/// are both `Int`. Each segment is the length of a given value, and is stored by the accumulating
+/// offset.
+///
+/// The resulting structure could be represented like this:
+///
+///     offset: 0 1  3 4   7
+///             |-|--|-|---|
+///     length:  1  2 1  3
 ///
 public struct ContiguousSegmentCollection <Metric: Hashable, Segment: Intervallic>
     where Metric == Segment.Metric
