@@ -35,12 +35,20 @@ public struct SortedArray <Element: Comparable>:
         self.init(presorted: Array(elements).sorted())
     }
 
-    /// Create a `SortedArray` with the given array of presorted elements.
+    /// Create a `SortedArray` with the given collection of presorted elements.
     ///
     /// - Warning: You must be certain that `presorted` is sorted, otherwise undefined behavior is
     /// certain.
     public init <C> (presorted: C) where C: Collection, C.Element == Element {
         self.base = Array(presorted)
+    }
+
+    /// Create a `SortedArray` with the given array of presorted elements.
+    ///
+    /// - Warning: You must be certain that `presorted` is sorted, otherwise undefined behavior is
+    /// certain.
+    public init (presorted: [Element]) {
+        self.base = presorted
     }
 
     // MARK: - Instance Methods
