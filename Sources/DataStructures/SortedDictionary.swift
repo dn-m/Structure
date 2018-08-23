@@ -42,7 +42,7 @@ public struct SortedDictionary<Key, Value>: DictionaryProtocol where Key: Hashab
     /// certain.
     public init(presorted: OrderedDictionary<Key,Value>) {
         self.keys = SortedArray(presorted: presorted.keys)
-        self.unsorted = Dictionary(presorted.map { $0 })
+        self.unsorted = presorted.values
     }
 
     // MARK: - Subscripts
