@@ -32,19 +32,16 @@ extension Int: Intervallic { }
 extension Float: Intervallic { }
 extension Double: Intervallic { }
 
-extension Intervallic where Metric: Additive, Self: MeasuredFragmentable {
-    
+extension Intervallic where Self: MeasuredFragmentable, Metric: Additive {
+
     /// - Returns: A fragment of self from lower bound to the given `offset`.
-    public func to(_ offset: Metric) -> Fragment {
-        precondition(offset <= length)
-        let range = .zero ..< offset
-        return fragment(in: range)
+    public func fragment(in range: PartialRangeFrom<Metric>) -> Fragment {
+        return fragment(in: range.lowerBound ..< length)
     }
 
     /// - Returns: A fragment of self from the given `offset` to upper bound.
-    public func from(_ offset: Metric) -> Fragment {
-        precondition(offset >= .zero)
-        let range = offset ..< length
-        return fragment(in: range)
+    public func fragment(in range: PartialRangeUpTo<Metric>) -> Fragment {
+        return fragment(in: .zero ..< range.upperBound)
     }
 }
+
