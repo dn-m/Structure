@@ -20,18 +20,6 @@ public protocol Intervallic {
     var length: Metric { get }
 }
 
-extension Range: Intervallic where Bound: SignedNumeric {
-    public var length: Bound {
-        return upperBound - lowerBound
-    }
-}
-
-extension ClosedRange: Intervallic where Bound: SignedNumeric {
-    public var length: Bound {
-        return upperBound - lowerBound
-    }
-}
-
 extension Numeric where Self: Comparable {
     public var length: Self {
         return self
