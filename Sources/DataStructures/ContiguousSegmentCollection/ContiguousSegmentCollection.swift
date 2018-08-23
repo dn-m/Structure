@@ -140,28 +140,42 @@ extension ContiguousSegmentCollection: Fragmentable where
             let only = element.fragment(in: range.lowerBound - offset ..< range.upperBound - offset)
             return .init([range.lowerBound: only])
         }
-        let start = segment(from: range.lowerBound, at: startIndex)
-        let end = segment(to: range.upperBound, at: endIndex)
-        if endIndex == startIndex + 1 {
-            return Fragment([start,end]).offsetBy(range.lowerBound)
+        let start = offsetAndSegment(from: range.lowerBound, at: startIndex)
+        let end = offsetAndSegment(to: range.upperBound, at: endIndex)
+        guard endIndex > startIndex + 1 else { return .init(SortedDictionary([start,end])) }
+        return .init(SortedDictionary([start] + innards(in: startIndex + 1 ..< endIndex) + [end]))
+    }
+
+    public func innards(in range: Range<Int>) -> [(Metric,Segment.Fragment)] {
+        return base[range].map { element in
+            let (offset,segment) = element
+            return (offset, Segment.Fragment(whole: segment))
         }
-        let innards = base.values[startIndex + 1 ... endIndex - 1].map(Segment.Fragment.init)
-        return Fragment([start] + innards + [end]).offsetBy(range.lowerBound)
     }
 
-    /// - Returns: Segment at the given `index`, spanning from the given (global) `offset` to its
-    /// upper bound.
-    public func segment(from offset: Metric, at index: Int) -> Segment.Fragment {
-        let (elementOffset, segment) = storage[index]
-        return segment.from(offset - elementOffset)
+    public func offsetAndSegment(from offset: Metric, at index: Int) -> (Metric,Segment.Fragment) {
+        let (segmentOffset, segment) = storage[index]
+        return (offset, segment.from(offset - segmentOffset))
     }
 
-    /// - Returns: Segment at the given `index`, spanning from its lower bound, to the given
-    /// (global) offset.
-    public func segment(to offset: Metric, at index: Int) -> Segment.Fragment {
-        let (elementOffset, fragment) = storage[index]
-        return fragment.to(offset - elementOffset)
+    public func offsetAndSegment(to offset: Metric, at index: Int) -> (Metric,Segment.Fragment) {
+        let (segmentOffset, segment) = storage[index]
+        return (segmentOffset, segment.to(offset - segmentOffset))
     }
+//
+//    /// - Returns: Segment at the given `index`, spanning from the given (global) `offset` to its
+//    /// upper bound.
+//    public func segment(from offset: Metric, at index: Int) -> Segment.Fragment {
+//        let (elementOffset, segment) = storage[index]
+//        return segment.from(offset - elementOffset)
+//    }
+//
+//    /// - Returns: Segment at the given `index`, spanning from its lower bound, to the given
+//    /// (global) offset.
+//    public func segment(to offset: Metric, at index: Int) -> Segment.Fragment {
+//        let (elementOffset, fragment) = storage[index]
+//        return fragment.to(offset - elementOffset)
+//    }
 
     /// - Returns: A `Range<Metric>` which clamps the given `range` to the bounds of this
     /// `ContiguousSegmentCollection`.
