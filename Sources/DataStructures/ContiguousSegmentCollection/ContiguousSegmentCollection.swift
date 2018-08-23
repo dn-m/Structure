@@ -136,6 +136,7 @@ extension ContiguousSegmentCollection: Fragmentable where
     Segment.Fragment.Whole == Segment,
     Segment.Metric == Segment.Fragment.Metric
 {
+    // MARK: - Fragmentable
 
     /// The type of `Fragment` of a `ContiguousSegmentCollection`.
     public typealias Fragment = ContiguousSegmentCollection<Metric, Segment.Fragment>
