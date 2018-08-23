@@ -7,7 +7,9 @@
 
 import Algebra
 
-public struct ContiguousSegmentCollection <Metric: Hashable & Comparable, Segment: Intervallic> {
+public struct ContiguousSegmentCollection <Metric: Hashable, Segment: Intervallic>
+    where Metric == Segment.Metric
+{
 
     // MARK: - Instance Properties
 
@@ -18,12 +20,18 @@ extension ContiguousSegmentCollection {
 
     // MARK: - Initializers
 
-    init(_ presorted: SortedDictionary<Metric,Segment>) {
+    /// Creates a `ContiguousSegmentCollection` with the given `presorted` `SortedDictionary` of
+    /// values.
+    public init(_ presorted: SortedDictionary<Metric,Segment>) {
         self.storage = presorted
     }
 }
 
 extension ContiguousSegmentCollection: RandomAccessCollectionWrapping {
+
+    // MARK: - RandomAccessCollectionWrapping
+
+    /// - Returns: A view of the underlying storage producing a `RandomAccessCollection` interface.
     public var base: SortedDictionary<Metric,Segment> {
         return storage
     }
@@ -37,9 +45,10 @@ extension ContiguousSegmentCollection {
     public static var empty: ContiguousSegmentCollection { return .init([:]) }
 }
 
-extension ContiguousSegmentCollection where Segment.Metric == Metric, Metric: Additive {
+extension ContiguousSegmentCollection where Metric: Additive {
 
-    init <S> (_ sequence: S) where S: Sequence, S.Element == Segment {
+    /// Creates a `ContiguousSegmentCollection` with the given `sequence` of segments.
+    public init <S> (_ sequence: S) where S: Sequence, S.Element == Segment {
         var ordered: OrderedDictionary<Metric,Segment> = [:]
         var accum: Metric = .zero
         for segment in sequence {
@@ -49,7 +58,7 @@ extension ContiguousSegmentCollection where Segment.Metric == Metric, Metric: Ad
         self.init(SortedDictionary(presorted: ordered))
     }
 
-    /// Creates a `ContiguousSegmentCollection` with a collection of segments.
+    /// Creates a `ContiguousSegmentCollection` with the given `collection` of segments.
     public init <C> (_ collection: C) where C: Collection, C.Element == Segment {
         var ordered = OrderedDictionary<Metric,Segment>(minimumCapacity: collection.count)
         var accum: Metric = .zero
@@ -61,7 +70,7 @@ extension ContiguousSegmentCollection where Segment.Metric == Metric, Metric: Ad
     }
 }
 
-extension ContiguousSegmentCollection where Segment.Metric == Metric, Metric: Additive & SignedNumeric {
+extension ContiguousSegmentCollection where Metric: Additive & SignedNumeric {
 
     /// - Returns: A `ContiguousSegmentCollection` with all `offsets` reduced such that the first
     /// offset is `0`.
@@ -76,7 +85,7 @@ extension ContiguousSegmentCollection where Segment.Metric == Metric, Metric: Ad
     }
 }
 
-extension ContiguousSegmentCollection: Intervallic where Segment.Metric == Metric, Metric: Additive {
+extension ContiguousSegmentCollection: Intervallic where Metric: Additive {
 
     // MARK: - Intervallic
 
@@ -87,7 +96,8 @@ extension ContiguousSegmentCollection: Intervallic where Segment.Metric == Metri
 
     /// - Returns: `true` if the `target` is within the bounds of this `ContiguousSegmentCollection`.
     public func contains(_ target: Metric) -> Bool {
-        return (.zero ..< length).contains(target)
+        guard let first = first, let last = last else { return false }
+        return (first.0 ..< last.0 + last.1.length).contains(target)
     }
 }
 
@@ -108,26 +118,29 @@ extension ContiguousSegmentCollection {
 
 extension ContiguousSegmentCollection: FragmentProtocol where Metric: SignedNumeric {
 
-    public init(whole: ContiguousSegmentCollection<Metric, Segment>) {
-        self.storage = whole.storage
-    }
+    // MARK: - FragmentProtocol
 
     public typealias Whole = ContiguousSegmentCollection
     public typealias WholeMetric = Metric
+
+    /// Creates a fragment from the given `whole` which saturates the domain of the original.
+    public init(whole: ContiguousSegmentCollection<Metric, Segment>) {
+        self.storage = whole.storage
+    }
 }
 
 extension ContiguousSegmentCollection: Fragmentable where
-    Segment.Metric == Metric,
     Metric: Additive,
-    Segment: Intervallic & Fragmentable,
+    Segment: Fragmentable,
     Segment.Fragment: Intervallic,
     Segment.Fragment.Whole == Segment,
     Segment.Metric == Segment.Fragment.Metric
 {
 
+    /// The type of `Fragment` of a `ContiguousSegmentCollection`.
     public typealias Fragment = ContiguousSegmentCollection<Metric, Segment.Fragment>
 
-    /// - Returns: New `ContiguousSegmentCollection` in the given `range` of metrics.
+    /// - Returns: A `ContiguousSegmentCollection` in the given `range` of metrics.
     public func fragment (in range: Range<Metric>) -> Fragment {
         guard
             let range = normalizedRange(range),
@@ -143,7 +156,8 @@ extension ContiguousSegmentCollection: Fragmentable where
         let start = offsetAndSegment(from: range.lowerBound, at: startIndex)
         let end = offsetAndSegment(to: range.upperBound, at: endIndex)
         guard endIndex > startIndex + 1 else { return .init(SortedDictionary([start,end])) }
-        return .init(SortedDictionary([start] + innards(in: startIndex + 1 ..< endIndex) + [end]))
+        let innards = fragments(in: startIndex + 1 ..< endIndex)
+        return .init(SortedDictionary([start] + innards + [end]))
     }
 
     /// - Returns: A `Range<Metric>` which clamps the given `range` to the bounds of this
@@ -153,7 +167,7 @@ extension ContiguousSegmentCollection: Fragmentable where
         return range.clamped(to: first ..< length)
     }
 
-    private func innards(in range: Range<Int>) -> [(Metric,Segment.Fragment)] {
+    private func fragments(in range: Range<Int>) -> [(Metric,Segment.Fragment)] {
         return base[range].map { element in
             let (offset,segment) = element
             return (offset, Segment.Fragment(whole: segment))
@@ -172,7 +186,7 @@ extension ContiguousSegmentCollection: Fragmentable where
 
     /// - Returns: A tuple of the start index and end index of segments containing the bounds of
     /// the given `interval`.
-    func indices(containingBoundsOf interval: Range<Metric>) -> (Int,Int)? {
+    private func indices(containingBoundsOf interval: Range<Metric>) -> (Int,Int)? {
         guard
             let startIndex = index(containing: interval.lowerBound, for: .lower),
             let endIndex = index(containing: interval.upperBound, for: .upper)
@@ -182,14 +196,14 @@ extension ContiguousSegmentCollection: Fragmentable where
         return (startIndex,endIndex)
     }
 
-    enum Bound {
+    private enum Bound {
         case lower, upper
         var lowerCompare: (Metric,Metric) -> Bool { return self == .lower ? (>=) : (>) }
         var upperCompare: (Metric,Metric) -> Bool { return self == .lower ? (<) : (<=) }
     }
 
     /// - Returns: The index of the element containing the given `target` offset.
-    func index(containing target: Metric, for bound: Bound) -> Int? {
+    private func index(containing target: Metric, for bound: Bound) -> Int? {
         var start = 0
         var end = segments.count
         while start < end {
