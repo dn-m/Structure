@@ -70,6 +70,21 @@ extension ContiguousSegmentCollection where Metric: Additive {
     }
 }
 
+extension ContiguousSegmentCollection {
+
+    // MARK: - Computed Properties
+
+    /// - Returns: A collection of the offsets of each spanner contained herein.
+    public var offsets: AnyCollection<Metric> {
+        return AnyCollection(storage.keys)
+    }
+
+    /// - Returns: A collection of the spanners contained herein.
+    public var segments: AnyCollection<Segment> {
+        return AnyCollection(storage.values)
+    }
+}
+
 extension ContiguousSegmentCollection where Metric: Additive & SignedNumeric {
 
     /// - Returns: A `ContiguousSegmentCollection` with all `offsets` reduced such that the first
@@ -98,21 +113,6 @@ extension ContiguousSegmentCollection: Intervallic where Metric: Additive {
     public func contains(_ target: Metric) -> Bool {
         guard let first = first, let last = last else { return false }
         return (first.0 ..< last.0 + last.1.length).contains(target)
-    }
-}
-
-extension ContiguousSegmentCollection {
-
-    // MARK: - Offsets and Segments
-
-    /// - Returns: A collection of the offsets of each spanner contained herein.
-    public var offsets: AnyCollection<Metric> {
-        return AnyCollection(storage.keys)
-    }
-
-    /// - Returns: A collection of the spanners contained herein.
-    public var segments: AnyCollection<Segment> {
-        return AnyCollection(storage.values)
     }
 }
 
