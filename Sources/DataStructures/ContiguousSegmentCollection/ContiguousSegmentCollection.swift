@@ -146,42 +146,28 @@ extension ContiguousSegmentCollection: Fragmentable where
         return .init(SortedDictionary([start] + innards(in: startIndex + 1 ..< endIndex) + [end]))
     }
 
-    public func innards(in range: Range<Int>) -> [(Metric,Segment.Fragment)] {
+    /// - Returns: A `Range<Metric>` which clamps the given `range` to the bounds of this
+    /// `ContiguousSegmentCollection`.
+    private func normalizedRange(_ range: Range<Metric>) -> Range<Metric>? {
+        guard let first = first?.0 else { return nil }
+        return range.clamped(to: first ..< length)
+    }
+
+    private func innards(in range: Range<Int>) -> [(Metric,Segment.Fragment)] {
         return base[range].map { element in
             let (offset,segment) = element
             return (offset, Segment.Fragment(whole: segment))
         }
     }
 
-    public func offsetAndSegment(from offset: Metric, at index: Int) -> (Metric,Segment.Fragment) {
+    private func offsetAndSegment(from offset: Metric, at index: Int) -> (Metric,Segment.Fragment) {
         let (segmentOffset, segment) = storage[index]
         return (offset, segment.from(offset - segmentOffset))
     }
 
-    public func offsetAndSegment(to offset: Metric, at index: Int) -> (Metric,Segment.Fragment) {
+    private func offsetAndSegment(to offset: Metric, at index: Int) -> (Metric,Segment.Fragment) {
         let (segmentOffset, segment) = storage[index]
         return (segmentOffset, segment.to(offset - segmentOffset))
-    }
-//
-//    /// - Returns: Segment at the given `index`, spanning from the given (global) `offset` to its
-//    /// upper bound.
-//    public func segment(from offset: Metric, at index: Int) -> Segment.Fragment {
-//        let (elementOffset, segment) = storage[index]
-//        return segment.from(offset - elementOffset)
-//    }
-//
-//    /// - Returns: Segment at the given `index`, spanning from its lower bound, to the given
-//    /// (global) offset.
-//    public func segment(to offset: Metric, at index: Int) -> Segment.Fragment {
-//        let (elementOffset, fragment) = storage[index]
-//        return fragment.to(offset - elementOffset)
-//    }
-
-    /// - Returns: A `Range<Metric>` which clamps the given `range` to the bounds of this
-    /// `ContiguousSegmentCollection`.
-    private func normalizedRange(_ range: Range<Metric>) -> Range<Metric>? {
-        guard let first = first?.0 else { return nil }
-        return range.clamped(to: first ..< length)
     }
 
     /// - Returns: A tuple of the start index and end index of segments containing the bounds of
