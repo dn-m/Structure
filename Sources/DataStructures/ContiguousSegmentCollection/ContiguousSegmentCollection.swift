@@ -169,14 +169,12 @@ extension ContiguousSegmentCollection: Measured & Fragmentable where
 
     private func offsetAndSegment(from offset: Metric, at index: Int) -> (Metric,Segment.Fragment) {
         let (segmentOffset, segment) = storage[index]
-        let translated = offset - segmentOffset
-        return (offset, segment.fragment(in: translated...))
+        return (offset, segment.fragment(in: (offset - segmentOffset)...))
     }
 
     private func offsetAndSegment(to offset: Metric, at index: Int) -> (Metric,Segment.Fragment) {
         let (segmentOffset, segment) = storage[index]
-        let translated = offset - segmentOffset
-        return (segmentOffset, segment.fragment(in: ..<translated))
+        return (segmentOffset, segment.fragment(in: ..<(offset - segmentOffset)))
     }
 
     /// - Returns: A tuple of the start index and end index of segments containing the bounds of
