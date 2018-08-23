@@ -20,8 +20,6 @@ public struct SortedDictionary<Key, Value>: DictionaryProtocol where Key: Hashab
     public var keys: SortedArray<Key> = []
 
     /// Backing dictionary.
-    ///
-    // FIXME: Make `private` in Swift 4
     private var unsorted: [Key: Value] = [:]
 
     // MARK: - Initializers
