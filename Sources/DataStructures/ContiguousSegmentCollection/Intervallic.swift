@@ -64,22 +64,3 @@ extension Intervallic where Metric: Additive, Self: Fragmentable {
         return fragment(in: range)
     }
 }
-
-extension Intervallic where Self: IntervallicFragment, Self: Fragmentable, Self.Fragment == Self {
-
-    // MARK: - Fragmentable
-
-    /// - Returns: A fragment of self from lower bound to the given `offset`.
-    public func to(_ offset: Metric) -> Self {
-        precondition(offset <= self.range.upperBound)
-        let range = self.range.lowerBound ..< offset
-        return fragment(in: range)
-    }
-
-    /// - Returns: A fragment of self from the given `offset` to upper bound.
-    public func from(_ offset: Metric) -> Self {
-        precondition(offset >= self.range.lowerBound)
-        let range = offset ..< self.range.upperBound
-        return fragment(in: range)
-    }
-}
