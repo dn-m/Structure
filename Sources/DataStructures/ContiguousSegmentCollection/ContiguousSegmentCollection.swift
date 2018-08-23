@@ -121,9 +121,9 @@ extension ContiguousSegmentCollection: Intervallic where Metric: Additive {
     }
 }
 
-extension ContiguousSegmentCollection: FragmentProtocol where Metric: SignedNumeric {
+extension ContiguousSegmentCollection: Totalizable where Metric: SignedNumeric {
 
-    // MARK: - FragmentProtocol
+    // MARK: - Totalizable
 
     public typealias Whole = ContiguousSegmentCollection
     public typealias WholeMetric = Metric
@@ -137,7 +137,7 @@ extension ContiguousSegmentCollection: FragmentProtocol where Metric: SignedNume
 extension ContiguousSegmentCollection: Measured & Fragmentable where
     Metric: Additive,
     Segment: MeasuredFragmentable,
-    Segment.Fragment: Intervallic,
+    Segment.Fragment: Intervallic & Totalizable,
     Segment.Fragment.Whole == Segment,
     Segment.Metric == Segment.Fragment.Metric
 {

@@ -25,7 +25,7 @@ extension Int: MeasuredFragmentable {
     }
 }
 
-extension Int.Fragment: MeasuredFragment, MeasuredFragmentable {
+extension Int.Fragment: MeasuredFragmentable, Totalizable {
     public typealias Fragment = Int.Fragment
     public typealias WholeMetric = Int
     public init(whole: Int) {
