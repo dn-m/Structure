@@ -14,14 +14,6 @@ public protocol Fragmentable {
     associatedtype Fragment
 }
 
-public protocol Measured {
-
-    // MARK: - Associated Types
-
-    /// The type which is used to measure this type.
-    associatedtype Metric: SignedNumeric, Comparable
-}
-
 public protocol MeasuredFragmentable: Measured & Fragmentable where
     Fragment: Measured,
     Fragment.Metric == Self.Metric
