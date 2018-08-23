@@ -38,9 +38,10 @@ extension ContiguousSegmentCollection where Metric: Additive {
             self.offset = offset
             self.intermediate = [:]
         }
-        public func add(_ segment: Segment) {
+        public func add(_ segment: Segment) -> Builder {
             intermediate.append(segment, key: offset)
             offset = offset + segment.length
+            return self
         }
         public func build() -> ContiguousSegmentCollection {
             return .init(SortedDictionary(presorted: intermediate))
