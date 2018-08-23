@@ -18,16 +18,21 @@ public protocol Measured {
 
     // MARK: - Associated Types
 
-    associatedtype Metric
+    associatedtype Metric: SignedNumeric, Comparable
 }
 
-public protocol MeasuredFragmentable: Measured & Fragmentable where Fragment.WholeMetric == Metric  {
+public protocol MeasuredFragmentable: Measured & Fragmentable where Fragment: MeasuredFragment, Fragment.Metric == Self.Metric  {
     /// - Returns: `Fragment` within the given `range`.
     func fragment(in range: Range<Metric>) -> Fragment
 }
 
 public protocol FragmentProtocol {
-    associatedtype WholeMetric: SignedNumeric & Comparable
     associatedtype Whole
     init(whole: Whole)
+}
+
+public protocol MeasuredFragment: Measured, FragmentProtocol where
+    Whole: MeasuredFragmentable, Whole.Metric == Self.Metric
+{
+    
 }
