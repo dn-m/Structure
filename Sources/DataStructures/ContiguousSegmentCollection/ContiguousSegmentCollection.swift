@@ -121,19 +121,6 @@ extension ContiguousSegmentCollection: Intervallic where Metric: Additive {
     }
 }
 
-extension ContiguousSegmentCollection: Totalizable where Metric: SignedNumeric {
-
-    // MARK: - Totalizable
-
-    public typealias Whole = ContiguousSegmentCollection
-    public typealias WholeMetric = Metric
-
-    /// Creates a fragment from the given `whole` which saturates the domain of the original.
-    public init(whole: ContiguousSegmentCollection<Metric, Segment>) {
-        self.storage = whole.storage
-    }
-}
-
 extension ContiguousSegmentCollection: Measured & Fragmentable where
     Metric: Additive,
     Segment: MeasuredFragmentable,
