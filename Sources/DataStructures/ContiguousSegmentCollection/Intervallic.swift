@@ -21,12 +21,8 @@ public protocol Intervallic {
 }
 
 extension Numeric where Self: Comparable {
-    public var length: Self {
-        return self
-    }
-}
 
-extension SignedNumeric where Self: Comparable {
+    /// - Returns: Self as its length.
     public var length: Self {
         return self
     }
