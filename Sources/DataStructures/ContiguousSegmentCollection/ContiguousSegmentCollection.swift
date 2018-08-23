@@ -7,12 +7,17 @@
 
 import Algebra
 
+/// A generic collection of contiguous `Intervallic`-type value wherein `Intervallic` types are
+/// stored by their offset.
+///
+/// **Example Usage**
+///
+///     let collection = ContiguousSegmentCollection([1,2,1,3])
+///     // Creates a structure like this: |-|--|-|---|
+///
 public struct ContiguousSegmentCollection <Metric: Hashable, Segment: Intervallic>
     where Metric == Segment.Metric
 {
-
-    // MARK: - Instance Properties
-
     private let storage: SortedDictionary<Metric,Segment>
 }
 
