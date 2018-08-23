@@ -30,6 +30,24 @@ public struct ContiguousSegmentCollection <Metric: Hashable, Segment: Intervalli
     private let storage: SortedDictionary<Metric,Segment>
 }
 
+extension ContiguousSegmentCollection where Metric: Additive {
+    public class Builder {
+        private var offset: Metric
+        private var intermediate: OrderedDictionary<Metric,Segment>
+        public init(offset: Metric = .zero) {
+            self.offset = offset
+            self.intermediate = [:]
+        }
+        public func add(_ segment: Segment) {
+            intermediate.append(segment, key: offset)
+            offset = offset + segment.length
+        }
+        public func build() -> ContiguousSegmentCollection {
+            return .init(SortedDictionary(presorted: intermediate))
+        }
+    }
+}
+
 extension ContiguousSegmentCollection {
 
     // MARK: - Initializers
