@@ -170,13 +170,18 @@ extension ContiguousSegmentCollection: Fragmentable where Metric: Zero, Segment:
 
         /// Creates a `ContiguousSegmentCollection.Fragment` with the given `single` segment
         /// fragment, offset by the given `offset`.
-        public init(_ single: Segment.Fragment, offsetBy offset: Metric) {
+        public init(_ single: Segment.Fragment, offsetBy offset: Metric = .zero) {
             self.init(.single(single), offsetBy: offset)
         }
 
         /// Creates a `ContiguousSegmentCollection.Fragment` with the given pair of segment
         /// fragments, offset by the given `offset`.
-        public init(_ head: Segment.Fragment, _ tail: Segment.Fragment, offsetBy offset: Metric) {
+        public init(
+            _ head: Segment.Fragment,
+            _ tail: Segment.Fragment,
+            offsetBy offset: Metric = .zero
+        )
+        {
             self.init(.double(head,tail), offsetBy: offset)
         }
 
@@ -186,7 +191,7 @@ extension ContiguousSegmentCollection: Fragmentable where Metric: Zero, Segment:
             head: Segment.Fragment,
             body: [Segment],
             tail: Segment.Fragment,
-            offsetBy offset: Metric
+            offsetBy offset: Metric = .zero
         )
         {
             self.init(.multiple(head, body, tail), offsetBy: offset)
