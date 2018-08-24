@@ -54,6 +54,7 @@ extension ContiguousSegmentCollection {
         // MARK: - Instance Methods
 
         /// Appends the given `segment` to the in-process `ContiguousSegmentCollection`.
+        @discardableResult
         public func add(_ segment: Segment) -> Builder {
             intermediate.append(segment, key: offset)
             offset = offset + segment.length
