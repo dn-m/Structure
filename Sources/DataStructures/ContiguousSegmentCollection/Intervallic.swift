@@ -11,6 +11,8 @@ public protocol Intervallic: Measured {
 
     // MARK: - Instance Properties
 
+    associatedtype Metric
+
     /// Length of the `Spanning` type in the given `Metric`.
     var length: Metric { get }
 }
@@ -23,12 +25,6 @@ extension Numeric where Self: Comparable {
     }
 }
 
-extension Int: Intervallic {
-    public typealias Metric = Int
-}
-extension Float: Intervallic {
-    public typealias Metric = Float
-}
-extension Double: Intervallic {
-    public typealias Metric = Double
-}
+extension Int: Intervallic { }
+extension Float: Intervallic { }
+extension Double: Intervallic { }
