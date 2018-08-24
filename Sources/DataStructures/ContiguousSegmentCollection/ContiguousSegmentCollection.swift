@@ -218,12 +218,15 @@ extension ContiguousSegmentCollection {
     /// `endIndex`. This would require adding a parameter to `index(containing:for:)` describing
     /// the `searchRange`.
     private func indices(containingBoundsOf interval: Range<Metric>) -> (Int,Int)? {
-        guard
-            let startIndex = index(containing: interval.lowerBound, for: .lower),
-            let endIndex = index(containing: interval.upperBound, for: .upper)
-        else {
-            return nil
-        }
+        guard let startIndex = index(
+            containing: interval.lowerBound,
+            for: .lower
+        ) else { return nil }
+        guard let endIndex = index(
+            containing: interval.upperBound,
+            for: .upper,
+            in: startIndex ..< count
+        ) else { return nil }
         return (startIndex,endIndex)
     }
 
