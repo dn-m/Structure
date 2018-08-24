@@ -143,7 +143,7 @@ extension ContiguousSegmentCollection: Fragmentable where Metric: Zero, Segment:
             case empty
             case single(Segment.Fragment)
             case double(Segment.Fragment, Segment.Fragment)
-            case multiple(Segment.Fragment?, [Segment], Segment.Fragment?)
+            case multiple(Segment.Fragment?, ArraySlice<Segment>, Segment.Fragment?)
         }
 
         // MARK: - Type Properties
@@ -189,7 +189,7 @@ extension ContiguousSegmentCollection: Fragmentable where Metric: Zero, Segment:
         /// fragments and the segments in-between, offset by the given `offset`.
         public init(
             head: Segment.Fragment,
-            body: [Segment],
+            body: ArraySlice<Segment>,
             tail: Segment.Fragment,
             offsetBy offset: Metric = .zero
         )
@@ -243,8 +243,8 @@ extension ContiguousSegmentCollection: Fragmentable where Metric: Zero, Segment:
         return (segmentOffset, segment.fragment(in: ..<(offset - segmentOffset)))
     }
 
-    private func segments(in range: Range<Int>) -> [Segment] {
-        return self[range].map { _, segment in segment }
+    private func segments(in range: Range<Int>) -> ArraySlice<Segment> {
+        return base.values[range]
     }
 }
 
