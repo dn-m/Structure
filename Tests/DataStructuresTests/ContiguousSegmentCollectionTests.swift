@@ -11,9 +11,6 @@ import XCTest
 extension Int: IntervallicFragmentable {
 
     public struct Fragment: Intervallic {
-
-        public typealias Metric = Int
-
         public var length: Int { return range.length }
         let value: Int
         let range: Range<Metric>
