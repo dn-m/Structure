@@ -9,9 +9,12 @@ import Algebra
 
 public protocol Intervallic: Measured {
 
-    // MARK: - Instance Properties
+    // MARK - Associated Types
 
+    /// The type which is used to measure this type.
     associatedtype Metric
+
+    // MARK: - Instance Properties
 
     /// Length of the `Spanning` type in the given `Metric`.
     var length: Metric { get }
