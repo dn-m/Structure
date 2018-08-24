@@ -203,7 +203,13 @@ extension ContiguousSegmentCollection: Fragmentable where Metric: Zero, Segment:
 }
 
 
-extension ContiguousSegmentCollection where Segment: IntervallicFragmentable {
+extension ContiguousSegmentCollection {
+
+    /// - Returns: The index of the segment containing the given `offset`, if it exists. Otherwise,
+    /// `nil`.
+    public func indexOfSegment(containing offset: Metric) -> Int? {
+        return index(containing: offset, for: .lower)
+    }
 
     /// - Returns: A tuple of the start index and end index of segments containing the bounds of
     /// the given `interval`.
