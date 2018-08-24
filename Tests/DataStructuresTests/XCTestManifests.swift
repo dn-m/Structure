@@ -439,7 +439,6 @@ public func __allTests() -> [XCTestCaseEntry] {
         testCase(EitherTests.__allTests),
         testCase(HomogeneityTests.__allTests),
         testCase(IntervalRelationTests.__allTests),
-        testCase(IntervalTests.__allTests),
         testCase(InvertibleEnumTests.__allTests),
         testCase(LinkedListTests.__allTests),
         testCase(MatrixTests.__allTests),
