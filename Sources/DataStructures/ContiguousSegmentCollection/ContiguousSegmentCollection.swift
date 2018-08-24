@@ -30,19 +30,37 @@ public struct ContiguousSegmentCollection <Metric: Hashable & Additive, Segment:
     private let storage: SortedDictionary<Metric,Segment>
 }
 
-extension ContiguousSegmentCollection where Metric: Additive {
+extension ContiguousSegmentCollection {
+
+    // MARK: - Nested Types
+
+    /// Encapsulation of the incremental building state when constructing a
+    /// `ContiguousSegmentCollection`.
+    ///
+    /// This class only offsets an interface to `add` segments additively, and to `build` the
+    /// result, in order to ensure order without the increased performance penalty of doing so.
+    ///
     public class Builder {
+
         private var offset: Metric
         private var intermediate: OrderedDictionary<Metric,Segment>
+
+        // MARK: - Initializers
         public init(offset: Metric = .zero) {
             self.offset = offset
             self.intermediate = [:]
         }
+
+        // MARK: - Instance Methods
+
+        /// Appends the given `segment` to the in-process `ContiguousSegmentCollection`.
         public func add(_ segment: Segment) -> Builder {
             intermediate.append(segment, key: offset)
             offset = offset + segment.length
             return self
         }
+
+        /// - Returns: The completed `ContiguousSegmentCollection`.
         public func build() -> ContiguousSegmentCollection {
             return .init(SortedDictionary(presorted: intermediate))
         }
