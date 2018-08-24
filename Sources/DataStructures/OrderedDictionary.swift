@@ -82,13 +82,9 @@ public struct OrderedDictionary <Key: Hashable, Value>: DictionaryProtocol {
         unordered.reserveCapacity(minimumCapacity)
     }
 
-    /// - returns: The value at the given `index`.
+    /// - Returns: The value at the given `index`.
     public func value(index: Int) -> Value? {
-
-        guard index >= 0 && index < keys.count else {
-            return nil
-        }
-
+        guard index >= 0 && index < keys.count else { return nil }
         return unordered[keys[index]]
     }
 }
