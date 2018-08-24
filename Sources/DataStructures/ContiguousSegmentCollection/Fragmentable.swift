@@ -13,12 +13,3 @@ public protocol Fragmentable {
     /// Type of fragment that is created from this type.
     associatedtype Fragment
 }
-
-public protocol MeasuredFragmentable: Measured, Fragmentable where
-    Fragment: Measured,
-    Fragment.Metric == Self.Metric
-{
-
-    /// - Returns: `Fragment` within the given `range`.
-    func fragment(in range: Range<Metric>) -> Fragment
-}
