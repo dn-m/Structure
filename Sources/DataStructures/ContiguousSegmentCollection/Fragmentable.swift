@@ -14,7 +14,7 @@ public protocol Fragmentable {
     associatedtype Fragment
 }
 
-public protocol MeasuredFragmentable: Measured & Fragmentable where
+public protocol MeasuredFragmentable: Measured, Fragmentable where
     Fragment: Measured,
     Fragment.Metric == Self.Metric
 {
