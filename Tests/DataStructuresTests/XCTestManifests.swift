@@ -352,7 +352,6 @@ extension SortedArrayTests {
 
 extension SortedDictionaryTests {
     static let __allTests = [
-        ("testAdditionOperator", testAdditionOperator),
         ("testGetSubscript", testGetSubscript),
         ("testInitPresorted", testInitPresorted),
         ("testInsert", testInsert),

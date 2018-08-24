@@ -6,18 +6,20 @@
 //
 //
 
+import Algebra
+
 /// Ordered dictionary which has sorted `keys`.
 public struct SortedDictionary<Key, Value>: DictionaryProtocol where Key: Hashable & Comparable {
 
     // MARK: - Instance Properties
 
-    /// Values contained herein, in order sorted by their associated keys.
-    public var values: [Value] {
-        return keys.map { self.unsorted[$0]! }
-    }
-
     /// Sorted keys.
     public var keys: SortedArray<Key> = []
+
+    /// Values contained herein, in order sorted by their associated keys.
+    public var values: [Value] {
+        return keys.map { unsorted[$0]! }
+    }
 
     /// Backing dictionary.
     private var unsorted: [Key: Value] = [:]
@@ -40,7 +42,13 @@ public struct SortedDictionary<Key, Value>: DictionaryProtocol where Key: Hashab
     /// certain.
     public init(presorted: OrderedDictionary<Key,Value>) {
         self.keys = SortedArray(presorted: presorted.keys)
-        self.unsorted = presorted.values
+        self.unsorted = presorted.unordered
+    }
+
+    /// Creats a `SortedDictionary` with the contents of another `SortedDictionary`.
+    public init(_ sorted: SortedDictionary) {
+        self.keys = sorted.keys
+        self.unsorted = sorted.unsorted
     }
 
     // MARK: - Subscripts
@@ -79,6 +87,12 @@ public struct SortedDictionary<Key, Value>: DictionaryProtocol where Key: Hashab
     /// Insert the contents of another `SortedDictionary` value.
     public mutating func insert(contentsOf sortedDictionary: SortedDictionary<Key, Value>) {
         sortedDictionary.forEach { insert($0.1, key: $0.0) }
+    }
+
+    /// Reserves the amount of memory required to store the given `minimumCapacity` of elements.
+    public mutating func reserveCapacity(_ minimumCapacity: Int) {
+        keys.reserveCapacity(minimumCapacity)
+        unsorted.reserveCapacity(minimumCapacity)
     }
 
     /// - returns: Value at the given `index`, if present. Otherwise, `nil`.
@@ -158,22 +172,15 @@ extension SortedDictionary: ExpressibleByDictionaryLiteral {
 
     /// Create a `SortedDictionary` with a `DictionaryLiteral`.
     public init(dictionaryLiteral elements: (Key, Value)...) {
-
-        self.init()
-
-        elements.forEach { (k, v) in
-            insert(v, key: k)
-        }
+        self.init(minimumCapacity: elements.count)
+        elements.forEach { (k, v) in insert(v, key: k) }
     }
 }
 
-/// - returns: `SortedOrderedDictionary` with values of two `SortedOrderedDictionary` values.
-public func + <Value, Key> (
-    lhs: SortedDictionary<Value, Key>,
-    rhs: SortedDictionary<Value, Key>
-) -> SortedDictionary<Value, Key> where Key: Hashable, Key: Comparable
-{
-    var result = lhs
-    rhs.forEach { result.insert($0.1, key: $0.0) }
-    return result
+extension SortedDictionary: Zero {
+
+    /// - Returns: A `SortedDictionary` with no elements.
+    public static var zero: SortedDictionary {
+        return .init()
+    }
 }

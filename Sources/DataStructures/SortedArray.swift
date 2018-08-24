@@ -47,8 +47,13 @@ public struct SortedArray <Element: Comparable>:
     ///
     /// - Warning: You must be certain that `presorted` is sorted, otherwise undefined behavior is
     /// certain.
-    public init (presorted: [Element]) {
+    public init(presorted: [Element]) {
         self.base = presorted
+    }
+
+    /// Creates a `SortedArray` with the contents of another one.
+    public init(_ sorted: SortedArray) {
+        self.init(presorted: sorted.base)
     }
 
     // MARK: - Instance Methods
@@ -72,6 +77,11 @@ public struct SortedArray <Element: Comparable>:
     /// Insert the contents of another sequence of `T`.
     public mutating func insert <S: Sequence> (contentsOf elements: S) where S.Element == Element {
         elements.forEach { insert($0) }
+    }
+
+    /// Reserves the amount of memory to store the given `minimumCapacity` of elements.
+    public mutating func reserveCapacity(_ minimumCapacity: Int) {
+        base.reserveCapacity(minimumCapacity)
     }
 
     /// Appends the given `element`.
@@ -123,7 +133,7 @@ extension SortedArray: Additive {
     // MARK: - Additive
 
     /// - Returns: Empty `SortedArray`.
-    public static var zero: SortedArray<Element> {
+    public static var zero: SortedArray {
         return SortedArray()
     }
 
