@@ -9,7 +9,6 @@ import XCTest
 @testable import DataStructures
 
 extension Int: IntervallicFragmentable {
-
     public struct Fragment: Intervallic {
         public var length: Int { return range.length }
         let value: Int
@@ -19,13 +18,10 @@ extension Int: IntervallicFragmentable {
             self.range = range
         }
     }
-
-    public func fragment(in range: Range<Int>) -> Int.Fragment {
-        return Fragment(self, in: range)
-    }
+    public func fragment(in range: Range<Int>) -> Int.Fragment { return Fragment(self, in: range) }
 }
 
-extension Int.Fragment: IntervallicFragmentable, Totalizable {
+extension Int.Fragment: IntervallicFragmentable, Totalizable, Equatable {
     public init(whole: Int) {
         self.init(whole, in: 0..<whole.length)
     }
@@ -33,8 +29,6 @@ extension Int.Fragment: IntervallicFragmentable, Totalizable {
         return .init(value, in: range)
     }
 }
-
-extension Int.Fragment: Equatable { }
 
 class ContiguousSegmentCollectionTests: XCTestCase {
 
