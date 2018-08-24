@@ -236,10 +236,15 @@ extension ContiguousSegmentCollection {
     /// - Returns: The index of the element containing the given `target` offset.
     ///
     /// - TODO: Add `searchRange` parameter
-    /// - TODO: Inject `lowerCompare` and `upperCompare` directly, rather than `bound`.
-    private func index(containing target: Metric, for bound: Bound) -> Int? {
-        var start = 0
-        var end = segments.count
+    private func index(
+        containing target: Metric,
+        for bound: Bound,
+        in searchRange: Range<Int>? = nil
+    ) -> Int?
+    {
+        let searchRange = searchRange ?? 0..<count
+        var start = searchRange.lowerBound
+        var end = searchRange.upperBound
         while start < end {
             let mid = start + (end - start) / 2
             let (offset, element) = storage[mid]
