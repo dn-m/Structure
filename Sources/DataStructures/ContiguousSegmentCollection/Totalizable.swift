@@ -5,6 +5,8 @@
 //  Created by James Bean on 8/22/18.
 //
 
+import Algebra
+
 /// Interface for fragment types which can create a fragment version of a whole instance of the
 /// type.
 public protocol Totalizable {

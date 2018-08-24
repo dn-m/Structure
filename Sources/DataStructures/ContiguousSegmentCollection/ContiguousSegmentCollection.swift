@@ -134,28 +134,69 @@ extension ContiguousSegmentCollection: Intervallic {
 
 extension ContiguousSegmentCollection: Fragmentable where Metric: Zero, Segment: IntervallicFragmentable {
 
+    // MARK: - Nested Types
+
+    /// A fragment of a `ContiguousSegmentCollection`.
     public struct Fragment {
 
-        public enum Segments {
+        enum Segments {
             case empty
             case single(Segment.Fragment)
             case double(Segment.Fragment, Segment.Fragment)
             case multiple(Segment.Fragment?, [Segment], Segment.Fragment?)
         }
 
+        // MARK: - Type Properties
+
+        /// - Returns: A `Fragment` with no elements.
         public static var empty: Fragment {
             return .init(.empty, offsetBy: .zero)
         }
 
+        // MARK: - Instance Properties
+
+        /// The offset of this `Fragment`.
         let offset: Metric
+
+        /// The segments contained herein.
         let segments: Segments
 
-        public init(_ segments: Segments, offsetBy offset: Metric = .zero) {
+        // MARK: - Initializers
+
+        init(_ segments: Segments, offsetBy offset: Metric = .zero) {
             self.offset = offset
             self.segments = segments
         }
+
+        /// Creates a `ContiguousSegmentCollection.Fragment` with the given `single` segment
+        /// fragment, offset by the given `offset`.
+        public init(_ single: Segment.Fragment, offsetBy offset: Metric) {
+            self.init(.single(single), offsetBy: offset)
+        }
+
+        /// Creates a `ContiguousSegmentCollection.Fragment` with the given pair of segment
+        /// fragments, offset by the given `offset`.
+        public init(_ head: Segment.Fragment, _ tail: Segment.Fragment, offsetBy offset: Metric) {
+            self.init(.double(head,tail), offsetBy: offset)
+        }
+
+        /// Creates a `ContiguousSegmentCollection.Fragment` with the given pair of segment
+        /// fragments and the segments in-between, offset by the given `offset`.
+        public init(
+            head: Segment.Fragment,
+            body: [Segment],
+            tail: Segment.Fragment,
+            offsetBy offset: Metric
+        )
+        {
+            self.init(.multiple(head, body, tail), offsetBy: offset)
+        }
     }
 
+    /// Returns: A fragment in the given `range`.
+    ///
+    /// > The offsets are preserved from the initial collection.
+    ///
     public func fragment(in range: Range<Metric>) -> Fragment {
 
         guard
@@ -169,20 +210,20 @@ extension ContiguousSegmentCollection: Fragmentable where Metric: Zero, Segment:
         if startIndex == endIndex {
             let (offset, element) = storage[startIndex]
             let localRange = range.shifted(by: -offset)
-            return Fragment(.single(element.fragment(in: localRange)), offsetBy: range.lowerBound)
+            return Fragment(element.fragment(in: localRange), offsetBy: range.lowerBound)
         }
 
         let (offset,start) = offsetAndSegment(from: range.lowerBound, at: startIndex)
         let (_,end) = offsetAndSegment(to: range.upperBound, at: endIndex)
 
         // Two fragments
-        guard endIndex > startIndex + 1 else {
-            return Fragment(.double(start,end), offsetBy: offset)
-        }
+        guard endIndex > startIndex + 1 else { return Fragment(start, end, offsetBy: offset) }
 
         // Two fragments and body
         return Fragment(
-            .multiple(start, segments(in: startIndex + 1 ..< endIndex), end),
+            head: start,
+            body: segments(in: startIndex + 1 ..< endIndex),
+            tail: end,
             offsetBy: offset
         )
     }
