@@ -267,7 +267,6 @@ extension ContiguousSegmentCollection {
 extension ContiguousSegmentCollection.Fragment.Segments: Equatable where
     Segment: Equatable, Segment.Fragment: Equatable
 {
-
 }
 
 extension ContiguousSegmentCollection.Fragment: Equatable where
