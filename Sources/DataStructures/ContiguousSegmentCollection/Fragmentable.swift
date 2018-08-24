@@ -16,21 +16,6 @@ public protocol Fragmentable {
     associatedtype Fragment
 }
 
-//extension Fragmentable where Self: Intervallic {
-//
-//    public func fragment(in range: Range<Metric>) {
-//        fatalError()
-//    }
-//
-//    public func fragment(in range: PartialRangeUpTo<Metric>) {
-//        fatalError()
-//    }
-//
-//    public func fragment(in range: PartialRangeFrom<Metric>) {
-//        fatalError()
-//    }
-//}
-
 public protocol IntervallicFragmentable: Intervallic, Fragmentable where Fragment: Intervallic, Fragment.Metric == Metric {
     func fragment(in range: Range<Metric>) -> Fragment
 }
