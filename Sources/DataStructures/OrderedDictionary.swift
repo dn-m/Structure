@@ -126,6 +126,7 @@ extension OrderedDictionary: Collection {
 }
 
 extension OrderedDictionary: Equatable where Value: Equatable { }
+extension OrderedDictionary: Hashable where Value: Hashable { }
 
 extension OrderedDictionary: ExpressibleByDictionaryLiteral {
 

@@ -245,4 +245,4 @@ extension ContiguousSegmentCollection: Measured, Fragmentable where
 }
 
 extension ContiguousSegmentCollection: Equatable where Segment: Equatable { }
-
+extension ContiguousSegmentCollection: Hashable where Segment: Hashable { }

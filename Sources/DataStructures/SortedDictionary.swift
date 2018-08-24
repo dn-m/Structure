@@ -102,8 +102,6 @@ public struct SortedDictionary<Key, Value>: DictionaryProtocol where Key: Hashab
     }
 }
 
-extension SortedDictionary: Equatable where Value: Equatable { }
-
 extension SortedDictionary: Collection {
 
     // MARK: - Collection
@@ -165,6 +163,9 @@ extension SortedDictionary {
         return Array(self)
     }
 }
+
+extension SortedDictionary: Equatable where Value: Equatable { }
+extension SortedDictionary: Hashable where Value: Hashable { }
 
 extension SortedDictionary: ExpressibleByDictionaryLiteral {
 

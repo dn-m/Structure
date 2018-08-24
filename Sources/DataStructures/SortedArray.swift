@@ -119,6 +119,7 @@ public struct SortedArray <Element: Comparable>:
 }
 
 extension SortedArray: Equatable { }
+extension SortedArray: Hashable where Element: Hashable { }
 
 extension SortedArray {
 
