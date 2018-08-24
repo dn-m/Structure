@@ -13,6 +13,8 @@ public protocol IntervallicFragmentable: Intervallic, Fragmentable
     where Fragment: Intervallic, Fragment.Metric == Metric
 {
 
+    associatedtype Fragment
+
     // MARK: - Instance Methods
 
     /// - Returns: The `Fragment` in the given `range`.

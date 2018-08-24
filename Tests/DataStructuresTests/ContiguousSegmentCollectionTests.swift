@@ -26,7 +26,6 @@ extension Int: IntervallicFragmentable {
 }
 
 extension Int.Fragment: IntervallicFragmentable, Totalizable {
-    public typealias Fragment = Int.Fragment
     public init(whole: Int) {
         self.init(whole, in: 0..<whole.length)
     }
