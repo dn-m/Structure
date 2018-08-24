@@ -127,16 +127,6 @@ extension IntervalRelationTests {
     ]
 }
 
-extension IntervalTests {
-    static let __allTests = [
-        ("testAPI", testAPI),
-        ("testContainsClosedClosed", testContainsClosedClosed),
-        ("testContainsClosedOpen", testContainsClosedOpen),
-        ("testContainsOpenClosed", testContainsOpenClosed),
-        ("testContainsOpenOpen", testContainsOpenOpen),
-    ]
-}
-
 extension InvertibleEnumTests {
     static let __allTests = [
         ("testEventCountInverse", testEventCountInverse),
