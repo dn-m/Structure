@@ -24,7 +24,7 @@ import Algebra
 ///             |-|--|-|---|
 ///     length:  1  2 1  3
 ///
-public struct ContiguousSegmentCollection <Metric: Hashable, Segment: Intervallic>
+public struct ContiguousSegmentCollection <Metric: Hashable & Additive, Segment: Intervallic>
     where Metric == Segment.Metric
 {
     private let storage: SortedDictionary<Metric,Segment>
@@ -78,7 +78,7 @@ extension ContiguousSegmentCollection {
     public static var empty: ContiguousSegmentCollection { return .init([:]) }
 }
 
-extension ContiguousSegmentCollection where Metric: Additive {
+extension ContiguousSegmentCollection {
 
     /// Creates a `ContiguousSegmentCollection` with the given `sequence` of segments.
     public init <S: Sequence> (offset: Metric = .zero, _ sequence: S) where S.Element == Segment {
@@ -118,7 +118,7 @@ extension ContiguousSegmentCollection {
     }
 }
 
-extension ContiguousSegmentCollection where Metric: Additive & SignedNumeric {
+extension ContiguousSegmentCollection {
 
     /// - Returns: A `ContiguousSegmentCollection` with all `offsets` reduced such that the first
     /// offset is `0`.
@@ -133,13 +133,13 @@ extension ContiguousSegmentCollection where Metric: Additive & SignedNumeric {
     }
 }
 
-extension ContiguousSegmentCollection: Intervallic where Metric: Additive {
+extension ContiguousSegmentCollection: Intervallic {
 
     // MARK: - Intervallic
 
     /// - Returns: The length of `ContiguousSegmentCollection`.
     public var length: Metric {
-        return storage.values.map { $0.length }.sum
+        return segments.map { $0.length }.sum
     }
 
     /// - Returns: `true` if the `target` is within the bounds of this `ContiguousSegmentCollection`.
@@ -149,8 +149,7 @@ extension ContiguousSegmentCollection: Intervallic where Metric: Additive {
     }
 }
 
-extension ContiguousSegmentCollection: Measured & Fragmentable where
-    Metric: Additive,
+extension ContiguousSegmentCollection: Measured, Fragmentable where
     Segment: MeasuredFragmentable,
     Segment.Fragment: Intervallic & Totalizable,
     Segment.Fragment.Whole == Segment
@@ -180,13 +179,8 @@ extension ContiguousSegmentCollection: Measured & Fragmentable where
         return .init(SortedDictionary([start] + innards + [end]))
     }
 
-    /// - Returns: A `Range<Metric>` which clamps the given `range` to the bounds of this
-    /// `ContiguousSegmentCollection`.
-    private func normalizedRange(_ range: Range<Metric>) -> Range<Metric>? {
-        guard let first = first?.0 else { return nil }
-        return range.clamped(to: first ..< length)
-    }
-
+    /// - Returns: An array of 2-tuples containing the offset and the totalized fragment in the
+    /// given `range`.
     private func fragments(in range: Range<Int>) -> [(Metric,Segment.Fragment)] {
         return base[range].map { element in
             let (offset,segment) = element
@@ -241,6 +235,14 @@ extension ContiguousSegmentCollection: Measured & Fragmentable where
         }
         return nil
     }
+
+    /// - Returns: A `Range<Metric>` which clamps the given `range` to the bounds of this
+    /// `ContiguousSegmentCollection`.
+    private func normalizedRange(_ range: Range<Metric>) -> Range<Metric>? {
+        guard let first = first?.0 else { return nil }
+        return range.clamped(to: first ..< length)
+    }
 }
 
 extension ContiguousSegmentCollection: Equatable where Segment: Equatable { }
+
