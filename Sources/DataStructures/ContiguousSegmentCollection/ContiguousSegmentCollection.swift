@@ -170,43 +170,59 @@ extension ContiguousSegmentCollection: Intervallic {
     }
 }
 
-extension ContiguousSegmentCollection: Measured, Fragmentable where
-    Segment: MeasuredFragmentable,
-    Segment.Fragment: Intervallic & Totalizable,
-    Segment.Fragment.Whole == Segment
-{
-    // MARK: - Fragmentable
+extension ContiguousSegmentCollection: Fragmentable where Metric: Zero, Segment: IntervallicFragmentable {
 
-    /// The type of `Fragment` of a `ContiguousSegmentCollection`.
-    public typealias Fragment = ContiguousSegmentCollection<Metric, Segment.Fragment>
+    public struct Fragment {
 
-    /// - Returns: A `ContiguousSegmentCollection` in the given `range` of metrics.
-    public func fragment (in range: Range<Metric>) -> Fragment {
+        public enum Segments {
+            case empty
+            case single(Segment.Fragment)
+            case double(Segment.Fragment, Segment.Fragment)
+            case multiple(Segment.Fragment?, [Segment], Segment.Fragment?)
+        }
+
+        public static var empty: Fragment {
+            return .init(.empty, offsetBy: .zero)
+        }
+
+        let offset: Metric
+        let segments: Segments
+
+        public init(_ segments: Segments, offsetBy offset: Metric = .zero) {
+            self.offset = offset
+            self.segments = segments
+        }
+    }
+
+    public func fragment(in range: Range<Metric>) -> Fragment {
+
         guard
             let range = normalizedRange(range),
             let (startIndex,endIndex) = indices(containingBoundsOf: range)
         else {
             return .empty
         }
-        if endIndex == startIndex {
-            let (offset, element) = storage[startIndex]
-            let only = element.fragment(in: range.lowerBound - offset ..< range.upperBound - offset)
-            return .init([range.lowerBound: only])
-        }
-        let start = offsetAndSegment(from: range.lowerBound, at: startIndex)
-        let end = offsetAndSegment(to: range.upperBound, at: endIndex)
-        guard endIndex > startIndex + 1 else { return .init(SortedDictionary([start,end])) }
-        let innards = fragments(in: startIndex + 1 ..< endIndex)
-        return .init(SortedDictionary([start] + innards + [end]))
-    }
 
-    /// - Returns: An array of 2-tuples containing the offset and the totalized fragment in the
-    /// given `range`.
-    private func fragments(in range: Range<Int>) -> [(Metric,Segment.Fragment)] {
-        return base[range].map { element in
-            let (offset,segment) = element
-            return (offset, Segment.Fragment(whole: segment))
+        // Single fragment
+        if startIndex == endIndex {
+            let (offset, element) = storage[startIndex]
+            let localRange = range.shifted(by: -offset)
+            return Fragment(.single(element.fragment(in: localRange)), offsetBy: range.lowerBound)
         }
+
+        let (offset,start) = offsetAndSegment(from: range.lowerBound, at: startIndex)
+        let (_,end) = offsetAndSegment(to: range.upperBound, at: endIndex)
+
+        // Two fragments
+        guard endIndex > startIndex + 1 else {
+            return Fragment(.double(start,end), offsetBy: offset)
+        }
+
+        // Two fragments and body
+        return Fragment(
+            .multiple(start, segments(in: startIndex + 1 ..< endIndex), end),
+            offsetBy: offset
+        )
     }
 
     private func offsetAndSegment(from offset: Metric, at index: Int) -> (Metric,Segment.Fragment) {
@@ -218,6 +234,24 @@ extension ContiguousSegmentCollection: Measured, Fragmentable where
         let (segmentOffset, segment) = storage[index]
         return (segmentOffset, segment.fragment(in: ..<(offset - segmentOffset)))
     }
+
+    private func segments(in range: Range<Int>) -> [Segment] {
+        return self[range].map { _, segment in segment }
+    }
+}
+
+extension ContiguousSegmentCollection.Fragment.Segments: Equatable where
+    Segment: Equatable, Segment.Fragment: Equatable {
+
+}
+
+extension ContiguousSegmentCollection.Fragment: Equatable where
+    Segment: Equatable, Segment.Fragment: Equatable
+{
+
+}
+
+extension ContiguousSegmentCollection where Segment: IntervallicFragmentable {
 
     /// - Returns: A tuple of the start index and end index of segments containing the bounds of
     /// the given `interval`.
@@ -271,6 +305,111 @@ extension ContiguousSegmentCollection: Measured, Fragmentable where
         return range.clamped(to: first ..< length)
     }
 }
+
+
+//extension ContiguousSegmentCollection: Measured, Fragmentable where
+////    Metric == Segment.Metric,
+////    Segment: MeasuredFragmentable,
+////    Segment.Fragment: Intervallic & Totalizable,
+////    Segment.Fragment.Metric == Segment.Metric,
+////    Segment.Fragment.Whole == Segment
+//{
+//    // MARK: - Fragmentable
+//
+//    /// The type of `Fragment` of a `ContiguousSegmentCollection`.
+//    public typealias Fragment = ContiguousSegmentCollection<Metric, Segment.Fragment>
+//
+//    /// - Returns: A `ContiguousSegmentCollection` in the given `range` of metrics.
+//    public func fragment (in range: Range<Metric>) -> Fragment {
+//        guard
+//            let range = normalizedRange(range),
+//            let (startIndex,endIndex) = indices(containingBoundsOf: range)
+//        else {
+//            return .empty
+//        }
+//        if endIndex == startIndex {
+//            let (offset, element) = storage[startIndex]
+//            let only = element.fragment(in: range.lowerBound - offset ..< range.upperBound - offset)
+//            return .init([range.lowerBound: only])
+//        }
+//        let start = offsetAndSegment(from: range.lowerBound, at: startIndex)
+//        let end = offsetAndSegment(to: range.upperBound, at: endIndex)
+//        guard endIndex > startIndex + 1 else { return .init(SortedDictionary([start,end])) }
+//        let innards = fragments(in: startIndex + 1 ..< endIndex)
+//        return .init(SortedDictionary([start] + innards + [end]))
+//    }
+//
+//    /// - Returns: An array of 2-tuples containing the offset and the totalized fragment in the
+//    /// given `range`.
+//    private func fragments(in range: Range<Int>) -> [(Metric,Segment.Fragment)] {
+//        return base[range].map { element in
+//            let (offset,segment) = element
+//            return (offset, Segment.Fragment(whole: segment))
+//        }
+//    }
+//
+//    private func offsetAndSegment(from offset: Metric, at index: Int) -> (Metric,Segment.Fragment) {
+//        let (segmentOffset, segment) = storage[index]
+//        return (offset, segment.fragment(in: (offset - segmentOffset)...))
+//    }
+//
+//    private func offsetAndSegment(to offset: Metric, at index: Int) -> (Metric,Segment.Fragment) {
+//        let (segmentOffset, segment) = storage[index]
+//        return (segmentOffset, segment.fragment(in: ..<(offset - segmentOffset)))
+//    }
+//
+//    /// - Returns: A tuple of the start index and end index of segments containing the bounds of
+//    /// the given `interval`.
+//    ///
+//    /// - TODO: For a performance optimization, only search indices `startIndex...` to find the
+//    /// `endIndex`. This would require adding a parameter to `index(containing:for:)` describing
+//    /// the `searchRange`.
+//    private func indices(containingBoundsOf interval: Range<Metric>) -> (Int,Int)? {
+//        guard
+//            let startIndex = index(containing: interval.lowerBound, for: .lower),
+//            let endIndex = index(containing: interval.upperBound, for: .upper)
+//        else {
+//            return nil
+//        }
+//        return (startIndex,endIndex)
+//    }
+//
+//    private enum Bound {
+//        case lower, upper
+//        var lowerCompare: (Metric,Metric) -> Bool { return self == .lower ? (>=) : (>) }
+//        var upperCompare: (Metric,Metric) -> Bool { return self == .lower ? (<) : (<=) }
+//    }
+//
+//    /// - Returns: The index of the element containing the given `target` offset.
+//    ///
+//    /// - TODO: Add `searchRange` parameter
+//    /// - TODO: Inject `lowerCompare` and `upperCompare` directly, rather than `bound`.
+//    private func index(containing target: Metric, for bound: Bound) -> Int? {
+//        var start = 0
+//        var end = segments.count
+//        while start < end {
+//            let mid = start + (end - start) / 2
+//            let (offset, element) = storage[mid]
+//            let lowerBound = offset
+//            let upperBound = offset + element.length
+//            if bound.lowerCompare(target,lowerBound) && bound.upperCompare(target,upperBound) {
+//                return mid
+//            } else if bound.lowerCompare(target,upperBound) {
+//                start = mid + 1
+//            } else {
+//                end = mid
+//            }
+//        }
+//        return nil
+//    }
+//
+//    /// - Returns: A `Range<Metric>` which clamps the given `range` to the bounds of this
+//    /// `ContiguousSegmentCollection`.
+//    private func normalizedRange(_ range: Range<Metric>) -> Range<Metric>? {
+//        guard let first = first?.0 else { return nil }
+//        return range.clamped(to: first ..< length)
+//    }
+//}
 
 extension ContiguousSegmentCollection: Equatable where Segment: Equatable { }
 extension ContiguousSegmentCollection: Hashable where Segment: Hashable { }

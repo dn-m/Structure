@@ -7,12 +7,7 @@
 
 import Algebra
 
-public protocol Intervallic {
-
-    // MARK: - Associated Types
-
-    /// Type of the `length` of the `Intervallic` type.
-    associatedtype Metric: SignedNumeric, Comparable
+public protocol Intervallic: Measured {
 
     // MARK: - Instance Properties
 
@@ -28,20 +23,26 @@ extension Numeric where Self: Comparable {
     }
 }
 
-extension Int: Intervallic { }
-extension Float: Intervallic { }
-extension Double: Intervallic { }
-
-extension Intervallic where Self: MeasuredFragmentable, Metric: Additive {
-
-    /// - Returns: A fragment of self from lower bound to the given `offset`.
-    public func fragment(in range: PartialRangeFrom<Metric>) -> Fragment {
-        return fragment(in: range.lowerBound ..< length)
-    }
-
-    /// - Returns: A fragment of self from the given `offset` to upper bound.
-    public func fragment(in range: PartialRangeUpTo<Metric>) -> Fragment {
-        return fragment(in: .zero ..< range.upperBound)
-    }
+extension Int: Intervallic {
+    public typealias Metric = Int
+}
+extension Float: Intervallic {
+    public typealias Metric = Float
+}
+extension Double: Intervallic {
+    public typealias Metric = Double
 }
 
+//extension Intervallic where Self: MeasuredFragmentable, Metric: Additive {
+//
+//    /// - Returns: A fragment of self from lower bound to the given `offset`.
+//    public func fragment(in range: PartialRangeFrom<Metric>) -> Fragment {
+//        return fragment(in: range.lowerBound ..< length)
+//    }
+//
+//    /// - Returns: A fragment of self from the given `offset` to upper bound.
+//    public func fragment(in range: PartialRangeUpTo<Metric>) -> Fragment {
+//        return fragment(in: .zero ..< range.upperBound)
+//    }
+//}
+//
