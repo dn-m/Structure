@@ -164,7 +164,9 @@ extension ContiguousSegmentCollection: Intervallic {
     /// - Returns: `true` if the `target` is within the bounds of this `ContiguousSegmentCollection`.
     public func contains(_ target: Metric) -> Bool {
         guard let first = first, let last = last else { return false }
-        return (first.0 ..< last.0 + last.1.length).contains(target)
+        let start = first.0
+        let end = last.0 + last.1.length
+        return (start ..< end).contains(target)
     }
 }
 
@@ -219,6 +221,10 @@ extension ContiguousSegmentCollection: Measured, Fragmentable where
 
     /// - Returns: A tuple of the start index and end index of segments containing the bounds of
     /// the given `interval`.
+    ///
+    /// - TODO: For a performance optimization, only search indices `startIndex...` to find the
+    /// `endIndex`. This would require adding a parameter to `index(containing:for:)` describing
+    /// the `searchRange`.
     private func indices(containingBoundsOf interval: Range<Metric>) -> (Int,Int)? {
         guard
             let startIndex = index(containing: interval.lowerBound, for: .lower),
@@ -236,6 +242,9 @@ extension ContiguousSegmentCollection: Measured, Fragmentable where
     }
 
     /// - Returns: The index of the element containing the given `target` offset.
+    ///
+    /// - TODO: Add `searchRange` parameter
+    /// - TODO: Inject `lowerCompare` and `upperCompare` directly, rather than `bound`.
     private func index(containing target: Metric, for bound: Bound) -> Int? {
         var start = 0
         var end = segments.count
