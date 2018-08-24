@@ -130,11 +130,7 @@ extension OrderedDictionary: ExpressibleByDictionaryLiteral {
 
     /// Create an `OrderedDictionary` with a `DictionaryLiteral`.
     public init(dictionaryLiteral elements: (Key, Value)...) {
-
-        self.init()
-
-        elements.forEach { (k, v) in
-            append(v, key: k)
-        }
+        self.init(minimumCapacity: elements.count)
+        elements.forEach { (k, v) in append(v, key: k) }
     }
 }
