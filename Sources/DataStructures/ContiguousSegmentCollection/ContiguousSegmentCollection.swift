@@ -81,7 +81,7 @@ extension ContiguousSegmentCollection {
 extension ContiguousSegmentCollection where Metric: Additive {
 
     /// Creates a `ContiguousSegmentCollection` with the given `sequence` of segments.
-    public init <S> (_ sequence: S) where S: Sequence, S.Element == Segment {
+    public init <S: Sequence> (offset: Metric = .zero, _ sequence: S) where S.Element == Segment {
         var ordered: OrderedDictionary<Metric,Segment> = [:]
         var accum: Metric = .zero
         for segment in sequence {
@@ -92,7 +92,7 @@ extension ContiguousSegmentCollection where Metric: Additive {
     }
 
     /// Creates a `ContiguousSegmentCollection` with the given `collection` of segments.
-    public init <C> (_ collection: C) where C: Collection, C.Element == Segment {
+    public init <C: Collection> (offset: Metric = .zero, _ collection: C) where C.Element == Segment {
         var ordered = OrderedDictionary<Metric,Segment>(minimumCapacity: collection.count)
         var accum: Metric = .zero
         for segment in collection {
