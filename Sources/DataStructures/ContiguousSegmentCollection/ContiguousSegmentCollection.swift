@@ -153,8 +153,7 @@ extension ContiguousSegmentCollection: Measured & Fragmentable where
     Metric: Additive,
     Segment: MeasuredFragmentable,
     Segment.Fragment: Intervallic & Totalizable,
-    Segment.Fragment.Whole == Segment,
-    Segment.Metric == Segment.Fragment.Metric
+    Segment.Fragment.Whole == Segment
 {
     // MARK: - Fragmentable
 
