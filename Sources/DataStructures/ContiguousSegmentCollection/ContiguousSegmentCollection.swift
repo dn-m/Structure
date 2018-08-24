@@ -32,44 +32,6 @@ public struct ContiguousSegmentCollection <Metric: Hashable & Additive, Segment:
 
 extension ContiguousSegmentCollection {
 
-    // MARK: - Nested Types
-
-    /// Encapsulation of the incremental building state when constructing a
-    /// `ContiguousSegmentCollection`.
-    ///
-    /// This class only offsets an interface to `add` segments additively, and to `build` the
-    /// result, in order to ensure order without the increased performance penalty of doing so.
-    ///
-    public class Builder {
-
-        private var offset: Metric
-        private var intermediate: OrderedDictionary<Metric,Segment>
-
-        // MARK: - Initializers
-        public init(offset: Metric = .zero) {
-            self.offset = offset
-            self.intermediate = [:]
-        }
-
-        // MARK: - Instance Methods
-
-        /// Appends the given `segment` to the in-process `ContiguousSegmentCollection`.
-        @discardableResult
-        public func add(_ segment: Segment) -> Builder {
-            intermediate.append(segment, key: offset)
-            offset = offset + segment.length
-            return self
-        }
-
-        /// - Returns: The completed `ContiguousSegmentCollection`.
-        public func build() -> ContiguousSegmentCollection {
-            return .init(SortedDictionary(presorted: intermediate))
-        }
-    }
-}
-
-extension ContiguousSegmentCollection {
-
     // MARK: - Initializers
 
     /// Creates a `ContiguousSegmentCollection` with the given `presorted` `SortedDictionary` of
@@ -240,16 +202,6 @@ extension ContiguousSegmentCollection: Fragmentable where Metric: Zero, Segment:
     }
 }
 
-extension ContiguousSegmentCollection.Fragment.Segments: Equatable where
-    Segment: Equatable, Segment.Fragment: Equatable {
-
-}
-
-extension ContiguousSegmentCollection.Fragment: Equatable where
-    Segment: Equatable, Segment.Fragment: Equatable
-{
-
-}
 
 extension ContiguousSegmentCollection where Segment: IntervallicFragmentable {
 
@@ -304,6 +256,18 @@ extension ContiguousSegmentCollection where Segment: IntervallicFragmentable {
         guard let first = first?.0 else { return nil }
         return range.clamped(to: first ..< length)
     }
+}
+
+extension ContiguousSegmentCollection.Fragment.Segments: Equatable where
+    Segment: Equatable, Segment.Fragment: Equatable
+{
+
+}
+
+extension ContiguousSegmentCollection.Fragment: Equatable where
+    Segment: Equatable, Segment.Fragment: Equatable
+{
+
 }
 
 extension ContiguousSegmentCollection: Equatable where Segment: Equatable { }

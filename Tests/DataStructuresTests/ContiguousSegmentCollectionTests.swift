@@ -77,20 +77,6 @@ class ContiguousSegmentCollectionTests: XCTestCase {
         XCTAssertEqual(fourthSegment.1, 5)
     }
 
-    func testBuilder() {
-        let built = ContiguousSegmentCollection.Builder()
-            .add(1)
-            .add(2)
-            .add(3)
-            .add(5)
-            .add(8)
-            .add(13)
-            .add(21)
-            .build()
-        let expected = ContiguousSegmentCollection([1,2,3,5,8,13,21])
-        XCTAssertEqual(built, expected)
-    }
-
     /// |---|---|---|---|
     var collection = ContiguousSegmentCollection([4,4,4,4])
 
