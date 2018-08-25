@@ -139,39 +139,43 @@ extension ContiguousSegmentCollection: Fragmentable where Metric: Zero, Segment:
     /// A fragment of a `ContiguousSegmentCollection`.
     public struct Fragment {
 
-        enum Segments {
-            case empty
-            case single(Segment.Fragment)
-            case double(Segment.Fragment, Segment.Fragment)
-            case multiple(Segment.Fragment?, ArraySlice<Segment>, Segment.Fragment?)
-        }
-
         // MARK: - Type Properties
 
         /// - Returns: A `Fragment` with no elements.
         public static var empty: Fragment {
-            return .init(.empty, offsetBy: .zero)
+            return .init()
         }
 
         // MARK: - Instance Properties
 
+        let head: Segment.Fragment?
+        let body: ArraySlice<Segment>
+        let tail: Segment.Fragment?
+
         /// The offset of this `Fragment`.
         let offset: Metric
 
-        /// The segments contained herein.
-        let segments: Segments
-
         // MARK: - Initializers
 
-        init(_ segments: Segments, offsetBy offset: Metric = .zero) {
+        /// Creates a `ContiguousSegmentCollection.Fragment` with the given pair of segment
+        /// fragments and the segments in-between, offset by the given `offset`.
+        init(
+            head: Segment.Fragment? = nil,
+            body: ArraySlice<Segment> = [],
+            tail: Segment.Fragment? = nil,
+            offsetBy offset: Metric = .zero
+        )
+        {
+            self.head = head
+            self.body = body
+            self.tail = tail
             self.offset = offset
-            self.segments = segments
         }
 
         /// Creates a `ContiguousSegmentCollection.Fragment` with the given `single` segment
         /// fragment, offset by the given `offset`.
         public init(_ single: Segment.Fragment, offsetBy offset: Metric = .zero) {
-            self.init(.single(single), offsetBy: offset)
+            self.init(head: single, offsetBy: offset)
         }
 
         /// Creates a `ContiguousSegmentCollection.Fragment` with the given pair of segment
@@ -182,19 +186,7 @@ extension ContiguousSegmentCollection: Fragmentable where Metric: Zero, Segment:
             offsetBy offset: Metric = .zero
         )
         {
-            self.init(.double(head,tail), offsetBy: offset)
-        }
-
-        /// Creates a `ContiguousSegmentCollection.Fragment` with the given pair of segment
-        /// fragments and the segments in-between, offset by the given `offset`.
-        public init(
-            head: Segment.Fragment,
-            body: ArraySlice<Segment>,
-            tail: Segment.Fragment,
-            offsetBy offset: Metric = .zero
-        )
-        {
-            self.init(.multiple(head, body, tail), offsetBy: offset)
+            self.init(head: head, tail: tail, offsetBy: offset)
         }
     }
 
@@ -245,6 +237,29 @@ extension ContiguousSegmentCollection: Fragmentable where Metric: Zero, Segment:
 
     private func segments(in range: Range<Int>) -> ArraySlice<Segment> {
         return base.values[range]
+    }
+}
+
+extension ContiguousSegmentCollection.Fragment {
+
+    public var offsets: AnyCollection<Metric> {
+        fatalError()
+    }
+}
+
+extension ContiguousSegmentCollection.Fragment: IntervallicFragmentable {
+
+    // MARK: - IntervallicFragmentable
+
+    public typealias Fragment = ContiguousSegmentCollection.Fragment
+
+    /// - Returns: The length of this `ContiguousSegmentCollection.Fragment`.
+    public var length: Metric {
+        return (head?.length ?? .zero) + body.map { $0.length }.sum + (tail?.length ?? .zero)
+    }
+
+    public func fragment(in range: Range<Metric>) -> ContiguousSegmentCollection<Metric, Segment>.Fragment {
+        fatalError()
     }
 }
 
@@ -316,11 +331,6 @@ extension ContiguousSegmentCollection {
         guard let first = first?.0 else { return nil }
         return range.clamped(to: first ..< length)
     }
-}
-
-extension ContiguousSegmentCollection.Fragment.Segments: Equatable where
-    Segment: Equatable, Segment.Fragment: Equatable
-{
 }
 
 extension ContiguousSegmentCollection.Fragment: Equatable where
