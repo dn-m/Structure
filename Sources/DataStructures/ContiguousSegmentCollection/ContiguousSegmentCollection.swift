@@ -262,7 +262,7 @@ extension ContiguousSegmentCollection.Fragment: IntervallicFragmentable {
 
     public func fragment(in range: Range<Metric>) -> ContiguousSegmentCollection.Fragment {
         guard let range = normalizedRange(range) else { return .empty }
-//        let bodyOffset = self.offset + (head?.length ?? .zero)
+        
         return body.fragment(in: range)
     }
 
