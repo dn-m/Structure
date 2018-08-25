@@ -149,7 +149,7 @@ extension ContiguousSegmentCollection: Fragmentable where Metric: Zero, Segment:
         // MARK: - Instance Properties
 
         let head: Segment.Fragment?
-        let body: ArraySlice<Segment>
+        let body: ContiguousSegmentCollection
         let tail: Segment.Fragment?
 
         /// The offset of this `Fragment`.
@@ -161,7 +161,7 @@ extension ContiguousSegmentCollection: Fragmentable where Metric: Zero, Segment:
         /// fragments and the segments in-between, offset by the given `offset`.
         init(
             head: Segment.Fragment? = nil,
-            body: ArraySlice<Segment> = [],
+            body: ContiguousSegmentCollection = .empty,
             tail: Segment.Fragment? = nil,
             offsetBy offset: Metric = .zero
         )
@@ -237,8 +237,8 @@ extension ContiguousSegmentCollection: Fragmentable where Metric: Zero, Segment:
         return (segmentOffset, segment.fragment(in: ..<(offset - segmentOffset)))
     }
 
-    private func segments(in range: Range<Int>) -> ArraySlice<Segment> {
-        return base.values[range]
+    private func segments(in range: Range<Int>) -> ContiguousSegmentCollection {
+        return ContiguousSegmentCollection(base.values[range])
     }
 }
 
@@ -257,15 +257,13 @@ extension ContiguousSegmentCollection.Fragment: IntervallicFragmentable {
     //
     // FIXME: Consider storing this.
     public var length: Metric {
-        return (head?.length ?? .zero) + body.lazy.map { $0.length }.sum + (tail?.length ?? .zero)
+        return (head?.length ?? .zero) + body.segments.lazy.map { $0.length }.sum + (tail?.length ?? .zero)
     }
 
     public func fragment(in range: Range<Metric>) -> ContiguousSegmentCollection.Fragment {
         guard let range = normalizedRange(range) else { return .empty }
-        let bodyOffset = self.offset + (head?.length ?? .zero)
-        let bodyFragment = ContiguousSegmentCollection(offset: bodyOffset, body)
-        #warning("TODO")
-        fatalError()
+//        let bodyOffset = self.offset + (head?.length ?? .zero)
+        return body.fragment(in: range)
     }
 
     private func normalizedRange(_ range: Range<Metric>) -> Range<Metric>? {
@@ -350,3 +348,13 @@ extension ContiguousSegmentCollection.Fragment: Equatable where
 
 extension ContiguousSegmentCollection: Equatable where Segment: Equatable { }
 extension ContiguousSegmentCollection: Hashable where Segment: Hashable { }
+
+extension ContiguousSegmentCollection: ExpressibleByArrayLiteral {
+
+    // MARK: - ExpressibleByArrayLiteral
+
+    /// Creates a `ContiguousSegmentCollection` with the given array literal.
+    public init(arrayLiteral elements: Segment...) {
+        self.init(elements)
+    }
+}
