@@ -214,7 +214,9 @@ extension ContiguousSegmentCollection: Fragmentable where Metric: Zero, Segment:
         let (_,end) = offsetAndSegment(to: range.upperBound, at: endIndex)
 
         // Two fragments
-        guard endIndex > startIndex + 1 else { return Fragment(start, end, offsetBy: offset) }
+        guard endIndex > startIndex + 1 else {
+            return Fragment(start, end, offsetBy: offset)
+        }
 
         // Two fragments and body
         return Fragment(
@@ -251,18 +253,26 @@ extension ContiguousSegmentCollection.Fragment: IntervallicFragmentable {
 
     // MARK: - IntervallicFragmentable
 
-    public typealias Fragment = ContiguousSegmentCollection.Fragment
-
     /// - Returns: The length of this `ContiguousSegmentCollection.Fragment`.
+    //
+    // FIXME: Consider storing this.
     public var length: Metric {
-        return (head?.length ?? .zero) + body.map { $0.length }.sum + (tail?.length ?? .zero)
+        return (head?.length ?? .zero) + body.lazy.map { $0.length }.sum + (tail?.length ?? .zero)
     }
 
-    public func fragment(in range: Range<Metric>) -> ContiguousSegmentCollection<Metric, Segment>.Fragment {
+    public func fragment(in range: Range<Metric>) -> ContiguousSegmentCollection.Fragment {
+        guard let range = normalizedRange(range) else { return .empty }
+        let bodyOffset = self.offset + (head?.length ?? .zero)
+        let bodyFragment = ContiguousSegmentCollection(offset: bodyOffset, body)
+        #warning("TODO")
         fatalError()
     }
-}
 
+    private func normalizedRange(_ range: Range<Metric>) -> Range<Metric>? {
+        guard head != nil || tail != nil || !body.isEmpty else { return nil }
+        return range.clamped(to: offset ..< offset + length)
+    }
+}
 
 extension ContiguousSegmentCollection {
 
