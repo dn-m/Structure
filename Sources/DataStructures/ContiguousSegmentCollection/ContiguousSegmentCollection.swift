@@ -24,9 +24,15 @@ import Algebra
 ///             |-|--|-|---|
 ///     length:  1  2 1  3
 ///
-public struct ContiguousSegmentCollection <Metric: Hashable & Additive, Segment: Intervallic>
-    where Metric == Segment.Metric
+public struct ContiguousSegmentCollection <Segment: Intervallic>
+    where Segment.Metric: Hashable & Additive
 {
+
+    // MARK: - Type Aliases
+
+    /// The type which is used to measure the `Segment`.
+    public typealias Metric = Segment.Metric
+
     private let storage: SortedDictionary<Metric,Segment>
 }
 
@@ -62,9 +68,9 @@ extension ContiguousSegmentCollection {
 extension ContiguousSegmentCollection {
 
     /// Creates a `ContiguousSegmentCollection` with the given `sequence` of segments.
-    public init <S: Sequence> (offset: Metric = .zero, _ sequence: S) where S.Element == Segment {
+    public init <S: Sequence> (_ sequence: S, offset: Metric = .zero) where S.Element == Segment {
         var ordered: OrderedDictionary<Metric,Segment> = [:]
-        var accum: Metric = .zero
+        var accum: Metric = offset
         for segment in sequence {
             ordered.append(segment, key: accum)
             accum += segment.length
@@ -73,14 +79,23 @@ extension ContiguousSegmentCollection {
     }
 
     /// Creates a `ContiguousSegmentCollection` with the given `collection` of segments.
-    public init <C: Collection> (offset: Metric = .zero, _ collection: C) where C.Element == Segment {
+    public init <C: Collection> (_ collection: C, offset: Metric = .zero)
+        where C.Element == Segment
+    {
         var ordered = OrderedDictionary<Metric,Segment>(minimumCapacity: collection.count)
-        var accum: Metric = .zero
+        var accum: Metric = offset
         for segment in collection {
             ordered.append(segment, key: accum)
             accum += segment.length
         }
         self.init(SortedDictionary(presorted: ordered))
+    }
+
+    /// Creates a `ContiguousSegmentCollection` with the given `presorted` collection of key-value
+    /// pairs.
+    public init <C: Collection> (presorted: C) where C.Element == Element {
+        print("presorted: \(presorted)")
+        self.init(SortedDictionary(presorted: presorted))
     }
 }
 
@@ -132,12 +147,23 @@ extension ContiguousSegmentCollection: Intervallic {
     }
 }
 
-extension ContiguousSegmentCollection: Fragmentable where Metric: Zero, Segment: IntervallicFragmentable {
+extension ContiguousSegmentCollection: Fragmentable
+    where Metric: Zero, Segment: IntervallicFragmentable
+{
 
     // MARK: - Nested Types
 
     /// A fragment of a `ContiguousSegmentCollection`.
     public struct Fragment {
+
+        struct Item {
+            let offset: Metric
+            let fragment: Segment.Fragment
+
+            func contains(_ target: Metric) -> Bool {
+                return (offset ..< fragment.length).contains(target)
+            }
+        }
 
         // MARK: - Type Properties
 
@@ -148,45 +174,69 @@ extension ContiguousSegmentCollection: Fragmentable where Metric: Zero, Segment:
 
         // MARK: - Instance Properties
 
-        let head: Segment.Fragment?
-        let body: ContiguousSegmentCollection
-        let tail: Segment.Fragment?
+        public var offset: Metric {
+            return head?.offset ?? body.first?.0 ?? .zero
+        }
 
-        /// The offset of this `Fragment`.
-        let offset: Metric
+        let head: Item?
+        let body: ContiguousSegmentCollection<Segment>
+        let tail: Item?
 
         // MARK: - Initializers
 
         /// Creates a `ContiguousSegmentCollection.Fragment` with the given pair of segment
         /// fragments and the segments in-between, offset by the given `offset`.
         init(
-            head: Segment.Fragment? = nil,
+            head: Item? = nil,
             body: ContiguousSegmentCollection = .empty,
-            tail: Segment.Fragment? = nil,
-            offsetBy offset: Metric = .zero
+            tail: Item? = nil
         )
         {
             self.head = head
             self.body = body
             self.tail = tail
-            self.offset = offset
+        }
+
+        public init(
+            head: Segment.Fragment,
+            body: ContiguousSegmentCollection<Segment>,
+            tail: Segment.Fragment
+        )
+        {
+            precondition(!body.isEmpty)
+            let offset = body.first!.0
+            let head = Item(offset: offset - head.length, fragment: head)
+            let tail = Item(offset: offset + body.length, fragment: tail)
+            self.init(head: head, body: body, tail: tail)
+        }
+
+        public init(head: Segment.Fragment, body: ContiguousSegmentCollection<Segment>) {
+            precondition(!body.isEmpty)
+            let offset = body.first!.0
+            let head = Item(offset: offset - head.length, fragment: head)
+            self.init(head: head, body: body)
+        }
+
+        public init(body: ContiguousSegmentCollection<Segment>, tail: Segment.Fragment) {
+            precondition(!body.isEmpty)
+            let offset = body.first!.0
+            let tail = Item(offset: offset - tail.length, fragment: tail)
+            self.init(body: body, tail: tail)
         }
 
         /// Creates a `ContiguousSegmentCollection.Fragment` with the given `single` segment
         /// fragment, offset by the given `offset`.
-        public init(_ single: Segment.Fragment, offsetBy offset: Metric = .zero) {
-            self.init(head: single, offsetBy: offset)
+        public init(_ single: Segment.Fragment, offset: Metric = .zero) {
+            let item = Item(offset: offset, fragment: single)
+            self.init(head: item)
         }
 
         /// Creates a `ContiguousSegmentCollection.Fragment` with the given pair of segment
         /// fragments, offset by the given `offset`.
-        public init(
-            _ head: Segment.Fragment,
-            _ tail: Segment.Fragment,
-            offsetBy offset: Metric = .zero
-        )
-        {
-            self.init(head: head, tail: tail, offsetBy: offset)
+        public init(_ head: Segment.Fragment, _ tail: Segment.Fragment, offset: Metric = .zero) {
+            let head = Item(offset: offset, fragment: head)
+            let tail = Item(offset: offset + tail.length, fragment: tail)
+            self.init(head: head, tail: tail)
         }
     }
 
@@ -203,42 +253,71 @@ extension ContiguousSegmentCollection: Fragmentable where Metric: Zero, Segment:
             return .empty
         }
 
-        // Single fragment
         if startIndex == endIndex {
-            let (offset, element) = storage[startIndex]
-            let localRange = range.shifted(by: -offset)
-            return Fragment(element.fragment(in: localRange), offsetBy: range.lowerBound)
+            return single(at: startIndex, in: range)
+        } else if endIndex == startIndex + 1 {
+            return adjacentPair(at: startIndex, in: range)
+        } else {
+            return spanning(from: startIndex, to: endIndex, in: range)
         }
-
-        let (offset,start) = offsetAndSegment(from: range.lowerBound, at: startIndex)
-        let (_,end) = offsetAndSegment(to: range.upperBound, at: endIndex)
-
-        // Two fragments
-        guard endIndex > startIndex + 1 else {
-            return Fragment(start, end, offsetBy: offset)
-        }
-
-        // Two fragments and body
-        return Fragment(
-            head: start,
-            body: segments(in: startIndex + 1 ..< endIndex),
-            tail: end,
-            offsetBy: offset
-        )
     }
 
-    private func offsetAndSegment(from offset: Metric, at index: Int) -> (Metric,Segment.Fragment) {
-        let (segmentOffset, segment) = storage[index]
-        return (offset, segment.fragment(in: (offset - segmentOffset)...))
+    private func single(at index: Int, in range: Range<Metric>) -> Fragment {
+        let (offset, segment) = storage[index]
+        let localRange = range.shifted(by: -offset)
+        let fragment = segment.fragment(in: localRange)
+        if fragment.length == segment.length {
+            let body = ContiguousSegmentCollection([segment], offset: range.lowerBound)
+            return Fragment(body: body)
+        } else {
+            return Fragment(segment.fragment(in: localRange), offset: range.lowerBound )
+        }
     }
 
-    private func offsetAndSegment(to offset: Metric, at index: Int) -> (Metric,Segment.Fragment) {
-        let (segmentOffset, segment) = storage[index]
-        return (segmentOffset, segment.fragment(in: ..<(offset - segmentOffset)))
+    private func adjacentPair(at index: Int, in range: Range<Metric>) -> Fragment {
+        let (startOffset, startSegment) = storage[index]
+        let startFragment = startSegment.fragment(in: (range.lowerBound - startOffset)...)
+        let (endOffset, endSegment) = storage[index + 1]
+        let endFragment = endSegment.fragment(in: ..<(range.upperBound - endOffset))
+        if startSegment.length == startFragment.length && endSegment.length == endFragment.length {
+            return Fragment(body: ContiguousSegmentCollection([startSegment, endSegment], offset: startOffset))
+        } else if startSegment.length == startFragment.length && endSegment.length != endFragment.length {
+            return Fragment(
+                body: ContiguousSegmentCollection([startSegment], offset: startOffset),
+                tail: endFragment
+            )
+        } else if startSegment.length != startFragment.length && endSegment.length == endFragment.length {
+            return Fragment(
+                head: startFragment,
+                body: ContiguousSegmentCollection([endSegment], offset: endOffset)
+            )
+        } else {
+            return Fragment(startFragment, endFragment, offset: startOffset)
+        }
+    }
+
+    private func spanning(from startIndex: Int, to endIndex: Int, in range: Range<Metric>) -> Fragment {
+        let (startOffset, startSegment) = storage[startIndex]
+        let startFragment = startSegment.fragment(in: (range.lowerBound - startOffset)...)
+        let (endOffset, endSegment) = storage[endIndex]
+        let endFragment = endSegment.fragment(in: ..<(range.upperBound - endOffset))
+        if startSegment.length == startFragment.length && endSegment.length == endFragment.length {
+            return Fragment(body: segments(in: startIndex...endIndex))
+        } else if startSegment.length == startFragment.length && endSegment.length != endFragment.length {
+            return Fragment(body: segments(in: startIndex ..< endIndex), tail: endFragment)
+        } else if startSegment.length != startFragment.length && endSegment.length == endFragment.length {
+            return Fragment(head: startFragment, body: segments(in: startIndex + 1 ... endIndex))
+        } else {
+            return Fragment(startFragment, endFragment, offset: startOffset)
+        }
     }
 
     private func segments(in range: Range<Int>) -> ContiguousSegmentCollection {
-        return ContiguousSegmentCollection(base.values[range])
+        return ContiguousSegmentCollection(presorted: self[range])
+    }
+
+    private func segments(in range: ClosedRange<Int>) -> ContiguousSegmentCollection {
+        return ContiguousSegmentCollection(presorted: self[range])
     }
 }
 
@@ -251,18 +330,27 @@ extension ContiguousSegmentCollection.Fragment {
 
 extension ContiguousSegmentCollection.Fragment: IntervallicFragmentable {
 
+    // MARK: - Type Aliases
+
+    public typealias Fragment = ContiguousSegmentCollection<Segment>.Fragment
+    public typealias Metric = Segment.Metric
+
+
     // MARK: - IntervallicFragmentable
 
     /// - Returns: The length of this `ContiguousSegmentCollection.Fragment`.
     //
     // FIXME: Consider storing this.
     public var length: Metric {
-        return (head?.length ?? .zero) + body.segments.lazy.map { $0.length }.sum + (tail?.length ?? .zero)
+        return (head?.fragment.length ?? .zero) + body.segments.lazy.map { $0.length }.sum + (tail?.fragment.length ?? .zero)
     }
 
-    public func fragment(in range: Range<Metric>) -> ContiguousSegmentCollection.Fragment {
+    public func fragment(in range: Range<Metric>) -> ContiguousSegmentCollection<Segment>.Fragment {
         guard let range = normalizedRange(range) else { return .empty }
-        
+        if let head = head {
+            let headRange = head.offset ..< offset
+
+        }
         return body.fragment(in: range)
     }
 
@@ -341,10 +429,11 @@ extension ContiguousSegmentCollection {
     }
 }
 
+extension ContiguousSegmentCollection.Fragment.Item: Equatable where
+    Segment: Equatable, Segment.Fragment: Equatable { }
+
 extension ContiguousSegmentCollection.Fragment: Equatable where
-    Segment: Equatable, Segment.Fragment: Equatable
-{
-}
+    Segment: Equatable, Segment.Fragment: Equatable { }
 
 extension ContiguousSegmentCollection: Equatable where Segment: Equatable { }
 extension ContiguousSegmentCollection: Hashable where Segment: Hashable { }
@@ -356,5 +445,14 @@ extension ContiguousSegmentCollection: ExpressibleByArrayLiteral {
     /// Creates a `ContiguousSegmentCollection` with the given array literal.
     public init(arrayLiteral elements: Segment...) {
         self.init(elements)
+    }
+}
+
+extension ContiguousSegmentCollection: CustomStringConvertible {
+
+    // MARK: - CustomStringConvertible
+
+    public var description: String {
+        return map { offset,segment in  "\(offset): \(segment)" }.joined(separator: "\n")
     }
 }

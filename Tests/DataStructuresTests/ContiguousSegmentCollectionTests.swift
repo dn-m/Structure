@@ -10,10 +10,11 @@ import XCTest
 
 extension Int: IntervallicFragmentable {
     public struct Fragment: Intervallic {
+        public typealias Metric = Int
         public var length: Int { return range.length }
         let value: Int
-        let range: Range<Metric>
-        init(_ value: Int, in range: Range<Metric>) {
+        let range: Range<Int>
+        init(_ value: Int, in range: Range<Int>) {
             self.value = value
             self.range = range
         }
@@ -68,14 +69,14 @@ class ContiguousSegmentCollectionTests: XCTestCase {
     }
 
     /// |---|---|---|---|
-    var collection = ContiguousSegmentCollection([4,4,4,4])
+    let collection = ContiguousSegmentCollection([4,4,4,4])
 
     ///          xx
     /// |---|---|---|---|
     func testFragmentA() {
         let fragment = collection.fragment(in: 9..<11)
         let single = Int.Fragment(4, in: 1..<3)
-        let expected = ContiguousSegmentCollection<Int,Int>.Fragment(single, offsetBy: 9)
+        let expected = ContiguousSegmentCollection<Int>.Fragment(single, offset: 9)
         XCTAssertEqual(fragment, expected)
     }
 
@@ -84,7 +85,7 @@ class ContiguousSegmentCollectionTests: XCTestCase {
     func testFragmentB() {
         let fragment = collection.fragment(in: 8..<10)
         let single = Int.Fragment(4, in: 0..<2)
-        let expected = ContiguousSegmentCollection<Int,Int>.Fragment(single, offsetBy: 8)
+        let expected = ContiguousSegmentCollection<Int>.Fragment(single, offset: 8)
         XCTAssertEqual(fragment, expected)
     }
 
@@ -93,7 +94,7 @@ class ContiguousSegmentCollectionTests: XCTestCase {
     func testFragmentC() {
         let fragment = collection.fragment(in: 10..<12)
         let single = Int.Fragment(4, in: 2..<4)
-        let expected = ContiguousSegmentCollection<Int,Int>.Fragment(single, offsetBy: 10)
+        let expected = ContiguousSegmentCollection<Int>.Fragment(single, offset: 10)
         XCTAssertEqual(fragment, expected)
     }
 
@@ -101,8 +102,8 @@ class ContiguousSegmentCollectionTests: XCTestCase {
     /// |---|---|---|---|
     func testFragmentD() {
         let fragment = collection.fragment(in: 8..<12)
-        let single = Int.Fragment(4, in: 0..<4)
-        let expected = ContiguousSegmentCollection<Int,Int>.Fragment(single, offsetBy: 8)
+        let body = ContiguousSegmentCollection([4], offset: 8)
+        let expected = ContiguousSegmentCollection<Int>.Fragment(body: body)
         XCTAssertEqual(fragment, expected)
     }
 
@@ -110,10 +111,9 @@ class ContiguousSegmentCollectionTests: XCTestCase {
     /// |---|---|---|---|
     func testFragmentE() {
         let fragment = collection.fragment(in: 4..<10)
-        let expected = ContiguousSegmentCollection<Int,Int>.Fragment(
-            Int.Fragment(4, in: 0..<4),
-            Int.Fragment(4, in: 0..<2),
-            offsetBy: 4
+        let expected = ContiguousSegmentCollection<Int>.Fragment(
+            body: ContiguousSegmentCollection([4], offset: 4),
+            tail: Int.Fragment(4, in: 0..<2)
         )
         XCTAssertEqual(fragment, expected)
     }
@@ -122,10 +122,9 @@ class ContiguousSegmentCollectionTests: XCTestCase {
     /// |---|---|---|---|
     func testFragmentF() {
         let fragment = collection.fragment(in: 6..<12)
-        let expected = ContiguousSegmentCollection<Int,Int>.Fragment(
-            Int.Fragment(4, in: 2..<4),
-            Int.Fragment(4, in: 0..<4),
-            offsetBy: 6
+        let expected = ContiguousSegmentCollection<Int>.Fragment(
+            head: Int.Fragment(4, in: 2..<4),
+            body: ContiguousSegmentCollection([4], offset: 8)
         )
         XCTAssertEqual(fragment, expected)
     }
@@ -134,11 +133,9 @@ class ContiguousSegmentCollectionTests: XCTestCase {
     /// |---|---|---|---|
     func testFragmentG() {
         let fragment = collection.fragment(in: 2..<16)
-        let expected = ContiguousSegmentCollection<Int,Int>.Fragment(
+        let expected = ContiguousSegmentCollection<Int>.Fragment(
             head: Int.Fragment(4, in: 2..<4),
-            body: [4,4],
-            tail: Int.Fragment(4, in: 0..<4),
-            offsetBy: 2
+            body: ContiguousSegmentCollection<Int>([4,4,4], offset: 4)
         )
         XCTAssertEqual(fragment, expected)
     }
@@ -147,9 +144,8 @@ class ContiguousSegmentCollectionTests: XCTestCase {
     /// |---|---|---|---|
     func testFragmentH() {
         let fragment = collection.fragment(in: 0..<14)
-        let expected = ContiguousSegmentCollection<Int,Int>.Fragment(
-            head: Int.Fragment(4, in: 0..<4),
-            body: [4,4],
+        let expected = ContiguousSegmentCollection<Int>.Fragment(
+            body: [4,4,4],
             tail: Int.Fragment(4, in: 0..<2)
         )
         XCTAssertEqual(fragment, expected)
@@ -159,72 +155,70 @@ class ContiguousSegmentCollectionTests: XCTestCase {
     /// |---|---|---|---|
     func testFragmentI() {
         let fragment = collection.fragment(in: 0..<16)
-        let expected = ContiguousSegmentCollection<Int,Int>.Fragment(
-            head: Int.Fragment(4, in: 0..<4),
-            body: [4,4],
-            tail: Int.Fragment(4, in: 0..<4)
-        )
+        let expected = ContiguousSegmentCollection<Int>.Fragment(body: [4,4,4,4])
         XCTAssertEqual(fragment, expected)
     }
 
+    // MARK: ContiguousSegment.Fragment
+
+    ///  xx
+    /// |--||---------||--||
     func testFragmentOfFragmentHeadHead() {
         let fragment = collection.fragment(in: 1 ..< 14)
         let subfragment = fragment.fragment(in: 2 ..< 4)
         let single = Int.Fragment(4, in: 0..<2)
-        let expected = ContiguousSegmentCollection<Int,Int>.Fragment(single, offsetBy: 2)
+        let expected = ContiguousSegmentCollection<Int>.Fragment(single, offset: 2)
         XCTAssertEqual(subfragment, expected)
     }
 
+    ///  x       x
+    /// |--||---------||--||
     func testFragmentOfFragmentHeadBody() {
         let fragment = collection.fragment(in: 1 ..< 14)
         let subfragment = fragment.fragment(in: 2 ..< 10)
         let head = Int.Fragment(4, in: 0..<2)
         let tail = Int.Fragment(4, in: 0..<2)
-        let expected = ContiguousSegmentCollection<Int,Int>.Fragment(
+        let expected = ContiguousSegmentCollection<Int>.Fragment(
             head: head,
-            body: [4],
-            tail: tail,
-            offsetBy: 2
+            body: ContiguousSegmentCollection<Int>([4], offset: 4),
+            tail: tail
         )
         XCTAssertEqual(subfragment, expected)
     }
 
+    ///       x     x
+    /// |--||---------||--||
     func testFragmentOfFragmentBodyBody() {
         let fragment = collection.fragment(in: 1 ..< 14)
         let subfragment = fragment.fragment(in: 6 ..< 10)
         let head = Int.Fragment(4, in: 2 ..< 4)
         let tail = Int.Fragment(4, in: 0 ..< 2)
-        let expected = ContiguousSegmentCollection<Int,Int>.Fragment(head, tail, offsetBy: 6)
+        let expected = ContiguousSegmentCollection<Int>.Fragment(head, tail, offset: 6)
         XCTAssertEqual(subfragment, expected)
     }
 
+    ///            x     x
+    /// |--||---------||--||
     func testFragmentOfFragmentBodyTail() {
         let fragment = collection.fragment(in: 1 ..< 14)
         let subfragment = fragment.fragment(in: 6 ..< 14)
         let head = Int.Fragment(4, in: 2 ..< 4)
         let tail = Int.Fragment(4, in: 0 ..< 2)
-        let expected = ContiguousSegmentCollection<Int,Int>.Fragment(
+        let expected = ContiguousSegmentCollection<Int>.Fragment(
             head: head,
-            body: [4,4],
-            tail: tail,
-            offsetBy: 6
+            body: ContiguousSegmentCollection<Int>([4,4], offset: 4),
+            tail: tail
         )
         XCTAssertEqual(subfragment, expected)
     }
 
+    ///                 xx
+    /// |--||---------||--||
     func testFramgnetOfFragmentTailTail() {
         let fragment = collection.fragment(in: 1 ..< 14)
         let subfragment = fragment.fragment(in: 12 ..< 14)
         let single = Int.Fragment(4, in: 0..<2)
-        let expected = ContiguousSegmentCollection<Int,Int>.Fragment(single, offsetBy: 12)
+        let expected = ContiguousSegmentCollection<Int>.Fragment(single, offset: 12)
         XCTAssertEqual(subfragment, expected)
-    }
-
-    func testFragmentOfFragment() {
-        let fragment = collection.fragment(in: 6..<12)
-        let subfragment = fragment.fragment(in: 8..<10)
-        let single = Int.Fragment(4, in: 0..<2)
-        let expected = ContiguousSegmentCollection<Int,Int>.Fragment(single, offsetBy: 8)
-        XCTAssertEqual(fragment, expected)
     }
 }

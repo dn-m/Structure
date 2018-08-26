@@ -9,7 +9,7 @@
 import Algebra
 
 /// Ordered dictionary which has sorted `keys`.
-public struct SortedDictionary<Key, Value>: DictionaryProtocol where Key: Hashable & Comparable {
+public struct SortedDictionary <Key,Value>: DictionaryProtocol where Key: Hashable & Comparable {
 
     // MARK: - Instance Properties
 
@@ -34,6 +34,17 @@ public struct SortedDictionary<Key, Value>: DictionaryProtocol where Key: Hashab
     public init(minimumCapacity: Int) {
         self.keys = []
         self.keys = .init(minimumCapacity: minimumCapacity)
+    }
+
+    /// Creates a `SortedDictionary` with a collection of (Key,Value) pairs.
+    ///
+    /// - Warning: You must be certain that `presorted` is sorted, otherwise undefined behavior is
+    /// certain.
+    public init <C: Collection> (presorted: C) where C.Element == Element {
+        self.init(minimumCapacity: presorted.count)
+        presorted.forEach { key,value in
+            append(value, guaranteedMax: key)
+        }
     }
 
     /// Create a `SortedDictionary` with the elements of a presorted `OrderedDictionary`.
@@ -87,6 +98,15 @@ public struct SortedDictionary<Key, Value>: DictionaryProtocol where Key: Hashab
     /// Insert the contents of another `SortedDictionary` value.
     public mutating func insert(contentsOf sortedDictionary: SortedDictionary<Key, Value>) {
         sortedDictionary.forEach { insert($0.1, key: $0.0) }
+    }
+
+    /// Append the given `value` for the given `guaranteedMax` key.
+    ///
+    /// - Warning: You must be certain that `presorted` is sorted, otherwise undefined behavior is
+    /// certain.
+    public mutating func append(_ value: Value, guaranteedMax key: Key) {
+        keys.append(guaranteedMax: key)
+        unsorted[key] = value
     }
 
     /// Reserves the amount of memory required to store the given `minimumCapacity` of elements.
