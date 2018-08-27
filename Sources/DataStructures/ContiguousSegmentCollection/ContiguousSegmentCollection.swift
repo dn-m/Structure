@@ -163,10 +163,6 @@ extension ContiguousSegmentCollection: Fragmentable
 
             let offset: Metric
             let fragment: Segment.Fragment
-
-            func contains(_ target: Metric) -> Bool {
-                return (offset ..< fragment.length).contains(target)
-            }
         }
 
         // MARK: - Type Properties
@@ -178,8 +174,9 @@ extension ContiguousSegmentCollection: Fragmentable
 
         // MARK: - Instance Properties
 
+        /// - Returns:
         public var offset: Metric {
-            return head?.offset ?? body.first?.0 ?? .zero
+            return head?.offset ?? body.first?.0 ?? tail?.offset ?? .zero
         }
 
         let head: Item?
@@ -188,8 +185,8 @@ extension ContiguousSegmentCollection: Fragmentable
 
         // MARK: - Initializers
 
-        /// Creates a `ContiguousSegmentCollection.Fragment` with the given pair of segment
-        /// fragments and the segments in-between, offset by the given `offset`.
+        /// Creates a `ContiguousSegmentCollection.Fragment` with the given pair of fragment items
+        /// and the segments in-between.
         init(
             head: Item? = nil,
             body: ContiguousSegmentCollection = .empty,
@@ -201,6 +198,8 @@ extension ContiguousSegmentCollection: Fragmentable
             self.tail = tail
         }
 
+        /// Creates a `ContiguousSegmentCollection.Fragment` with the given pair of segment
+        /// fragments and the segments in-between, offset by the given `offset`.
         public init(
             head: Segment.Fragment?,
             body: ContiguousSegmentCollection<Segment>,
@@ -365,25 +364,27 @@ extension ContiguousSegmentCollection.Fragment: IntervallicFragmentable {
     }
 
     /// - Returns: A `ContiguousSegmentCollection.Fragment` in the given `range`.
-    //
-    // FIXME: Refactor.
     public func fragment(in range: Range<Metric>) -> ContiguousSegmentCollection<Segment>.Fragment {
 
         guard let range = normalizedRange(range) else { return .empty }
 
         // If the `head` contains the lower bound of the search range.
-        if let head = head, (head.offset ..< head.end).contains(range.lowerBound) {
+        if let head = head, (head.offset..<head.end).contains(range.lowerBound) {
 
             // If the `head` also contains the upper bound of the search range.
-            if (range.lowerBound ... head.end).contains(range.upperBound) {
+            if (range.lowerBound...head.end).contains(range.upperBound) {
                 let headFragment = head.fragment.fragment(in: range)
                 return Fragment(headFragment, offset: range.lowerBound)
             }
 
             // Otherwise, concatenate the head fragment with the body fragment.
-            let fragment = head.fragment.fragment(in: range)
-            let b = body.fragment(in: range)
-            return Fragment(head: fragment, body: b.body, tail: b.tail?.fragment)
+            let headFragment = head.fragment.fragment(in: range)
+            let bodyFragment = body.fragment(in: range)
+            return Fragment(
+                head: headFragment,
+                body: bodyFragment.body,
+                tail: bodyFragment.tail?.fragment
+            )
         }
 
         // If the `tail` contains the upper bound of the search range.
@@ -392,13 +393,17 @@ extension ContiguousSegmentCollection.Fragment: IntervallicFragmentable {
             // If the `tail` also contains the lower bound of the search range.
             if (tail.offset...tail.end).contains(range.lowerBound) {
                 let tailFragment = tail.fragment.fragment(in: range.shifted(by: -tail.offset))
-                return .init(tailFragment, offset: range.lowerBound)
+                return Fragment(tailFragment, offset: range.lowerBound)
             }
 
             // Otherwise, concatenate the body fragment with the tail fragment.
-            let fragment = tail.fragment.fragment(in: range.shifted(by: -tail.offset))
-            let b = body.fragment(in: range)
-            return Fragment(head: b.head?.fragment, body: b.body, tail: fragment)
+            let tailFragment = tail.fragment.fragment(in: range.shifted(by: -tail.offset))
+            let bodyFragment = body.fragment(in: range)
+            return Fragment(
+                head: bodyFragment.head?.fragment,
+                body: bodyFragment.body,
+                tail: tailFragment
+            )
         }
 
         // Otherwise, simply return the fragment within the bounds of the body.
