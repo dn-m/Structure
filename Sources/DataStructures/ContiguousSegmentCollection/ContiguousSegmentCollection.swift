@@ -417,7 +417,7 @@ extension ContiguousSegmentCollection {
 
     /// - Returns: The index of the segment containing the given `offset`, if it exists. Otherwise,
     /// `nil`.
-    public func indexOfSegment(containing offset: Metric) -> Int? {
+    func indexOfSegment(containing offset: Metric) -> Int? {
         return index(containing: offset, for: .lower)
     }
 
