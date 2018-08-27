@@ -368,41 +368,40 @@ extension ContiguousSegmentCollection.Fragment: IntervallicFragmentable {
     //
     // FIXME: Refactor.
     public func fragment(in range: Range<Metric>) -> ContiguousSegmentCollection<Segment>.Fragment {
+
         guard let range = normalizedRange(range) else { return .empty }
-        if let head = head {
 
-            // If the `head` contains the lower bound of the search range.
-            if (head.offset ..< head.end).contains(range.lowerBound) {
+        // If the `head` contains the lower bound of the search range.
+        if let head = head, (head.offset ..< head.end).contains(range.lowerBound) {
 
-                // If the `head` also contains the upper bound of the search range.
-                if (range.lowerBound ... head.end).contains(range.upperBound) {
-                    let fragment = head.fragment.fragment(in: range)
-                    return .init(fragment, offset: range.lowerBound)
-                }
-                let fragment = head.fragment.fragment(in: range)
-                let b = body.fragment(in: range)
-                return ContiguousSegmentCollection<Segment>.Fragment(
-                    head: fragment,
-                    body: b.body,
-                    tail: b.tail?.fragment
-                )
+            // If the `head` also contains the upper bound of the search range.
+            if (range.lowerBound ... head.end).contains(range.upperBound) {
+                let headFragment = head.fragment.fragment(in: range)
+                return Fragment(headFragment, offset: range.lowerBound)
             }
+
+            // Otherwise, concatenate the head fragment with the body fragment.
+            let fragment = head.fragment.fragment(in: range)
+            let b = body.fragment(in: range)
+            return Fragment(head: fragment, body: b.body, tail: b.tail?.fragment)
         }
-        if let tail = tail {
 
-            // If the `tail` contains the upper bound of the search range.
-            if (tail.offset...tail.end).contains(range.upperBound) {
+        // If the `tail` contains the upper bound of the search range.
+        if let tail = tail, (tail.offset...tail.end).contains(range.upperBound) {
 
-                // If the `tail` also contains the lower bound of the search range.
-                if (tail.offset...tail.end).contains(range.lowerBound) {
-                    let fragment = tail.fragment.fragment(in: range.shifted(by: -tail.offset))
-                    return .init(fragment, offset: range.lowerBound)
-                }
-                let fragment = tail.fragment.fragment(in: range.shifted(by: -tail.offset))
-                let b = body.fragment(in: range)
-                return Fragment(head: b.head?.fragment, body: b.body, tail: fragment)
+            // If the `tail` also contains the lower bound of the search range.
+            if (tail.offset...tail.end).contains(range.lowerBound) {
+                let tailFragment = tail.fragment.fragment(in: range.shifted(by: -tail.offset))
+                return .init(tailFragment, offset: range.lowerBound)
             }
+
+            // Otherwise, concatenate the body fragment with the tail fragment.
+            let fragment = tail.fragment.fragment(in: range.shifted(by: -tail.offset))
+            let b = body.fragment(in: range)
+            return Fragment(head: b.head?.fragment, body: b.body, tail: fragment)
         }
+
+        // Otherwise, simply return the fragment within the bounds of the body.
         return body.fragment(in: range)
     }
 
