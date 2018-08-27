@@ -38,27 +38,6 @@ public struct ContiguousSegmentCollection <Segment: Intervallic>
 
 extension ContiguousSegmentCollection {
 
-    // MARK: - Initializers
-
-    /// Creates a `ContiguousSegmentCollection` with the given `presorted` `SortedDictionary` of
-    /// values.
-    public init(_ presorted: SortedDictionary<Metric,Segment>) {
-        self.storage = presorted
-    }
-}
-
-extension ContiguousSegmentCollection: RandomAccessCollectionWrapping {
-
-    // MARK: - RandomAccessCollectionWrapping
-
-    /// - Returns: A view of the underlying storage producing a `RandomAccessCollection` interface.
-    public var base: SortedDictionary<Metric,Segment> {
-        return storage
-    }
-}
-
-extension ContiguousSegmentCollection {
-
     // MARK: - Type Properties
 
     /// `ContiguousSegmentCollection` with no segments.
@@ -66,6 +45,14 @@ extension ContiguousSegmentCollection {
 }
 
 extension ContiguousSegmentCollection {
+
+    // MARK: - Initializers
+
+    /// Creates a `ContiguousSegmentCollection` with the given `presorted` `SortedDictionary` of
+    /// values.
+    public init(_ presorted: SortedDictionary<Metric,Segment>) {
+        self.storage = presorted
+    }
 
     /// Creates a `ContiguousSegmentCollection` with the given `sequence` of segments.
     public init <S: Sequence> (_ sequence: S, offset: Metric = .zero) where S.Element == Segment {
@@ -327,6 +314,16 @@ extension ContiguousSegmentCollection: Fragmentable
 
     private func segments(in range: ClosedRange<Int>) -> ContiguousSegmentCollection {
         return ContiguousSegmentCollection(presorted: self[range])
+    }
+}
+
+extension ContiguousSegmentCollection: RandomAccessCollectionWrapping {
+
+    // MARK: - RandomAccessCollectionWrapping
+
+    /// - Returns: A view of the underlying storage producing a `RandomAccessCollection` interface.
+    public var base: SortedDictionary<Metric,Segment> {
+        return storage
     }
 }
 
