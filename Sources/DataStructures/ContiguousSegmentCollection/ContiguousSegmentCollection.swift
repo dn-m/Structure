@@ -94,7 +94,6 @@ extension ContiguousSegmentCollection {
     /// Creates a `ContiguousSegmentCollection` with the given `presorted` collection of key-value
     /// pairs.
     public init <C: Collection> (presorted: C) where C.Element == Element {
-        print("presorted: \(presorted)")
         self.init(SortedDictionary(presorted: presorted))
     }
 }
@@ -148,7 +147,7 @@ extension ContiguousSegmentCollection: Intervallic {
 }
 
 extension ContiguousSegmentCollection: Fragmentable
-    where Metric: Zero, Segment: IntervallicFragmentable
+    where Metric: Zero, Segment: IntervallicFragmentable, Segment.Fragment: IntervallicFragmentable, Segment.Fragment.Fragment == Segment.Fragment
 {
 
     // MARK: - Nested Types
@@ -157,6 +156,11 @@ extension ContiguousSegmentCollection: Fragmentable
     public struct Fragment {
 
         struct Item {
+
+            var end: Metric {
+                return offset + fragment.length
+            }
+
             let offset: Metric
             let fragment: Segment.Fragment
 
@@ -198,15 +202,15 @@ extension ContiguousSegmentCollection: Fragmentable
         }
 
         public init(
-            head: Segment.Fragment,
+            head: Segment.Fragment?,
             body: ContiguousSegmentCollection<Segment>,
-            tail: Segment.Fragment
+            tail: Segment.Fragment?
         )
         {
             precondition(!body.isEmpty)
             let offset = body.first!.0
-            let head = Item(offset: offset - head.length, fragment: head)
-            let tail = Item(offset: offset + body.length, fragment: tail)
+            let head = head.flatMap { Item(offset: offset - $0.length, fragment: $0) }
+            let tail = tail.flatMap { Item(offset: offset + body.length, fragment: $0) }
             self.init(head: head, body: body, tail: tail)
         }
 
@@ -280,10 +284,12 @@ extension ContiguousSegmentCollection: Fragmentable
         let (endOffset, endSegment) = storage[index + 1]
         let endFragment = endSegment.fragment(in: ..<(range.upperBound - endOffset))
         if startSegment.length == startFragment.length && endSegment.length == endFragment.length {
-            return Fragment(body: ContiguousSegmentCollection([startSegment, endSegment], offset: startOffset))
+            return Fragment(
+                body: ContiguousSegmentCollection([startSegment, endSegment], offset: range.lowerBound)
+            )
         } else if startSegment.length == startFragment.length && endSegment.length != endFragment.length {
             return Fragment(
-                body: ContiguousSegmentCollection([startSegment], offset: startOffset),
+                body: ContiguousSegmentCollection([startSegment], offset: range.lowerBound),
                 tail: endFragment
             )
         } else if startSegment.length != startFragment.length && endSegment.length == endFragment.length {
@@ -292,7 +298,7 @@ extension ContiguousSegmentCollection: Fragmentable
                 body: ContiguousSegmentCollection([endSegment], offset: endOffset)
             )
         } else {
-            return Fragment(startFragment, endFragment, offset: startOffset)
+            return Fragment(startFragment, endFragment, offset: range.lowerBound)
         }
     }
 
@@ -308,7 +314,11 @@ extension ContiguousSegmentCollection: Fragmentable
         } else if startSegment.length != startFragment.length && endSegment.length == endFragment.length {
             return Fragment(head: startFragment, body: segments(in: startIndex + 1 ... endIndex))
         } else {
-            return Fragment(startFragment, endFragment, offset: startOffset)
+            return Fragment(
+                head: startFragment,
+                body: segments(in: startIndex + 1 ..< endIndex),
+                tail: endFragment
+            )
         }
     }
 
@@ -323,8 +333,12 @@ extension ContiguousSegmentCollection: Fragmentable
 
 extension ContiguousSegmentCollection.Fragment {
 
-    public var offsets: AnyCollection<Metric> {
-        fatalError()
+    /// - Returns: The offsets of each `Segment.Fragment` or `Segment` contained herein.
+    public var offsets: [Metric] {
+        let headOffset = head.map { [$0.offset] } ?? []
+        let bodyOffsets = Array(body.offsets)
+        let tailOffset = tail.map { [$0.offset] } ?? []
+        return headOffset + bodyOffsets + tailOffset
     }
 }
 
@@ -332,9 +346,11 @@ extension ContiguousSegmentCollection.Fragment: IntervallicFragmentable {
 
     // MARK: - Type Aliases
 
+    /// A `ContiguousSegmentCollection.Fragment` produces itself as a `Fragment`.
     public typealias Fragment = ContiguousSegmentCollection<Segment>.Fragment
-    public typealias Metric = Segment.Metric
 
+    /// A `ContiguousSegmentCollection` inherits its `Metric` from its `Segment`.
+    public typealias Metric = Segment.Metric
 
     // MARK: - IntervallicFragmentable
 
@@ -342,14 +358,50 @@ extension ContiguousSegmentCollection.Fragment: IntervallicFragmentable {
     //
     // FIXME: Consider storing this.
     public var length: Metric {
-        return (head?.fragment.length ?? .zero) + body.segments.lazy.map { $0.length }.sum + (tail?.fragment.length ?? .zero)
+        let headLength = head?.fragment.length ?? .zero
+        let bodyLength = body.length
+        let tailLength = tail?.fragment.length ?? .zero
+        return headLength + bodyLength + tailLength
     }
 
+    /// - Returns: A `ContiguousSegmentCollection.Fragment` in the given `range`.
+    //
+    // FIXME: Refactor.
     public func fragment(in range: Range<Metric>) -> ContiguousSegmentCollection<Segment>.Fragment {
         guard let range = normalizedRange(range) else { return .empty }
         if let head = head {
-            let headRange = head.offset ..< offset
 
+            // If the `head` contains the lower bound of the search range.
+            if (head.offset ..< head.end).contains(range.lowerBound) {
+
+                // If the `head` also contains the upper bound of the search range.
+                if (range.lowerBound ... head.end).contains(range.upperBound) {
+                    let fragment = head.fragment.fragment(in: range)
+                    return .init(fragment, offset: range.lowerBound)
+                }
+                let fragment = head.fragment.fragment(in: range)
+                let b = body.fragment(in: range)
+                return ContiguousSegmentCollection<Segment>.Fragment(
+                    head: fragment,
+                    body: b.body,
+                    tail: b.tail?.fragment
+                )
+            }
+        }
+        if let tail = tail {
+
+            // If the `tail` contains the upper bound of the search range.
+            if (tail.offset...tail.end).contains(range.upperBound) {
+
+                // If the `tail` also contains the lower bound of the search range.
+                if (tail.offset...tail.end).contains(range.lowerBound) {
+                    let fragment = tail.fragment.fragment(in: range.shifted(by: -tail.offset))
+                    return .init(fragment, offset: range.lowerBound)
+                }
+                let fragment = tail.fragment.fragment(in: range.shifted(by: -tail.offset))
+                let b = body.fragment(in: range)
+                return Fragment(head: b.head?.fragment, body: b.body, tail: fragment)
+            }
         }
         return body.fragment(in: range)
     }
@@ -370,20 +422,20 @@ extension ContiguousSegmentCollection {
 
     /// - Returns: A tuple of the start index and end index of segments containing the bounds of
     /// the given `interval`.
-    ///
-    /// - TODO: For a performance optimization, only search indices `startIndex...` to find the
-    /// `endIndex`. This would require adding a parameter to `index(containing:for:)` describing
-    /// the `searchRange`.
     private func indices(containingBoundsOf interval: Range<Metric>) -> (Int,Int)? {
-        guard let startIndex = index(
-            containing: interval.lowerBound,
-            for: .lower
-        ) else { return nil }
+
+        guard let startIndex = index(containing: interval.lowerBound, for: .lower) else {
+            return nil
+        }
+
         guard let endIndex = index(
             containing: interval.upperBound,
             for: .upper,
             in: startIndex ..< count
-        ) else { return nil }
+        ) else {
+            return nil
+        }
+
         return (startIndex,endIndex)
     }
 
@@ -394,8 +446,6 @@ extension ContiguousSegmentCollection {
     }
 
     /// - Returns: The index of the element containing the given `target` offset.
-    ///
-    /// - TODO: Add `searchRange` parameter
     private func index(
         containing target: Metric,
         for bound: Bound,
@@ -425,7 +475,7 @@ extension ContiguousSegmentCollection {
     /// `ContiguousSegmentCollection`.
     private func normalizedRange(_ range: Range<Metric>) -> Range<Metric>? {
         guard let first = first?.0 else { return nil }
-        return range.clamped(to: first ..< length)
+        return range.clamped(to: first ..< first + length)
     }
 }
 

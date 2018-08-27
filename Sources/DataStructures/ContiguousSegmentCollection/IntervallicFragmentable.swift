@@ -13,6 +13,9 @@ public protocol IntervallicFragmentable: Intervallic, Fragmentable
     where Fragment: Intervallic, Fragment.Metric == Metric
 {
 
+    // MARK: - Associated Types
+
+    /// The fragment of an `IntervallicFragmentable` type.
     associatedtype Fragment
 
     // MARK: - Instance Methods
