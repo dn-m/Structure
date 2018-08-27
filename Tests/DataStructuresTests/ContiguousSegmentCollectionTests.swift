@@ -34,7 +34,7 @@ extension Int.Fragment: IntervallicFragmentable, Totalizable, Equatable {
 class ContiguousSegmentCollectionTests: XCTestCase {
 
     func testInitSegments() {
-        let collection = ContiguousSegmentCollection([1,2,3,5,8,13,21])
+        let collection: ContiguousSegmentCollection = [1,2,3,5,8,13,21]
         let expected: SortedDictionary = [0: 1, 1: 2, 3: 3, 6: 5, 11: 8, 19: 13, 32: 21]
         XCTAssertEqual(collection.base, expected)
     }
