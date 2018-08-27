@@ -14,7 +14,7 @@ import Algebra
 ///
 ///     let collection = ContiguousSegmentCollection([1,2,1,3])
 ///
-/// This creates a `ContiguousSegmentCollection<Int>`, where the `Metric` and `Interallic` types
+/// This creates a `ContiguousSegmentCollection<Int>`, where the `Metric` and `Intervallic` types
 /// are both `Int`. Each segment is the length of a given value, and is stored by the accumulating
 /// offset.
 ///
