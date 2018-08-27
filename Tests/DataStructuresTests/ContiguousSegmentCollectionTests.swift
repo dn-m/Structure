@@ -199,7 +199,6 @@ class ContiguousSegmentCollectionTests: XCTestCase {
     /// |--||---------||--|
     func testFragmentOfFragmentBodyTail() {
         let fragment = collection.fragment(in: 1..<14)
-        print("SUBFRAGMENT ====================")
         let subfragment = fragment.fragment(in: 6..<14)
         let expected = ContiguousSegmentCollection<Int>.Fragment(
             head: Int.Fragment(4, in: 2..<4),
