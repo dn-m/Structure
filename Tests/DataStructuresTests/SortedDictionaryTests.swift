@@ -78,22 +78,6 @@ class SortedDictionaryTests: XCTestCase {
         XCTAssertEqual(dict1.map { $0.1 }, ["one", "two", "three", "four"])
     }
 
-    func testAdditionOperator() {
-
-        var dict1 = SortedDictionary<Int, String>()
-        dict1.insert("one", key: 1)
-        dict1.insert("three", key: 3)
-
-        var dict2 = SortedDictionary<Int, String>()
-        dict2.insert("two", key: 2)
-        dict2.insert("four", key: 4)
-
-        let dict3 = dict1 + dict2
-
-        XCTAssertEqual(dict3.map { $0.0 }, [1,2,3,4])
-        XCTAssertEqual(dict3.map { $0.1 }, ["one", "two", "three", "four"])
-    }
-
     func testValueItIndex() {
 
         var dict = SortedDictionary<Int, String>()
