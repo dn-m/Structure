@@ -15,7 +15,7 @@ public struct OrderedDictionary <Key: Hashable, Value>: DictionaryProtocol {
     public var keys: [Key] = []
 
     /// Values.
-    public var values: [Key: Value] = [:]
+    public var unordered: [Key: Value] = [:]
 
     // MARK: - Initializers
 
@@ -27,7 +27,7 @@ public struct OrderedDictionary <Key: Hashable, Value>: DictionaryProtocol {
     public init(minimumCapacity: Int) {
         self.keys = []
         self.keys.reserveCapacity(minimumCapacity)
-        self.values = .init(minimumCapacity: minimumCapacity)
+        self.unordered = .init(minimumCapacity: minimumCapacity)
     }
 
     // MARK: - Subscripts
@@ -36,18 +36,18 @@ public struct OrderedDictionary <Key: Hashable, Value>: DictionaryProtocol {
     public subscript(key: Key) -> Value? {
 
         get {
-            return values[key]
+            return unordered[key]
         }
 
         set {
 
             guard let newValue = newValue else {
-                values.removeValue(forKey: key)
+                unordered.removeValue(forKey: key)
                 keys = keys.filter { $0 != key }
                 return
             }
 
-            let oldValue = values.updateValue(newValue, forKey: key)
+            let oldValue = unordered.updateValue(newValue, forKey: key)
             if oldValue == nil {
                 keys.append(key)
             }
@@ -59,31 +59,33 @@ public struct OrderedDictionary <Key: Hashable, Value>: DictionaryProtocol {
     /// Append `value` for given `key`.
     public mutating func append(_ value: Value, key: Key) {
         keys.append(key)
-        values[key] = value
+        unordered[key] = value
     }
 
     /// Insert `value` for given `key` at `index`.
     public mutating func insert(_ value: Value, key: Key, index: Int) {
         keys.insert(key, at: index)
-        values[key] = value
+        unordered[key] = value
     }
 
     /// Append the contents of another `OrderedDictionary` structure.
     public mutating func appendContents(of orderedDictionary: OrderedDictionary<Key,Value>) {
         keys.append(contentsOf: orderedDictionary.keys)
         for key in orderedDictionary.keys {
-            values.updateValue(orderedDictionary[key]!, forKey: key)
+            unordered.updateValue(orderedDictionary[key]!, forKey: key)
         }
     }
 
-    /// - returns: The value at the given `index`.
+    /// Reserves the amount of memory required to store the given `minimumCapacity` of elements.
+    public mutating func reserveCapacity(_ minimumCapacity: Int) {
+        keys.reserveCapacity(minimumCapacity)
+        unordered.reserveCapacity(minimumCapacity)
+    }
+
+    /// - Returns: The value at the given `index`.
     public func value(index: Int) -> Value? {
-
-        guard index >= 0 && index < keys.count else {
-            return nil
-        }
-
-        return values[keys[index]]
+        guard index >= 0 && index < keys.count else { return nil }
+        return unordered[keys[index]]
     }
 }
 
@@ -114,12 +116,13 @@ extension OrderedDictionary: Collection {
     /// - returns: Element at the given `index`.
     public subscript (index: Int) -> (Key, Value) {
         let key = keys[index]
-        let value = values[key]!
+        let value = unordered[key]!
         return (key, value)
     }
 }
 
 extension OrderedDictionary: Equatable where Value: Equatable { }
+extension OrderedDictionary: Hashable where Value: Hashable { }
 
 extension OrderedDictionary: ExpressibleByDictionaryLiteral {
 
@@ -127,11 +130,7 @@ extension OrderedDictionary: ExpressibleByDictionaryLiteral {
 
     /// Create an `OrderedDictionary` with a `DictionaryLiteral`.
     public init(dictionaryLiteral elements: (Key, Value)...) {
-
-        self.init()
-
-        elements.forEach { (k, v) in
-            append(v, key: k)
-        }
+        self.init(minimumCapacity: elements.count)
+        elements.forEach { (k, v) in append(v, key: k) }
     }
 }

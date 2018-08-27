@@ -48,6 +48,31 @@ extension CircularArrayTests {
     ]
 }
 
+extension ContiguousSegmentCollectionTests {
+    static let __allTests = [
+        ("testContains", testContains),
+        ("testFragmentA", testFragmentA),
+        ("testFragmentB", testFragmentB),
+        ("testFragmentC", testFragmentC),
+        ("testFragmentD", testFragmentD),
+        ("testFragmentE", testFragmentE),
+        ("testFragmentF", testFragmentF),
+        ("testFragmentG", testFragmentG),
+        ("testFragmentH", testFragmentH),
+        ("testFragmentI", testFragmentI),
+        ("testFragmentOfFragmentBodyBody", testFragmentOfFragmentBodyBody),
+        ("testFragmentOfFragmentBodyTail", testFragmentOfFragmentBodyTail),
+        ("testFragmentOfFragmentHeadBody", testFragmentOfFragmentHeadBody),
+        ("testFragmentOfFragmentHeadHead", testFragmentOfFragmentHeadHead),
+        ("testFragmnetOfFragmentTailTail", testFragmnetOfFragmentTailTail),
+        ("testInitSegments", testInitSegments),
+        ("testLength", testLength),
+        ("testOffsets", testOffsets),
+        ("testRandomAccess", testRandomAccess),
+        ("testSegments", testSegments),
+    ]
+}
+
 extension DictionaryProtocolsTests {
     static let __allTests = [
         ("testDictionaryInitWithArrayOfTuples", testDictionaryInitWithArrayOfTuples),
@@ -147,6 +172,18 @@ extension MutableGraphTests {
         ("testMultipleAttemptsToAddSameNode", testMultipleAttemptsToAddSameNode),
         ("testSingleVertex", testSingleVertex),
         ("testWeightFromSingleEdge", testWeightFromSingleEdge),
+    ]
+}
+
+extension NewTypeTests {
+    static let __allTests = [
+        ("testCollection", testCollection),
+        ("testComparable", testComparable),
+        ("testExpressibleByFloatLiteral", testExpressibleByFloatLiteral),
+        ("testExpressibleByIntegerLiteral", testExpressibleByIntegerLiteral),
+        ("testNumeric", testNumeric),
+        ("testSequence", testSequence),
+        ("testSignedNumeric", testSignedNumeric),
     ]
 }
 
@@ -297,6 +334,7 @@ extension SortedArrayTests {
         ("testIndex", testIndex),
         ("testInitEmpty", testInitEmpty),
         ("testInitWithArraySorted", testInitWithArraySorted),
+        ("testInitWithPresorted", testInitWithPresorted),
         ("testInsertAtBeginning", testInsertAtBeginning),
         ("testInsertAtEnd", testInsertAtEnd),
         ("testInsertElements", testInsertElements),
@@ -309,8 +347,8 @@ extension SortedArrayTests {
 
 extension SortedDictionaryTests {
     static let __allTests = [
-        ("testAdditionOperator", testAdditionOperator),
         ("testGetSubscript", testGetSubscript),
+        ("testInitPresorted", testInitPresorted),
         ("testInsert", testInsert),
         ("testInsertContentsOfSortedDictionary", testInsertContentsOfSortedDictionary),
         ("testIterationSorted", testIterationSorted),
@@ -401,6 +439,7 @@ public func __allTests() -> [XCTestCaseEntry] {
         testCase(ArrayExtensionsTests.__allTests),
         testCase(BinaryHeapTests.__allTests),
         testCase(CircularArrayTests.__allTests),
+        testCase(ContiguousSegmentCollectionTests.__allTests),
         testCase(DictionaryProtocolsTests.__allTests),
         testCase(EitherTests.__allTests),
         testCase(HomogeneityTests.__allTests),
@@ -409,6 +448,7 @@ public func __allTests() -> [XCTestCaseEntry] {
         testCase(LinkedListTests.__allTests),
         testCase(MatrixTests.__allTests),
         testCase(MutableGraphTests.__allTests),
+        testCase(NewTypeTests.__allTests),
         testCase(OrderedDictionaryTests.__allTests),
         testCase(PairsTests.__allTests),
         testCase(ReferenceTreeProtocolTests.__allTests),

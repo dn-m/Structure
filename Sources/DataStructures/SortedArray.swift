@@ -35,12 +35,25 @@ public struct SortedArray <Element: Comparable>:
         self.init(presorted: Array(elements).sorted())
     }
 
-    /// Create a `SortedArray` with the given array of presorted elements.
+    /// Create a `SortedArray` with the given collection of presorted elements.
     ///
     /// - Warning: You must be certain that `presorted` is sorted, otherwise undefined behavior is
     /// certain.
     public init <C> (presorted: C) where C: Collection, C.Element == Element {
         self.base = Array(presorted)
+    }
+
+    /// Create a `SortedArray` with the given array of presorted elements.
+    ///
+    /// - Warning: You must be certain that `presorted` is sorted, otherwise undefined behavior is
+    /// certain.
+    public init(presorted: [Element]) {
+        self.base = presorted
+    }
+
+    /// Creates a `SortedArray` with the contents of another one.
+    public init(_ sorted: SortedArray) {
+        self.init(presorted: sorted.base)
     }
 
     // MARK: - Instance Methods
@@ -62,10 +75,21 @@ public struct SortedArray <Element: Comparable>:
     }
 
     /// Insert the contents of another sequence of `T`.
-    public mutating func insert <S> (contentsOf elements: S)
-        where S: Sequence, S.Element == Element
-    {
+    public mutating func insert <S: Sequence> (contentsOf elements: S) where S.Element == Element {
         elements.forEach { insert($0) }
+    }
+
+    /// Reserves the amount of memory to store the given `minimumCapacity` of elements.
+    public mutating func reserveCapacity(_ minimumCapacity: Int) {
+        base.reserveCapacity(minimumCapacity)
+    }
+
+    /// Appends the given `element`.
+    ///
+    /// - Warning: This element _must_ be greater or equal to the current maximum, otherwise there
+    /// will be undefined behavior ahead.
+    public mutating func append(guaranteedMax element: Element) {
+        base.append(element)
     }
 
     /// - Returns: Index for the given `element`, if it exists. Otherwise, `nil`.
@@ -95,6 +119,7 @@ public struct SortedArray <Element: Comparable>:
 }
 
 extension SortedArray: Equatable { }
+extension SortedArray: Hashable where Element: Hashable { }
 
 extension SortedArray {
 
@@ -109,7 +134,7 @@ extension SortedArray: Additive {
     // MARK: - Additive
 
     /// - Returns: Empty `SortedArray`.
-    public static var zero: SortedArray<Element> {
+    public static var zero: SortedArray {
         return SortedArray()
     }
 

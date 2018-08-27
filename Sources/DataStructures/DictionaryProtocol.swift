@@ -30,6 +30,10 @@ public protocol DictionaryProtocol: Collection {
 
     /// - Returns: `Value` for the given `key`, if present. Otherwise, `nil`.
     subscript (key: Key) -> Value? { get set }
+
+    /// Reserves the required amount of memory to store the given `minimumCapacity` of key-value
+    /// pairs.
+    mutating func reserveCapacity(_ minimumCapacity: Int)
 }
 
 extension DictionaryProtocol {
