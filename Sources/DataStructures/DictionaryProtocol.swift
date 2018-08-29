@@ -50,9 +50,7 @@ extension DictionaryProtocol {
     /// elements.
     public init <C: Collection> (_ collection: C) where C.Element == (key: Key, value: Value) {
         self.init(minimumCapacity: collection.count)
-        for (key, value) in collection {
-            self[key] = value
-        }
+        for (k, v) in collection { self[k] = v }
     }
 }
 
