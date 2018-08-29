@@ -77,10 +77,12 @@ extension DictionaryProtocolsTests {
     static let __allTests = [
         ("testDictionaryInitWithArrayOfTuples", testDictionaryInitWithArrayOfTuples),
         ("testDictionaryInitWithArrays", testDictionaryInitWithArrays),
-        ("testEnsureArrayTypeValueForKeyNotYetExtant", testEnsureArrayTypeValueForKeyNotYetExtant),
-        ("testEnsureArrayTypeValueForKeyPreexisting", testEnsureArrayTypeValueForKeyPreexisting),
         ("testEnsureDictionaryTypeValueNotYetExtant", testEnsureDictionaryTypeValueNotYetExtant),
         ("testEnsureDictionaryTypeValuePreexisting", testEnsureDictionaryTypeValuePreexisting),
+        ("testEnsureRangeReplaceableCollectionValueForKeyNotYetExtant", testEnsureRangeReplaceableCollectionValueForKeyNotYetExtant),
+        ("testEnsureRangeReplaceableCollectionValueForKeyPreexisting", testEnsureRangeReplaceableCollectionValueForKeyPreexisting),
+        ("testEnsureSetAlgebraValueForKeyNotYetExtant", testEnsureSetAlgebraValueForKeyNotYetExtant),
+        ("testEnsureSetAlgebraValueForKeyPreexisting", testEnsureSetAlgebraValueForKeyPreexisting),
         ("testEqualitySimple", testEqualitySimple),
         ("testMergedNestedDict", testMergedNestedDict),
         ("testMergedNewDictOvercomesOriginal", testMergedNewDictOvercomesOriginal),
@@ -92,6 +94,10 @@ extension DictionaryProtocolsTests {
         ("testSafelyAppendContentsToNotYetExtant", testSafelyAppendContentsToNotYetExtant),
         ("testSafelyAppendToExisting", testSafelyAppendToExisting),
         ("testSafelyAppendToNotYetExisting", testSafelyAppendToNotYetExisting),
+        ("testSafelyInsertContentsToExisting", testSafelyFormUnionExisting),
+        ("testSafelyInsertContentsToNotYetExtant", testSafelyFormUnionNotYetExtant),
+        ("testSafelyInsertToExisting", testSafelyInsertToExisting),
+        ("testSafelyInsertToNotYetExisting", testSafelyInsertToNotYetExisting),
     ]
 }
 
