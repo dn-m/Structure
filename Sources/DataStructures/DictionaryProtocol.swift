@@ -74,12 +74,14 @@ extension DictionaryProtocol where Element == (key: Key, value: Value) {
 
 extension DictionaryProtocol where Value: RangeReplaceableCollection {
 
-    /// Ensure that an Array-type value exists for the given `key`.
+    /// Ensure that an `RangeReplaceableCollection`-conforming type value exists for the given
+    /// `key`.
     public mutating func ensureValue(forKey key: Key) {
         if self[key] == nil { self[key] = Value() }
     }
 
-    /// Safely append the given `value` to the Array-type `value` for the given `key`.
+    /// Safely append the given `value` to the `RangeReplaceableCollection`-conforming type `value`
+    /// for the given `key`.
     public mutating func safelyAppend(_ value: Value.Element, forKey key: Key) {
         ensureValue(forKey: key)
         self[key]!.append(value)
@@ -101,6 +103,28 @@ extension DictionaryProtocol where Value: RangeReplaceableCollection, Value.Elem
         ensureValue(forKey: key)
         if self[key]!.contains(value) { return }
         self[key]!.append(value)
+    }
+}
+
+extension DictionaryProtocol where Value: SetAlgebra {
+
+    /// Ensure that an `SetAlgebra`-conforming type value exists for the given `key`.
+    public mutating func ensureValue(forKey key: Key) {
+        if self[key] == nil { self[key] = Value() }
+    }
+
+    /// Safely append the given `value` to the `SetAlgebra`-conforming type `value` for the given
+    /// `key`.
+    public mutating func safelyInsert(_ value: Value.Element, forKey key: Key) {
+        ensureValue(forKey: key)
+        self[key]!.insert(value)
+    }
+
+    /// Safely append the contents of an array to the `SetAlgebra`-conforming type `value` for the
+    /// given `key`.
+    public mutating func safelyFormIntersection(_ other: Value, forKey key: Key) {
+        ensureValue(forKey: key)
+        self[key]!.formIntersection(other)
     }
 }
 

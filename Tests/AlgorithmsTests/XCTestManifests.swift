@@ -58,6 +58,14 @@ extension TupleMapTests {
     ]
 }
 
+extension UnzipTests {
+    static let __allTests = [
+        ("testEmpty", testEmpty),
+        ("testNonEmpty", testNonEmpty),
+        ("testPerformance", testPerformance),
+    ]
+}
+
 #if !os(macOS)
 public func __allTests() -> [XCTestCaseEntry] {
     return [
@@ -68,6 +76,7 @@ public func __allTests() -> [XCTestCaseEntry] {
         testCase(StableSortTests.__allTests),
         testCase(SwapTests.__allTests),
         testCase(TupleMapTests.__allTests),
+        testCase(UnzipTests.__allTests),
     ]
 }
 #endif
