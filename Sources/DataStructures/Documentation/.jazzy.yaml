@@ -39,6 +39,15 @@ custom_categories:
       - zip(_:_:_:fill1:fill2:fill3:)
       - zip(_:_:_:fill:)
 
+  - name: ContiguousSegmentCollection
+    children:
+      - ContiguousSegmentCollection
+      - Measured
+      - Intervallic
+      - Fragmentable
+      - Totalizable
+      - IntervallicFragmentable
+
   - name: Wrapping Protocols
     children:
       - IntegerWrapping

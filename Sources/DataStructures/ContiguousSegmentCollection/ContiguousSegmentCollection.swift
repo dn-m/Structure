@@ -12,9 +12,9 @@ import Algebra
 ///
 /// **Example Usage**
 ///
-///     let collection = ContiguousSegmentCollection([1,2,1,3])
+///     let collection: ContiguousSegmentCollection = [1,2,1,3]
 ///
-/// This creates a `ContiguousSegmentCollection<Int,Int>`, where the `Metric` and `Interallic` types
+/// This creates a `ContiguousSegmentCollection<Int>`, where the `Metric` and `Intervallic` types
 /// are both `Int`. Each segment is the length of a given value, and is stored by the accumulating
 /// offset.
 ///
@@ -38,27 +38,6 @@ public struct ContiguousSegmentCollection <Segment: Intervallic>
 
 extension ContiguousSegmentCollection {
 
-    // MARK: - Initializers
-
-    /// Creates a `ContiguousSegmentCollection` with the given `presorted` `SortedDictionary` of
-    /// values.
-    public init(_ presorted: SortedDictionary<Metric,Segment>) {
-        self.storage = presorted
-    }
-}
-
-extension ContiguousSegmentCollection: RandomAccessCollectionWrapping {
-
-    // MARK: - RandomAccessCollectionWrapping
-
-    /// - Returns: A view of the underlying storage producing a `RandomAccessCollection` interface.
-    public var base: SortedDictionary<Metric,Segment> {
-        return storage
-    }
-}
-
-extension ContiguousSegmentCollection {
-
     // MARK: - Type Properties
 
     /// `ContiguousSegmentCollection` with no segments.
@@ -66,6 +45,14 @@ extension ContiguousSegmentCollection {
 }
 
 extension ContiguousSegmentCollection {
+
+    // MARK: - Initializers
+
+    /// Creates a `ContiguousSegmentCollection` with the given `presorted` `SortedDictionary` of
+    /// values.
+    public init(_ presorted: SortedDictionary<Metric,Segment>) {
+        self.storage = presorted
+    }
 
     /// Creates a `ContiguousSegmentCollection` with the given `sequence` of segments.
     public init <S: Sequence> (_ sequence: S, offset: Metric = .zero) where S.Element == Segment {
@@ -330,6 +317,16 @@ extension ContiguousSegmentCollection: Fragmentable
     }
 }
 
+extension ContiguousSegmentCollection: RandomAccessCollectionWrapping {
+
+    // MARK: - RandomAccessCollectionWrapping
+
+    /// - Returns: A view of the underlying storage producing a `RandomAccessCollection` interface.
+    public var base: SortedDictionary<Metric,Segment> {
+        return storage
+    }
+}
+
 extension ContiguousSegmentCollection.Fragment {
 
     /// - Returns: The offsets of each `Segment.Fragment` or `Segment` contained herein.
@@ -420,7 +417,7 @@ extension ContiguousSegmentCollection {
 
     /// - Returns: The index of the segment containing the given `offset`, if it exists. Otherwise,
     /// `nil`.
-    public func indexOfSegment(containing offset: Metric) -> Int? {
+    func indexOfSegment(containing offset: Metric) -> Int? {
         return index(containing: offset, for: .lower)
     }
 
