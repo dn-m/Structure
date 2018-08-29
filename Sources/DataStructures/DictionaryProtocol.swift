@@ -75,19 +75,19 @@ extension DictionaryProtocol where Element == (key: Key, value: Value) {
 extension DictionaryProtocol where Value: RangeReplaceableCollection {
 
     /// Ensure that an Array-type value exists for the given `key`.
-    public mutating func ensureValue(for key: Key) {
+    public mutating func ensureValue(forKey key: Key) {
         if self[key] == nil { self[key] = Value() }
     }
 
     /// Safely append the given `value` to the Array-type `value` for the given `key`.
-    public mutating func safelyAppend(_ value: Value.Element, toArrayWith key: Key) {
-        ensureValue(for: key)
+    public mutating func safelyAppend(_ value: Value.Element, forKey key: Key) {
+        ensureValue(forKey: key)
         self[key]!.append(value)
     }
 
     /// Safely append the contents of an array to the Array-type `value` for the given `key`.
-    public mutating func safelyAppendContents(of values: Value, toArrayWith key: Key) {
-        ensureValue(for: key)
+    public mutating func safelyAppend(contentsOf values: Value, forKey key: Key) {
+        ensureValue(forKey: key)
         self[key]!.append(contentsOf: values)
     }
 }
@@ -97,8 +97,8 @@ extension DictionaryProtocol where Value: RangeReplaceableCollection, Value.Elem
     /// Safely append value to the array value for a given key.
     ///
     /// If this value already exists in desired array, the new value will not be added.
-    public mutating func safelyAndUniquelyAppend(_ value: Value.Element, toArrayWith key: Key) {
-        ensureValue(for: key)
+    public mutating func safelyAndUniquelyAppend(_ value: Value.Element, forKey key: Key) {
+        ensureValue(forKey: key)
         if self[key]!.contains(value) { return }
         self[key]!.append(value)
     }
@@ -107,7 +107,7 @@ extension DictionaryProtocol where Value: RangeReplaceableCollection, Value.Elem
 extension DictionaryProtocol where Value: DictionaryProtocol {
 
     /// Ensure there is a value for a given `key`.
-    public mutating func ensureValue(for key: Key) {
+    public mutating func ensureValue(forKey key: Key) {
         if self[key] == nil { self[key] = Value() }
     }
 }
@@ -123,7 +123,7 @@ extension DictionaryProtocol where
     /// this one.
     public mutating func merge(with dictionary: Self) {
         for (key, subDict) in dictionary {
-            ensureValue(for: key)
+            ensureValue(forKey: key)
             for (subKey, value) in subDict {
                 self[key]![subKey] = value
             }

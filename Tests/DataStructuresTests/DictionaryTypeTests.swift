@@ -14,7 +14,7 @@ class DictionaryProtocolsTests: XCTestCase {
     func testSafelyAppendToExisting() {
 
         var dict = [0: [0,1,2]]
-        dict.safelyAppend(3, toArrayWith: 0)
+        dict.safelyAppend(3, forKey: 0)
 
         XCTAssertEqual(dict[0]!, [0,1,2,3])
     }
@@ -22,7 +22,7 @@ class DictionaryProtocolsTests: XCTestCase {
     func testSafelyAppendToNotYetExisting() {
 
         var dict = [0: [0,1,2]]
-        dict.safelyAppend(0, toArrayWith: 1)
+        dict.safelyAppend(0, forKey: 1)
 
         XCTAssertEqual(dict[1]!, [0])
     }
@@ -30,7 +30,7 @@ class DictionaryProtocolsTests: XCTestCase {
     func testSafelyAppendContentsToExisting() {
 
         var dict = [0: [0,1,2]]
-        dict.safelyAppendContents(of: [3,4,5], toArrayWith: 0)
+        dict.safelyAppend(contentsOf: [3,4,5], forKey: 0)
 
         XCTAssertEqual(dict[0]!, [0,1,2,3,4,5])
     }
@@ -38,7 +38,7 @@ class DictionaryProtocolsTests: XCTestCase {
     func testSafelyAppendContentsToNotYetExtant() {
 
         var dict = [0: [0,1,2]]
-        dict.safelyAppendContents(of: [0,1,2], toArrayWith: 1)
+        dict.safelyAppend(contentsOf: [0,1,2], forKey: 1)
 
         XCTAssertEqual(dict[1]!, [0,1,2])
     }
@@ -46,7 +46,7 @@ class DictionaryProtocolsTests: XCTestCase {
     func testSafelyAndUniquelyAppendValuePreexisting() {
 
         var dict = [0: [0,1,2]]
-        dict.safelyAndUniquelyAppend(1, toArrayWith: 1)
+        dict.safelyAndUniquelyAppend(1, forKey: 1)
 
         XCTAssertEqual(dict[0]!, [0,1,2])
     }
@@ -54,7 +54,7 @@ class DictionaryProtocolsTests: XCTestCase {
     func testSafelyAndUniquelyAppendValueNotExtant() {
 
         var dict = [0: [0,1,2]]
-        dict.safelyAndUniquelyAppend(3, toArrayWith: 0)
+        dict.safelyAndUniquelyAppend(3, forKey: 0)
 
         XCTAssertEqual(dict[0]!, [0,1,2,3])
     }
@@ -62,7 +62,7 @@ class DictionaryProtocolsTests: XCTestCase {
     func testEnsureArrayTypeValueForKeyPreexisting() {
 
         var dict = [0: [0], 1: [1], 2: [2]]
-        dict.ensureValue(for: 0)
+        dict.ensureValue(forKey: 0)
 
         XCTAssertEqual(dict[1]!, [1])
     }
@@ -70,7 +70,7 @@ class DictionaryProtocolsTests: XCTestCase {
     func testEnsureArrayTypeValueForKeyNotYetExtant() {
 
         var dict = [0: [0], 1: [1], 2: [2]]
-        dict.ensureValue(for: 3)
+        dict.ensureValue(forKey: 3)
 
         XCTAssertEqual(dict[3]!, [])
     }
@@ -78,7 +78,7 @@ class DictionaryProtocolsTests: XCTestCase {
     func testEnsureDictionaryTypeValuePreexisting() {
 
         var dict = [0: [0: 0]]
-        dict.ensureValue(for: 0)
+        dict.ensureValue(forKey: 0)
 
         XCTAssertNotNil(dict[0])
     }
@@ -86,7 +86,7 @@ class DictionaryProtocolsTests: XCTestCase {
     func testEnsureDictionaryTypeValueNotYetExtant() {
 
         var dict = [0: [0: 0]]
-        dict.ensureValue(for: 1)
+        dict.ensureValue(forKey: 1)
 
         XCTAssertNotNil(dict[1])
     }
