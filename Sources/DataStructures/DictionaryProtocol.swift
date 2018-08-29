@@ -122,9 +122,9 @@ extension DictionaryProtocol where Value: SetAlgebra {
 
     /// Safely append the contents of an array to the `SetAlgebra`-conforming type `value` for the
     /// given `key`.
-    public mutating func safelyFormIntersection(_ other: Value, forKey key: Key) {
+    public mutating func safelyFormUnion(_ other: Value, forKey key: Key) {
         ensureValue(forKey: key)
-        self[key]!.formIntersection(other)
+        self[key]!.formUnion(other)
     }
 }
 

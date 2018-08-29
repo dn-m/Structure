@@ -94,8 +94,8 @@ extension DictionaryProtocolsTests {
         ("testSafelyAppendContentsToNotYetExtant", testSafelyAppendContentsToNotYetExtant),
         ("testSafelyAppendToExisting", testSafelyAppendToExisting),
         ("testSafelyAppendToNotYetExisting", testSafelyAppendToNotYetExisting),
-        ("testSafelyInsertContentsToExisting", testSafelyInsertContentsToExisting),
-        ("testSafelyInsertContentsToNotYetExtant", testSafelyInsertContentsToNotYetExtant),
+        ("testSafelyInsertContentsToExisting", testSafelyFormUnionExisting),
+        ("testSafelyInsertContentsToNotYetExtant", testSafelyFormUnionNotYetExtant),
         ("testSafelyInsertToExisting", testSafelyInsertToExisting),
         ("testSafelyInsertToNotYetExisting", testSafelyInsertToNotYetExisting),
     ]

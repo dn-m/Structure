@@ -83,15 +83,15 @@ class DictionaryProtocolsTests: XCTestCase {
         XCTAssertEqual(dict[1]!, [0])
     }
 
-    func testSafelyInsertContentsToExisting() {
+    func testSafelyFormUnionExisting() {
         var dict: [Int: Set<Int>] = [0: [0,1,2]]
-        dict.safelyFormIntersection([3,4,5], forKey: 0)
+        dict.safelyFormUnion([3,4,5], forKey: 0)
         XCTAssertEqual(dict[0]!, [0,1,2,3,4,5])
     }
 
-    func testSafelyInsertContentsToNotYetExtant() {
+    func testSafelyFormUnionNotYetExtant() {
         var dict: [Int: Set<Int>] = [0: [0,1,2]]
-        dict.safelyFormIntersection([0,1,2], forKey: 1)
+        dict.safelyFormUnion([0,1,2], forKey: 1)
         XCTAssertEqual(dict[1]!, [0,1,2])
     }
 
