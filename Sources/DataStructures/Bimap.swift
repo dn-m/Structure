@@ -131,7 +131,7 @@ extension Bimap {
     ///
     /// - Returns: The previous value for the given `key`, if it existed. Otherwise, `nil`.
     @discardableResult
-    public mutating func removeValueForKey(_ key: Key) -> Value? {
+    public mutating func removeValue(forKey key: Key) -> Value? {
         let previous = self[key: key]
         self[key: key] = nil
         return previous
@@ -141,7 +141,7 @@ extension Bimap {
     ///
     /// - Returns: The previous key for the given `value`, if it existed. Otherwise, `nil`.
     @discardableResult
-    public mutating func removeKeyForValue(_ value: Value) -> Key? {
+    public mutating func removeKey(forValue value: Value) -> Key? {
         let previous = self[value: value]
         self[value: value] = nil
         return previous
