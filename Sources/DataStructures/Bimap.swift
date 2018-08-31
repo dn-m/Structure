@@ -5,8 +5,8 @@
 //  Created by James Bean on 8/31/18.
 //
 
-/// Dictionary-like structure which allows O(1) access from `Key` to `Value` and from `Value` to
-/// `Key`.
+/// Dictionary-like structure which allows O(1) access from `Key` to `Value` as well as from `Value`
+/// to `Key`.
 public struct Bimap <Key: Hashable, Value: Hashable>: Hashable {
 
     // MARK: - Instance Properties
