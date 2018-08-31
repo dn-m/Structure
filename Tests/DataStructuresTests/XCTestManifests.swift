@@ -21,6 +21,19 @@ extension ArrayExtensionsTests {
     ]
 }
 
+extension BimapTests {
+    static let __allTests = [
+        ("testInitEmpty", testInitEmpty),
+        ("testKeySubscript", testKeySubscript),
+        ("testRemoveAll", testRemoveAll),
+        ("testRemoveKey", testRemoveKey),
+        ("testRemoveValue", testRemoveValue),
+        ("testUpdateKey", testUpdateKey),
+        ("testUpdateValue", testUpdateValue),
+        ("testValueSubscript", testValueSubscript),
+    ]
+}
+
 extension BinaryHeapTests {
     static let __allTests = [
         ("testBalance", testBalance),
@@ -94,8 +107,8 @@ extension DictionaryProtocolsTests {
         ("testSafelyAppendContentsToNotYetExtant", testSafelyAppendContentsToNotYetExtant),
         ("testSafelyAppendToExisting", testSafelyAppendToExisting),
         ("testSafelyAppendToNotYetExisting", testSafelyAppendToNotYetExisting),
-        ("testSafelyInsertContentsToExisting", testSafelyFormUnionExisting),
-        ("testSafelyInsertContentsToNotYetExtant", testSafelyFormUnionNotYetExtant),
+        ("testSafelyFormUnionExisting", testSafelyFormUnionExisting),
+        ("testSafelyFormUnionNotYetExtant", testSafelyFormUnionNotYetExtant),
         ("testSafelyInsertToExisting", testSafelyInsertToExisting),
         ("testSafelyInsertToNotYetExisting", testSafelyInsertToNotYetExisting),
     ]
@@ -443,6 +456,7 @@ extension ZipToLongestTests {
 public func __allTests() -> [XCTestCaseEntry] {
     return [
         testCase(ArrayExtensionsTests.__allTests),
+        testCase(BimapTests.__allTests),
         testCase(BinaryHeapTests.__allTests),
         testCase(CircularArrayTests.__allTests),
         testCase(ContiguousSegmentCollectionTests.__allTests),
