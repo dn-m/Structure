@@ -82,35 +82,23 @@ extension Bimap {
 
     /// Get and set the `Key` for the given `value`.
     public subscript(value value: Value) -> Key? {
-        get {
-            return keyByValue[value]
-        }
+        get { return keyByValue[value] }
         set(newKey) {
             let oldKey = keyByValue.removeValue(forKey: value)
-            if let oldKey = oldKey {
-                valueByKey.removeValue(forKey: oldKey)
-            }
+            if let oldKey = oldKey { valueByKey.removeValue(forKey: oldKey) }
             keyByValue[value] = newKey
-            if let newKey = newKey {
-                valueByKey[newKey] = value
-            }
+            if let newKey = newKey { valueByKey[newKey] = value }
         }
     }
 
     /// Get and set the `Value` for the given `key`.
     public subscript(key key: Key) -> Value? {
-        get {
-            return valueByKey[key]
-        }
+        get { return valueByKey[key] }
         set {
             let oldValue = valueByKey.removeValue(forKey: key)
-            if let oldValue = oldValue {
-                keyByValue.removeValue(forKey: oldValue)
-            }
+            if let oldValue = oldValue { keyByValue.removeValue(forKey: oldValue) }
             valueByKey[key] = newValue
-            if let newValue = newValue {
-                keyByValue[newValue] = key
-            }
+            if let newValue = newValue { keyByValue[newValue] = key }
         }
     }
 }
