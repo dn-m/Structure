@@ -166,6 +166,32 @@ extension Bimap {
     }
 }
 
+extension Bimap: DictionaryProtocol {
+
+    /// Gets and sets the value for the `key`.
+    public subscript(key: Key) -> Value? {
+        get { return self[key: key] }
+        set { self[key: key] = newValue }
+    }
+
+    /// Reserves the amount of memory needed to store the given `minimumCapacity` of key-value
+    /// pairs.
+    public mutating func reserveCapacity(_ minimumCapacity: Int) {
+        valueByKey.reserveCapacity(minimumCapacity)
+        keyByValue.reserveCapacity(minimumCapacity)
+    }
+}
+
+extension Bimap: CollectionWrapping {
+
+    // MARK: - CollectionWrapping
+
+    /// - Returns: The `[Key: Value]` base for `Collection` operations.
+    public var base: [Key: Value] {
+        return valueByKey
+    }
+}
+
 extension Bimap: ExpressibleByDictionaryLiteral {
 
     // MARK: ExpressibleByDictionaryLiteral Protocol Conformance
