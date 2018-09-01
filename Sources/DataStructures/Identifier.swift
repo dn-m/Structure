@@ -21,6 +21,7 @@
 ///     // 'Identifier<Friend>'
 ///
 public struct Identifier <Subject> {
+
     let value: Int
 
     // MARK: - Initializers
