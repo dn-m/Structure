@@ -18,6 +18,7 @@ extension BinarySearchTree {
 
     // MARK: - Computed Properties
 
+    /// - Returns: The amount of nodes contained herein.
     public var count: Int {
         switch self {
         case .empty:
@@ -29,6 +30,7 @@ extension BinarySearchTree {
         }
     }
 
+    /// - Returns: The height of this `BinarySearchTree`.
     public var height: Int {
         switch self {
         case .empty:
@@ -40,6 +42,7 @@ extension BinarySearchTree {
         }
     }
 
+    /// - Returns: The left-most descendent.
     public var minDescendent: BinarySearchTree {
         var node = self
         var prev = node
@@ -53,6 +56,7 @@ extension BinarySearchTree {
         return prev
     }
 
+    /// - Returns: The right-most descendent.
     public var maxDescendent: BinarySearchTree {
         var node = self
         var prev = node
@@ -71,6 +75,7 @@ extension BinarySearchTree {
 
     // MARK: - Instance Methods
 
+    /// - Returns: A `BinarySearchTree` with the given `newValue` inserted in the appropriate place.
     public func inserting(_ newValue: Value) -> BinarySearchTree {
         switch self {
         case .empty:
@@ -90,10 +95,13 @@ extension BinarySearchTree {
         }
     }
 
+    /// - Returns: `true` if this `BinarySearchTree` contains the given `value`. Otherwise, `false`.
     public func contains(_ value: Value) -> Bool {
         return search(for: value) != nil
     }
 
+    /// - Returns: The `BinarySearchTree` which contains the given `target`, if it exists.
+    /// Otherwise, `nil`.
     public func search(for target: Value) -> BinarySearchTree? {
         switch self {
         case .empty:
