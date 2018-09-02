@@ -44,6 +44,12 @@ extension BinaryHeapTests {
     ]
 }
 
+extension BinarySearchTreeTests {
+    static let __allTests = [
+        ("testInitSequence", testInitSequence),
+    ]
+}
+
 extension CircularArrayTests {
     static let __allTests = [
         ("testCollection", testCollection),
@@ -458,6 +464,7 @@ public func __allTests() -> [XCTestCaseEntry] {
         testCase(ArrayExtensionsTests.__allTests),
         testCase(BimapTests.__allTests),
         testCase(BinaryHeapTests.__allTests),
+        testCase(BinarySearchTreeTests.__allTests),
         testCase(CircularArrayTests.__allTests),
         testCase(ContiguousSegmentCollectionTests.__allTests),
         testCase(DictionaryProtocolsTests.__allTests),
