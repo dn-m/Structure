@@ -16,6 +16,15 @@ public enum BinarySearchTree <Value: Comparable> {
 
 extension BinarySearchTree {
 
+    public init <S> (_ sequence: S) where S: Sequence, S.Element == Value {
+        var tree: BinarySearchTree = .empty
+        sequence.forEach { tree = tree.inserting($0) }
+        self = tree
+    }
+}
+
+extension BinarySearchTree {
+
     // MARK: - Computed Properties
 
     /// - Returns: The amount of nodes contained herein.
@@ -40,6 +49,23 @@ extension BinarySearchTree {
         case .node(let left, _, let right):
             return 1 + max(left.height, right.height)
         }
+    }
+
+    /// - Returns: The values of the nodes contained herein in `inOrder` (sorted) order.
+    ///
+    /// - Complexity: O(*n*)
+    public var inOrder: [Value] {
+        func traverse(_ node: BinarySearchTree, into result: [Value]) -> [Value] {
+            switch node {
+            case .empty:
+                return result
+            case .leaf(let value):
+                return result + [value]
+            case .node(let left, let value, let right):
+                return left.inOrder + [value] + right.inOrder
+            }
+        }
+        return traverse(self, into: [])
     }
 
     /// - Returns: The left-most descendent.
@@ -117,5 +143,12 @@ extension BinarySearchTree {
                 return self
             }
         }
+    }
+}
+
+extension BinarySearchTree: ExpressibleByArrayLiteral {
+
+    public init(arrayLiteral elements: Value...) {
+        self.init(elements)
     }
 }
