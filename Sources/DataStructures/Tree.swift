@@ -62,16 +62,19 @@ extension Tree {
     ///     ])
     ///     tree.leaves // => [0,1,2]
     ///
+    @inlinable
     public var leaves: [Leaf] {
-        func flattened(accum: [Leaf], tree: Tree) -> [Leaf] {
+        func flatten(accum: inout [Leaf], tree: Tree) {
             switch tree {
             case .branch(_, let trees):
-                return trees.reduce(accum, flattened)
+                accum = trees.reduce(into: accum, flatten)
             case .leaf(let value):
-                return accum + [value]
+                accum.append(value)
             }
         }
-        return flattened(accum: [], tree: self)
+        var result: [Leaf] = []
+        flatten(accum: &result, tree: self)
+        return result
     }
 
     /// - Returns: The number of edges on the longest path between the root and a leaf.
