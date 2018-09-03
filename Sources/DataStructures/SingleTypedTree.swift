@@ -11,6 +11,7 @@ extension Tree where Branch == Leaf {
     // MARK: - Single-Typed Tree
 
     /// The payload of a given `Tree`.
+    @inlinable
     public var value: Leaf {
         switch self {
         case .leaf(let value):
@@ -31,6 +32,7 @@ extension Tree where Branch == Leaf {
     ///
     ///     self = .branch(value, [.leaf(value)])
     ///
+    @inlinable
     public init <S: Sequence> (_ value: Leaf, _ sequence: S) where S.Element == Leaf {
 
         if let array = sequence as? Array<Leaf>, array.isEmpty {
@@ -42,6 +44,7 @@ extension Tree where Branch == Leaf {
     }
 
     /// - Returns: A new `Tree` with the given `value` as payload.
+    @inlinable
     public func updating(value: Leaf) -> Tree {
         switch self {
         case .leaf:
@@ -52,6 +55,7 @@ extension Tree where Branch == Leaf {
     }
 
     /// Apply a given `transform` to all nodes in a `Tree`.
+    @inlinable
     public func map <Result> (_ transform: (Leaf) -> Result) -> Tree<Result,Result> {
         switch self {
         case .leaf(let value):

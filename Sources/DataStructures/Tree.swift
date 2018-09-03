@@ -62,16 +62,19 @@ extension Tree {
     ///     ])
     ///     tree.leaves // => [0,1,2]
     ///
+    @inlinable
     public var leaves: [Leaf] {
-        func flattened(accum: [Leaf], tree: Tree) -> [Leaf] {
+        func flatten(accum: inout [Leaf], tree: Tree) {
             switch tree {
             case .branch(_, let trees):
-                return trees.reduce(accum, flattened)
+                accum = trees.reduce(into: accum, flatten)
             case .leaf(let value):
-                return accum + [value]
+                accum.append(value)
             }
         }
-        return flattened(accum: [], tree: self)
+        var result: [Leaf] = []
+        flatten(accum: &result, tree: self)
+        return result
     }
 
     /// - Returns: The number of edges on the longest path between the root and a leaf.
@@ -86,6 +89,7 @@ extension Tree {
     ///     ])
     ///     tree.height // => 2
     ///
+    @inlinable
     public var height: Int {
         func traverse(_ tree: Tree, height: Int) -> Int {
             switch tree {
@@ -211,6 +215,7 @@ extension Tree {
     }
 
     /// - Returns: A `Tree` with leaves updated by the given `transform`.
+    @inlinable
     public func mapLeaves <T> (_ transform: @escaping (Leaf) -> T) -> Tree<Branch,T> {
         switch self {
         case .leaf(let value):
@@ -221,6 +226,7 @@ extension Tree {
     }
 
     /// - Returns: A `Tree` with its leaves replaced by the elements in the given `collection`.
+    @inlinable
     public func zipLeaves <C: RangeReplaceableCollection> (_ collection: C)
         -> Tree<Branch, C.Element>
     {
@@ -228,6 +234,7 @@ extension Tree {
     }
 
     // FIXME: Instead of copying `collection`, increment an `index`, pointing to `collection`.
+    @inlinable
     public func zipLeaves <C: RangeReplaceableCollection, T> (
         _ collection: C,
         _ transform: @escaping (Leaf, C.Element) -> T
@@ -268,6 +275,7 @@ extension Tree {
     }
 
     /// - Returns: A `Tree` with its branches and leaves modified by the given `transform`.
+    @inlinable
     public func map <B,L> (_ transform: Transform<B,L>) -> Tree<B,L> {
         switch self {
         case .leaf(let value):
@@ -299,9 +307,13 @@ extension Tree {
     /// Transforms for `branch` and `leaf` cases.
     public struct Transform <B,L> {
 
+        @usableFromInline
         let branch: (Branch) -> B
+
+        @usableFromInline
         let leaf: (Leaf) -> L
 
+        @inlinable
         public init(branch: @escaping (Branch) -> B, leaf: @escaping (Leaf) -> L) {
             self.branch = branch
             self.leaf = leaf
@@ -342,6 +354,7 @@ extension Tree: CustomStringConvertible {
 /// corresponding node in the given trees `a` and `b`.
 ///
 /// - Invariant: `a` and `b` are the same shape.
+@inlinable
 public func zip <T,U,V> (_ a: Tree<T,T>, _ b: Tree<U,U>, _ f: (T, U) -> V) -> Tree<V,V> {
     switch (a,b) {
     case (.leaf(let a), .leaf(let b)):

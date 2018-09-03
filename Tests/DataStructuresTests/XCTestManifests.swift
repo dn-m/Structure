@@ -412,6 +412,7 @@ extension TreeTests {
     static let __allTests = [
         ("testHeightBranchSingleDepthOne", testHeightBranchSingleDepthOne),
         ("testHeightLeafZero", testHeightLeafZero),
+        ("testHeightMany", testHeightMany),
         ("testHeightNested", testHeightNested),
         ("testInitWithSequence", testInitWithSequence),
         ("testInitWithValueAndEmptyArray", testInitWithValueAndEmptyArray),
@@ -426,6 +427,7 @@ extension TreeTests {
         ("testLeavesBranchMultipleTrees", testLeavesBranchMultipleTrees),
         ("testLeavesBranchSingleChild", testLeavesBranchSingleChild),
         ("testLeavesLeaf", testLeavesLeaf),
+        ("testLeavesMany", testLeavesMany),
         ("testLeavesMultipleDepth", testLeavesMultipleDepth),
         ("testMap", testMap),
         ("testPath", testPath),
