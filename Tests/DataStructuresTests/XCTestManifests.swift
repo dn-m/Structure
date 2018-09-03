@@ -445,6 +445,7 @@ extension TreeTests {
 
 extension Zip3SequenceTests {
     static let __allTests = [
+        ("testMany", testMany),
         ("testZip3Sequence", testZip3Sequence),
     ]
 }

@@ -22,4 +22,13 @@ class Zip3SequenceTests: XCTestCase {
             XCTAssertEqual(b,c)
         }
     }
+
+    func testMany() {
+        let a = (0..<1_000_000)
+        let b = a.reversed()
+        let c = zip(a,b).map(*)
+        measure {
+            _ = zip(a,b,c).map { $0 }
+        }
+    }
 }

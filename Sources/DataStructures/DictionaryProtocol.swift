@@ -76,18 +76,21 @@ extension DictionaryProtocol where Value: RangeReplaceableCollection {
 
     /// Ensure that an `RangeReplaceableCollection`-conforming type value exists for the given
     /// `key`.
+    @inlinable
     public mutating func ensureValue(forKey key: Key) {
         if self[key] == nil { self[key] = Value() }
     }
 
     /// Safely append the given `value` to the `RangeReplaceableCollection`-conforming type `value`
     /// for the given `key`.
+    @inlinable
     public mutating func safelyAppend(_ value: Value.Element, forKey key: Key) {
         ensureValue(forKey: key)
         self[key]!.append(value)
     }
 
     /// Safely append the contents of an array to the Array-type `value` for the given `key`.
+    @inlinable
     public mutating func safelyAppend(contentsOf values: Value, forKey key: Key) {
         ensureValue(forKey: key)
         self[key]!.append(contentsOf: values)
@@ -99,6 +102,7 @@ extension DictionaryProtocol where Value: RangeReplaceableCollection, Value.Elem
     /// Safely append value to the array value for a given key.
     ///
     /// If this value already exists in desired array, the new value will not be added.
+    @inlinable
     public mutating func safelyAndUniquelyAppend(_ value: Value.Element, forKey key: Key) {
         ensureValue(forKey: key)
         if self[key]!.contains(value) { return }
@@ -109,12 +113,14 @@ extension DictionaryProtocol where Value: RangeReplaceableCollection, Value.Elem
 extension DictionaryProtocol where Value: SetAlgebra {
 
     /// Ensure that an `SetAlgebra`-conforming type value exists for the given `key`.
+    @inlinable
     public mutating func ensureValue(forKey key: Key) {
         if self[key] == nil { self[key] = Value() }
     }
 
     /// Safely append the given `value` to the `SetAlgebra`-conforming type `value` for the given
     /// `key`.
+    @inlinable
     public mutating func safelyInsert(_ value: Value.Element, forKey key: Key) {
         ensureValue(forKey: key)
         self[key]!.insert(value)
@@ -122,6 +128,7 @@ extension DictionaryProtocol where Value: SetAlgebra {
 
     /// Safely append the contents of an array to the `SetAlgebra`-conforming type `value` for the
     /// given `key`.
+    @inlinable
     public mutating func safelyFormUnion(_ other: Value, forKey key: Key) {
         ensureValue(forKey: key)
         self[key]!.formUnion(other)
@@ -131,6 +138,7 @@ extension DictionaryProtocol where Value: SetAlgebra {
 extension DictionaryProtocol where Value: DictionaryProtocol {
 
     /// Ensure there is a value for a given `key`.
+    @inlinable
     public mutating func ensureValue(forKey key: Key) {
         if self[key] == nil { self[key] = Value() }
     }
