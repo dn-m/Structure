@@ -426,4 +426,26 @@ class TreeTests: XCTestCase {
             _ = tree.leaves
         }
     }
+
+    func testHeightMany() {
+        let tree = Tree.branch(0, [
+            .leaf(1),
+            .branch(0, [
+                .leaf(2),
+                .leaf(3),
+                .leaf(4)
+                ]),
+            .leaf(5),
+            .branch(0, [
+                .leaf(6),
+                .branch(0, [
+                    .leaf(7),
+                    .leaf(8)
+                    ])
+                ])
+            ])
+        (0..<1_000_000).forEach { _ in
+            _ = tree.leaves
+        }
+    }
 }
