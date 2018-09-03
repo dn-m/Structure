@@ -44,12 +44,6 @@ extension BinaryHeapTests {
     ]
 }
 
-extension BinarySearchTreeTests {
-    static let __allTests = [
-        ("testInitSequence", testInitSequence),
-    ]
-}
-
 extension CircularArrayTests {
     static let __allTests = [
         ("testCollection", testCollection),

@@ -193,6 +193,7 @@
 ///
 /// Modified by James Bean.
 ///
+@inlinable
 public func zip <Sequence1,Sequence2,Sequence3> (
     _ sequence1: Sequence1,
     _ sequence2: Sequence2,
@@ -209,12 +210,18 @@ public struct Zip3Sequence <
 >: IteratorProtocol, Sequence
 {
 
-    private var iterator1: Sequence1.Iterator
-    private var iterator2: Sequence2.Iterator
-    private var iterator3: Sequence3.Iterator
+    @usableFromInline
+    var iterator1: Sequence1.Iterator
+
+    @usableFromInline
+    var iterator2: Sequence2.Iterator
+
+    @usableFromInline
+    var iterator3: Sequence3.Iterator
 
     /// Creates an instance that makes pairs of elements from `sequence1` and
     /// `sequence2`.
+    @inlinable
     public init(_ sequence1: Sequence1, _ sequence2: Sequence2, _ sequence3: Sequence3) {
         self.iterator1 = sequence1.makeIterator()
         self.iterator2 = sequence2.makeIterator()
@@ -225,6 +232,7 @@ public struct Zip3Sequence <
     /// exists.
     ///
     /// Once `nil` has been returned, all subsequent calls return `nil`.
+    @inlinable
     public mutating func next() -> (Sequence1.Element, Sequence2.Element, Sequence3.Element)? {
         guard let a = iterator1.next(), let b = iterator2.next(), let c = iterator3.next() else {
             return nil
