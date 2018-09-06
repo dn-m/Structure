@@ -60,6 +60,16 @@ extension Sequence where Element: Additive {
     }
 }
 
+extension Array: Additive {
+
+    // MARK: Additive
+
+    /// - Returns: An `Array` with no elements.
+    public static var zero: Array {
+        return Array()
+    }
+}
+
 extension Set: Additive {
 
     // MARK: - Additive
