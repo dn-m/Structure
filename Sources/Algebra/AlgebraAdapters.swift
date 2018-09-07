@@ -65,9 +65,15 @@ extension Array: Additive {
     // MARK: - Additive
 
     /// - Returns: An `Array` with no elements.
-    public static var zero: Array {
-        return Array()
-    }
+    public static var zero: Array { return [] }
+}
+
+extension String: Additive {
+
+    // MARK: - Additive
+
+    /// - Returns: An `String` with no characters.
+    public static var zero: String { return "" }
 }
 
 extension Set: Additive {
