@@ -1,5 +1,17 @@
 import XCTest
 
+extension AVLTreeTests {
+    static let __allTests = [
+        ("testInitSequence", testInitSequence),
+        ("testManyValuesDecreasing", testManyValuesDecreasing),
+        ("testManyValuesIncreasing", testManyValuesIncreasing),
+        ("testManyValuesRandom", testManyValuesRandom),
+        ("testSingleNodeHeight", testSingleNodeHeight),
+        ("testThreeNodes", testThreeNodes),
+        ("testTwoNodes", testTwoNodes),
+    ]
+}
+
 extension ArrayExtensionsTests {
     static let __allTests = [
         ("testInsertingAtIndexAtBeginning", testInsertingAtIndexAtBeginning),
@@ -464,6 +476,7 @@ extension ZipToLongestTests {
 #if !os(macOS)
 public func __allTests() -> [XCTestCaseEntry] {
     return [
+        testCase(AVLTreeTests.__allTests),
         testCase(ArrayExtensionsTests.__allTests),
         testCase(BimapTests.__allTests),
         testCase(BinaryHeapTests.__allTests),
