@@ -12,12 +12,12 @@ public struct AVLTree <Key: Comparable, Value> {
 
     // MARK: - Instance Properties
 
-    @usableFromInline
-    var root: Node?
+    /// The root node of this `AVLTree`.
+    public var root: Node?
 
     /// Creates an `AVLTree` with the given `root` node.
-    @usableFromInline
-    init(root: Node? = nil) {
+    @inlinable
+    public init(root: Node? = nil) {
         self.root = root
     }
 }
@@ -139,7 +139,9 @@ extension AVLTree {
         return balance(node, with: key)
     }
 
-    static func balance(_ node: Node, with key: Key) -> Node {
+    /// Balances an `AVLTree` to ensure that leaf no path is no more than one longer than any other.
+    @inlinable
+    public static func balance(_ node: Node, with key: Key) -> Node {
         node.updateHeight()
         let balance = balanceFactor(node.left, node.right)
         if balance > 1 && key < node.left!.key {
@@ -158,10 +160,12 @@ extension AVLTree {
 
     // TODO: removeValue(forKey key: Key) -> Node?
 
+    @usableFromInline
     static func balanceFactor(_ left: Node?, _ right: Node?) -> Int {
         return (left?.height ?? -1) - (right?.height ?? -1)
     }
 
+    @usableFromInline
     static func rotateLeft(_ node: Node) -> Node {
         guard let newRoot = node.right else { return node }
         node.right = newRoot.left
@@ -171,6 +175,7 @@ extension AVLTree {
         return newRoot
     }
 
+    @usableFromInline
     static func rotateRight(_ node: Node) -> Node {
         guard let newRoot = node.left else { return node }
         node.left = newRoot.right
@@ -183,6 +188,7 @@ extension AVLTree {
 
 extension AVLTree.Node {
 
+    @usableFromInline
     func updateHeight() {
         self.height = max(left?.height ?? 0, right?.height ?? 0) + 1
     }
