@@ -202,6 +202,16 @@ extension MatrixTests {
     ]
 }
 
+extension MetatypeTests {
+    static let __allTests = [
+        ("testEquatable", testEquatable),
+        ("testEquatableFalse", testEquatableFalse),
+        ("testHashableEqual", testHashableEqual),
+        ("testHashableNotEqual", testHashableNotEqual),
+        ("testInit", testInit),
+    ]
+}
+
 extension MutableGraphTests {
     static let __allTests = [
         ("testBidirectionalRelationshipIsTwoDirectedRelationships", testBidirectionalRelationshipIsTwoDirectedRelationships),
@@ -490,6 +500,7 @@ public func __allTests() -> [XCTestCaseEntry] {
         testCase(InvertibleEnumTests.__allTests),
         testCase(LinkedListTests.__allTests),
         testCase(MatrixTests.__allTests),
+        testCase(MetatypeTests.__allTests),
         testCase(MutableGraphTests.__allTests),
         testCase(NewTypeTests.__allTests),
         testCase(OrderedDictionaryTests.__allTests),
