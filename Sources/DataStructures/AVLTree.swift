@@ -27,7 +27,7 @@ extension AVLTree {
     // MARK: - Nested Types
 
     /// Node for an `AVLTree` which contains a `key`, and `value`, along with the `left` and `right`
-    /// child nodes (if they exist), as well as the its `height`.
+    /// child nodes (if they exist), as well as its `height`.
     public final class Node {
 
         // MARK: - Instance Properties
