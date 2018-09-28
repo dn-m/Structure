@@ -72,7 +72,7 @@ extension GraphProtocol {
         visited.append(source)
         while !queue.isEmpty {
             let node = queue.dequeue()
-            for neighbor in neighbors(of: node, in: nil) where !visited.contains(neighbor) {
+            for neighbor in neighbors(of: node) where !visited.contains(neighbor) {
                 queue.enqueue(neighbor)
                 visited.append(neighbor)
                 if neighbor == destination { return visited }
