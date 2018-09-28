@@ -65,7 +65,7 @@ extension GraphProtocol {
     
     /// - Returns: A set of edges outgoing from the given `source`.
     @inlinable
-    public func edges(containing source: Node) -> Set<Edge> {
+    public func edges(from source: Node) -> Set<Edge> {
         return Set(neighbors(of: source).map { Edge(source, $0) })
     }
 
