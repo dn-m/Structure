@@ -5,7 +5,10 @@
 //  Created by James Bean on 9/27/18.
 //
 
-/// First-in-first-out linear data structure.
+/// First-in-last-out linear data structure.
+///
+/// - Remark: Consider using two linked lists instead of an `Array` as the internal storage.
+/// `Array` gives `O(*n*)` performance for `remove(at:)`, which is used by `dequeue`.
 public struct Queue <Element> {
 
     // MARK: - Instance Properties
@@ -66,4 +69,3 @@ extension Queue {
         return storage.remove(at: 0)
     }
 }
-
