@@ -63,7 +63,7 @@ extension WeightedGraph {
     /// resultant set.
     @inlinable
     public func neighbors(of source: Node, in nodes: Set<Node>? = nil) -> Set<Node> {
-        return (nodes ?? self.nodes).intersection(adjacents.keys.compactMap { $0.other(source) })
+        return (nodes ?? self.nodes).filter { adjacents.keys.contains(Edge(source,$0)) }
     }
 }
 
