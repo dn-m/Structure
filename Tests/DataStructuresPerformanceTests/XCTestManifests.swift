@@ -31,6 +31,19 @@ extension QueuePerformanceTests {
     ]
 }
 
+extension WeightedDirectedGraphPerformanceTests {
+    static let __allTests = [
+        ("testEdgesFromNode_O_1", testEdgesFromNode_O_1),
+        ("testNeighborsOfNode_O_1", testNeighborsOfNode_O_1),
+    ]
+}
+
+extension WeightedGraphPerformanceTests {
+    static let __allTests = [
+        ("testNeighborsOfNode_O_1", testNeighborsOfNode_O_1),
+    ]
+}
+
 #if !os(macOS)
 public func __allTests() -> [XCTestCaseEntry] {
     return [
@@ -38,6 +51,8 @@ public func __allTests() -> [XCTestCaseEntry] {
         testCase(DirectedGraphPerformanceTests.__allTests),
         testCase(GraphPerformanceTests.__allTests),
         testCase(QueuePerformanceTests.__allTests),
+        testCase(WeightedDirectedGraphPerformanceTests.__allTests),
+        testCase(WeightedGraphPerformanceTests.__allTests),
     ]
 }
 #endif

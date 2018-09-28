@@ -66,4 +66,3 @@ extension Graph {
 
 extension Graph: Equatable { }
 extension Graph: Hashable { }
-

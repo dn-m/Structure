@@ -27,8 +27,6 @@ class Zip3SequenceTests: XCTestCase {
         let a = (0..<1_000_000)
         let b = a.reversed()
         let c = zip(a,b).map(*)
-        measure {
-            _ = zip(a,b,c).map { $0 }
-        }
+        _ = zip(a,b,c).map { $0 }
     }
 }
