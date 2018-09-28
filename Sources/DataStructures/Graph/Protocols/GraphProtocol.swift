@@ -53,6 +53,8 @@ extension GraphProtocol {
         return nodes.contains(node)
     }
     
+    /// Returns: `true` if the `GraphProtocol`-conforming type value contains the given `edge`.
+    /// Otherwise, `false`.
     @inlinable
     public func contains(_ edge: Edge) -> Bool {
         return edges.contains(edge)
