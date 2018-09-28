@@ -132,6 +132,17 @@ extension DictionaryProtocolsTests {
     ]
 }
 
+extension DirectedGraphTests {
+    static let __allTests = [
+        ("testDirectedGraphInsertNodes", testDirectedGraphInsertNodes),
+        ("testEdgesFromNode", testEdgesFromNode),
+        ("testShortestPathThreeNodes", testShortestPathThreeNodes),
+        ("testShortestUnweightedPathSingleNode", testShortestUnweightedPathSingleNode),
+        ("testShortestUnweightedPathTwoDirectionallyConnectedNodes", testShortestUnweightedPathTwoDirectionallyConnectedNodes),
+        ("testShortestUnweightedPathTwoUnconnectedNodes", testShortestUnweightedPathTwoUnconnectedNodes),
+    ]
+}
+
 extension EitherTests {
     static let __allTests = [
         ("testEquatable", testEquatable),
@@ -517,6 +528,7 @@ public func __allTests() -> [XCTestCaseEntry] {
         testCase(CircularArrayTests.__allTests),
         testCase(ContiguousSegmentCollectionTests.__allTests),
         testCase(DictionaryProtocolsTests.__allTests),
+        testCase(DirectedGraphTests.__allTests),
         testCase(EitherTests.__allTests),
         testCase(GraphTests.__allTests),
         testCase(HomogeneityTests.__allTests),
