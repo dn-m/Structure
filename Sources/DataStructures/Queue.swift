@@ -66,6 +66,6 @@ extension Queue {
     /// - Complexity: O(*n*)
     @inlinable
     public mutating func dequeue() -> Element {
-        return storage.remove(at: 0)
+        return storage.removeFirst()
     }
 }

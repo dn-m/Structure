@@ -11,7 +11,7 @@ import DataStructures
 
 class BinaryHeapPerformanceTests: XCTestCase {
 
-    /// Guarantee that insertion into `BinaryHeap` is O(1).
+    /// Guarantee that insertion into `BinaryHeap` is O(*1*).
     func testInsert_O_1() {
         let benchmark = Benchmark.mutating(
             testPoints: Scale.small,
@@ -24,7 +24,7 @@ class BinaryHeapPerformanceTests: XCTestCase {
         XCTAssert(benchmark.performance(is: .constant))
     }
 
-    /// Guarantee that popping the minimum value from `BinaryHeap` is O(1).
+    /// Guarantee that popping the minimum value from `BinaryHeap` is O(*1*).
     func testPop_O_1() {
         let benchmark = Benchmark.mutating(
             testPoints: Scale.small,
