@@ -40,6 +40,11 @@ extension WeightedGraphProtocol {
 
     // MARK: - Querying
 
+    /// - Returns: All of the edges contained herein.
+    public var edges: Set<Edge> {
+        return Set(adjacents.keys.lazy)
+    }
+
     /// - Returns: `true` if this graph contains an edge between given `source` and `destination`.
     /// Otherwise, `false`.
     @inlinable

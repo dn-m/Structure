@@ -21,6 +21,9 @@ public protocol GraphProtocol {
     /// All of the nodes contained herein.
     var nodes: Set<Node> { get set }
 
+    /// All of the edges contained herein.
+    var edges: Set<Edge> { get }
+
     // MARK: - Initializers
 
     /// Creates a `GraphProtocol`-conforming type value with the given set of `nodes`.
