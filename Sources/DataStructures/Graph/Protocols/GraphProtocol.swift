@@ -63,6 +63,7 @@ extension GraphProtocol {
         return (nodes ?? self.nodes).filter { edges.contains(Edge(source,$0)) }
     }
     
+    /// - Returns: A set of edges outgoing from the given `source`.
     @inlinable
     public func edges(containing source: Node) -> Set<Edge> {
         return Set(neighbors(of: source).map { Edge(source, $0) })
