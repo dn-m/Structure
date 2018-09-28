@@ -43,7 +43,7 @@ extension UnweightedGraphProtocol {
     /// - Returns: A set of edges containing the given `node`.
     @inlinable
     public func edges(containing node: Node) -> Set<Edge> {
-        return edges.filter { $0.a == node || $0.b == node }
+        return edges(from: node)
     }
 }
 
