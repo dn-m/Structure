@@ -9,7 +9,8 @@ extension BinaryHeapPerformanceTests {
 
 extension DirectedGraphPerformanceTests {
     static let __allTests = [
-        ("testEdgesFromNode_O_n", testEdgesFromNode_O_n),
+        ("testEdgesFromNode_O_1", testEdgesFromNode_O_1),
+        ("testNeighborsOfNode_O_1", testNeighborsOfNode_O_1),
     ]
 }
 
