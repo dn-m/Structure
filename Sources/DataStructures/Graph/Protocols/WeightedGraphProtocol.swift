@@ -46,13 +46,6 @@ extension WeightedGraphProtocol {
         return Set(adjacents.keys.lazy)
     }
 
-    /// - Returns: `true` if this graph contains an edge between given `source` and `destination`.
-    /// Otherwise, `false`.
-    @inlinable
-    public func containsEdge(from source: Node, to destination: Node) -> Bool {
-        return contains(Edge(source,destination))
-    }
-
     /// - Returns: The weight for the edge connecting the given `source` and `destination` nodes,
     /// if the given `edge` is contained herein. Otherwise, `nil`.
     @inlinable
