@@ -256,6 +256,16 @@ extension PairsTests {
     ]
 }
 
+extension QueueTests {
+    static let __allTests = [
+        ("testEnqueuedDequeue", testEnqueuedDequeue),
+        ("testEnqueuedNotEmpty", testEnqueuedNotEmpty),
+        ("testEnqueuedPeekNotNil", testEnqueuedPeekNotNil),
+        ("testInitEmpty", testInitEmpty),
+        ("testInitPeekNil", testInitPeekNil),
+    ]
+}
+
 extension ReferenceTreeProtocolTests {
     static let __allTests = [
         ("testAddChild", testAddChild),
@@ -505,6 +515,7 @@ public func __allTests() -> [XCTestCaseEntry] {
         testCase(NewTypeTests.__allTests),
         testCase(OrderedDictionaryTests.__allTests),
         testCase(PairsTests.__allTests),
+        testCase(QueueTests.__allTests),
         testCase(ReferenceTreeProtocolTests.__allTests),
         testCase(ReferenceTreeTests.__allTests),
         testCase(SortedArrayTests.__allTests),
