@@ -9,7 +9,7 @@
 public protocol SwappablePair: SymmetricPair { }
 
 extension SwappablePair {
-    
+
     /// - Returns: A `SwappablePair` wherein the values are swapped for one another.
     public var swapped: Self { return .init(b,a) }
 }
