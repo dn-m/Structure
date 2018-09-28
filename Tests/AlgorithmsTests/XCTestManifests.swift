@@ -60,7 +60,6 @@ extension TupleMapTests {
 
 extension UnzipTests {
     static let __allTests = [
-        ("testEmpty", testEmpty),
         ("testNonEmpty", testNonEmpty),
         ("testPerformance", testPerformance),
     ]

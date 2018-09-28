@@ -10,10 +10,6 @@ import Algorithms
 
 class UnzipTests: XCTestCase {
 
-    func testEmpty() {
-
-    }
-
     func testNonEmpty() {
         let array = [(1,2),(3,4),(5,6),(7,8),(9,10),(11,12),(13,14)]
         let (odds,evens) = array.unzipped()
@@ -25,8 +21,6 @@ class UnzipTests: XCTestCase {
         let array = (0..<1_000_000).map { _ in
             (Int.random(in: .min ..< .max), Int.random(in: .min ..< .max))
         }
-        measure {
-            let (xs,ys) = array.unzipped()
-        }
+        let _ = array.unzipped()
     }
 }
