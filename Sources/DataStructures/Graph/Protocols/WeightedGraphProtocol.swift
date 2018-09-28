@@ -76,7 +76,7 @@ extension WeightedGraphProtocol {
     /// - Returns: A set of edges containing the given `node`.
     @inlinable
     public func edges(containing node: Node) -> Set<Edge> {
-        return Set(adjacents.keys.lazy.filter { $0.contains(node) })
+        return edges(from: node)
     }
 }
 
