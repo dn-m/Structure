@@ -52,20 +52,5 @@ extension WeightedGraph {
     }
 }
 
-extension WeightedGraph {
-
-    // MARK: - Instance Methods
-
-    /// - Returns: A set of nodes connected to the given `source`, in the given set of
-    /// `nodes`.
-    ///
-    /// If `nodes` is empty, then any nodes contained herein are able to be included in the
-    /// resultant set.
-    @inlinable
-    public func neighbors(of source: Node, in nodes: Set<Node>? = nil) -> Set<Node> {
-        return (nodes ?? self.nodes).filter { adjacents.keys.contains(Edge(source,$0)) }
-    }
-}
-
 extension WeightedGraph: Equatable { }
 extension WeightedGraph: Hashable where Weight: Hashable { }

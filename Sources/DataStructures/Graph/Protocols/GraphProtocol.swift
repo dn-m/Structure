@@ -59,6 +59,16 @@ extension GraphProtocol {
         return nodes.contains(node)
     }
 
+    /// - Returns: A set of nodes connected to the given `source`, in the given set of
+    /// `nodes`.
+    ///
+    /// If `nodes` is empty, then any nodes contained herein are able to be included in the
+    /// resultant set.
+    @inlinable
+    public func neighbors(of source: Node, in nodes: Set<Node>? = nil) -> Set<Node> {
+        return (nodes ?? self.nodes).filter { edges.contains(Edge(source,$0)) }
+    }
+
     /// - Returns: An array of `Node` values in breadth first order.
     @inlinable
     public func breadthFirstSearch(from source: Node, to destination: Node? = nil) -> [Node] {

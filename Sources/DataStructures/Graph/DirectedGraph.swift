@@ -65,16 +65,6 @@ extension DirectedGraph {
     public func edges(from source: Node) -> Set<Edge> {
         return edges.filter { $0.a == source }
     }
-
-    /// - Returns: A set of nodes connected to the given `source`, in the given set of
-    /// `nodes`.
-    ///
-    /// If `nodes` is empty, then any nodes contained herein are able to be included in the
-    /// resultant set.
-    @inlinable
-    public func neighbors(of source: Node, in nodes: Set<Node>? = nil) -> Set<Node> {
-        return (nodes ?? self.nodes).filter { edges.contains(Edge(source,$0)) }
-    }
 }
 
 extension DirectedGraph: Equatable { }
