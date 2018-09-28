@@ -63,6 +63,8 @@ extension GraphProtocol {
         return (nodes ?? self.nodes).filter { edges.contains(Edge(source,$0)) }
     }
     
+    /// - Returns: A set of edges that contain the given `node` (either incident or
+    /// outgoing).
     public func edges(containing node: Node) -> Set<Edge> {
         return edges(from: node).union(edges(to: node))
     }
