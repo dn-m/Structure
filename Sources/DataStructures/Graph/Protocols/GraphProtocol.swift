@@ -62,6 +62,11 @@ extension GraphProtocol {
     public func neighbors(of source: Node, in nodes: Set<Node>? = nil) -> Set<Node> {
         return (nodes ?? self.nodes).filter { edges.contains(Edge(source,$0)) }
     }
+    
+    @inlinable
+    public func edges(containing source: Node) -> Set<Edge> {
+        return Set(neighbors(of: source).map { Edge(source, $0) })
+    }
 
     /// - Returns: An array of `Node` values in breadth first order.
     @inlinable
