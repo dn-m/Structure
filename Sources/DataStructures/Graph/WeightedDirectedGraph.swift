@@ -44,17 +44,6 @@ extension WeightedDirectedGraph {
     }
 }
 
-extension WeightedDirectedGraph {
-
-    // MARK: - Instance Methods
-
-    /// - Returns: A set of edges which emanate from the given `source` node.
-    @inlinable
-    public func edges(from source: Node) -> Set<Edge> {
-        return Set(adjacents.keys.lazy.filter { $0.a == source })
-    }
-}
-
 extension WeightedDirectedGraph: Equatable { }
 extension WeightedDirectedGraph: Hashable where Weight: Hashable { }
 
