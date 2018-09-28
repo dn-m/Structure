@@ -68,6 +68,11 @@ extension GraphProtocol {
     public func edges(from source: Node) -> Set<Edge> {
         return Set(neighbors(of: source).map { Edge(source, $0) })
     }
+    
+    @inlinable
+    public func edges(to destination: Node) -> Set<Edge> {
+        return Set(nodes.lazy.map { Edge($0, destination) }.filter(edges.contains))
+    }
 
     /// - Returns: An array of `Node` values in breadth first order.
     @inlinable
