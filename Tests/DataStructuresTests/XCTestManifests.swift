@@ -138,6 +138,19 @@ extension EitherTests {
     ]
 }
 
+extension GraphTests {
+    static let __allTests = [
+        ("testBreadthFirstSearch", testBreadthFirstSearch),
+        ("testEdgesContainingNode", testEdgesContainingNode),
+        ("testEdgesCount", testEdgesCount),
+        ("testInsertNodes", testInsertNodes),
+        ("testNeighbors", testNeighbors),
+        ("testNeighborsInSet", testNeighborsInSet),
+        ("testNodesCount", testNodesCount),
+        ("testRemoveEdge", testRemoveEdge),
+    ]
+}
+
 extension HomogeneityTests {
     static let __allTests = [
         ("testIsHeterogeneousFalse", testIsHeterogeneousFalse),
@@ -505,6 +518,7 @@ public func __allTests() -> [XCTestCaseEntry] {
         testCase(ContiguousSegmentCollectionTests.__allTests),
         testCase(DictionaryProtocolsTests.__allTests),
         testCase(EitherTests.__allTests),
+        testCase(GraphTests.__allTests),
         testCase(HomogeneityTests.__allTests),
         testCase(IntervalRelationTests.__allTests),
         testCase(InvertibleEnumTests.__allTests),
