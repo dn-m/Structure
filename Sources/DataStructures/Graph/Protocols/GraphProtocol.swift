@@ -52,6 +52,11 @@ extension GraphProtocol {
     public func contains(_ node: Node) -> Bool {
         return nodes.contains(node)
     }
+    
+    @inlinable
+    public func contains(_ edge: Edge) -> Bool {
+        return edges.contains(edge)
+    }
 
     /// - Returns: A set of nodes connected to the given `source`, in the given set of
     /// `nodes`.
