@@ -41,6 +41,7 @@ extension WeightedGraphProtocol {
     // MARK: - Querying
 
     /// - Returns: All of the edges contained herein.
+    @inlinable
     public var edges: Set<Edge> {
         return Set(adjacents.keys.lazy)
     }
