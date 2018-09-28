@@ -60,7 +60,7 @@ extension Graph {
     /// resultant set.
     @inlinable
     public func neighbors(of source: Node, in nodes: Set<Node>? = nil) -> Set<Node> {
-        return (nodes ?? self.nodes).intersection(edges.compactMap { $0.other(source) })
+        return (nodes ?? self.nodes).filter { edges.contains(Edge(source,$0)) }
     }
 }
 
