@@ -53,6 +53,7 @@ public func __allTests() -> [XCTestCaseEntry] {
         testCase(QueuePerformanceTests.__allTests),
         testCase(WeightedDirectedGraphPerformanceTests.__allTests),
         testCase(WeightedGraphPerformanceTests.__allTests),
+        testCase(QueuePerformanceTests.__allTests),
     ]
 }
 #endif
