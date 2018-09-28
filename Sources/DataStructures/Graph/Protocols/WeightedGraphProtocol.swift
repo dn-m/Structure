@@ -72,12 +72,6 @@ extension WeightedGraphProtocol {
     public func weight(_ edge: Edge) -> Weight? {
         return adjacents[edge]
     }
-
-    /// - Returns: A set of edges containing the given `node`.
-    @inlinable
-    public func edges(containing node: Node) -> Set<Edge> {
-        return edges(from: node)
-    }
 }
 
 extension WeightedGraphProtocol {
