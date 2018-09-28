@@ -501,6 +501,14 @@ extension TreeTests {
     ]
 }
 
+extension WeightedDirectedGraphTests {
+    static let __allTests = [
+        ("testEdgesFromNode", testEdgesFromNode),
+        ("testShortestPathTwoOptions", testShortestPathTwoOptions),
+        ("testWeightedDirectedGraphInsertNodes", testWeightedDirectedGraphInsertNodes),
+    ]
+}
+
 extension WeightedGraphTests {
     static let __allTests = [
         ("testContains", testContains),
@@ -562,6 +570,7 @@ public func __allTests() -> [XCTestCaseEntry] {
         testCase(StackTests.__allTests),
         testCase(SubsetsTests.__allTests),
         testCase(TreeTests.__allTests),
+        testCase(WeightedDirectedGraphTests.__allTests),
         testCase(WeightedGraphTests.__allTests),
         testCase(Zip3SequenceTests.__allTests),
         testCase(ZipToLongestTests.__allTests),
