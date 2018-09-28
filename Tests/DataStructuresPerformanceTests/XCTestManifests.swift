@@ -7,6 +7,20 @@ extension BinaryHeapPerformanceTests {
     ]
 }
 
+extension DirectedGraphPerformanceTests {
+    static let __allTests = [
+        ("testEdgesFromNode_O_n", testEdgesFromNode_O_n),
+    ]
+}
+
+extension GraphPerformanceTests {
+    static let __allTests = [
+        ("testInsertEdge_O_1", testInsertEdge_O_1),
+        ("testInsertNode_O_1", testInsertNode_O_1),
+        ("testNeighborsOfNode_O_n", testNeighborsOfNode_O_n),
+    ]
+}
+
 extension QueuePerformanceTests {
     static let __allTests = [
         ("testDequeue_O_n", testDequeue_O_n),
@@ -20,6 +34,8 @@ extension QueuePerformanceTests {
 public func __allTests() -> [XCTestCaseEntry] {
     return [
         testCase(BinaryHeapPerformanceTests.__allTests),
+        testCase(DirectedGraphPerformanceTests.__allTests),
+        testCase(GraphPerformanceTests.__allTests),
         testCase(QueuePerformanceTests.__allTests),
     ]
 }

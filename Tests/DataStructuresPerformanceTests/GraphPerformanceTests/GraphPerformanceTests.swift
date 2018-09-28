@@ -13,6 +13,7 @@ class GraphPerformanceTests: XCTestCase {
 
     func testInsertNode_O_1() {
         let benchmark = Benchmark.mutating(
+            testPoints: Scale.small,
             setup: graph(size:),
             measuring: { $0.insert(Int.random(in: .min ..< .max)) }
         )
@@ -21,6 +22,7 @@ class GraphPerformanceTests: XCTestCase {
 
     func testInsertEdge_O_1() {
         let benchmark = Benchmark.mutating(
+            testPoints: Scale.small,
             setup: graph(size:),
             measuring: {
                 $0.insertEdge(
@@ -34,6 +36,7 @@ class GraphPerformanceTests: XCTestCase {
 
     func testNeighborsOfNode_O_n() {
         let benchmark = Benchmark.mutating(
+            testPoints: Scale.small,
             setup: graph(size:),
             measuring: { _ = $0.neighbors(of: Int.random(in: .min ..< .max)) }
         )
@@ -41,8 +44,11 @@ class GraphPerformanceTests: XCTestCase {
     }
 }
 
-func graph (size: Int) -> Graph<Int> {
+private func graph (size: Int) -> Graph<Int> {
     var result = Graph<Int>()
     (0..<size).forEach { size in result.insert(size) }
+    (0..<size/10).forEach { size in
+        _ = result.insertEdge(from: Int.random(in: .min ..< size), to: Int.random(in: .min ..< size))
+    }
     return result
 }
