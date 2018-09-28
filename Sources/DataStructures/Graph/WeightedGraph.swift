@@ -69,4 +69,3 @@ extension WeightedGraph {
 
 extension WeightedGraph: Equatable { }
 extension WeightedGraph: Hashable where Weight: Hashable { }
-
