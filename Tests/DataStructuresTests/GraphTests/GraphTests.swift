@@ -39,15 +39,6 @@ class GraphTests: XCTestCase {
         XCTAssertEqual(graph.edges.count, 1)
     }
 
-    func testEdgesContainingNode() {
-        var graph = Graph<String>()
-        graph.insert("a")
-        graph.insert("b")
-        graph.insert("c")
-        graph.insertEdge(from: "a", to: "c")
-        XCTAssertEqual(graph.edges(containing: "a"), [UnorderedPair("a","c")])
-    }
-
     func testNeighbors() {
         var graph = Graph<String>()
         graph.insertEdge(from: "a", to: "b")
