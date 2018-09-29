@@ -33,9 +33,6 @@ public protocol GraphProtocol {
 
     /// Removes the edge from the given `source` to the given `destination`.
     mutating func removeEdge(from source: Node, to destination: Node)
-
-    /// - Returns: A set of edges containing the given `node`.
-    func edges(containing node: Node) -> Set<Edge>
 }
 
 extension GraphProtocol {
@@ -61,13 +58,6 @@ extension GraphProtocol {
     @inlinable
     public func neighbors(of source: Node, in nodes: Set<Node>? = nil) -> Set<Node> {
         return (nodes ?? self.nodes).filter { edges.contains(Edge(source,$0)) }
-    }
-    
-    /// - Returns: A set of edges that contain the given `node` (either incident or
-    /// outgoing).
-    @inlinable
-    public func edges(containing node: Node) -> Set<Edge> {
-        return edges(from: node).union(edges(to: node))
     }
     
     /// - Returns: A set of edges outgoing from the given `source`.

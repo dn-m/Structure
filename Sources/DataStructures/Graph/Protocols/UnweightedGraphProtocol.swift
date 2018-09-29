@@ -39,6 +39,13 @@ extension UnweightedGraphProtocol {
     public func contains(_ edge: Edge) -> Bool {
         return edges.contains(edge)
     }
+
+    /// - Returns: A set of edges that contain the given `node` (either incident or
+    /// outgoing).
+    @inlinable
+    public func edges(containing node: Node) -> Set<Edge> {
+        return edges.filter { $0.contains(node) }
+    }
 }
 
 extension UnweightedGraphProtocol {
