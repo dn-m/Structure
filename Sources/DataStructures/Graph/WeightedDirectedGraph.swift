@@ -13,7 +13,7 @@ public struct WeightedDirectedGraph <Node: Hashable, Weight: Numeric>:
     // MARK: - Instance Properties
 
     public var nodes: Set<Node>
-    public var adjacents: [Edge: Weight]
+    public var weights: [Edge: Weight]
 }
 
 extension WeightedDirectedGraph {
@@ -32,15 +32,15 @@ extension WeightedDirectedGraph {
     @inlinable
     public init(_ nodes: Set<Node> = []) {
         self.nodes = nodes
-        self.adjacents = [:]
+        self.weights = [:]
     }
 
     /// Creates a `Graph` with the given set of nodes and the given dictionary of weights
     /// stored by the applicable edge.
     @inlinable
-    public init(_ nodes: Set<Node> = [], _ adjacents: [Edge: Weight] = [:]) {
+    public init(_ nodes: Set<Node> = [], _ weights: [Edge: Weight] = [:]) {
         self.init(nodes)
-        self.adjacents = adjacents
+        self.weights = weights
     }
 }
 
