@@ -15,9 +15,6 @@ public struct OrderedPair <T>: SwappablePair {
 
     /// The second value contained herein.
     public let b: T
-}
-
-extension OrderedPair {
 
     // MARK: - Initializers
 
