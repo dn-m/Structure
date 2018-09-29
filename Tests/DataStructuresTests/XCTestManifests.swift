@@ -132,9 +132,32 @@ extension DictionaryProtocolsTests {
     ]
 }
 
+extension DirectedGraphTests {
+    static let __allTests = [
+        ("testDirectedGraphInsertNodes", testDirectedGraphInsertNodes),
+        ("testEdgesFromNode", testEdgesFromNode),
+        ("testShortestPathThreeNodes", testShortestPathThreeNodes),
+        ("testShortestUnweightedPathSingleNode", testShortestUnweightedPathSingleNode),
+        ("testShortestUnweightedPathTwoDirectionallyConnectedNodes", testShortestUnweightedPathTwoDirectionallyConnectedNodes),
+        ("testShortestUnweightedPathTwoUnconnectedNodes", testShortestUnweightedPathTwoUnconnectedNodes),
+    ]
+}
+
 extension EitherTests {
     static let __allTests = [
         ("testEquatable", testEquatable),
+    ]
+}
+
+extension GraphTests {
+    static let __allTests = [
+        ("testBreadthFirstSearch", testBreadthFirstSearch),
+        ("testEdgesCount", testEdgesCount),
+        ("testInsertNodes", testInsertNodes),
+        ("testNeighbors", testNeighbors),
+        ("testNeighborsInSet", testNeighborsInSet),
+        ("testNodesCount", testNodesCount),
+        ("testRemoveEdge", testRemoveEdge),
     ]
 }
 
@@ -477,6 +500,27 @@ extension TreeTests {
     ]
 }
 
+extension WeightedDirectedGraphTests {
+    static let __allTests = [
+        ("testEdgesFromNode", testEdgesFromNode),
+        ("testShortestPathTwoOptions", testShortestPathTwoOptions),
+        ("testWeightedDirectedGraphInsertNodes", testWeightedDirectedGraphInsertNodes),
+    ]
+}
+
+extension WeightedGraphTests {
+    static let __allTests = [
+        ("testContains", testContains),
+        ("testInsertNodes", testInsertNodes),
+        ("testNeighbors", testNeighbors),
+        ("testRemoveEdge", testRemoveEdge),
+        ("testUnweightedFromDirected", testUnweightedFromDirected),
+        ("testUnweightedFromUndirected", testUnweightedFromUndirected),
+        ("testUpdateEdge", testUpdateEdge),
+        ("testWeightForEdge", testWeightForEdge),
+    ]
+}
+
 extension Zip3SequenceTests {
     static let __allTests = [
         ("testMany", testMany),
@@ -504,7 +548,9 @@ public func __allTests() -> [XCTestCaseEntry] {
         testCase(CircularArrayTests.__allTests),
         testCase(ContiguousSegmentCollectionTests.__allTests),
         testCase(DictionaryProtocolsTests.__allTests),
+        testCase(DirectedGraphTests.__allTests),
         testCase(EitherTests.__allTests),
+        testCase(GraphTests.__allTests),
         testCase(HomogeneityTests.__allTests),
         testCase(IntervalRelationTests.__allTests),
         testCase(InvertibleEnumTests.__allTests),
@@ -523,6 +569,8 @@ public func __allTests() -> [XCTestCaseEntry] {
         testCase(StackTests.__allTests),
         testCase(SubsetsTests.__allTests),
         testCase(TreeTests.__allTests),
+        testCase(WeightedDirectedGraphTests.__allTests),
+        testCase(WeightedGraphTests.__allTests),
         testCase(Zip3SequenceTests.__allTests),
         testCase(ZipToLongestTests.__allTests),
     ]

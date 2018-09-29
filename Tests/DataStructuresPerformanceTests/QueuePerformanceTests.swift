@@ -13,7 +13,11 @@ class QueuePerformanceTests: XCTestCase {
 
     func testEnqueue_O_1() {
         let benchmark = Benchmark.mutating(
-            setup: { _ in Queue<Int>() },
+            setup: { size -> Queue<Int> in
+                var q = Queue<Int>()
+                (0..<size).forEach { q.enqueue($0) }
+                return q
+            },
             measuring: { $0.enqueue(0) }
         )
         XCTAssert(benchmark.performance(is: .constant))
