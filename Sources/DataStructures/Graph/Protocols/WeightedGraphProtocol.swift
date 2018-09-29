@@ -16,13 +16,13 @@ public protocol WeightedGraphProtocol: GraphProtocol {
     // MARK: - Instance Properties
 
     /// The storage of weights by the applicable edge.
-    var adjacents: [Edge: Weight] { get set }
+    var weights: [Edge: Weight] { get set }
 
     // MARK: - Initializers
 
     /// Creates a `WeightedGraphProtocol`-conforming type value with the given set of `nodes` and
     /// the given dictionary of weights stored by the applicable edge.
-    init(_ nodes: Set<Node>, _ adjacents: [Edge: Weight])
+    init(_ nodes: Set<Node>, _ weights: [Edge: Weight])
 }
 
 extension WeightedGraphProtocol {
@@ -32,7 +32,7 @@ extension WeightedGraphProtocol {
     /// - Returns: An unweighted version of this `WeightedGraphProtocol`-conforming type value.
     @inlinable
     public func unweighted <U> () -> U where U: UnweightedGraphProtocol, U.Edge == Edge {
-        return .init(nodes, Set(adjacents.keys.lazy))
+        return .init(nodes, Set(weights.keys.lazy))
     }
 }
 
@@ -43,7 +43,7 @@ extension WeightedGraphProtocol {
     /// - Returns: All of the edges contained herein.
     @inlinable
     public var edges: Set<Edge> {
-        return Set(adjacents.keys.lazy)
+        return Set(weights.keys.lazy)
     }
 
     /// - Returns: The weight for the edge connecting the given `source` and `destination` nodes,
@@ -57,7 +57,7 @@ extension WeightedGraphProtocol {
     /// Otherwise, `nil`.
     @inlinable
     public func weight(_ edge: Edge) -> Weight? {
-        return adjacents[edge]
+        return weights[edge]
     }
 }
 
@@ -72,7 +72,7 @@ extension WeightedGraphProtocol {
     public mutating func insertEdge(from source: Node, to destination: Node, weight: Weight) {
         nodes.insert(source)
         nodes.insert(destination)
-        adjacents[Edge(source,destination)] = weight
+        weights[Edge(source,destination)] = weight
     }
 
     /// Removes the edge between the given `source` and `destination` nodes.
@@ -83,13 +83,13 @@ extension WeightedGraphProtocol {
 
     @inlinable
     public mutating func removeEdge(_ edge: Edge) {
-        adjacents[edge] = nil
+        weights[edge] = nil
     }
 
     /// Inserts the given `edge` with the given `weight`.
     @inlinable
     public mutating func insertEdge(_ edge: Edge, weight: Weight) {
-        adjacents[edge] = weight
+        weights[edge] = weight
     }
 
     /// Updates the weight of the edge between the given `source` and `destination` nodes by the
