@@ -49,6 +49,20 @@ extension GraphProtocol {
     public func contains(_ node: Node) -> Bool {
         return nodes.contains(node)
     }
+    
+    /// - Returns: `true` if this graph contains an edge between given `source` and `destination`.
+    /// Otherwise, `false`.
+    @inlinable
+    public func containsEdge(from source: Node, to destination: Node) -> Bool {
+        return contains(Edge(source,destination))
+    }
+    
+    /// Returns: `true` if the `GraphProtocol`-conforming type value contains the given `edge`.
+    /// Otherwise, `false`.
+    @inlinable
+    public func contains(_ edge: Edge) -> Bool {
+        return edges.contains(edge)
+    }
 
     /// - Returns: A set of nodes connected to the given `source`, in the given set of
     /// `nodes`.

@@ -32,17 +32,6 @@ extension UnweightedGraphProtocol {
 
 extension UnweightedGraphProtocol {
 
-    // MARK: - Querying
-
-    /// - Returns: `true` if this graph contains the given `edge`. Otherwise, `false`.
-    @inlinable
-    public func contains(_ edge: Edge) -> Bool {
-        return edges.contains(edge)
-    }
-}
-
-extension UnweightedGraphProtocol {
-
     // MARK: - Modifying
 
     /// Inserts an edge between the given `source` and `destination` nodes.
