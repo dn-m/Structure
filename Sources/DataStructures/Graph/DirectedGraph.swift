@@ -52,7 +52,7 @@ extension DirectedGraph {
     @inlinable
     public init <C> (path: C) where C: Collection, C.Element == Node {
         self.nodes = Set(path)
-        self.edges = Set(nodes.pairs.map(OrderedPair.init(_:_:)))
+        self.edges = Set(nodes.pairs.map(OrderedPair.init))
     }
 }
 

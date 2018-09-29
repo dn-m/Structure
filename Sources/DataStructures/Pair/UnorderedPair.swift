@@ -15,9 +15,6 @@ public struct UnorderedPair <T>: SymmetricPair {
 
     /// The second value contained herein.
     public let b: T
-}
-
-extension UnorderedPair {
 
     // MARK: - Initializers
 
@@ -27,7 +24,6 @@ extension UnorderedPair {
         self.a = a
         self.b = b
     }
-
 }
 
 extension UnorderedPair where T: Equatable {
