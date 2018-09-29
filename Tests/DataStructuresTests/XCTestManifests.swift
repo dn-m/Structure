@@ -152,7 +152,6 @@ extension EitherTests {
 extension GraphTests {
     static let __allTests = [
         ("testBreadthFirstSearch", testBreadthFirstSearch),
-        ("testEdgesContainingNode", testEdgesContainingNode),
         ("testEdgesCount", testEdgesCount),
         ("testInsertNodes", testInsertNodes),
         ("testNeighbors", testNeighbors),

@@ -56,16 +56,5 @@ extension DirectedGraph {
     }
 }
 
-extension DirectedGraph {
-
-    // MARK: - Instance Methods
-
-    /// - Returns: A set of edges which emanate from the given `source` node.
-    @inlinable
-    public func edges(from source: Node) -> Set<Edge> {
-        return edges.filter { $0.a == source }
-    }
-}
-
 extension DirectedGraph: Equatable { }
 extension DirectedGraph: Hashable { }

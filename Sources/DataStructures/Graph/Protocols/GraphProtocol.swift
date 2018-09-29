@@ -33,9 +33,6 @@ public protocol GraphProtocol {
 
     /// Removes the edge from the given `source` to the given `destination`.
     mutating func removeEdge(from source: Node, to destination: Node)
-
-    /// - Returns: A set of edges containing the given `node`.
-    func edges(containing node: Node) -> Set<Edge>
 }
 
 extension GraphProtocol {
@@ -52,6 +49,20 @@ extension GraphProtocol {
     public func contains(_ node: Node) -> Bool {
         return nodes.contains(node)
     }
+    
+    /// - Returns: `true` if this graph contains an edge between given `source` and `destination`.
+    /// Otherwise, `false`.
+    @inlinable
+    public func containsEdge(from source: Node, to destination: Node) -> Bool {
+        return contains(Edge(source,destination))
+    }
+    
+    /// Returns: `true` if the `GraphProtocol`-conforming type value contains the given `edge`.
+    /// Otherwise, `false`.
+    @inlinable
+    public func contains(_ edge: Edge) -> Bool {
+        return edges.contains(edge)
+    }
 
     /// - Returns: A set of nodes connected to the given `source`, in the given set of
     /// `nodes`.
@@ -61,6 +72,18 @@ extension GraphProtocol {
     @inlinable
     public func neighbors(of source: Node, in nodes: Set<Node>? = nil) -> Set<Node> {
         return (nodes ?? self.nodes).filter { edges.contains(Edge(source,$0)) }
+    }
+    
+    /// - Returns: A set of edges outgoing from the given `source`.
+    @inlinable
+    public func edges(from source: Node) -> Set<Edge> {
+        return Set(neighbors(of: source).map { Edge(source, $0) })
+    }
+    
+    /// - Returns: A set of edges incident to the given `destination`.
+    @inlinable
+    public func edges(to destination: Node) -> Set<Edge> {
+        return Set(nodes.lazy.map { Edge($0, destination) }.filter(edges.contains))
     }
 
     /// - Returns: An array of `Node` values in breadth first order.

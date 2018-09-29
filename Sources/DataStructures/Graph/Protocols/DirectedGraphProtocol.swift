@@ -6,10 +6,4 @@
 //
 
 /// Interface for directed graphs.
-public protocol DirectedGraphProtocol: GraphProtocol where Edge == OrderedPair<Node> {
-
-    // MARK: - Instance Methods
-
-    /// - Returns: A set of edges which emanate from the given `source` node.
-    func edges(from source: Node) -> Set<Edge>
-}
+public protocol DirectedGraphProtocol: GraphProtocol where Edge == OrderedPair<Node> { }
