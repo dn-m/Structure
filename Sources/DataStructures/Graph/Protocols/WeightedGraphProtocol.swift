@@ -17,12 +17,6 @@ public protocol WeightedGraphProtocol: GraphProtocol {
 
     /// The storage of weights by the applicable edge.
     var weights: [Edge: Weight] { get set }
-
-    // MARK: - Initializers
-
-    /// Creates a `WeightedGraphProtocol`-conforming type value with the given set of `nodes` and
-    /// the given dictionary of weights stored by the applicable edge.
-    init(_ nodes: Set<Node>, _ weights: [Edge: Weight])
 }
 
 extension WeightedGraphProtocol {
