@@ -24,11 +24,6 @@ public protocol GraphProtocol {
     /// All of the edges contained herein.
     var edges: Set<Edge> { get }
 
-    // MARK: - Initializers
-
-    /// Creates a `GraphProtocol`-conforming type value with the given set of `nodes`.
-    init(_ nodes: Set<Node>)
-
     // MARK: - Instance Methods
 
     /// Removes the edge from the given `source` to the given `destination`.
