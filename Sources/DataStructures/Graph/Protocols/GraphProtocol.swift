@@ -24,11 +24,6 @@ public protocol GraphProtocol {
     /// All of the edges contained herein.
     var edges: Set<Edge> { get }
 
-    // MARK: - Initializers
-
-    /// Creates a `GraphProtocol`-conforming type value with the given set of `nodes`.
-    init(_ nodes: Set<Node>)
-
     // MARK: - Instance Methods
 
     /// Removes the edge from the given `source` to the given `destination`.
@@ -77,7 +72,7 @@ extension GraphProtocol {
     /// - Returns: A set of edges outgoing from the given `source`.
     @inlinable
     public func edges(from source: Node) -> Set<Edge> {
-        return Set(neighbors(of: source).map { Edge(source, $0) })
+        return Set(neighbors(of: source).lazy.map { Edge(source, $0) })
     }
     
     /// - Returns: A set of edges incident to the given `destination`.
