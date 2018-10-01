@@ -1,15 +1,30 @@
 custom_categories:
 
+  - name: Utility
+    children: 
+    - Metatype
+    - Identifier
+
   - name: Abstract
     children:
     - Either
     - IntervalRelation
+
+  - name: Pairs
+    children:
+    - Pair
+    - SymmetricPair
+    - SwappablePair
+    - Cross
+    - UnorderedPair
+    - OrderedPair
 
   - name: Linear
     children:
       - Matrix
       - LinkedList
       - Stack  
+      - Queue
       - SortedArray
       - CircularArray
 
@@ -17,16 +32,29 @@ custom_categories:
     children:
       - Tree
       - BinaryHeap
+      - BinarySearchTree
+      - AVLTree
+      - ReferenceTree
+      - ReferenceTreeProtocol
 
   - name: Graphs
     children:
+      - Graph
+      - WeightedGraph
+      - DirectedGraph
+      - WeightedDirectedGraph
       - ReferenceGraph
+      - GraphProtocol
+      - WeightedGraphProtocol
+      - DirectedGraphProtocol
+      - WeightedDirectedGraphProtocol
 
   - name: Dictionaries
     children:
       - DictionaryProtocol
       - OrderedDictionary
       - SortedDictionary
+      - Bimap
 
   - name: Zip
     children:
@@ -50,6 +78,7 @@ custom_categories:
 
   - name: Wrapping Protocols
     children:
+      - NewType
       - IntegerWrapping
       - FloatWrapping
       - DoubleWrapping
