@@ -44,9 +44,7 @@ class GraphPerformanceTests: XCTestCase {
     }
 
     func testProfile() {
-        measure {
-            let _ = graph(size: 1_000_000)
-        }
+        let _ = graph(size: 1_000_000)
     }
 }
 
