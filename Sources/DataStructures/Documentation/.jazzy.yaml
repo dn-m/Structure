@@ -4,6 +4,8 @@ custom_categories:
     children: 
     - Metatype
     - Identifier
+    - RangeProtocol
+    - InvertibleEnum
 
   - name: Abstract
     children:
@@ -46,7 +48,9 @@ custom_categories:
       - ReferenceGraph
       - GraphProtocol
       - WeightedGraphProtocol
+      - UnweightedGraphProtocol
       - DirectedGraphProtocol
+      - UndirectedGraphProtocol
       - WeightedDirectedGraphProtocol
 
   - name: Dictionaries
