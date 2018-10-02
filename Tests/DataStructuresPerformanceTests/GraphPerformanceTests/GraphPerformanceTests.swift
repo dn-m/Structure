@@ -42,6 +42,12 @@ class GraphPerformanceTests: XCTestCase {
         )
         XCTAssert(benchmark.performance(is: .constant))
     }
+
+    func testProfile() {
+        measure {
+            let _ = graph(size: 1_000_000)
+        }
+    }
 }
 
 private func graph (size: Int) -> Graph<Int> {
