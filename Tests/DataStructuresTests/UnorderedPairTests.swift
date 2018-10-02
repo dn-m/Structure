@@ -34,4 +34,16 @@ class UnorderedPairTests: XCTestCase {
             _ = p.hashValue
         }
     }
+
+    func testManyHashValuesIntForCollisions() {
+        for _ in 0 ..< 1_000_000 {
+            let a = UnorderedPair(Int.random(in: .min ... .max), Int.random(in: .min ... .max))
+            let b = UnorderedPair(Int.random(in: .min ... .max), Int.random(in: .min ... .max))
+            if a == b {
+                XCTAssertEqual(a.hashValue, b.hashValue)
+            } else {
+                XCTAssertNotEqual(a.hashValue, b.hashValue)
+            }
+        }
+    }
 }
