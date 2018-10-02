@@ -52,6 +52,6 @@ extension UnorderedPair: Hashable where T: Hashable {
 
     /// Implements hashable requirement.
     public var hashValue: Int {
-        return Set([a,b]).hashValue
+        return a.hashValue ^ b.hashValue
     }
 }
