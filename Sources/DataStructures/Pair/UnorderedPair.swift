@@ -30,6 +30,7 @@ extension UnorderedPair where T: Equatable {
 
     /// - Returns: The value in this `UnorderedPair` other than the given `value`, if the given
     /// `value` is contained herein. Otherwise, `nil`.
+    @inlinable
     public func other(_ value: T) -> T? {
         return a == value ? b : b == value ? a : nil
     }
@@ -41,6 +42,7 @@ extension UnorderedPair: Equatable where T: Equatable {
 
     /// - Returns: `true` if both values contained by the given `UnorderedPair` values are
     /// equivalent, regardless of order. Otherwise, `false`.
+    @inlinable
     public static func == (_ lhs: UnorderedPair, _ rhs: UnorderedPair) -> Bool {
         return (lhs.a == rhs.a && lhs.b == rhs.b) || (lhs.a == rhs.b && lhs.b == rhs.a)
     }
@@ -51,7 +53,8 @@ extension UnorderedPair: Hashable where T: Hashable {
     // MARK: - Hashable
 
     /// Implements hashable requirement.
+    @inlinable
     public var hashValue: Int {
-        return Set([a,b]).hashValue
+        return a.hashValue ^ b.hashValue
     }
 }
