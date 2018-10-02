@@ -46,4 +46,22 @@ class UnorderedPairTests: XCTestCase {
             }
         }
     }
+
+    func testManyHashValuesStringForCollisions() {
+        for _ in 0 ..< 1_000_000 {
+            let a = UnorderedPair(randomString(), randomString())
+            let b = UnorderedPair(randomString(), randomString())
+            if a == b {
+                XCTAssertEqual(a.hashValue, b.hashValue)
+            } else {
+                XCTAssertNotEqual(a.hashValue, b.hashValue)
+            }
+        }
+    }
+}
+
+func randomString(maxLength: Int = 10) -> String {
+    let alphaNumeric = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+    let count = Int.random(in: 1 ..< maxLength)
+    return String((0..<count).map { _ in alphaNumeric.randomElement()! })
 }
