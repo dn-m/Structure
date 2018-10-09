@@ -54,7 +54,7 @@ extension UnorderedPair: Hashable where T: Hashable {
 
     /// Implements hashable requirement.
     @inlinable
-    public var hashValue: Int {
-        return a.hashValue ^ b.hashValue
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(a.hashValue ^ b.hashValue)
     }
 }
