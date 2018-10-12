@@ -28,6 +28,9 @@ public protocol GraphProtocol {
 
     /// Removes the edge from the given `source` to the given `destination`.
     mutating func removeEdge(from source: Node, to destination: Node)
+    
+    /// Removes `edge` from graph.
+    mutating func remove(_ edge: Edge)
 }
 
 extension GraphProtocol {
