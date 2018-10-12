@@ -48,7 +48,7 @@ extension GraphProtocol {
     @inlinable
     public mutating func remove(_ node: Node) {
         nodes.remove(node)
-        edges.filter { $0.contains(node) }.forEach { removeEdge(from: $0.a, to: $0.b) }
+        edges.filter { $0.contains(node) }.forEach { remove($0) }
     }
 
     /// - Returns: `true` if the `GraphProtocol`-conforming type value contains the given `node`.
