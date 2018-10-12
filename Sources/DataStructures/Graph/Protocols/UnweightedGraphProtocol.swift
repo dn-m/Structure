@@ -43,12 +43,6 @@ extension UnweightedGraphProtocol {
         insert(destination)
         edges.insert(Edge(source,destination))
     }
-
-    /// Removes the edge between the given `source` and `destination` nodes.
-    @inlinable
-    public mutating func removeEdge(from source: Node, to destination: Node) {
-        edges.remove(Edge(source,destination))
-    }
     
     /// Removes `edge` from graph.
     @inlinable
