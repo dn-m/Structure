@@ -37,6 +37,13 @@ extension GraphProtocol {
     public mutating func insert(_ node: Node) {
         nodes.insert(node)
     }
+    
+    /// Removes the given `node` and removes all edges that contain it.
+    @inlinable
+    public mutating func remove(_ node: Node) {
+        nodes.remove(node)
+        edges.filter { $0.contains(node) }.forEach { removeEdge(from: $0.a, to: $0.b) }
+    }
 
     /// - Returns: `true` if the `GraphProtocol`-conforming type value contains the given `node`.
     /// Otherwise, `false`.
