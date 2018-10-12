@@ -40,7 +40,7 @@ extension GraphProtocol {
     
     /// Removes the edge from the given `source` to the given `destination`.
     @inlinable
-    mutating func removeEdge(from source: Node, to destination: Node) {
+    public mutating func removeEdge(from source: Node, to destination: Node) {
         remove(Edge(source, destination))
     }
     
