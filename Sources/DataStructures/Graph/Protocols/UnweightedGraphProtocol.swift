@@ -49,6 +49,12 @@ extension UnweightedGraphProtocol {
     public mutating func removeEdge(from source: Node, to destination: Node) {
         edges.remove(Edge(source,destination))
     }
+    
+    /// Removes `edge` from graph.
+    @inlinable
+    public mutating func remove(_ edge: Edge) {
+        edges.remove(edge)
+    }
 }
 
 extension UnweightedGraphProtocol {
