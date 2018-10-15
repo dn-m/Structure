@@ -32,12 +32,6 @@ public protocol GraphProtocol {
 
 extension GraphProtocol {
 
-    /// Inserts the given `node` without making any connections to other nodes contained herein.
-    @inlinable
-    public mutating func insert(_ node: Node) {
-        nodes.insert(node)
-    }
-
     /// - Returns: `true` if the `GraphProtocol`-conforming type value contains the given `node`.
     /// Otherwise, `false`.
     @inlinable
