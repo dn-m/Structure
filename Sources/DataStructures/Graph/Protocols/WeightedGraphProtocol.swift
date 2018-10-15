@@ -62,10 +62,9 @@ extension WeightedGraphProtocol {
     /// Inserts an edge between the given `source` and `destination` nodes, with the given `weight`.
     ///
     /// If the `source` or `destination` nodes are not yet contained herein, they are inserted.
+    /// - TODO: Implement error-raising for `source` or `destination` absent.
     @inlinable
     public mutating func insertEdge(from source: Node, to destination: Node, weight: Weight) {
-        nodes.insert(source)
-        nodes.insert(destination)
         weights[Edge(source,destination)] = weight
     }
 
