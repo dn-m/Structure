@@ -15,6 +15,11 @@ public protocol CarrierGraphProtocol: GraphProtocol {
 
 extension CarrierGraphProtocol {
     
+    @inlinable
+    public var nodes: Set<Node> {
+        return Set(data.keys.lazy)
+    }
+    
     /// Inserts the given `node` with the given data `value`.
     @inlinable
     public mutating func insert(_ node: Node, value: Data) {
