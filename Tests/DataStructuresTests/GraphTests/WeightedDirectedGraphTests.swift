@@ -12,6 +12,7 @@ class WeightedDirectedGraphTests: XCTestCase {
 
     func testWeightedDirectedGraphInsertNodes() {
         var result = WeightedDirectedGraph<String,Double>()
+        ["Zero","One"].forEach { result.insert($0) }
         result.insertEdge(from: "Zero", to: "One", weight: 42.0)
         let expected = WeightedDirectedGraph(["Zero","One"], [.init("Zero","One"): 42.0])
         XCTAssertEqual(result, expected)
@@ -19,6 +20,7 @@ class WeightedDirectedGraphTests: XCTestCase {
 
     func testEdgesFromNode() {
         var graph = WeightedDirectedGraph<String,Int>()
+        ["a","b","c","d","e"].forEach { graph.insert($0) }
         graph.insertEdge(from: "a", to: "b", weight: 5)
         graph.insertEdge(from: "b", to: "c", weight: 7)
         graph.insertEdge(from: "b", to: "d", weight: 11)

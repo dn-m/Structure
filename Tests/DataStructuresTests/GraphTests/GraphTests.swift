@@ -26,6 +26,7 @@ class GraphTests: XCTestCase {
 
     func testInsertNodes() {
         var result = Graph<Int>()
+        [0,1].forEach { result.insert($0) }
         result.insertEdge(from: 0, to: 1)
         let expected = Graph([0,1], [.init(0,1)])
         XCTAssertEqual(result, expected)
@@ -41,6 +42,7 @@ class GraphTests: XCTestCase {
 
     func testNeighbors() {
         var graph = Graph<String>()
+        ["a","b","c"].forEach { graph.insert($0) }
         graph.insertEdge(from: "a", to: "b")
         graph.insertEdge(from: "a", to: "c")
         XCTAssertEqual(graph.neighbors(of: "a"), ["b","c"])
@@ -57,6 +59,7 @@ class GraphTests: XCTestCase {
 
     func testBreadthFirstSearch() {
         var graph = Graph<String>()
+        ["a","b","c","d","e"].forEach { graph.insert($0) }
         graph.insertEdge(from: "a", to: "b")
         graph.insertEdge(from: "b", to: "c")
         graph.insertEdge(from: "c", to: "d")
