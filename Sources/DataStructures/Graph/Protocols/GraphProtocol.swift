@@ -19,7 +19,7 @@ public protocol GraphProtocol {
     // MARK: - Instance Properties
 
     /// All of the nodes contained herein.
-    var nodes: Set<Node> { get set }
+    var nodes: Set<Node> { get }
 
     /// All of the edges contained herein.
     var edges: Set<Edge> { get }
