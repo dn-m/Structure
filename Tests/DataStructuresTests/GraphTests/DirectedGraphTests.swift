@@ -12,6 +12,7 @@ class DirectedGraphTests: XCTestCase {
 
     func testDirectedGraphInsertNodes() {
         var result = DirectedGraph<String>()
+        ["Zero","One"].forEach { result.insert($0) }
         result.insertEdge(from: "Zero", to: "One")
         let expected = DirectedGraph(["Zero","One"], [.init("Zero","One")])
         XCTAssertEqual(result, expected)
@@ -19,6 +20,7 @@ class DirectedGraphTests: XCTestCase {
 
     func testEdgesFromNode() {
         var graph = DirectedGraph<String>()
+        ["a","b","c","d","e"].forEach { graph.insert($0) }
         graph.insertEdge(from: "a", to: "b")
         graph.insertEdge(from: "b", to: "c")
         graph.insertEdge(from: "b", to: "d")
