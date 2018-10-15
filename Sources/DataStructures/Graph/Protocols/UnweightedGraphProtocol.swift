@@ -13,11 +13,6 @@ public protocol UnweightedGraphProtocol: GraphProtocol {
     /// All of the edges contained herein.
     var edges: Set<Edge> { get set }
 
-    // MARK: - Initializers
-
-    /// Creates an `UnweightedGraphProtocol`-conforming type value with the given set of `nodes`
-    /// and the given set of `edges`.
-    init(_ nodes: Set<Node>, _ edges: Set<Edge>)
 }
 
 extension UnweightedGraphProtocol {
