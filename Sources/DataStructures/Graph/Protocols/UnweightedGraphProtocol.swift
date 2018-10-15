@@ -34,12 +34,3 @@ extension UnweightedGraphProtocol {
         edges.remove(Edge(source,destination))
     }
 }
-
-extension UnweightedGraphProtocol {
-
-    /// - Returns: A new graph with the union of the nodes and edges of the two given graphs.
-    @inlinable
-    public static func + (lhs: Self, rhs: Self) -> Self {
-        return .init(lhs.nodes.union(rhs.nodes), lhs.edges.union(rhs.edges))
-    }
-}
