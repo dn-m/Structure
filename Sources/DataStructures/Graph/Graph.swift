@@ -7,9 +7,8 @@
 
 /// Unweighted, undirected graph.
 public struct Graph <Node: Hashable>:
-    UnweightedGraphProtocol,
     UndirectedGraphProtocol,
-    NonCarrierGraphProtocol
+    UnweightedNonCarrierGraphProtocol
 {
 
     // MARK: - Instance Properties
