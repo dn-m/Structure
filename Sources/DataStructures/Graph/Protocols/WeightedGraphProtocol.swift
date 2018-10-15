@@ -21,17 +21,6 @@ public protocol WeightedGraphProtocol: GraphProtocol {
 
 extension WeightedGraphProtocol {
 
-    // MARK: - Transforming into unweighted graphs
-
-    /// - Returns: An unweighted version of this `WeightedGraphProtocol`-conforming type value.
-    @inlinable
-    public func unweighted <U> () -> U where U: UnweightedGraphProtocol, U.Edge == Edge {
-        return .init(nodes, Set(weights.keys.lazy))
-    }
-}
-
-extension WeightedGraphProtocol {
-
     // MARK: - Querying
 
     /// - Returns: All of the edges contained herein.
