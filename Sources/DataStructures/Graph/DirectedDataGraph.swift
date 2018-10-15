@@ -6,7 +6,7 @@
 //
 
 /// Unweighted, directed graph with data carrying nodes.
-public struct DirectedDataGraph <Node: Hashable, Data: Hashable>:
+public struct DirectedDataGraph <Node: Hashable, Data>:
     DirectedGraphProtocol,
     UnweightedCarrierGraphProtocol
 {
@@ -52,5 +52,5 @@ extension DirectedDataGraph {
     }
 }
 
-extension DirectedDataGraph: Equatable { }
-extension DirectedDataGraph: Hashable { }
+extension DirectedDataGraph: Equatable where Data: Equatable { }
+extension DirectedDataGraph: Hashable where Data: Hashable { }
