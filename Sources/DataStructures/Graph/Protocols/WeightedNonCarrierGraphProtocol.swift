@@ -17,7 +17,7 @@ extension WeightedNonCarrierGraphProtocol {
     /// - Returns: An unweighted version of this `WeightedNonCarrierGraphProtocol`-conforming
     /// type value.
     @inlinable
-    public func unweighted <U> () -> U where U: UnweightedGraphProtocol, U.Edge == Edge {
+    public func unweighted <U> () -> U where U: UnweightedNonCarrierGraphProtocol, U.Edge == Edge {
         return .init(nodes, Set(weights.keys.lazy))
     }
 }
