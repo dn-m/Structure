@@ -17,16 +17,6 @@ public protocol UnweightedGraphProtocol: GraphProtocol {
 
 extension UnweightedGraphProtocol {
 
-    /// Creates an `UnweightedGraphProtocol`-conforming type value which is composed a path of
-    /// nodes.
-    @inlinable
-    public init <S> (path: S) where S: Sequence, S.Element == Node {
-        self.init(Set(path), Set(path.pairs.map(Edge.init)))
-    }
-}
-
-extension UnweightedGraphProtocol {
-
     // MARK: - Modifying
 
     /// Inserts an edge between the given `source` and `destination` nodes.
