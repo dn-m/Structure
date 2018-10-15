@@ -37,6 +37,7 @@ extension UnweightedGraphProtocol {
     /// Inserts an edge between the given `source` and `destination` nodes.
     ///
     /// If the `source` or `destination` nodes are not yet contained herein, they are inserted.
+    /// - TODO: Implement error-raising for `source` or `destination` absent.
     @inlinable
     public mutating func insertEdge(from source: Node, to destination: Node) {
         edges.insert(Edge(source,destination))
