@@ -39,8 +39,6 @@ extension UnweightedGraphProtocol {
     /// If the `source` or `destination` nodes are not yet contained herein, they are inserted.
     @inlinable
     public mutating func insertEdge(from source: Node, to destination: Node) {
-        insert(source)
-        insert(destination)
         edges.insert(Edge(source,destination))
     }
 
