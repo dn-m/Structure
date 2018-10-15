@@ -6,7 +6,11 @@
 //
 
 /// Unweighted, undirected graph.
-public struct Graph <Node: Hashable>: UnweightedGraphProtocol, UndirectedGraphProtocol {
+public struct Graph <Node: Hashable>:
+    UnweightedGraphProtocol,
+    UndirectedGraphProtocol,
+    NonCarrierGraphProtocol
+{
 
     // MARK: - Instance Properties
 

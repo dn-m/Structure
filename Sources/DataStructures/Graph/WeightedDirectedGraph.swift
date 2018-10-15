@@ -8,7 +8,8 @@
 /// Weighted, directed graph.
 public struct WeightedDirectedGraph <Node: Hashable, Weight: Numeric>:
     WeightedGraphProtocol,
-    DirectedGraphProtocol
+    DirectedGraphProtocol,
+    NonCarrierGraphProtocol
 {
     // MARK: - Instance Properties
 
