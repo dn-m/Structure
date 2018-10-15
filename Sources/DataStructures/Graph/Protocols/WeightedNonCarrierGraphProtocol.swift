@@ -10,7 +10,7 @@ public protocol WeightedNonCarrierGraphProtocol:
     NonCarrierGraphProtocol
 { }
 
-extension WeightedGraphProtocol {
+extension WeightedNonCarrierGraphProtocol {
     
     // MARK: - Transforming into unweighted graphs
     
