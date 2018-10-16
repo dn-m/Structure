@@ -16,6 +16,6 @@ extension NonCarrierGraphProtocol {
     /// Inserts the given `node` without making any connections to other nodes contained herein.
     @inlinable
     public mutating func insert(_ node: Node) {
-    nodes.insert(node)
+        nodes.insert(node)
     }
 }
