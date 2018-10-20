@@ -29,5 +29,12 @@ extension Cross {
     }
 }
 
+extension Cross: Comparable where T: Comparable & Equatable, U: Comparable {
+    
+    public static func < (lhs: Cross, rhs: Cross) -> Bool {
+        return lhs.a < rhs.a || (lhs.a == rhs.a && lhs.b < rhs.b)
+    }
+}
+
 extension Cross: Equatable where T: Equatable, U: Equatable { }
 extension Cross: Hashable where T: Hashable, U: Hashable { }
