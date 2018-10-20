@@ -29,5 +29,15 @@ extension Cross {
     }
 }
 
+extension Cross: Comparable where T: Comparable, U: Comparable {
+    
+    /// - Returns: true if and only if the first element of `lhs` is less than the first element
+    /// of `rhs` OR if those elements are equal and the second element of `lhs` is less than the
+    /// second element of `rhs` (lexicographic ordering).
+    public static func < (lhs: Cross, rhs: Cross) -> Bool {
+        return lhs.a < rhs.a || (lhs.a == rhs.a && lhs.b < rhs.b)
+    }
+}
+
 extension Cross: Equatable where T: Equatable, U: Equatable { }
 extension Cross: Hashable where T: Hashable, U: Hashable { }
