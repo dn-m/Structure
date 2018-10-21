@@ -69,14 +69,9 @@ extension WeightedGraphProtocol {
         weights[Edge(source,destination)] = weight
     }
 
-    /// Removes the edge between the given `source` and `destination` nodes.
+    /// Remove `edge` from graph.
     @inlinable
-    public mutating func removeEdge(from source: Node, to destination: Node) {
-        removeEdge(Edge(source, destination))
-    }
-
-    @inlinable
-    public mutating func removeEdge(_ edge: Edge) {
+    public mutating func remove(_ edge: Edge) {
         weights[edge] = nil
     }
 

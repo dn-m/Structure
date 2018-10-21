@@ -25,9 +25,9 @@ public protocol GraphProtocol {
     var edges: Set<Edge> { get }
 
     // MARK: - Instance Methods
-
-    /// Removes the edge from the given `source` to the given `destination`.
-    mutating func removeEdge(from source: Node, to destination: Node)
+    
+    /// Removes `edge` from graph.
+    mutating func remove(_ edge: Edge)
 }
 
 extension GraphProtocol {
@@ -36,6 +36,19 @@ extension GraphProtocol {
     @inlinable
     public mutating func insert(_ node: Node) {
         nodes.insert(node)
+    }
+    
+    /// Removes the edge from the given `source` to the given `destination`.
+    @inlinable
+    public mutating func removeEdge(from source: Node, to destination: Node) {
+        remove(Edge(source, destination))
+    }
+    
+    /// Removes the given `node` and removes all edges that contain it.
+    @inlinable
+    public mutating func remove(_ node: Node) {
+        nodes.remove(node)
+        edges.filter { $0.contains(node) }.forEach { remove($0) }
     }
 
     /// - Returns: `true` if the `GraphProtocol`-conforming type value contains the given `node`.
