@@ -54,6 +54,13 @@ extension DirectedGraph {
         self.nodes = Set(path)
         self.edges = Set(nodes.pairs.map(OrderedPair.init))
     }
+
+    /// Creates a `DirectedGraph` with enough memory to store the given `minimumNodesCapacity` and
+    /// `minimumEdgesCapacity`.
+    public init(minimumNodesCapacity: Int, minimumEdgesCapacity: Int) {
+        self.nodes = Set(minimumCapacity: minimumNodesCapacity)
+        self.edges = Set(minimumCapacity: minimumEdgesCapacity)
+    }
 }
 
 extension DirectedGraph: Equatable { }
