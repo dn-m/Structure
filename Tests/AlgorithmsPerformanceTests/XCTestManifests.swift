@@ -2,7 +2,7 @@ import XCTest
 
 extension StableSortPerformanceTests {
     static let __allTests = [
-        ("testStableSort", testStableSort),
+        ("testStableSort", testStableSort_O_nlogn),
     ]
 }
 
