@@ -47,7 +47,7 @@ extension GraphProtocol {
     /// Removes the given `node` and removes all edges that contain it.
     @inlinable
     public mutating func remove(_ node: Node) {
-        nodes.remove(node)
+        guard nodes.remove(node) != nil else { return }
         edges.filter { $0.contains(node) }.forEach { remove($0) }
     }
 
@@ -79,24 +79,29 @@ extension GraphProtocol {
     /// resultant set.
     @inlinable
     public func neighbors(of source: Node, in nodes: Set<Node>? = nil) -> Set<Node> {
+        guard self.nodes.contains(source) else { return [] }
         return (nodes ?? self.nodes).filter { edges.contains(Edge(source,$0)) }
     }
     
     /// - Returns: A set of edges outgoing from the given `source`.
     @inlinable
     public func edges(from source: Node) -> Set<Edge> {
+        guard nodes.contains(source) else { return [] }
         return Set(neighbors(of: source).lazy.map { Edge(source, $0) })
     }
     
     /// - Returns: A set of edges incident to the given `destination`.
     @inlinable
     public func edges(to destination: Node) -> Set<Edge> {
+        guard nodes.contains(destination) else { return [] }
         return Set(nodes.lazy.map { Edge($0, destination) }.filter(edges.contains))
     }
 
     /// - Returns: An array of `Node` values in breadth first order.
+    // TODO: Consider return `[Node]?` or throwing Error if `source` is not in graph.
     @inlinable
     public func breadthFirstSearch(from source: Node, to destination: Node? = nil) -> [Node] {
+        guard nodes.contains(source) else { return [] }
         var visited: [Node] = []
         var queue = Queue<Node>()
         queue.enqueue(source)
@@ -118,6 +123,7 @@ extension GraphProtocol {
     /// `destination`, the path with the fewest edges is returned.
     @inlinable
     public func shortestUnweightedPath(from source: Node, to destination: Node) -> [Node]? {
+        guard nodes.contains(source) && nodes.contains(destination) else { return nil }
         var breadcrumbs: [Node: Node] = [:]
         func backtrace() -> [Node] {
             var path = [destination]

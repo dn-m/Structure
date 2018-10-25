@@ -18,7 +18,7 @@ extension GraphPerformanceTests {
     static let __allTests = [
         ("testInsertEdge_O_1", testInsertEdge_O_1),
         ("testInsertNode_O_1", testInsertNode_O_1),
-        ("testNeighborsOfNode_O_n", testNeighborsOfNode_O_n),
+        ("testNeighborsOfNode_O_n", testNeighborsOfNodeInGraph_O_n),
     ]
 }
 
