@@ -112,7 +112,7 @@ private func graph(size: Int) -> Graph<Int> {
     var graph = Graph<Int>()
     (0..<size).forEach { size in graph.insert(size) }
     (0..<size/10).forEach { size in
-        _ = graph.insertEdge(from: Int.random(in: 0 ..< size), to: Int.random(in: 0 ..< size))
+        _ = graph.insertEdge(from: Int.random(in: 0 ... size), to: Int.random(in: 0 ... size))
     }
     return graph
 }
