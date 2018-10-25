@@ -12,12 +12,12 @@ import PerformanceTesting
 
 class StableSortPerformanceTests: XCTestCase {
 
-    func testStableSort() {
+    func testStableSort_O_nlogn() {
         let benchmark = Benchmark.mutating(
             testPoints: Scale.small,
             setup: { Array((0..<$0).map { Int.random(in: 0...$0) }) },
             measuring: { _ = $0.stableSort(<) }
         )
-        XCTAssert(benchmark.performance(is: .linear))
+        XCTAssert(benchmark.performance(is: .quadratic))
     }
 }
