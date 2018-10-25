@@ -12,6 +12,7 @@ import PerformanceTesting
 
 class StableSortPerformanceTests: XCTestCase {
 
+    // FIXME: There is currently no linearithmic option for `Complexity`.
     func testStableSort_O_nlogn() {
         let benchmark = Benchmark.mutating(
             testPoints: Scale.small,
