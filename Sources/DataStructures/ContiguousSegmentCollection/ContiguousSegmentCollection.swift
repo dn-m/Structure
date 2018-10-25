@@ -142,7 +142,7 @@ extension ContiguousSegmentCollection: Fragmentable
     /// A fragment of a `ContiguousSegmentCollection`.
     public struct Fragment {
 
-        struct Item {
+        public struct Item {
 
             var end: Metric {
                 return offset + fragment.length
@@ -161,7 +161,7 @@ extension ContiguousSegmentCollection: Fragmentable
 
         // MARK: - Instance Properties
 
-        /// - Returns:
+        /// - Returns: The offset of the fragment within the context of the whole.
         public var offset: Metric {
             return head?.offset ?? body.first?.0 ?? tail?.offset ?? .zero
         }
@@ -174,7 +174,7 @@ extension ContiguousSegmentCollection: Fragmentable
 
         /// Creates a `ContiguousSegmentCollection.Fragment` with the given pair of fragment items
         /// and the segments in-between.
-        init(
+        public init(
             head: Item? = nil,
             body: ContiguousSegmentCollection = .empty,
             tail: Item? = nil
