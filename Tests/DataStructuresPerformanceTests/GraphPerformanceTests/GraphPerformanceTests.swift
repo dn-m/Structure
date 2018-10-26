@@ -97,7 +97,7 @@ class GraphPerformanceTests: XCTestCase {
 }
 
 private func completeGraph(size: Int) -> Graph<Int> {
-    var graph = Graph<Int>()
+    var graph = Graph<Int>(minimumNodesCapacity: size, minimumEdgesCapacity: size * (size - 1) / 2)
     (0..<size).forEach { size in graph.insert(size) }
     for a in 0..<size {
         for b in 0..<size where a != b {
