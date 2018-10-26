@@ -51,8 +51,7 @@ extension BinaryHeapTests {
         ("testBalance", testBalance),
         ("testBasicInsertPop", testBasicInsertPop),
         ("testPopNil", testPopNil),
-        ("testSimpleBalance", testSimpleBalance),
-        ("testUpdate", testUpdate),
+        ("testSimpleBalance", testSimpleBalance)
     ]
 }
 
