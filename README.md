@@ -7,7 +7,7 @@ The `Structure` package defines algebraic and data structures in Swift 4.2, alon
 
 ## Modules
 
-The contents of this Swift package are split amongst four modules:
+The contents of this Swift package are split amongst four modules. 
 
 #### [`Destructure`](https://github.com/dn-m/Structure/tree/master/Sources/Destructure) 
 
@@ -37,7 +37,7 @@ Algorithms for restructuring elements in `Sequence` and `Collection` types, like
 
 ### Installation
 
-To use the `Structure` package in your own project, add it to the `dependencies` section of your `Package.swift` file:
+To include the `Structure` package in your own project, add it to the `dependencies` section of your `Package.swift` file:
 
 ```Swift
 let package = Package(
@@ -51,8 +51,16 @@ let package = Package(
 )
 ```
 
+To use a given module in your own project, import the desired module:
 
-## Development
+```Swift
+import DataStructures
+var queue = Queue<Int>()
+queue.enqueue(1)
+let one = queue.dequeue()
+```
+
+### Development
 
 To contribute to the `Structure` package, clone the `git` repository:
 
