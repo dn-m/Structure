@@ -37,7 +37,7 @@ Algorithms for restructuring elements in `Sequence` and `Collection` types, like
 
 ### Installation
 
-In order to use the `Structure` package, add it to the `dependencies` section of your `Package.swift` file:
+To use the `Structure` package in your own project, add it to the `dependencies` section of your `Package.swift` file:
 
 ```Swift
 let package = Package(
