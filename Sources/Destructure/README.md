@@ -4,7 +4,7 @@ The `Destructure` module exposes a single extension on the [`Sequence`](https://
 
 ```Swift
 extension Sequence {
-    /// - Returns: A tuple containing the `head` and `tail` elements of this sequence, if the this sequence is not empty. Otherwise, `nil`.
+    /// - Returns: A tuple containing the `head` and `tail` elements of this sequence, if this sequence is not empty. Otherwise, `nil`.
     public var destructured: (Element, AnySequence<Element>)?
 }
 ```
