@@ -11,7 +11,7 @@ The contents of this Swift package are split amongst four modules:
 
 ### [`Destructure`](https://github.com/dn-m/Structure/tree/master/Sources/Destructure) 
 
-Deconstruct `Sequence` types for functional-style recursive algorithms
+Deconstruct `Sequence` types for functional-style recursive algorithms.
 
 ### [`Algebra`](https://github.com/dn-m/Structure/tree/master/Sources/Algebra)
 
