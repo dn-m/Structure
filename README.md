@@ -18,9 +18,9 @@ Protocols and structures for defining types like `Semigroup`, `Monoid`, and `Gro
 
 ###[`DataStructures`](https://github.com/dn-m/Structure/tree/master/Sources/DataStructures)
 
-- Linear data structures (`Stack`, `Queue`, `SortedArray`, among many others)
+- Linear data structures (`Stack`, `Queue`, `LinkedList`, `Matrix`, `SortedArray`, and more)
 - Hash-based structures (`OrderedDictionary`, `SortedDictionary`)
-- Tree structures (`Tree`)
+- Tree structures (`Tree`, `BinarySearchTree`, `AVLTree`)
 - Graph structures (`Graph`)
 
 ###[`Algorithms`](https://github.com/dn-m/Structure/tree/master/Sources/Algorithms)
