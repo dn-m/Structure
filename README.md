@@ -9,21 +9,22 @@ The `Structure` package defines algebraic and data structures in Swift 4.2, alon
 
 The contents of this Swift package are split amongst four modules:
 
-###[`Destructure`](https://github.com/dn-m/Structure/tree/master/Sources/Destructure) 
+### [`Destructure`](https://github.com/dn-m/Structure/tree/master/Sources/Destructure) 
+
 Deconstuct `Sequence` types for functional-style recursive algorithms
 
-###[`Algebra`](https://github.com/dn-m/Structure/tree/master/Sources/Algebra)
+### [`Algebra`](https://github.com/dn-m/Structure/tree/master/Sources/Algebra)
 
 Protocols and structures for defining types like `Semigroup`, `Monoid`, and `Group`.
 
-###[`DataStructures`](https://github.com/dn-m/Structure/tree/master/Sources/DataStructures)
+### [`DataStructures`](https://github.com/dn-m/Structure/tree/master/Sources/DataStructures)
 
 - Linear data structures (`Stack`, `Queue`, `LinkedList`, `Matrix`, `SortedArray`, and more)
 - Hash-based structures (`OrderedDictionary`, `SortedDictionary`)
 - Tree structures (`Tree`, `BinarySearchTree`, `AVLTree`)
 - Graph structures (`Graph`)
 
-###[`Algorithms`](https://github.com/dn-m/Structure/tree/master/Sources/Algorithms)
+### [`Algorithms`](https://github.com/dn-m/Structure/tree/master/Sources/Algorithms)
 
 Algorithms for restructuring elements in `Sequence`, and `Collection` types, like `subsets` and `combinations`.
 
