@@ -26,7 +26,7 @@ Protocols and structures for defining types like `Semigroup`, `Monoid`, and `Gro
 
 #### [`Algorithms`](https://github.com/dn-m/Structure/tree/master/Sources/Algorithms)
 
-Algorithms for restructuring elements in `Sequence`, and `Collection` types, like `subsets` and `combinations`.
+Algorithms for restructuring elements in `Sequence` and `Collection` types, like `subsets` and `combinations`.
 
 ## Getting Started
 
