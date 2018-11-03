@@ -54,10 +54,10 @@ let package = Package(
 To use a given module in your own project, import the desired module:
 
 ```Swift
+import Algebra
+import Destructure
 import DataStructures
-var queue = Queue<Int>()
-queue.enqueue(1)
-let one = queue.dequeue()
+import Algorithms
 ```
 
 ### Development
