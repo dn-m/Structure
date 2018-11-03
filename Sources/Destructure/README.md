@@ -14,8 +14,6 @@ The `destructured` property exposes the `head` `Element` and `tail` `AnySequence
 ## Example usage
 
 ```Swift
-let friends = ["Chantel", "Matas", "Shreya", "Krish", "Carol", "Harlow", "Cindy"]
-
 /// Using a variety of techniques, find ways to ruin relationships with the given `friends`.
 /// - Returns: An empty array of friends.
 func burnBridges <S> (friends: S) -> [String] where S: Sequence, S.Element == String {
@@ -24,4 +22,5 @@ func burnBridges <S> (friends: S) -> [String] where S: Sequence, S.Element == St
     // Otherwise, burn bridges with the remaining friends
     return burnBridges(friends: rest)
 }
+let friends = burnBridges(friends: ["Chantel", "Matas", "Shreya", "Krish", "Carol"]) // => []
 ```
