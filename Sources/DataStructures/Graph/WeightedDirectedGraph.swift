@@ -7,7 +7,7 @@
 import Algebra
 
 /// Weighted, directed graph.
-public struct WeightedDirectedGraph <Node: Hashable, Weight: AdditiveGroup & Equatable>:
+public struct WeightedDirectedGraph <Node: Hashable, Weight>:
     WeightedGraphProtocol,
     DirectedGraphProtocol
 {
@@ -45,6 +45,6 @@ extension WeightedDirectedGraph {
     }
 }
 
-extension WeightedDirectedGraph: Equatable { }
+extension WeightedDirectedGraph: Equatable where Weight: Equatable { }
 extension WeightedDirectedGraph: Hashable where Weight: Hashable { }
 

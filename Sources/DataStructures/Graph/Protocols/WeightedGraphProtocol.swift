@@ -13,7 +13,7 @@ public protocol WeightedGraphProtocol: GraphProtocol {
     // MARK: - Associated Type
 
     /// The type of the weight of an `Edge`.
-    associatedtype Weight: AdditiveGroup
+    associatedtype Weight
 
     // MARK: - Instance Properties
 
