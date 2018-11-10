@@ -4,9 +4,10 @@
 //
 //  Created by James Bean on 9/27/18.
 //
+import Algebra
 
 /// Weighted, directed graph.
-public struct WeightedDirectedGraph <Node: Hashable, Weight: Numeric>:
+public struct WeightedDirectedGraph <Node: Hashable, Weight: AdditiveGroup & Equatable>:
     WeightedGraphProtocol,
     DirectedGraphProtocol
 {

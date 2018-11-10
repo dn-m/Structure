@@ -5,7 +5,7 @@
 //  Created by Benjamin Wetherfield on 10/11/2018.
 //
 
-protocol AdditiveGroup: Additive, Invertible {
+public protocol AdditiveGroup: Additive, Invertible {
     
     static prefix func - (_ element: Self) -> Self
     static func - (lhs: Self, rhs: Self) -> Self
