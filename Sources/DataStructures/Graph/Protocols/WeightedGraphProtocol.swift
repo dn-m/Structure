@@ -5,13 +5,15 @@
 //  Created by James Bean on 9/27/18.
 //
 
+import Algebra
+
 /// Interface for weighted graphs.
 public protocol WeightedGraphProtocol: GraphProtocol {
 
     // MARK: - Associated Type
 
     /// The type of the weight of an `Edge`.
-    associatedtype Weight: Numeric
+    associatedtype Weight
 
     // MARK: - Instance Properties
 

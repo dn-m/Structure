@@ -4,9 +4,10 @@
 //
 //  Created by James Bean on 9/27/18.
 //
+import Algebra
 
 /// Weighted, undirected graph.
-public struct WeightedGraph <Node: Hashable, Weight: Numeric>:
+public struct WeightedGraph <Node: Hashable, Weight>:
     WeightedGraphProtocol,
     UndirectedGraphProtocol
 {
@@ -19,7 +20,7 @@ public struct WeightedGraph <Node: Hashable, Weight: Numeric>:
 
     /// All of the edges contained herein stored with their weight.
     ///
-    /// An `Edge` is an `UnorderedPair` of `Node` values, and a `Weight` is any `Numeric`-conforming
+    /// An `Edge` is an `UnorderedPair` of `Node` values, and a `Weight` is any `AdditiveGroup`-conforming
     /// value.
     public var weights: [Edge: Weight]
 }
@@ -52,5 +53,5 @@ extension WeightedGraph {
     }
 }
 
-extension WeightedGraph: Equatable { }
+extension WeightedGraph: Equatable where Weight: Equatable { }
 extension WeightedGraph: Hashable where Weight: Hashable { }
