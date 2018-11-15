@@ -17,3 +17,10 @@ extension SymmetricPair where A: Equatable {
         return a == value || b == value
     }
 }
+
+extension SymmetricPair {
+    
+    func map <P,C> (_ f: (A) -> C) -> P where P: SymmetricPair, P.A == C {
+        return P(f(self.a), f(self.b))
+    }
+}
