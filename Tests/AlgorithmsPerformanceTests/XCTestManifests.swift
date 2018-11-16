@@ -1,15 +1,15 @@
 import XCTest
 
-extension StableSortPerformanceTests {
+extension CombinatoricsPerformanceTests {
     static let __allTests = [
-        ("testStableSort_O_nlogn", testStableSort_O_nlogn),
+        ("testCartesianProduct_O_n", testCartesianProduct_O_n),
     ]
 }
 
 #if !os(macOS)
 public func __allTests() -> [XCTestCaseEntry] {
     return [
-        testCase(StableSortPerformanceTests.__allTests),
+        testCase(CombinatoricsPerformanceTests.__allTests),
     ]
 }
 #endif
