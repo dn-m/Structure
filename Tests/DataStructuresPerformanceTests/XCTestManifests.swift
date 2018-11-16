@@ -23,7 +23,8 @@ extension GraphPerformanceTests {
         ("testEdgesToDestinationNotInGraph_O_1", testEdgesToDestinationNotInGraph_O_1),
         ("testInsertEdge_O_1", testInsertEdge_O_1),
         ("testInsertNode_O_1", testInsertNode_O_1),
-        ("testNeighborsOfNode_O_n", testNeighborsOfNode_O_n),
+        ("testNeighborsOfNodeInGraph_O_n", testNeighborsOfNodeInGraph_O_n),
+        ("testNeighborsOfNodeNotInGraph_O_1", testNeighborsOfNodeNotInGraph_O_1),
         ("testProfile", testProfile),
     ]
 }
