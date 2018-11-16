@@ -220,7 +220,7 @@ extension Bimap: ExpressibleByDictionaryLiteral {
 
 extension Bimap {
     
-    public func compose <Other: Hashable> (lhs: Bimap, rhs: Bimap<Value, Other>) -> Bimap<Key, Other> {
+    public static func compose <Other: Hashable> (lhs: Bimap, rhs: Bimap<Value, Other>) -> Bimap<Key, Other> {
         return lhs.reduce(into: Bimap<Key,Other>()) { bimap, pair in
                 let (key, value) = pair
                 bimap[key] = rhs[value]
