@@ -223,15 +223,15 @@ extension Bimap {
     /// - Returns: A `Bimap` between `lhs.Key` and `rhs.Value` by using the output of one as the input of
     /// the other.
     public static func * <Other: Hashable> (lhs: Bimap, rhs: Bimap<Value,Other>) -> Bimap<Key,Other> {
-        return compose(lhs, rhs)
+        return lhs.compose(with: rhs)
     }
     
-    /// - Returns: A `Bimap` between `lhs.Key` and `rhs.Value` by using the output of one as the input of
-    /// the other.
-    public static func compose <Other: Hashable> (_ lhs: Bimap, _ rhs: Bimap<Value,Other>) -> Bimap<Key,Other> {
-        return lhs.reduce(into: Bimap<Key,Other>()) { bimap, pair in
+    /// - Returns: A `Bimap` between `Key` and `other.Value` by using the output of one `Bimap` as the
+    /// input of the other.
+    public func compose <Other: Hashable> (with other: Bimap<Value,Other>) -> Bimap<Key,Other> {
+        return self.reduce(into: Bimap<Key,Other>()) { bimap, pair in
             let (key, value) = pair
-            bimap[key] = rhs[value]
+            bimap[key] = other[value]
         }
     }
 }
