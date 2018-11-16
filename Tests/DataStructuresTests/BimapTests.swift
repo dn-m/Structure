@@ -70,4 +70,12 @@ class BimapTests: XCTestCase {
         XCTAssertEqual(bimap.count, 0)
         XCTAssert(bimap.isEmpty)
     }
+    
+    func testCompose() {
+        let bimap1: Bimap = [0: "a", 2: "b"]
+        let bimap2: Bimap = ["b": 35, "c": 200]
+        let bimap3 = Bimap.compose(lhs: bimap1, rhs: bimap2)
+        XCTAssertEqual(bimap3[2], 35)
+        XCTAssertNil(bimap3[0])
+    }
 }
