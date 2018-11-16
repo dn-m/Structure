@@ -47,6 +47,13 @@ extension Graph {
         self.init(nodes)
         self.edges = edges
     }
+
+    /// Creates a `Graph` with enough memory to store the given `minimumNodesCapacity` and
+    /// `minimumEdgesCapacity`.
+    public init(minimumNodesCapacity: Int, minimumEdgesCapacity: Int) {
+        self.nodes = Set(minimumCapacity: minimumNodesCapacity)
+        self.edges = Set(minimumCapacity: minimumEdgesCapacity)
+    }
 }
 
 extension Graph: Equatable { }

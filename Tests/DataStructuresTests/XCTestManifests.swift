@@ -53,8 +53,7 @@ extension BinaryHeapTests {
         ("testBalance", testBalance),
         ("testBasicInsertPop", testBasicInsertPop),
         ("testPopNil", testPopNil),
-        ("testSimpleBalance", testSimpleBalance),
-        ("testUpdate", testUpdate),
+        ("testSimpleBalance", testSimpleBalance)
     ]
 }
 
@@ -103,6 +102,14 @@ extension ContiguousSegmentCollectionTests {
         ("testOffsets", testOffsets),
         ("testRandomAccess", testRandomAccess),
         ("testSegments", testSegments),
+    ]
+}
+
+extension CrossTests {
+    static let __allTests = [
+        ("testComparableFalseEqual", testComparableFalseEqual),
+        ("testComparableLexicographic", testComparableLexicographic),
+        ("testComparableLexicographicFalse", testComparableLexicographicFalse),
     ]
 }
 
@@ -502,6 +509,17 @@ extension TreeTests {
     ]
 }
 
+extension UnorderedPairTests {
+    static let __allTests = [
+        ("testEquatable", testEquatable),
+        ("testHashValuesInt", testHashValuesInt),
+        ("testHashValuesString", testHashValuesString),
+        ("testManyHashValuesIntForCollisions", testManyHashValuesIntForCollisions),
+        ("testManyHashValuesString", testManyHashValuesString),
+        ("testManyHashValuesStringForCollisions", testManyHashValuesStringForCollisions),
+    ]
+}
+
 extension WeightedDirectedGraphTests {
     static let __allTests = [
         ("testEdgesFromNode", testEdgesFromNode),
@@ -549,6 +567,7 @@ public func __allTests() -> [XCTestCaseEntry] {
         testCase(BinarySearchTreeTests.__allTests),
         testCase(CircularArrayTests.__allTests),
         testCase(ContiguousSegmentCollectionTests.__allTests),
+        testCase(CrossTests.__allTests),
         testCase(DictionaryProtocolsTests.__allTests),
         testCase(DirectedGraphTests.__allTests),
         testCase(EitherTests.__allTests),
@@ -571,6 +590,7 @@ public func __allTests() -> [XCTestCaseEntry] {
         testCase(StackTests.__allTests),
         testCase(SubsetsTests.__allTests),
         testCase(TreeTests.__allTests),
+        testCase(UnorderedPairTests.__allTests),
         testCase(WeightedDirectedGraphTests.__allTests),
         testCase(WeightedGraphTests.__allTests),
         testCase(Zip3SequenceTests.__allTests),

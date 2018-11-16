@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import DataStructures
+import DataStructures
 
 class BinaryHeapTests: XCTestCase {
     
@@ -42,18 +42,6 @@ class BinaryHeapTests: XCTestCase {
         input.enumerated().forEach { pair in heap.insert(pair.0, pair.1) }
         let output = (0..<100).map { _ in heap.pop()!.1 }
         let testAgainst = input.sorted()
-        XCTAssertEqual(testAgainst, output)
-        XCTAssertNil(heap.pop())
-    }
-    
-    func testUpdate() {
-        var heap = BinaryHeap<Int, Double>()
-        let input = (0..<100).map { _ in Double.random(in: 0...1) }
-        let throughput = (0..<100).map { _ in Double.random(in: 0...1) }
-        let testAgainst = (0..<100).map { i in min(input[i], throughput[i]) }.sorted()
-        input.enumerated().forEach { pair in heap.insert(pair.0, pair.1) }
-        throughput.enumerated().forEach { pair in heap.suggestDecrease(of: pair.0, to: pair.1) }
-        let output = (0..<100).map { _ in heap.pop()!.1 }
         XCTAssertEqual(testAgainst, output)
         XCTAssertNil(heap.pop())
     }

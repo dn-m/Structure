@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import DataStructures
+import DataStructures
 
 extension Int: IntervallicFragmentable {
     public struct Fragment: Intervallic {
