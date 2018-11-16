@@ -43,6 +43,8 @@ extension BimapTests {
         ("testUpdateKey", testUpdateKey),
         ("testUpdateValue", testUpdateValue),
         ("testValueSubscript", testValueSubscript),
+        ("testCompose", testCompose),
+        ("testComposeOperator", testComposeOperator),
     ]
 }
 
