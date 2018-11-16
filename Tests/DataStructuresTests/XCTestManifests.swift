@@ -43,6 +43,8 @@ extension BimapTests {
         ("testUpdateKey", testUpdateKey),
         ("testUpdateValue", testUpdateValue),
         ("testValueSubscript", testValueSubscript),
+        ("testCompose", testCompose),
+        ("testComposeOperator", testComposeOperator),
     ]
 }
 
@@ -51,8 +53,7 @@ extension BinaryHeapTests {
         ("testBalance", testBalance),
         ("testBasicInsertPop", testBasicInsertPop),
         ("testPopNil", testPopNil),
-        ("testSimpleBalance", testSimpleBalance),
-        ("testUpdate", testUpdate),
+        ("testSimpleBalance", testSimpleBalance)
     ]
 }
 

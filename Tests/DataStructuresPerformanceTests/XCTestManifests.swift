@@ -16,6 +16,11 @@ extension DirectedGraphPerformanceTests {
 
 extension GraphPerformanceTests {
     static let __allTests = [
+        ("testEdgeFromSourceInCompleteGraph_O_n", testEdgeFromSourceInCompleteGraph_O_n),
+        ("testEdgesFromSourceInGraph_O_n", testEdgesFromSourceInGraph_O_n),
+        ("testEdgesFromSourceNotInGraph_O_1", testEdgesFromSourceNotInGraph_O_1),
+        ("testEdgesToDestinationInGraph_O_n", testEdgesToDestinationInGraph_O_n),
+        ("testEdgesToDestinationNotInGraph_O_1", testEdgesToDestinationNotInGraph_O_1),
         ("testInsertEdge_O_1", testInsertEdge_O_1),
         ("testInsertNode_O_1", testInsertNode_O_1),
         ("testNeighborsOfNode_O_n", testNeighborsOfNode_O_n),

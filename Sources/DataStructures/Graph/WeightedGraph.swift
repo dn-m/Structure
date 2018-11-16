@@ -51,6 +51,13 @@ extension WeightedGraph {
         self.init(nodes)
         self.weights = weights
     }
+
+    /// Creates a `WeightedGraph` with enough memory to store the given `minimumNodesCapacity` and
+    /// `minimumEdgesCapacity`.
+    public init(minimumNodesCapacity: Int, minimumEdgesCapacity: Int) {
+        self.nodes = Set(minimumCapacity: minimumNodesCapacity)
+        self.weights = Dictionary(minimumCapacity: minimumEdgesCapacity)
+    }
 }
 
 extension WeightedGraph: Equatable where Weight: Equatable { }

@@ -50,14 +50,6 @@ public struct BinaryHeap <Element: Hashable, Value: Comparable> {
         }
     }
     
-    /// Propose update of `element` to value `suggestion` (accept if `value(of: element)`
-    /// decreases).
-    internal mutating func suggestDecrease (of element: Element, to suggestion: Value) {
-        if suggestion < value(of: element) {
-            decreaseValue(of: element, to: suggestion)
-        }
-    }
-    
     private func lessAt (_ i: Int, than j: Int) -> Bool {
         return value(at: i) < value(at: j)
     }
