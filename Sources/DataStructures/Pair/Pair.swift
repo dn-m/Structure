@@ -34,7 +34,10 @@ public protocol Pair {
 }
 
 extension Pair {
-    
+
+    // MARK: - Instance Methods
+
+    /// - Returns: A `Pair` with its members transformed by the given function.
     public func map <P,C,D> (_ f: (A,B) -> (C,D)) -> P where P: Pair, P.A == C, P.B == D {
         let (c,d) = f(self.a, self.b)
         return P(c,d)

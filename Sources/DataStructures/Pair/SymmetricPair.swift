@@ -19,7 +19,10 @@ extension SymmetricPair where A: Equatable {
 }
 
 extension SymmetricPair {
-    
+
+    // MARK: - Instance Methods
+
+    /// - Returns: A `SymmetricPair` with its members transformed by the given function.
     public func map <P,C> (_ f: (A) -> C) -> P where P: SymmetricPair, P.A == C {
         return P(f(self.a), f(self.b))
     }
