@@ -74,8 +74,16 @@ class BimapTests: XCTestCase {
     func testCompose() {
         let bimap1: Bimap = [0: "a", 2: "b"]
         let bimap2: Bimap = ["b": 35, "c": 200]
-        let bimap3 = Bimap.compose(lhs: bimap1, rhs: bimap2)
+        let bimap3 = Bimap.compose(bimap1, bimap2)
         XCTAssertEqual(bimap3[2], 35)
         XCTAssertNil(bimap3[0])
+    }
+    
+    func testComposeOperator() {
+        let bimap1: Bimap = [0: "Test", 1: "Operator"]
+        let bimap2: Bimap = ["Good": "A", "Idea": "to", "Test": "That"]
+        let bimap3 = bimap1 * bimap2
+        XCTAssertEqual(bimap3[0], "That")
+        XCTAssertNil(bimap3[1])
     }
 }
