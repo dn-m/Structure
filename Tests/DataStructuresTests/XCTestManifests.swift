@@ -35,6 +35,8 @@ extension ArrayExtensionsTests {
 
 extension BimapTests {
     static let __allTests = [
+        ("testCompose", testCompose),
+        ("testComposeOperator", testComposeOperator),
         ("testInitEmpty", testInitEmpty),
         ("testKeySubscript", testKeySubscript),
         ("testRemoveAll", testRemoveAll),
@@ -43,8 +45,6 @@ extension BimapTests {
         ("testUpdateKey", testUpdateKey),
         ("testUpdateValue", testUpdateValue),
         ("testValueSubscript", testValueSubscript),
-        ("testCompose", testCompose),
-        ("testComposeOperator", testComposeOperator),
     ]
 }
 
@@ -53,7 +53,7 @@ extension BinaryHeapTests {
         ("testBalance", testBalance),
         ("testBasicInsertPop", testBasicInsertPop),
         ("testPopNil", testPopNil),
-        ("testSimpleBalance", testSimpleBalance)
+        ("testSimpleBalance", testSimpleBalance),
     ]
 }
 
@@ -110,6 +110,7 @@ extension CrossTests {
         ("testComparableFalseEqual", testComparableFalseEqual),
         ("testComparableLexicographic", testComparableLexicographic),
         ("testComparableLexicographicFalse", testComparableLexicographicFalse),
+        ("testMap", testMap),
     ]
 }
 
@@ -279,6 +280,12 @@ extension OrderedDictionaryTests {
         ("testSubscriptIntValid", testSubscriptIntValid),
         ("testSubscriptKeyNil", testSubscriptKeyNil),
         ("testSubscriptKeyValid", testSubscriptKeyValid),
+    ]
+}
+
+extension OrderedPairTests {
+    static let __allTests = [
+        ("testMap", testMap),
     ]
 }
 
@@ -517,6 +524,7 @@ extension UnorderedPairTests {
         ("testManyHashValuesIntForCollisions", testManyHashValuesIntForCollisions),
         ("testManyHashValuesString", testManyHashValuesString),
         ("testManyHashValuesStringForCollisions", testManyHashValuesStringForCollisions),
+        ("testMap", testMap),
     ]
 }
 
@@ -581,6 +589,7 @@ public func __allTests() -> [XCTestCaseEntry] {
         testCase(MutableGraphTests.__allTests),
         testCase(NewTypeTests.__allTests),
         testCase(OrderedDictionaryTests.__allTests),
+        testCase(OrderedPairTests.__allTests),
         testCase(PairsTests.__allTests),
         testCase(QueueTests.__allTests),
         testCase(ReferenceTreeProtocolTests.__allTests),
