@@ -222,10 +222,16 @@ extension Bimap {
     
     public func compose <Other: Hashable> (lhs: Bimap, rhs: Bimap<Value, Other>) -> Bimap<Key, Other> {
         return Bimap<Key, Other> (
-            lhs.valueByKey.reduce(into: [Key: Other]()) { dict, pair in
+            lhs.reduce(into: [Key: Other]()) { dict, pair in
                 let (key, value) = pair
                 dict[key] = rhs[value]
             }
         )
     }
 }
+//
+//infix operator <>: MultiplicationPrecedence
+//public func <> <A,B,C> (lhs: Bimap<A,B>, rhs: Bimap<B,C>) -> Bimap<A,C> where A: Hashable, B:Hashable, C:Hashable {
+//    return compose (lhs, rhs)
+//}
+
