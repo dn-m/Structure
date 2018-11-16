@@ -19,6 +19,6 @@ class StableSortPerformanceTests: XCTestCase {
             setup: { Array((0..<$0).map { Int.random(in: 0...$0) }) },
             measuring: { _ = $0.stableSort(<) }
         )
-        XCTAssert(benchmark.performance(is: .quadratic))
+        XCTAssert(benchmark.performance(is: .constant))
     }
 }
