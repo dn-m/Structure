@@ -39,4 +39,8 @@ class CrossTests: XCTestCase {
         }
         XCTAssertEqual(start.map(function),expected)
     }
+
+    func testDescription() {
+        XCTAssertEqual(Cross("a",0).description, "<a,0>")
+    }
 }
