@@ -64,6 +64,10 @@ class UnorderedPairTests: XCTestCase {
         let expected = UnorderedPair(1,2)
         XCTAssertEqual(start.map { $0.count }, expected)
     }
+
+    func testDescription() {
+        XCTAssertEqual(UnorderedPair("a","z").description, "(a,z)")
+    }
 }
 
 func randomString(maxLength: Int = 10) -> String {

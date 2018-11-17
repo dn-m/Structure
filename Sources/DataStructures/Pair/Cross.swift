@@ -46,6 +46,7 @@ extension Cross: CustomStringConvertible {
 
     // MARK: - CustomStringConvertible
 
+    /// Printable description of `Cross`.
     public var description: String {
         return "<\(a),\(b)>"
     }
