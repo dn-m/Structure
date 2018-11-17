@@ -110,6 +110,7 @@ extension CrossTests {
         ("testComparableFalseEqual", testComparableFalseEqual),
         ("testComparableLexicographic", testComparableLexicographic),
         ("testComparableLexicographicFalse", testComparableLexicographicFalse),
+        ("testDescription", testDescription),
         ("testMap", testMap),
     ]
 }
@@ -285,6 +286,7 @@ extension OrderedDictionaryTests {
 
 extension OrderedPairTests {
     static let __allTests = [
+        ("testDescription", testDescription),
         ("testMap", testMap),
     ]
 }
@@ -518,6 +520,7 @@ extension TreeTests {
 
 extension UnorderedPairTests {
     static let __allTests = [
+        ("testDescription", testDescription),
         ("testEquatable", testEquatable),
         ("testHashValuesInt", testHashValuesInt),
         ("testHashValuesString", testHashValuesString),
