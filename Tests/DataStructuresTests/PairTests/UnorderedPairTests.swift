@@ -66,7 +66,7 @@ class UnorderedPairTests: XCTestCase {
     }
 
     func testDescription() {
-        XCTAssertEqual(UnorderedPair("a","z").description, "(a,z)")
+        XCTAssertEqual(UnorderedPair("a","z").description, "{a,z}")
     }
 }
 

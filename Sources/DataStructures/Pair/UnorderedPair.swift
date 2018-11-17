@@ -65,6 +65,6 @@ extension UnorderedPair: CustomStringConvertible {
 
     /// Printable description of `UnorderedPair`.
     public var description: String {
-        return "(\(a),\(b))"
+        return "{\(a),\(b)}"
     }
 }
