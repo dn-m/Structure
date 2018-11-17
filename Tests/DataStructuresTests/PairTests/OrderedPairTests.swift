@@ -15,4 +15,8 @@ class OrderedPairTests: XCTestCase {
         let expected = OrderedPair(1,2)
         XCTAssertEqual(start.map { $0.count }, expected)
     }
+
+    func testDescription() {
+        XCTAssertEqual(OrderedPair("3","four").description, "(3,four)")
+    }
 }

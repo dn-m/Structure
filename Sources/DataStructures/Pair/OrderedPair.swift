@@ -28,3 +28,13 @@ public struct OrderedPair <T>: SwappablePair {
 
 extension OrderedPair: Equatable where T: Equatable { }
 extension OrderedPair: Hashable where T: Hashable { }
+
+extension OrderedPair: CustomStringConvertible {
+
+    // MARK: - CustomStringConvertible
+
+    /// Printable description of `OrderedPair`.
+    public var description: String {
+        return "(\(a),\(b))"
+    }
+}
