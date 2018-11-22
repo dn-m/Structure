@@ -82,6 +82,7 @@ extension CircularArrayTests {
 
 extension ContiguousSegmentCollectionTests {
     static let __allTests = [
+        ("testCollectionFragmentSequence", testCollectionFragmentSequence),
         ("testContains", testContains),
         ("testFragmentA", testFragmentA),
         ("testFragmentB", testFragmentB),
