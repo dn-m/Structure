@@ -217,4 +217,8 @@ class ContiguousSegmentCollectionTests: XCTestCase {
         let expected = ContiguousSegmentCollection<Int>.Fragment(single, offset: 12)
         XCTAssertEqual(subfragment, expected)
     }
+
+    func testCollectionFragmentSequence() {
+        let _ = collection.fragment(in: 0 ..< collection.length).map { $0 }
+    }
 }
