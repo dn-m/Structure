@@ -210,7 +210,7 @@ class ContiguousSegmentCollectionTests: XCTestCase {
 
     ///                x  x
     /// |--||---------||--|
-    func testFragmnetOfFragmentTailTail() {
+    func testFragmentOfFragmentTailTail() {
         let fragment = collection.fragment(in: 1 ..< 14)
         let subfragment = fragment.fragment(in: 12 ..< 14)
         let single = Int.Fragment(4, in: 0..<2)
