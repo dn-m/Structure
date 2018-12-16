@@ -78,6 +78,7 @@ class ContiguousSegmentCollectionTests: XCTestCase {
         let single = Int.Fragment(4, in: 1..<3)
         let expected = ContiguousSegmentCollection<Int>.Fragment(single, offset: 9)
         XCTAssertEqual(fragment, expected)
+        XCTAssertEqual(fragment.first!.0, 9)
     }
 
     ///         x x
@@ -87,6 +88,7 @@ class ContiguousSegmentCollectionTests: XCTestCase {
         let single = Int.Fragment(4, in: 0..<2)
         let expected = ContiguousSegmentCollection<Int>.Fragment(single, offset: 8)
         XCTAssertEqual(fragment, expected)
+        XCTAssertEqual(fragment.first!.0, 8)
     }
 
     ///           x x
@@ -96,6 +98,7 @@ class ContiguousSegmentCollectionTests: XCTestCase {
         let single = Int.Fragment(4, in: 2..<4)
         let expected = ContiguousSegmentCollection<Int>.Fragment(single, offset: 10)
         XCTAssertEqual(fragment, expected)
+        XCTAssertEqual(fragment.first!.0, 10)
     }
 
     ///         x   x
@@ -105,6 +108,7 @@ class ContiguousSegmentCollectionTests: XCTestCase {
         let body = ContiguousSegmentCollection([4], offset: 8)
         let expected = ContiguousSegmentCollection<Int>.Fragment(body: body)
         XCTAssertEqual(fragment, expected)
+        XCTAssertEqual(fragment.first!.0, 8)
     }
 
     ///     x     x
@@ -116,6 +120,8 @@ class ContiguousSegmentCollectionTests: XCTestCase {
             tail: Int.Fragment(4, in: 0..<2)
         )
         XCTAssertEqual(fragment, expected)
+        XCTAssertEqual(fragment.first!.0, 4)
+        XCTAssertEqual(fragment.last!.0, 8)
     }
 
     ///       x     x
@@ -127,6 +133,8 @@ class ContiguousSegmentCollectionTests: XCTestCase {
             body: ContiguousSegmentCollection([4], offset: 8)
         )
         XCTAssertEqual(fragment, expected)
+        XCTAssertEqual(fragment.first!.0, 6)
+        XCTAssertEqual(fragment.last!.0, 8)
     }
 
     ///   x             x
@@ -138,6 +146,8 @@ class ContiguousSegmentCollectionTests: XCTestCase {
             body: ContiguousSegmentCollection<Int>([4,4,4], offset: 4)
         )
         XCTAssertEqual(fragment, expected)
+        XCTAssertEqual(fragment.first!.0, 2)
+        XCTAssertEqual(fragment.last!.0, 12)
     }
 
     /// x             x
@@ -149,6 +159,8 @@ class ContiguousSegmentCollectionTests: XCTestCase {
             tail: Int.Fragment(4, in: 0..<2)
         )
         XCTAssertEqual(fragment, expected)
+        XCTAssertEqual(fragment.first!.0, 0)
+        XCTAssertEqual(fragment.last!.0, 12)
     }
 
     /// x               x
@@ -157,6 +169,8 @@ class ContiguousSegmentCollectionTests: XCTestCase {
         let fragment = collection.fragment(in: 0..<16)
         let expected = ContiguousSegmentCollection<Int>.Fragment(body: [4,4,4,4])
         XCTAssertEqual(fragment, expected)
+        XCTAssertEqual(fragment.first!.0, 0)
+        XCTAssertEqual(fragment.last!.0, 12)
     }
 
     // MARK: ContiguousSegment.Fragment
