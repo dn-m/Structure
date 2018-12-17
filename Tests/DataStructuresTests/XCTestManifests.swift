@@ -97,7 +97,7 @@ extension ContiguousSegmentCollectionTests {
         ("testFragmentOfFragmentBodyTail", testFragmentOfFragmentBodyTail),
         ("testFragmentOfFragmentHeadBody", testFragmentOfFragmentHeadBody),
         ("testFragmentOfFragmentHeadHead", testFragmentOfFragmentHeadHead),
-        ("testFragmnetOfFragmentTailTail", testFragmnetOfFragmentTailTail),
+        ("testFragmentOfFragmentTailTail", testFragmentOfFragmentTailTail),
         ("testInitSegments", testInitSegments),
         ("testLength", testLength),
         ("testOffsets", testOffsets),

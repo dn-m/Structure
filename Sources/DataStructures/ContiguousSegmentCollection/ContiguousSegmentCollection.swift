@@ -212,8 +212,8 @@ extension ContiguousSegmentCollection: Fragmentable where
 
         public init(body: ContiguousSegmentCollection<Segment>, tail: Segment.Fragment) {
             precondition(!body.isEmpty)
-            let offset = body.first!.0
-            let tail = Item(offset: offset - tail.length, fragment: tail)
+            let offset = body.first!.0 + body.length
+            let tail = Item(offset: offset, fragment: tail)
             self.init(body: body, tail: tail)
         }
 
@@ -228,7 +228,7 @@ extension ContiguousSegmentCollection: Fragmentable where
         /// fragments, offset by the given `offset`.
         public init(_ head: Segment.Fragment, _ tail: Segment.Fragment, offset: Metric = .zero) {
             let head = Item(offset: offset, fragment: head)
-            let tail = Item(offset: offset + tail.length, fragment: tail)
+            let tail = Item(offset: head.end, fragment: tail)
             self.init(head: head, tail: tail)
         }
     }
