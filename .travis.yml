@@ -12,7 +12,9 @@ env:
 script:
   - swift package update
   - swift test -c release
-after_success: 
+after_success:
+  - swift package generate-xcodeproj --enable-code-coverage
+  - bash <(curl -s https://codecov.io/bash)
   - git clone https://github.com/dn-m/Documentarian && cd Documentarian
   - swift build -c release -Xswiftc -static-stdlib
   - cd ../
