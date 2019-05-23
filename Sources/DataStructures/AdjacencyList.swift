@@ -15,7 +15,7 @@ public struct AdjacencyList<Node: Hashable> {
         
     // MARK: - Initializers
 
-    init(_ adjacencies: [Node: Set<Node>]) {
+    public init(_ adjacencies: [Node: Set<Node>]) {
         self.adjacencies = adjacencies
     }
 }
