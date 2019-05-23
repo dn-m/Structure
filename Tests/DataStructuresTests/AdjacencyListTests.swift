@@ -15,6 +15,11 @@ class AdjacencyListTests: XCTestCase {
         XCTAssertTrue(adjacencyList.containsCycle())
     }
     
+    func testSimpleNonCycle() {
+        let adjacencyList = AdjacencyList<Int>([1:[]])
+        XCTAssertFalse(adjacencyList.containsCycle())
+    }
+    
     func testSimpleCycleTwoNodes() {
         let adjacencyList = AdjacencyList<Int>([1:[2], 2:[1]])
         XCTAssertTrue(adjacencyList.containsCycle())
@@ -28,5 +33,10 @@ class AdjacencyListTests: XCTestCase {
     func testSimpleCycleDisjoint() {
         let adjacencyList = AdjacencyList<Int>([1:[], 2:[3], 3:[4], 4:[2]])
         XCTAssertTrue(adjacencyList.containsCycle())
+    }
+    
+    func testSimpleNoCycleDisjoint() {
+        let adjacencyList = AdjacencyList<Int>([1:[2], 2:[], 3:[4], 4:[5], 5:[]])
+        XCTAssertFalse(adjacencyList.containsCycle())
     }
 }
