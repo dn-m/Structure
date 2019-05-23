@@ -10,6 +10,7 @@ public struct AdjacencyList<Node: Hashable> {
     
     // MARK: - Instance Properties
     
+    // Stores the set of nodes adjacent to each node
     let adjacencies: [Node: Set<Node>]
         
     // MARK: - Initializers
