@@ -90,4 +90,8 @@ extension AdjacencyList {
                 list[clump] = existingSet.union(adjacentClumps)
         })
     }
+    
+    func DAGify () -> AdjacencyList<Set<Node>> {
+        return clumpify (via: findStronglyConnectedComponent())
+    }
 }
