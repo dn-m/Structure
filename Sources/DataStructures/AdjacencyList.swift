@@ -94,4 +94,33 @@ extension AdjacencyList {
     func DAGify () -> AdjacencyList<Set<Node>> {
         return clumpify (via: findStronglyConnectedComponent())
     }
+    
+    func findCycle () -> Bool {
+        
+        func reducer (_ result: Bool, _ keyValue: (key: Node, value: Set<Node>)) -> Bool {
+            
+            var graph = adjacencies
+            var flag = false
+            
+            func depthFirstSearch (
+                _ visited: inout Set<Node>,
+                _ keyValue: (key: Node, value: Set<Node>)
+                )
+            {
+                guard let first = graph[keyValue.key]?.first, flag == false else { return }
+                graph[keyValue.key]!.remove(first)
+                if !visited.contains(keyValue.key) && visited.contains(first) {
+                    flag = true
+                    return
+                }
+                visited.insert(keyValue.key)
+                depthFirstSearch(&visited, (first, graph[first]!))
+            }
+            
+            let _ = adjacencies.reduce(into: [], depthFirstSearch)
+            return flag
+        }
+        
+        return adjacencies.reduce(false, reducer)
+    }
 }
