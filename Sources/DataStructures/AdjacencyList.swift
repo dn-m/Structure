@@ -76,4 +76,18 @@ extension AdjacencyList {
             let map = adjacencies.reduce(into: [:], reducer)
             return { map[$0]! }
     }
+    
+    func clumpify (via nodeClumper: @escaping (Node) -> Set<Node>) -> AdjacencyList<Set<Node>> {
+        return AdjacencyList<Set<Node>>(
+            adjacencies.reduce(into: [Set<Node>: Set<Set<Node>>]()) { list, adjacencyPair in
+                let (node, adjacentNodes) = adjacencyPair
+                let clump = nodeClumper(node)
+                let adjacentClumps = Set(adjacentNodes.map(nodeClumper))
+                guard let existingSet = list[clump] else {
+                    list[clump] = adjacentClumps
+                    return
+                }
+                list[clump] = existingSet.union(adjacentClumps)
+        })
+    }
 }
