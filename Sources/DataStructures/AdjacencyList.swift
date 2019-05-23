@@ -101,6 +101,7 @@ extension AdjacencyList {
         return clumpify (via: getStronglyConnectedComponent())
     }
     
+    // Determines whether the graph represented by the `AdjacencyList` contains a cycle.
     func containsCycle () -> Bool {
         
         func reducer (_ result: Bool, _ keyValue: (key: Node, value: Set<Node>)) -> Bool {
