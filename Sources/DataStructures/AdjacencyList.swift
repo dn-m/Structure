@@ -114,7 +114,7 @@ extension AdjacencyList {
         
         var flag = false
         
-        func reducer(_ visited: inout Set<Node>, _ keyValue: (key: Node, value: Set<Node>)) {
+        func cycleSearch(_ visited: inout Set<Node>, _ keyValue: (key: Node, value: Set<Node>)) {
             
             func depthFirstSearch (
                 _ visited: inout Set<Node>,
@@ -147,7 +147,7 @@ extension AdjacencyList {
             }
         }
         
-        let _ = adjacencies.reduce(into: [], reducer)
+        let _ = adjacencies.reduce(into: [], cycleSearch)
         return flag
     }
 }
