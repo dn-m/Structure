@@ -17,7 +17,7 @@ public struct AdjacencyList<Node: Hashable> {
 extension AdjacencyList {
     
     // Tarjan's algorithm to find strongly connected components
-    func findStronglyConnectedComponent ()
+    func getStronglyConnectedComponent ()
         -> (Node) -> Set<Node> {
             
             func reducer(
@@ -93,7 +93,7 @@ extension AdjacencyList {
     }
     
     func DAGify () -> AdjacencyList<Set<Node>> {
-        return clumpify (via: findStronglyConnectedComponent())
+        return clumpify (via: getStronglyConnectedComponent())
     }
     
     func findCycle () -> Bool {
