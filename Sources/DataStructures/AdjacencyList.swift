@@ -105,7 +105,7 @@ extension AdjacencyList {
     // Group nodes according to the function that sends a node to its strongly connected component, as found
     // by the implementation of Tarjan's algorithm, hence forming a Directed Acyclic Graph (DAG) version of
     // original `AdjacencyList` (`self`).
-    func DAGify () -> AdjacencyList<Set<Node>> {
+    public func DAGify () -> AdjacencyList<Set<Node>> {
         return clumpify (via: getStronglyConnectedComponent())
     }
     

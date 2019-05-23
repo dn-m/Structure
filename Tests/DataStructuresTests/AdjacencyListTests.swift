@@ -39,4 +39,34 @@ class AdjacencyListTests: XCTestCase {
         let adjacencyList = AdjacencyList<Int>([1:[2], 2:[], 3:[4], 4:[5], 5:[]])
         XCTAssertFalse(adjacencyList.containsCycle())
     }
+    
+    func testDAGifySimpleCycle() {
+        let adjacencyList = AdjacencyList<Int>([1:[1]])
+        XCTAssertFalse(adjacencyList.DAGify().containsCycle())
+    }
+    
+    func testDAGifySimpleNonCycle() {
+        let adjacencyList = AdjacencyList<Int>([1:[]])
+        XCTAssertFalse(adjacencyList.DAGify().containsCycle())
+    }
+    
+    func testDAGifySimpleCycleTwoNodes() {
+        let adjacencyList = AdjacencyList<Int>([1:[2], 2:[1]])
+        XCTAssertFalse(adjacencyList.DAGify().containsCycle())
+    }
+    
+    func testDAGifySimpleCycleThreeNodesMixed() {
+        let adjacencyList = AdjacencyList<Int>([1:[2], 2:[1], 3: [1,2]])
+        XCTAssertFalse(adjacencyList.DAGify().containsCycle())
+    }
+    
+    func testDAGifySimpleCycleDisjoint() {
+        let adjacencyList = AdjacencyList<Int>([1:[], 2:[3], 3:[4], 4:[2]])
+        XCTAssertFalse(adjacencyList.DAGify().containsCycle())
+    }
+    
+    func testDAGifySimpleNoCycleDisjoint() {
+        let adjacencyList = AdjacencyList<Int>([1:[2], 2:[], 3:[4], 4:[5], 5:[]])
+        XCTAssertFalse(adjacencyList.DAGify().containsCycle())
+    }
 }
