@@ -101,7 +101,7 @@ extension AdjacencyList {
         return clumpify (via: getStronglyConnectedComponent())
     }
     
-    func findCycle () -> Bool {
+    func containsCycle () -> Bool {
         
         func reducer (_ result: Bool, _ keyValue: (key: Node, value: Set<Node>)) -> Bool {
             
