@@ -138,6 +138,7 @@ extension AdjacencyList {
             }
             
             var active: Set<Node> = []
+            if flag == true { return }
             depthFirstSearch(&visited, &active, keyValue)
         }
         
