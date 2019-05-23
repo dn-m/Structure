@@ -83,11 +83,12 @@ extension AdjacencyList {
                 let (node, adjacentNodes) = adjacencyPair
                 let clump = nodeClumper(node)
                 let adjacentClumps = Set(adjacentNodes.map(nodeClumper))
-                guard let existingSet = list[clump] else {
+                if let existingSet = list[clump] {
+                    list[clump] = existingSet.union(adjacentClumps)
+                } else {
                     list[clump] = adjacentClumps
-                    return
                 }
-                list[clump] = existingSet.union(adjacentClumps)
+                list[clump]!.remove(clump)
         })
     }
     
