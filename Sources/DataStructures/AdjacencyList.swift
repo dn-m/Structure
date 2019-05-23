@@ -5,16 +5,23 @@
 //  Created by Benjamin Wetherfield on 5/23/19.
 //
 
+// Adjacency list representation of a graph
 public struct AdjacencyList<Node: Hashable> {
     
-    let adjacencies: [Node: Set<Node>]
+    // MARK: - Instance Properties
     
+    let adjacencies: [Node: Set<Node>]
+        
+    // MARK: - Initializers
+
     init(_ adjacencies: [Node: Set<Node>]) {
         self.adjacencies = adjacencies
     }
 }
 
 extension AdjacencyList {
+    
+    // MARK: - Instance Methods
     
     // Tarjan's algorithm to find strongly connected components
     func getStronglyConnectedComponent ()
