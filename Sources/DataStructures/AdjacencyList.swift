@@ -120,26 +120,31 @@ extension AdjacencyList {
                 _ visited: inout Set<Node>,
                 _ active: inout Set<Node>,
                 _ keyValue: (key: Node, value: Set<Node>)
-                )
+                ) -> Bool
             {
                 let (node, neighbors) = keyValue
-                if visited.contains(node) || flag == true { return }
+                if visited.contains(node) { return false }
                 visited.insert(node)
                 active.insert(node)
-                neighbors.forEach { neighbor in
+                let foundCycle = neighbors.reduce(false) { outcome, neighbor in
                     if active.contains(neighbor) {
-                        flag = true
-                        return
+                        return true
                     } else if !visited.contains(neighbor) {
-                        depthFirstSearch(&visited, &active, (neighbor, adjacencies[neighbor]!))
+                        return outcome ||
+                            depthFirstSearch(&visited, &active, (neighbor, adjacencies[neighbor]!))
+                    } else {
+                        return outcome
                     }
                 }
                 active.remove(node)
+                return foundCycle
             }
             
             var active: Set<Node> = []
             if flag == true { return }
-            depthFirstSearch(&visited, &active, keyValue)
+            if depthFirstSearch(&visited, &active, keyValue) {
+                flag = true
+            }
         }
         
         let _ = adjacencies.reduce(into: [], reducer)
