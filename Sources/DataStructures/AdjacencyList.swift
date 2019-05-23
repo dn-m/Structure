@@ -77,6 +77,8 @@ extension AdjacencyList {
             return { map[$0]! }
     }
     
+    // Group nodes according to the set-forming function and return the resulting `AdjacencyList`,
+    // removing self-loops that arise.
     func clumpify (via nodeClumper: @escaping (Node) -> Set<Node>) -> AdjacencyList<Set<Node>> {
         return AdjacencyList<Set<Node>>(
             adjacencies.reduce(into: [Set<Node>: Set<Set<Node>>]()) { list, adjacencyPair in
@@ -92,6 +94,9 @@ extension AdjacencyList {
         })
     }
     
+    // Group nodes according to the function that sends a node to its strongly connected component, as found
+    // by the implementation of Tarjan's algorithm, hence forming a Directed Acyclic Graph (DAG) version of
+    // original `AdjacencyList` (`self`).
     func DAGify () -> AdjacencyList<Set<Node>> {
         return clumpify (via: getStronglyConnectedComponent())
     }
