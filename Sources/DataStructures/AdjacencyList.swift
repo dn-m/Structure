@@ -110,32 +110,38 @@ extension AdjacencyList {
     }
     
     // Determines whether the graph represented by the `AdjacencyList` contains a cycle.
-    func containsCycle () -> Bool {
+    public func containsCycle () -> Bool {
         
-        func reducer (_ result: Bool, _ keyValue: (key: Node, value: Set<Node>)) -> Bool {
-            
-            var graph = adjacencies
-            var flag = false
+        var flag = false
+        
+        func reducer(_ visited: inout Set<Node>, _ keyValue: (key: Node, value: Set<Node>)) {
             
             func depthFirstSearch (
                 _ visited: inout Set<Node>,
+                _ active: inout Set<Node>,
                 _ keyValue: (key: Node, value: Set<Node>)
                 )
             {
-                guard let first = graph[keyValue.key]?.first, flag == false else { return }
-                graph[keyValue.key]!.remove(first)
-                if !visited.contains(keyValue.key) && visited.contains(first) {
-                    flag = true
-                    return
+                let (node, neighbors) = keyValue
+                if visited.contains(node) || flag == true { return }
+                visited.insert(node)
+                active.insert(node)
+                neighbors.forEach { neighbor in
+                    if active.contains(neighbor) {
+                        flag = true
+                        return
+                    } else if !visited.contains(neighbor) {
+                        depthFirstSearch(&visited, &active, (neighbor, adjacencies[neighbor]!))
+                    }
                 }
-                visited.insert(keyValue.key)
-                depthFirstSearch(&visited, (first, graph[first]!))
+                active.remove(node)
             }
             
-            let _ = adjacencies.reduce(into: [], depthFirstSearch)
-            return flag
+            var active: Set<Node> = []
+            depthFirstSearch(&visited, &active, keyValue)
         }
         
-        return adjacencies.reduce(false, reducer)
+        let _ = adjacencies.reduce(into: [], reducer)
+        return flag
     }
 }
