@@ -19,8 +19,14 @@ public struct AdjacencyList<Node: Hashable> {
         self.adjacencies = adjacencies
     }
     
-    public init(safely adjacencies: [Node: Set<Node>]) {
-        
+    public init(safe adjacencies: [Node: Set<Node>]) {
+        self.adjacencies = adjacencies.reduce(into: [Node: Set<Node>]()) { completed, pair in
+            let (node, neighbors) = pair
+            completed[node] = neighbors
+            neighbors.forEach { neighbor in
+                if !completed.keys.contains(neighbor) { completed[neighbor] = [] }
+            }
+        }
     }
 }
 
