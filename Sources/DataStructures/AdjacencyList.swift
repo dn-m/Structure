@@ -18,6 +18,10 @@ public struct AdjacencyList<Node: Hashable> {
     public init(_ adjacencies: [Node: Set<Node>]) {
         self.adjacencies = adjacencies
     }
+    
+    public init(safely adjacencies: [Node: Set<Node>]) {
+        
+    }
 }
 
 extension AdjacencyList {
