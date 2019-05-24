@@ -19,6 +19,8 @@ public struct AdjacencyList<Node: Hashable> {
         self.adjacencies = adjacencies
     }
     
+    // Safe initializer that ensures there are no hanging nodes inside of a "value" `Set` that are not within
+    // the "keys" of `adjancencies`.
     public init(safe adjacencies: [Node: Set<Node>]) {
         self.adjacencies = adjacencies.reduce(into: [Node: Set<Node>]()) { completed, pair in
             let (node, neighbors) = pair
