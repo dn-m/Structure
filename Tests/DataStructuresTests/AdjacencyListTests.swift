@@ -10,6 +10,14 @@ import DataStructures
 
 class AdjacencyListTests: XCTestCase {
     
+    func testSafeInitializer() {
+        let adjacencyList = AdjacencyList<Int>(safe: [1:[2,3,4]])
+        XCTAssertEqual(adjacencyList.adjacencies[1],[2,3,4])
+        XCTAssertEqual(adjacencyList.adjacencies[2],[])
+        XCTAssertEqual(adjacencyList.adjacencies[3],[])
+        XCTAssertEqual(adjacencyList.adjacencies[4],[])
+    }
+    
     func testSimpleCycle() {
         let adjacencyList = AdjacencyList<Int>([1:[1]])
         XCTAssertTrue(adjacencyList.containsCycle())
