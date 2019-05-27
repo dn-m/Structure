@@ -41,3 +41,13 @@ extension Cross: Comparable where T: Comparable, U: Comparable {
 
 extension Cross: Equatable where T: Equatable, U: Equatable { }
 extension Cross: Hashable where T: Hashable, U: Hashable { }
+
+extension Cross: CustomStringConvertible {
+
+    // MARK: - CustomStringConvertible
+
+    /// Printable description of `Cross`.
+    public var description: String {
+        return "<\(a),\(b)>"
+    }
+}

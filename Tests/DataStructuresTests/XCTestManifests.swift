@@ -72,7 +72,6 @@ extension BinaryHeapTests {
         ("testBasicInsertPop", testBasicInsertPop),
         ("testPopNil", testPopNil),
         ("testSimpleBalance", testSimpleBalance),
-        ("testUpdate", testUpdate),
     ]
 }
 
@@ -101,6 +100,7 @@ extension CircularArrayTests {
 
 extension ContiguousSegmentCollectionTests {
     static let __allTests = [
+        ("testCollectionFragmentSequence", testCollectionFragmentSequence),
         ("testContains", testContains),
         ("testFragmentA", testFragmentA),
         ("testFragmentB", testFragmentB),
@@ -115,7 +115,7 @@ extension ContiguousSegmentCollectionTests {
         ("testFragmentOfFragmentBodyTail", testFragmentOfFragmentBodyTail),
         ("testFragmentOfFragmentHeadBody", testFragmentOfFragmentHeadBody),
         ("testFragmentOfFragmentHeadHead", testFragmentOfFragmentHeadHead),
-        ("testFragmnetOfFragmentTailTail", testFragmnetOfFragmentTailTail),
+        ("testFragmentOfFragmentTailTail", testFragmentOfFragmentTailTail),
         ("testInitSegments", testInitSegments),
         ("testLength", testLength),
         ("testOffsets", testOffsets),
@@ -129,6 +129,8 @@ extension CrossTests {
         ("testComparableFalseEqual", testComparableFalseEqual),
         ("testComparableLexicographic", testComparableLexicographic),
         ("testComparableLexicographicFalse", testComparableLexicographicFalse),
+        ("testDescription", testDescription),
+        ("testMap", testMap),
     ]
 }
 
@@ -298,6 +300,13 @@ extension OrderedDictionaryTests {
         ("testSubscriptIntValid", testSubscriptIntValid),
         ("testSubscriptKeyNil", testSubscriptKeyNil),
         ("testSubscriptKeyValid", testSubscriptKeyValid),
+    ]
+}
+
+extension OrderedPairTests {
+    static let __allTests = [
+        ("testDescription", testDescription),
+        ("testMap", testMap),
     ]
 }
 
@@ -530,12 +539,14 @@ extension TreeTests {
 
 extension UnorderedPairTests {
     static let __allTests = [
+        ("testDescription", testDescription),
         ("testEquatable", testEquatable),
         ("testHashValuesInt", testHashValuesInt),
         ("testHashValuesString", testHashValuesString),
         ("testManyHashValuesIntForCollisions", testManyHashValuesIntForCollisions),
         ("testManyHashValuesString", testManyHashValuesString),
         ("testManyHashValuesStringForCollisions", testManyHashValuesStringForCollisions),
+        ("testMap", testMap),
     ]
 }
 
@@ -601,6 +612,7 @@ public func __allTests() -> [XCTestCaseEntry] {
         testCase(MutableGraphTests.__allTests),
         testCase(NewTypeTests.__allTests),
         testCase(OrderedDictionaryTests.__allTests),
+        testCase(OrderedPairTests.__allTests),
         testCase(PairsTests.__allTests),
         testCase(QueueTests.__allTests),
         testCase(ReferenceTreeProtocolTests.__allTests),

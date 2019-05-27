@@ -11,7 +11,7 @@ env:
   - SWIFT_VERSION=4.2
 script:
   - swift package update
-  - swift test
+  - swift test -c release
 after_success: 
   - git clone https://github.com/dn-m/Documentarian && cd Documentarian
   - swift build -c release -Xswiftc -static-stdlib

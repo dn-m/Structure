@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Algorithms
+import Algorithms
 
 class CombinatoricsTests: XCTestCase {
 

@@ -133,8 +133,11 @@ extension ContiguousSegmentCollection: Intervallic {
     }
 }
 
-extension ContiguousSegmentCollection: Fragmentable
-    where Metric: Zero, Segment: IntervallicFragmentable, Segment.Fragment: IntervallicFragmentable, Segment.Fragment.Fragment == Segment.Fragment
+extension ContiguousSegmentCollection: Fragmentable where
+    Metric: Zero,
+    Segment: IntervallicFragmentable,
+    Segment.Fragment: IntervallicFragmentable,
+    Segment.Fragment.Fragment == Segment.Fragment
 {
 
     // MARK: - Nested Types
@@ -142,7 +145,7 @@ extension ContiguousSegmentCollection: Fragmentable
     /// A fragment of a `ContiguousSegmentCollection`.
     public struct Fragment {
 
-        struct Item {
+        public struct Item {
 
             var end: Metric {
                 return offset + fragment.length
@@ -161,7 +164,7 @@ extension ContiguousSegmentCollection: Fragmentable
 
         // MARK: - Instance Properties
 
-        /// - Returns:
+        /// - Returns: The offset of the fragment within the context of the whole.
         public var offset: Metric {
             return head?.offset ?? body.first?.0 ?? tail?.offset ?? .zero
         }
@@ -174,7 +177,7 @@ extension ContiguousSegmentCollection: Fragmentable
 
         /// Creates a `ContiguousSegmentCollection.Fragment` with the given pair of fragment items
         /// and the segments in-between.
-        init(
+        public init(
             head: Item? = nil,
             body: ContiguousSegmentCollection = .empty,
             tail: Item? = nil
@@ -209,8 +212,8 @@ extension ContiguousSegmentCollection: Fragmentable
 
         public init(body: ContiguousSegmentCollection<Segment>, tail: Segment.Fragment) {
             precondition(!body.isEmpty)
-            let offset = body.first!.0
-            let tail = Item(offset: offset - tail.length, fragment: tail)
+            let offset = body.first!.0 + body.length
+            let tail = Item(offset: offset, fragment: tail)
             self.init(body: body, tail: tail)
         }
 
@@ -225,7 +228,7 @@ extension ContiguousSegmentCollection: Fragmentable
         /// fragments, offset by the given `offset`.
         public init(_ head: Segment.Fragment, _ tail: Segment.Fragment, offset: Metric = .zero) {
             let head = Item(offset: offset, fragment: head)
-            let tail = Item(offset: offset + tail.length, fragment: tail)
+            let tail = Item(offset: head.end, fragment: tail)
             self.init(head: head, tail: tail)
         }
     }
@@ -324,6 +327,23 @@ extension ContiguousSegmentCollection: RandomAccessCollectionWrapping {
     /// - Returns: A view of the underlying storage producing a `RandomAccessCollection` interface.
     public var base: SortedDictionary<Metric,Segment> {
         return storage
+    }
+}
+
+extension ContiguousSegmentCollection.Fragment: RandomAccessCollectionWrapping {
+
+    // MARK: - RandomAccessCollectionWrapping
+
+    /// - Returns: The `RandomAccessCollection` base of segment fragments indexed by their offsets.
+    public var base: [(Metric,Segment.Fragment)] {
+        var result: [(Metric,Segment.Fragment)] = []
+        result.reserveCapacity(body.count + 2)
+        if let head = self.head { result.append((head.offset, head.fragment)) }
+        result.append(
+            contentsOf: body.map { offset,whole in (offset,whole.fragment(in: ..<whole.length)) }
+        )
+        if let tail = self.tail { result.append((tail.offset, tail.fragment)) }
+        return result
     }
 }
 

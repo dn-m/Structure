@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import DataStructures
+import DataStructures
 
 class AVLTreeTests: XCTestCase {
 

@@ -90,7 +90,7 @@ extension WeightedGraphProtocol {
         from source: Node,
         to destination: Node,
         by transform: (Weight) -> Weight
-        )
+    )
     {
         updateEdge(Edge(source,destination), by: transform)
     }

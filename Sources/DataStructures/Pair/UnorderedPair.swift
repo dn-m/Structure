@@ -58,3 +58,13 @@ extension UnorderedPair: Hashable where T: Hashable {
         hasher.combine(a.hashValue ^ b.hashValue)
     }
 }
+
+extension UnorderedPair: CustomStringConvertible {
+
+    // MARK: - CustomStringConvertible
+
+    /// Printable description of `UnorderedPair`.
+    public var description: String {
+        return "{\(a),\(b)}"
+    }
+}

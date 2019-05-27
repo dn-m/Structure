@@ -30,4 +30,17 @@ class CrossTests: XCTestCase {
         XCTAssertFalse(a < b)
         XCTAssertFalse(b > a)
     }
+    
+    func testMap() {
+        let start = Cross("a",2)
+        let expected = Cross(4,"aa")
+        let function: (String,Int) -> (Int,String) = { string, int in
+            (int*2, string+string)
+        }
+        XCTAssertEqual(start.map(function),expected)
+    }
+
+    func testDescription() {
+        XCTAssertEqual(Cross("a",0).description, "<a,0>")
+    }
 }
