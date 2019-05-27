@@ -12,6 +12,24 @@ extension AVLTreeTests {
     ]
 }
 
+extension AdjacencyListTests {
+    static let __allTests = [
+        ("testDAGifySimpleCycle", testDAGifySimpleCycle),
+        ("testDAGifySimpleCycleDisjoint", testDAGifySimpleCycleDisjoint),
+        ("testDAGifySimpleCycleThreeNodesMixed", testDAGifySimpleCycleThreeNodesMixed),
+        ("testDAGifySimpleCycleTwoNodes", testDAGifySimpleCycleTwoNodes),
+        ("testDAGifySimpleNoCycleDisjoint", testDAGifySimpleNoCycleDisjoint),
+        ("testDAGifySimpleNonCycle", testDAGifySimpleNonCycle),
+        ("testSafeInitializer", testSafeInitializer),
+        ("testSimpleCycle", testSimpleCycle),
+        ("testSimpleCycleDisjoint", testSimpleCycleDisjoint),
+        ("testSimpleCycleThreeNodesMixed", testSimpleCycleThreeNodesMixed),
+        ("testSimpleCycleTwoNodes", testSimpleCycleTwoNodes),
+        ("testSimpleNoCycleDisjoint", testSimpleNoCycleDisjoint),
+        ("testSimpleNonCycle", testSimpleNonCycle),
+    ]
+}
+
 extension ArrayExtensionsTests {
     static let __allTests = [
         ("testInsertingAtIndexAtBeginning", testInsertingAtIndexAtBeginning),
@@ -573,6 +591,7 @@ extension ZipToLongestTests {
 public func __allTests() -> [XCTestCaseEntry] {
     return [
         testCase(AVLTreeTests.__allTests),
+        testCase(AdjacencyListTests.__allTests),
         testCase(ArrayExtensionsTests.__allTests),
         testCase(BimapTests.__allTests),
         testCase(BinaryHeapTests.__allTests),
