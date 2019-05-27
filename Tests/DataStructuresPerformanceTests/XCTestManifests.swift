@@ -19,6 +19,7 @@ extension GraphPerformanceTests {
         ("testInsertEdge_O_1", testInsertEdge_O_1),
         ("testInsertNode_O_1", testInsertNode_O_1),
         ("testNeighborsOfNode_O_n", testNeighborsOfNode_O_n),
+        ("testProfile", testProfile),
     ]
 }
 
@@ -53,7 +54,6 @@ public func __allTests() -> [XCTestCaseEntry] {
         testCase(QueuePerformanceTests.__allTests),
         testCase(WeightedDirectedGraphPerformanceTests.__allTests),
         testCase(WeightedGraphPerformanceTests.__allTests),
-        testCase(QueuePerformanceTests.__allTests),
     ]
 }
 #endif
