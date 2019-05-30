@@ -42,16 +42,4 @@ class NewTypeTests: XCTestCase {
         let n: SN = 1
         let _ = -n
     }
-
-    func testSequence() {
-        struct S: NewType, Sequence { let value: [Int] }
-        let s = S([1,2,3])
-        let _ = s.map { $0 }
-    }
-
-    func testCollection() {
-        struct C: NewType, Collection { let value: [Int] }
-        let c = C([1,2,3])
-        let _ = c.count
-    }
 }

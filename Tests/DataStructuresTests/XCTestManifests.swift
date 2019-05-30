@@ -277,12 +277,10 @@ extension MutableGraphTests {
 
 extension NewTypeTests {
     static let __allTests = [
-        ("testCollection", testCollection),
         ("testComparable", testComparable),
         ("testExpressibleByFloatLiteral", testExpressibleByFloatLiteral),
         ("testExpressibleByIntegerLiteral", testExpressibleByIntegerLiteral),
         ("testNumeric", testNumeric),
-        ("testSequence", testSequence),
         ("testSignedNumeric", testSignedNumeric),
     ]
 }

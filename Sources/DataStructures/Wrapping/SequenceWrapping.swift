@@ -21,21 +21,17 @@
 ///
 /// In the `init` method of the conforming `struct`, set the value of this private `var` with
 /// the given `sequence`.
-///
-/// - TODO: Consider removing `ExpressibleByArrayLiteral` and `init` requirements.
-public protocol SequenceWrapping: Sequence, ExpressibleByArrayLiteral {
+public protocol SequenceWrapping: Sequence {
 
     // MARK: Associated Types
 
+    /// Wrapped `Collection`-conforming type.
+    associatedtype Base: Sequence
+
     // MARK: - Instance Properties
 
-    /// `AnySequence` wrapper that provides shade for the domain specific implementation.
-    var sequence: AnySequence<Element> { get }
-
-    // MARK: - Initializers
-
-    /// Create an `SequenceWrapping` with a `Sequence`.
-    init <S> (_ sequence: S) where S: Sequence, S.Element == Element
+    /// Wrapped `Collection`-conforming type.
+    var base: Base { get }
 }
 
 extension SequenceWrapping {
@@ -43,12 +39,7 @@ extension SequenceWrapping {
     // MARK: - Sequence
 
     /// - returns a generator over the elements of this sequence.
-    public func makeIterator() -> AnyIterator<Element> {
-
-        let iterator = sequence.makeIterator()
-
-        return AnyIterator {
-            return iterator.next()
-        }
+    public func makeIterator() -> Base.Iterator {
+        return base.makeIterator()
     }
 }

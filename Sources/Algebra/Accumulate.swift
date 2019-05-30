@@ -12,7 +12,7 @@ extension Sequence {
     ///
     /// - Returns: An array of values starting with the given `initial`, followed by each
     /// element combined with the accumulation with the given `op`.
-    ///
+    ///x
     public func accumulating(
         _ initial: Element,
         _ op: (Element,Element) -> Element
