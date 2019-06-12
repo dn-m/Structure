@@ -42,7 +42,7 @@ extension Metatype: Hashable {
 
     /// - Returns: A unique hash value for the metatype wrapped-up herein.
     @inlinable
-    public var hashValue: Int {
-        return ObjectIdentifier(base).hashValue
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(ObjectIdentifier(base).hashValue)
     }
 }

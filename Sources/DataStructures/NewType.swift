@@ -94,38 +94,3 @@ extension NewType where Value: Numeric {
 }
 
 extension NewType where Value: SignedNumeric { }
-
-extension NewType where Value: Sequence {
-    public func makeIterator() -> Value.Iterator {
-        return value.makeIterator()
-    }
-}
-
-extension NewType where Value: Collection {
-
-    public typealias Iterator = Value.Iterator
-
-    /// Start index.
-    public var startIndex: Value.Index {
-        return value.startIndex
-    }
-
-    /// End index.
-    public var endIndex: Value.Index {
-        return value.endIndex
-    }
-
-    /// Index after given index `i`.
-    public func index(after i: Value.Index) -> Value.Index {
-        return value.index(after: i)
-    }
-
-    public var indices: Value.Indices {
-        return value.indices
-    }
-
-    /// - returns: Element at the given `index`.
-    public subscript (index: Value.Index) -> Value.Element {
-        return value[index]
-    }
-}

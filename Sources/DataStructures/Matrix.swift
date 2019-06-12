@@ -109,10 +109,11 @@ public struct Matrix <Element> {
     }
 }
 
-extension Matrix: CollectionWrapping {
+extension Matrix: SequenceWrapping {
 
-    // MARK: - CollectionWrapping
+    // MARK: - SequenceWrapping
 
+    /// - returns: Underlying `Collection`.
     public var base: [Element] {
         return grid
     }
