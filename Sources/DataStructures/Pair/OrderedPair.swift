@@ -28,6 +28,7 @@ public struct OrderedPair <T>: SwappablePair {
 
 extension OrderedPair: Equatable where T: Equatable { }
 extension OrderedPair: Hashable where T: Hashable { }
+extension OrderedPair: Codable where T: Codable { }
 
 extension OrderedPair: CustomStringConvertible {
 
