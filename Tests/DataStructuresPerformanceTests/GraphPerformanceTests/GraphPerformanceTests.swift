@@ -52,7 +52,7 @@ class GraphPerformanceTests: XCTestCase {
 
     func testEdgeFromSourceInCompleteGraph_O_n() {
         let benchmark = Benchmark.mutating(
-            testPoints: Scale.large,
+            testPoints: Scale.medium,
             setup: completeGraph(size:),
             measuring: { _ = $0.edges(from: 0) }
         )
