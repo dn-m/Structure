@@ -57,7 +57,7 @@ extension Collection {
 extension Sequence {
 
     /// - Returns: `Zip2Sequence` of 2-tuples composed of adjacent values.
-    public var pairs: Zip2Sequence<Self,SubSequence> {
+    public var pairs: Zip2Sequence<Self,DropFirstSequence<Self>> {
         return zip(self,dropFirst())
     }
 }
