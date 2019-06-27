@@ -62,7 +62,7 @@ public struct SortedArray <Element: Comparable>:
     ///
     /// - TODO: Make `throws` instead of returning silently.
     public mutating func remove(_ element: Element) {
-        guard let index = base.index(of: element) else { return }
+        guard let index = base.firstIndex(of: element) else { return }
         base.remove(at: index)
     }
 
