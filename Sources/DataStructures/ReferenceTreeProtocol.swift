@@ -139,7 +139,7 @@ public extension ReferenceTreeProtocol {
     /// - throws: `ReferenceTreeError.removalError` if the given `node` is not held in `children`.
     func removeChild(_ node: Self) throws {
 
-        guard let index = children.index(where: { $0 === node }) else {
+        guard let index = children.firstIndex(where: { $0 === node }) else {
             throw ReferenceTreeError.nodeNotFound
         }
 

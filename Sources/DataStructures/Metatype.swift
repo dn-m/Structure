@@ -43,6 +43,6 @@ extension Metatype: Hashable {
     /// - Returns: A unique hash value for the metatype wrapped-up herein.
     @inlinable
     public func hash(into hasher: inout Hasher) {
-        hasher.combine(ObjectIdentifier(base).hashValue)
+        hasher.combine(ObjectIdentifier(base))
     }
 }

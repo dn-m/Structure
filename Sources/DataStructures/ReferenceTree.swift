@@ -160,7 +160,7 @@ public class ReferenceTree {
      */
     public func removeChild(_ node: ReferenceTree) throws {
 
-        guard let index = children.index(where: { $0 === node }) else {
+        guard let index = children.firstIndex(where: { $0 === node }) else {
             throw Error.nodeNotFound
         }
 

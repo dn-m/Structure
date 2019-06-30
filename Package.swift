@@ -1,4 +1,4 @@
-// swift-tools-version:4.2
+// swift-tools-version:5.0
 
 import PackageDescription
 
@@ -11,7 +11,7 @@ let package = Package(
         .library(name: "Algorithms", targets: ["Algorithms"])
     ],
     dependencies: [
-        .package(url: "https://github.com/dn-m/PerformanceTesting", from: "0.2.0")
+        .package(url: "https://github.com/dn-m/PerformanceTesting", .branch("pitchspeller-dependency"))
     ],
     targets: [
 
