@@ -11,7 +11,7 @@ let package = Package(
         .library(name: "Algorithms", targets: ["Algorithms"])
     ],
     dependencies: [
-        .package(url: "https://github.com/dn-m/PerformanceTesting", .branch("pitchspeller-dependency"))
+        .package(url: "https://github.com/dn-m/PerformanceTesting", from: "0.4.0")
     ],
     targets: [
 
