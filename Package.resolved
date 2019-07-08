@@ -5,9 +5,9 @@
         "package": "PerformanceTesting",
         "repositoryURL": "https://github.com/dn-m/PerformanceTesting",
         "state": {
-          "branch": "pitchspeller-dependency",
-          "revision": "fd97209b9465e698c51cb30dfc24db35f39fa5c5",
-          "version": null
+          "branch": null,
+          "revision": "7c73a60c4b69b981ac3dd4015cc26cea0e45c8c7",
+          "version": "0.4.0"
         }
       }
     ]
