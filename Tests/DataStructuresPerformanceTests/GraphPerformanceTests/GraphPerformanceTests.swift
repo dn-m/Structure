@@ -56,6 +56,7 @@ class GraphPerformanceTests: XCTestCase {
             setup: completeGraph(size:),
             measuring: { _ = $0.edges(from: 0) }
         )
+        print(benchmark)
         XCTAssert(benchmark.performance(is: .linear))
     }
 
