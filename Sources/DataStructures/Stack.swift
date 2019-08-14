@@ -134,6 +134,16 @@ extension Stack: ExpressibleByArrayLiteral {
     }
 }
 
+extension Stack: CustomStringConvertible {
+
+    // MARK: - CustomStringConvertible
+
+    /// - Returns: The printed description of this `Stack`.
+    public var description: String {
+        return elements.description
+    }
+}
+
 extension Stack: Additive {
 
     // MARK: - Additive
