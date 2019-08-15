@@ -26,7 +26,6 @@ extension GraphPerformanceTests {
     //   `swift test --generate-linuxmain`
     // to regenerate.
     static let __allTests__GraphPerformanceTests = [
-        ("testEdgeFromSourceInCompleteGraph_O_n", testEdgeFromSourceInCompleteGraph_O_n),
         ("testEdgesFromSourceInGraph_O_n", testEdgesFromSourceInGraph_O_n),
         ("testEdgesFromSourceNotInGraph_O_1", testEdgesFromSourceNotInGraph_O_1),
         ("testEdgesToDestinationInGraph_O_n", testEdgesToDestinationInGraph_O_n),
