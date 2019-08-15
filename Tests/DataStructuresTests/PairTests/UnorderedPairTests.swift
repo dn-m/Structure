@@ -27,37 +27,6 @@ class UnorderedPairTests: XCTestCase {
         let p2 = UnorderedPair(2,1)
         XCTAssertEqual(p1.hashValue, p2.hashValue)
     }
-
-    func testManyHashValuesString() {
-        let p = UnorderedPair("a","b")
-        for _ in 0 ..< 1_000_000 {
-            _ = p.hashValue
-        }
-    }
-
-    func testManyHashValuesIntForCollisions() {
-        for _ in 0 ..< 1_000_000 {
-            let a = UnorderedPair(Int.random(in: .min ... .max), Int.random(in: .min ... .max))
-            let b = UnorderedPair(Int.random(in: .min ... .max), Int.random(in: .min ... .max))
-            if a == b {
-                XCTAssertEqual(a.hashValue, b.hashValue)
-            } else {
-                XCTAssertNotEqual(a.hashValue, b.hashValue)
-            }
-        }
-    }
-
-    func testManyHashValuesStringForCollisions() {
-        for _ in 0 ..< 1_000_000 {
-            let a = UnorderedPair(randomString(), randomString())
-            let b = UnorderedPair(randomString(), randomString())
-            if a == b {
-                XCTAssertEqual(a.hashValue, b.hashValue)
-            } else {
-                XCTAssertNotEqual(a.hashValue, b.hashValue)
-            }
-        }
-    }
     
     func testMap() {
         let start = UnorderedPair("a","ab")
