@@ -1,7 +1,7 @@
 # Structure
 
 ![Swift](https://img.shields.io/badge/Swift-5.0-brightgreen.svg)
-[![Build Status](https://travis-ci.org/dn-m/Structure.svg?branch=master)](https://travis-ci.org/dn-m/Structure)
+[![Build Status](https://travis-ci.org/dn-m/Structure.svg?branch=latest)](https://travis-ci.org/dn-m/Structure)
 
 The `Structure` package defines algebraic and data structures in Swift 4.2, along with algorithms to be performed over them.
 
