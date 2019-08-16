@@ -65,3 +65,4 @@ extension DirectedGraph {
 
 extension DirectedGraph: Equatable { }
 extension DirectedGraph: Hashable { }
+extension DirectedGraph: Codable where Node: Codable { }

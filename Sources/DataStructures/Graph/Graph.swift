@@ -58,3 +58,4 @@ extension Graph {
 
 extension Graph: Equatable { }
 extension Graph: Hashable { }
+extension Graph: Codable where Node: Codable { }
