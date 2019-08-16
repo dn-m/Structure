@@ -54,3 +54,4 @@ extension WeightedDirectedGraph {
 
 extension WeightedDirectedGraph: Equatable where Weight: Equatable { }
 extension WeightedDirectedGraph: Hashable where Weight: Hashable { }
+extension WeightedDirectedGraph: Codable where Node: Codable, Weight: Codable { }
