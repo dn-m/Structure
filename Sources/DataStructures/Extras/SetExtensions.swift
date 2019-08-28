@@ -5,6 +5,7 @@
 //  Created by James Bean on 6/29/18.
 //
 
+// TODO: Consider moving to the `Algorithms` module.
 extension Set {
 
     public func inserting(_ element: Element) -> Set {
