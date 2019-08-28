@@ -9,6 +9,7 @@ install:
   - eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
 env:
   - global:
+    - SWIFT_VERSION=DEVELOPMENT-SNAPSHOT-2019-08-01-a
     - CODECOV_TOKEN=7eef894d-9ca9-4cac-9356-04dd8ab8a73b
   - matrix:
     - SWIFT_VERSION=5.0
