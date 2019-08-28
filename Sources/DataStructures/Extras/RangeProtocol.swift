@@ -6,6 +6,8 @@
 //
 
 /// Unifying interface for `Range` and `ClosedRange` types.
+///
+/// TODO: Consider using Standard Library's `RangeExpression` protocol instead.
 public protocol RangeProtocol {
     associatedtype Bound: Comparable
     var lowerBound: Bound { get }

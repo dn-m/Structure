@@ -7,6 +7,7 @@
 
 import Algebra
 
+// TODO: Consider moving to the `Algebra` module.
 extension ClosedRange: Zero where Bound: Zero {
     
     public static var zero: ClosedRange {

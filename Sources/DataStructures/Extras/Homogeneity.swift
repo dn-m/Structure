@@ -7,6 +7,7 @@
 
 import Destructure
 
+// TODO: Consider moving to the `Algorithms` module.
 extension Sequence where Element: Equatable {
 
     /// - Returns: `true` if there are one or fewer elements in `self`, or if all elements in
