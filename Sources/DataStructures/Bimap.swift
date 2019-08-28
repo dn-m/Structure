@@ -238,3 +238,4 @@ extension Bimap {
 
 extension Bimap: Equatable { }
 extension Bimap: Hashable { }
+extension Bimap: Codable where Key: Codable, Value: Codable { }

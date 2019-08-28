@@ -72,3 +72,4 @@ extension Queue {
 
 extension Queue: Equatable where Element: Equatable { }
 extension Queue: Hashable where Element: Hashable { }
+extension Queue: Codable where Element: Codable { }

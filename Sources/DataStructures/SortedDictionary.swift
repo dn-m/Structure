@@ -205,3 +205,4 @@ extension SortedDictionary: Zero {
 
 extension SortedDictionary: Equatable where Value: Equatable { }
 extension SortedDictionary: Hashable where Value: Hashable { }
+extension SortedDictionary: Codable where Key: Codable, Value: Codable { }

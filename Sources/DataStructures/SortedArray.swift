@@ -172,3 +172,4 @@ extension SortedArray: ExpressibleByArrayLiteral {
 
 extension SortedArray: Equatable { }
 extension SortedArray: Hashable where Element: Hashable { }
+extension SortedArray: Codable where Element: Codable { }

@@ -168,3 +168,4 @@ extension Stack: Monoid {
 
 extension Stack: Equatable where Element: Equatable { }
 extension Stack: Hashable where Element: Hashable { }
+extension Stack: Codable where Element: Codable { }

@@ -59,8 +59,6 @@ extension UnorderedPair: Hashable where T: Hashable {
     }
 }
 
-extension UnorderedPair: Codable where T: Codable { }
-
 extension UnorderedPair: CustomStringConvertible {
 
     // MARK: - CustomStringConvertible
@@ -70,3 +68,5 @@ extension UnorderedPair: CustomStringConvertible {
         return "{\(a),\(b)}"
     }
 }
+
+extension UnorderedPair: Codable where T: Codable { }

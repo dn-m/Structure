@@ -166,3 +166,4 @@ extension AdjacencyList {
 
 extension AdjacencyList: Equatable { }
 extension AdjacencyList: Hashable { }
+extension AdjacencyList: Codable where Node: Codable { }

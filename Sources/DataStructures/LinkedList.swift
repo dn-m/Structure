@@ -101,3 +101,5 @@ extension LinkedList: ExpressibleByArrayLiteral {
 
 extension LinkedList: Equatable where Element: Equatable { }
 extension LinkedList: Hashable where Element: Hashable { }
+
+// TODO: Codable

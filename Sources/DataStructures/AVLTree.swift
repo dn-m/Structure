@@ -222,5 +222,8 @@ extension AVLTree.Node: Hashable where Key: Hashable, Value: Hashable {
     }
 }
 
+extension AVLTree.Node: Codable where Key: Codable, Value: Codable { }
+
 extension AVLTree: Equatable where Value: Equatable { }
 extension AVLTree: Hashable where Key: Hashable, Value: Hashable { }
+extension AVLTree: Codable where Key: Codable, Value: Codable { }
