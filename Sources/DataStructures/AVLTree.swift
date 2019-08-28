@@ -205,8 +205,6 @@ extension AVLTree.Node: Equatable where Value: Equatable {
     }
 }
 
-extension AVLTree: Equatable where Value: Equatable { }
-
 extension AVLTree: ExpressibleByArrayLiteral {
 
     // MARK: - ExpressibleByArrayLiteral
@@ -216,3 +214,13 @@ extension AVLTree: ExpressibleByArrayLiteral {
         self.init(elements)
     }
 }
+
+extension AVLTree.Node: Hashable where Key: Hashable, Value: Hashable {
+    /// Uses the `ObjectIdentifier` of this `Node` to determine hashing.
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(ObjectIdentifier(self))
+    }
+}
+
+extension AVLTree: Equatable where Value: Equatable { }
+extension AVLTree: Hashable where Key: Hashable, Value: Hashable { }

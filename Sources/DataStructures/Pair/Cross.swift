@@ -39,10 +39,6 @@ extension Cross: Comparable where T: Comparable, U: Comparable {
     }
 }
 
-extension Cross: Equatable where T: Equatable, U: Equatable { }
-extension Cross: Hashable where T: Hashable, U: Hashable { }
-extension Cross: Codable where T: Codable, U: Codable { }
-
 extension Cross: CustomStringConvertible {
 
     // MARK: - CustomStringConvertible
@@ -52,3 +48,7 @@ extension Cross: CustomStringConvertible {
         return "<\(a),\(b)>"
     }
 }
+
+extension Cross: Equatable where T: Equatable, U: Equatable { }
+extension Cross: Hashable where T: Hashable, U: Hashable { }
+extension Cross: Codable where T: Codable, U: Codable { }

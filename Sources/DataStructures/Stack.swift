@@ -116,14 +116,6 @@ extension Stack: BidirectionalCollection {
     }
 }
 
-extension Stack: Equatable where Element: Equatable {
-
-    /// - returns: `true` if two `Stack` values are equivalent. Otherwise `false`.
-    public static func == (lhs: Stack, rhs: Stack) -> Bool {
-        return lhs.elements == rhs.elements
-    }
-}
-
 extension Stack: ExpressibleByArrayLiteral {
 
     // MARK: - ExpressibleByArrayLiteral
@@ -173,3 +165,6 @@ extension Stack: Monoid {
         return lhs + rhs
     }
 }
+
+extension Stack: Equatable where Element: Equatable { }
+extension Stack: Hashable where Element: Hashable { }

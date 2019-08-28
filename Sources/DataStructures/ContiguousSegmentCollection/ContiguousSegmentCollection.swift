@@ -506,9 +506,6 @@ extension ContiguousSegmentCollection.Fragment.Item: Equatable where
 extension ContiguousSegmentCollection.Fragment: Equatable where
     Segment: Equatable, Segment.Fragment: Equatable { }
 
-extension ContiguousSegmentCollection: Equatable where Segment: Equatable { }
-extension ContiguousSegmentCollection: Hashable where Segment: Hashable { }
-
 extension ContiguousSegmentCollection: ExpressibleByArrayLiteral {
 
     // MARK: - ExpressibleByArrayLiteral
@@ -527,3 +524,6 @@ extension ContiguousSegmentCollection: CustomStringConvertible {
         return map { offset,segment in  "\(offset): \(segment)" }.joined(separator: "\n")
     }
 }
+
+extension ContiguousSegmentCollection: Equatable where Segment: Equatable { }
+extension ContiguousSegmentCollection: Hashable where Segment: Hashable { }

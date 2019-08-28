@@ -7,7 +7,7 @@
 
 /// Dictionary-like structure which allows O(1) access from `Key` to `Value` as well as from `Value`
 /// to `Key`.
-public struct Bimap <Key: Hashable, Value: Hashable>: Hashable {
+public struct Bimap <Key: Hashable, Value: Hashable> {
 
     // MARK: - Instance Properties
 
@@ -236,3 +236,5 @@ extension Bimap {
     }
 }
 
+extension Bimap: Equatable { }
+extension Bimap: Hashable { }

@@ -184,9 +184,6 @@ extension SortedDictionary {
     }
 }
 
-extension SortedDictionary: Equatable where Value: Equatable { }
-extension SortedDictionary: Hashable where Value: Hashable { }
-
 extension SortedDictionary: ExpressibleByDictionaryLiteral {
 
     // MARK: - ExpressibleByDictionaryLiteral
@@ -205,3 +202,6 @@ extension SortedDictionary: Zero {
         return .init()
     }
 }
+
+extension SortedDictionary: Equatable where Value: Equatable { }
+extension SortedDictionary: Hashable where Value: Hashable { }

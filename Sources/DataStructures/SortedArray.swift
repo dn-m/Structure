@@ -118,9 +118,6 @@ public struct SortedArray <Element: Comparable>:
     }
 }
 
-extension SortedArray: Equatable { }
-extension SortedArray: Hashable where Element: Hashable { }
-
 extension SortedArray {
 
     /// - Returns: The slice of the `SortedArray` for the given `bounds`.
@@ -172,3 +169,6 @@ extension SortedArray: ExpressibleByArrayLiteral {
         self.init(elements)
     }
 }
+
+extension SortedArray: Equatable { }
+extension SortedArray: Hashable where Element: Hashable { }

@@ -86,8 +86,6 @@ extension LinkedList: Collection {
     }
 }
 
-extension LinkedList: Equatable where Element: Equatable { }
-
 extension LinkedList: ExpressibleByArrayLiteral {
 
     // - MARK: ExpressibleByArrayLiteral
@@ -100,3 +98,6 @@ extension LinkedList: ExpressibleByArrayLiteral {
             .reduce(.end) { $0.cons(value: $1) }
     }
 }
+
+extension LinkedList: Equatable where Element: Equatable { }
+extension LinkedList: Hashable where Element: Hashable { }

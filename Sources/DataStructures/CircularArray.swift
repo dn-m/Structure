@@ -167,8 +167,6 @@ extension CircularArray: RangeReplaceableCollection {
     }
 }
 
-extension CircularArray: Equatable where Element: Equatable { }
-
 extension CircularArray: ExpressibleByArrayLiteral {
 
     // MARK: - ExpressibleByArrayLiteral
@@ -192,3 +190,6 @@ extension Array {
         return CircularArray(self)
     }
 }
+
+extension CircularArray: Equatable where Element: Equatable { }
+extension CircularArray: Hashable where Element: Hashable { }

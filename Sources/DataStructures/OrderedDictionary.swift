@@ -121,9 +121,6 @@ extension OrderedDictionary: Collection {
     }
 }
 
-extension OrderedDictionary: Equatable where Value: Equatable { }
-extension OrderedDictionary: Hashable where Value: Hashable { }
-
 extension OrderedDictionary: ExpressibleByDictionaryLiteral {
 
     // MARK: - ExpressibleByDictionaryLiteral
@@ -134,3 +131,6 @@ extension OrderedDictionary: ExpressibleByDictionaryLiteral {
         elements.forEach { (k, v) in append(v, key: k) }
     }
 }
+
+extension OrderedDictionary: Equatable where Value: Equatable { }
+extension OrderedDictionary: Hashable where Value: Hashable { }
