@@ -24,7 +24,7 @@
 /// [Allen](https://en.wikipedia.org/wiki/James_F._Allen), refined by
 /// [Krokhin et al.](http://www.ics.uci.edu/~alspaugh/cls/shr/allen.html#Allen1983-mkti).
 ///
-public enum IntervalRelation: InvertibleEnum {
+public enum IntervalRelation: String, InvertibleEnum {
 
     // MARK: - Cases
 
@@ -164,3 +164,4 @@ extension RangeProtocol {
 
 extension IntervalRelation: Equatable { }
 extension IntervalRelation: Hashable { }
+extension IntervalRelation: Codable { }

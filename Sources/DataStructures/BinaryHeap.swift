@@ -129,3 +129,4 @@ public struct BinaryHeap <Element: Hashable, Value: Comparable> {
 
 extension BinaryHeap: Equatable { }
 extension BinaryHeap: Hashable where Value: Hashable { }
+extension BinaryHeap: Codable where Element: Codable, Value: Codable { }

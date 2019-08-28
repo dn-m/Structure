@@ -156,3 +156,4 @@ extension Matrix: CustomStringConvertible {
 
 extension Matrix: Equatable where Element: Equatable { }
 extension Matrix: Hashable where Element: Hashable { }
+extension Matrix: Codable where Element: Codable { }

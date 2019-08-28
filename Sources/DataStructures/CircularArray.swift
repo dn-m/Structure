@@ -193,3 +193,4 @@ extension Array {
 
 extension CircularArray: Equatable where Element: Equatable { }
 extension CircularArray: Hashable where Element: Hashable { }
+extension CircularArray: Codable where Element: Codable { }

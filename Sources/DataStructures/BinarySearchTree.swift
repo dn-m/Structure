@@ -155,3 +155,5 @@ extension BinarySearchTree: ExpressibleByArrayLiteral {
 
 extension BinarySearchTree: Equatable { }
 extension BinarySearchTree: Hashable where Value: Hashable { }
+
+// TODO: `Codable`

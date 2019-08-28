@@ -45,5 +45,38 @@ public enum Either <Left,Right> {
     }
 }
 
+extension Either: Codable where Left: Codable, Right: Codable {
+
+    enum DecodingError: Error {
+        case invalidCase
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case left
+        case right
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        if let value = try? container.decode(Left.self, forKey: .left) {
+            self = .left(value)
+        } else if let value = try? container.decode(Right.self, forKey: .right) {
+            self = .right(value)
+        } else {
+            throw DecodingError.invalidCase
+        }
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        switch self {
+        case let .left(value):
+            try container.encode(value, forKey: .left)
+        case let .right(value):
+            try container.encode(value, forKey: .right)
+        }
+    }
+}
+
 extension Either: Equatable where Left: Equatable, Right: Equatable { }
 extension Either: Hashable where Left: Hashable, Right: Hashable { }

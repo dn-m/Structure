@@ -527,3 +527,4 @@ extension ContiguousSegmentCollection: CustomStringConvertible {
 
 extension ContiguousSegmentCollection: Equatable where Segment: Equatable { }
 extension ContiguousSegmentCollection: Hashable where Segment: Hashable { }
+extension ContiguousSegmentCollection: Codable where Metric: Codable, Segment: Codable { }

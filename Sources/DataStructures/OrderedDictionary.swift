@@ -134,3 +134,4 @@ extension OrderedDictionary: ExpressibleByDictionaryLiteral {
 
 extension OrderedDictionary: Equatable where Value: Equatable { }
 extension OrderedDictionary: Hashable where Value: Hashable { }
+extension OrderedDictionary: Codable where Key: Codable, Value: Codable { }
