@@ -119,8 +119,6 @@ extension Matrix: SequenceWrapping {
     }
 }
 
-extension Matrix: Equatable where Element: Equatable { }
-
 extension Matrix: CustomStringConvertible {
 
     // MARK: - CustomStringConvertible
@@ -155,3 +153,6 @@ extension Matrix: CustomStringConvertible {
         return rows.map(format).joined(separator: "\n")
     }
 }
+
+extension Matrix: Equatable where Element: Equatable { }
+extension Matrix: Hashable where Element: Hashable { }

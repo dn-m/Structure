@@ -205,8 +205,6 @@ extension AVLTree.Node: Equatable where Value: Equatable {
     }
 }
 
-extension AVLTree: Equatable where Value: Equatable { }
-
 extension AVLTree: ExpressibleByArrayLiteral {
 
     // MARK: - ExpressibleByArrayLiteral
@@ -216,3 +214,5 @@ extension AVLTree: ExpressibleByArrayLiteral {
         self.init(elements)
     }
 }
+
+extension AVLTree: Equatable where Value: Equatable { }

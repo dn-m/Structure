@@ -161,3 +161,6 @@ extension RangeProtocol {
         return value > lowerBound && value < upperBound
     }
 }
+
+extension IntervalRelation: Equatable { }
+extension IntervalRelation: Hashable { }

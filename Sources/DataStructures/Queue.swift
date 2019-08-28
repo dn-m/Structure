@@ -69,3 +69,6 @@ extension Queue {
         return storage.removeFirst()
     }
 }
+
+extension Queue: Equatable where Element: Equatable { }
+extension Queue: Hashable where Element: Hashable { }

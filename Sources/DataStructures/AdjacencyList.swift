@@ -163,3 +163,6 @@ extension AdjacencyList {
         return flag
     }
 }
+
+extension AdjacencyList: Equatable { }
+extension AdjacencyList: Hashable { }

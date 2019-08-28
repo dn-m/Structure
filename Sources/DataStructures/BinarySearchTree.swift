@@ -152,3 +152,6 @@ extension BinarySearchTree: ExpressibleByArrayLiteral {
         self.init(elements)
     }
 }
+
+extension BinarySearchTree: Equatable { }
+extension BinarySearchTree: Hashable where Value: Hashable { }

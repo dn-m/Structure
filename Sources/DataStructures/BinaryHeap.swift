@@ -126,3 +126,6 @@ public struct BinaryHeap <Element: Hashable, Value: Comparable> {
         bubbleDown(from: 0)
     }
 }
+
+extension BinaryHeap: Equatable { }
+extension BinaryHeap: Hashable where Value: Hashable { }

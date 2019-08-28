@@ -19,7 +19,6 @@
 ///     truck == friend
 ///     // Binary operator '==' cannot be applied to operands of type 'Identifier<Truck>' and
 ///     // 'Identifier<Friend>'
-///
 public struct Identifier <Subject> {
 
     let value: Int
