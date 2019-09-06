@@ -12,11 +12,9 @@ import DataStructures
 class MatrixTests: XCTestCase {
 
     func testInit() {
-
         let amountRows = 2
         let amountColumns = 3
-        var matrix = Matrix(height: amountRows, width: amountColumns, initial: 0)
-
+        let matrix = Matrix(height: amountRows, width: amountColumns, initial: 0)
         for row in 0 ..< amountRows {
             for column in 0 ..< amountColumns {
                 XCTAssertEqual(matrix[row, column], 0)

@@ -50,7 +50,7 @@ class GraphPerformanceTests: XCTestCase {
         XCTAssert(benchmark.performance(is: .constant))
     }
 
-    #warning("FIXME: Assess why the testEdgeFromSourceInCompleteGraph benchmark test files. It is currently disabled.")
+    // FIXME: Assess why the testEdgeFromSourceInCompleteGraph benchmark test files
     func DISABLED_testEdgeFromSourceInCompleteGraph_O_n() {
         let benchmark = Benchmark.mutating(
             testPoints: Scale.small,
