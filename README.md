@@ -3,7 +3,7 @@
 ![Swift](https://img.shields.io/badge/Swift-5.0-brightgreen.svg)
 [![Build Status](https://travis-ci.org/dn-m/Structure.svg?branch=latest)](https://travis-ci.org/dn-m/Structure)
 
-The `Structure` package defines algebraic and data structures in Swift 4.2, along with algorithms to be performed over them.
+The `Structure` package defines algebraic and data structures in Swift 5.x, along with algorithms to be performed over them.
 
 ## Modules
 
@@ -32,7 +32,7 @@ Algorithms for restructuring elements in `Sequence` and `Collection` types, like
 
 ### Requirements
 
-- Swift 4.2 (default in Xcode 10)
+- Swift 5.x (default in Xcode 10.2 & 11)
 - [Swift Package Manager](https://swift.org/package-manager/)
 
 ### Installation
